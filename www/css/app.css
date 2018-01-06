@@ -1,0 +1,150 @@
+/* =========
+Your custom styles go here
+ ========= */
+ 
+  /* custom */
+
+.content-block.close{
+    margin: 15px 0;
+}
+
+ .list-block.close{
+    margin: -1px 0 0;
+ }
+ .item-media {
+     width: 50px;
+     height: 50px;
+ }
+ .item-media img{
+    width: 100%;
+ }
+
+ .project-thumbnail{
+     width: 50px;
+     height: 50px;
+ }
+ .item-thumbnail{
+     width:33.3%;
+ }
+  
+ /* item.vue */
+ .content-block.camera{
+     margin-top: 45%;
+     text-align: center;
+ }
+ .camera .photo{
+     position: fixed;
+     top:0;
+     left:0;
+     width:100%;
+ }
+ .camera .save-btn{
+    position: absolute;
+    top:450px;
+    left:100px;
+ }
+ .camera p{
+    color: black;
+ }
+
+ /* item.vue */
+ .page.item .page-content{
+     overflow: hidden;
+ }
+
+ #canvas{
+    position: absolute;
+    top:0;
+    right:0;
+ }
+
+ .date{
+     color:white;
+     position: absolute;
+     top:0;
+     right:0;
+ }
+ .edit-btn, .control{
+     display: none;
+ }
+ .edit-btn.show, .control.show{
+    display: block;
+ }
+
+ .board{
+    position: absolute;
+    background: white;
+    padding: 10px;
+    border: 4px solid #777575;
+    min-width: 30%;
+    cursor: pointer;
+ }
+
+ .board h4{
+    margin: 0;
+ }
+ .board p{
+     margin: 0.5em 0;
+ }
+
+ .item-img {
+    height: 100%;
+    position: absolute;
+    left: -50%;
+    z-index: -10;
+    user-drag: none; 
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+ }
+ 
+ .control{
+    position: absolute;
+    bottom: 15px;
+    width: calc(100% - 30px);
+ }
+
+ .draw-control {
+    background:rgba(255, 255, 255, 0.55);
+    padding:5px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: center;
+ }
+
+.draw-control .color{
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    display: inline-block;
+    border: none;
+    margin: 0 3px;
+}
+
+.draw-control .white{
+    background-color:#FFF;
+}
+.draw-control .yellow{
+    background-color:#FFE400;
+}
+.draw-control .red{
+    background-color:#E30613;
+}
+.draw-control .blue{
+    background-color:#009FE3;
+}
+.draw-control .black{
+    background-color:#000;
+}
+.draw-control .reset{
+    background:white;
+    border: none;
+    padding: 5px;
+    vertical-align: bottom;
+}
+.draw-control .title{
+    vertical-align: super;
+    color:black;
+}

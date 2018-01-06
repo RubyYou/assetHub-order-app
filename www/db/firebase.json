@@ -1,0 +1,55 @@
+{
+  "items" : [ {
+  	"_id": 5,
+  	"_projectId": 0,
+    "boardlocation" : "{x:50, y: 200}",
+    "details" : "xxxxxxxxxx",
+    "drawArray" : "{color:'red', x:[100,200,400], y:[100,200,400]}",
+    "title" : "title 0",
+    "url" : "../../www/db/img/download-1.jpg",
+    "useTemplate" : false,
+    "lastUpdate": "15079811871000"
+  },
+  {
+  	"_id": 3,
+  	"_projectId": 0,
+    "boardlocation" : "{x:50, y: 200}",
+    "details" : "xxxxxxxxxx",
+    "drawArray" : "{color:'red', x:[100,200,400], y:[100,200,400]}",
+    "title" : "title 3",
+    "url" : "../../www/db/img/download.jpg",
+    "useTemplate" : false,
+    "lastUpdate": "15079811871000"
+  },
+  {
+  	"_id": 1,
+  	"_projectId": 1,
+    "boardlocation" : "{x:50, y: 200}",
+    "details" : "xxxxxxxxxx",
+    "drawArray" : "{color:'red', x:[100,200,400], y:[100,200,400]}",
+    "title" : "title 1",
+    "url" : "../../www/db/img/download-2.jpg",
+    "useTemplate" : false,
+    "lastUpdate": "15079811871000"
+  },
+  {
+  	"_id": 2,
+  	"_projectId": 1,
+    "boardlocation" : "{x:50, y: 200}",
+    "details" : "xxxxxxxxxx",
+    "drawArray" : "{color:'red', x:[100,200,400], y:[100,200,400]}",
+    "title" : "title 2",
+    "url" : "../../www/db/img/images-1.jpg",
+    "useTemplate" : false,
+    "lastUpdate": "15079811871000"
+  }],
+  "projects" : [ {
+  	"_id": 0,
+    "name" : "Project A",
+    "lastUpdate": "15079811871000"
+  }, {
+  	"_id": 1,
+    "name" : "ProjectB",
+    "lastUpdate": "15079811871000"
+  } ]
+}

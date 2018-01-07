@@ -11,13 +11,17 @@ const config = {
     messagingSenderId: "836178416951"
 };
 
+const workOrderDB = "carehub";  // TODO: need to change data base key node
+const materialDB = "material";
+
 class Loader {
+
     constructor()
     {
         firebase.initializeApp(config);
         this._storage = firebase.storage().ref();
-        this._workOrderDB = firebase.database().ref("carehub"); // TODO: need to change data base key node
-        this._materialDB = firebase.database().ref("material");
+        this._workOrderDB = firebase.database().ref(workOrderDB); 
+        this._materialDB = firebase.database().ref(materialDB);
         this._init ();
     }
 
@@ -25,7 +29,7 @@ class Loader {
     {
         var databaseRef = firebase.database().ref();
         
-        databaseRef.child('carehub').on('value', (snapshots) => { 
+        databaseRef.child(workOrderDB).on('value', (snapshots) => { 
             let items = [];
             console.log('done workOrderDB snapshot', snapshots.val());
             snapshots.forEach( snap => {
@@ -35,7 +39,7 @@ class Loader {
             store.commit('setWorkOrders', items);
         });
         
-        databaseRef.child('material').on('value', (snapshots) => { 
+        databaseRef.child(materialDB).on('value', (snapshots) => { 
             let materials = [];
             console.log('done material snapshot', snapshots.val());
             snapshots.forEach( snap => {
@@ -46,30 +50,28 @@ class Loader {
         });        
     }
 
-    // addNewItem (itemData, fileData, callback)
-    // {
-    //     this._itemsDB.push (itemData);
-    //     this._storage.child(itemData.imageUrl).put (fileData).then (function(){
-    //         alert('上傳成功');
-    //         callback ();
-    //     });
-    // }
+    addNewWorkOrder (payload, callback)
+    {
+        this._workOrderDB.push (payload).then (function () {
+            console.log ('updatePayload, finished');
+            callback ();
+        });
+    }
 
-    // updateItem (key, itemData, callback)
-    // {
-    //     firebase.database().ref("items/" + key).set(itemData).then (function(){
-    //         alert ('上傳成功');
-    //         callback ();
-    //     });
-    // }
+    updateWorkOrder (key, payload, callback)
+    {
+        firebase.database().ref (workOrderDB + "/" + key).set (payload).then (function () {
+            callback ();
+        });
+    }
 
-    // deleteItem (key, callback)
-    // {
-    //     this._itemsDB.child(key).remove(()=> {
-    //         alert ('刪除成功');
-    //         callback ();
-    //     });
-    // }
+    deleteWorkOrder (key, callback)
+    {
+        this._workOrderDB.child(key).remove(()=> {
+            console.log ('delete finish', key);
+            callback ();
+        });
+    }
 
     // addProject (name, callback)
     // {

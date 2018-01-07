@@ -11,7 +11,7 @@
       <f7-view id="main-view" navbar-through :dynamic-navbar="true" main>
         <!-- iOS Theme Navbar -->
         <f7-navbar v-if="$theme.ios">
-          <f7-nav-center sliding>Carehub</f7-nav-center>
+          <f7-nav-center sliding> AssetHub 工單 </f7-nav-center>
         </f7-navbar>
         
         <!-- Pages -->
@@ -27,7 +27,7 @@
               </f7-nav-right>
             </f7-navbar>
             <f7-block>
-              <f7-link href="/workorders"> 工單列表 </f7-link>
+              <f7-link href="/workorders" > 工單列表 </f7-link>
               <f7-link href="/materials"> 材料列表 </f7-link>
             </f7-block>
           </f7-page>

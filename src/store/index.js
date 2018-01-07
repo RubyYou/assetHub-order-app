@@ -14,7 +14,7 @@ const defaultWorkOrder = {
   lastUpdated: new Date().getTime (), 
   location: "B1",
   minus:0,
-  progress: "in progress",
+  progress: "start",
   progressTime: 0,
   showDatePicker: false,
   supervisor: "",
@@ -66,7 +66,6 @@ export default new Vuex.Store({
         }
       },
       updateSelectedWorkOrder (state, payload) {
-        // console.log (payload);
         state.selectedWorkOrder [payload.name] = payload.data;
       },
 

@@ -7,7 +7,8 @@
     </f7-navbar> 
 
     <f7-block>
-      <p> 任務狀態 </p>
+      <f7-block-title> 任務狀態 </f7-block-title>
+      <br/>
       <div class="progress" >
         <div class="icon" @click="updateWorkOrder ('progress', 'start')">
             <img :src="getImage('start')" />
@@ -32,12 +33,15 @@
       <f7-list form>
         <f7-list-item>
           <f7-label>工作名稱</f7-label>
-          <f7-input type="text" placeholder="name" :value="order.title"/>
+          <f7-input type="text" placeholder="name" :value="order.title"
+                    @change = "(e) => { updateWorkOrder ('title', e.target.value)}" />
         </f7-list-item>
 
         <f7-list-item>
           <f7-label>細節</f7-label>
-          <f7-input type="textarea" placeholder="fill out detail" :value="order.details"></f7-input>
+          <f7-input type="textarea" placeholder="fill out detail" :value="order.details"
+                    @change = "(e) => { updateWorkOrder ('details', e.target.value)}"
+          ></f7-input>
         </f7-list-item>
 
         <f7-list-item smart-select title="工單類型">
@@ -65,8 +69,8 @@
           <f7-label>進度: {{order.progressTime}} %</f7-label>
           <div class="item-input">
             <div class="range-slider">
-              <input type="range" min="0" max="100" :value="order.progressTime" step="1"
-               @change="(e) => { updateWorkOrder ('progressTime', e.target.value)}"
+              <input type="range" min="0" max="100" :value="order.progressTime" step="10"
+               @change = "(e) => { updateWorkOrder ('progressTime', e.target.value)}"
                />
             </div>
           </div>
@@ -74,22 +78,25 @@
 
         <f7-list-item>
           <f7-label>結束時間</f7-label>
-          <f7-input type="text" :value="order.endTime"/>
+          <f7-input type="text" :value="new Date(order.endTime).toString()"
+                    @change = "(e) => { updateWorkOrder ('endTime', e.target.value)}" />
         </f7-list-item>
 
         <f7-list-item>
           <f7-label>狀態更新</f7-label>
-          <f7-input type="text" :value="order.lastUpdated"/>
+          <f7-input type="text" :value="new Date(order.lastUpdated).toString()" readOnly />
         </f7-list-item>
 
         <f7-list-item>
           <f7-label>建立人</f7-label>
-          <f7-input type="text" :value="order.supervisor"/>
+          <f7-input type="text" :value="order.supervisor" 
+                    @change = "(e) => { updateWorkOrder ('supervisor', e.target.value)}" />
         </f7-list-item>
 
         <f7-list-item>
           <f7-label>指派人</f7-label>
-          <f7-input type="text" :value="order.assignee"/>
+          <f7-input type="text" :value="order.assignee" 
+                    @change = "(e) => { updateWorkOrder ('assignee', e.target.value)}" />
         </f7-list-item>
 
         <f7-list-item smart-select title="服務地點">
@@ -102,30 +109,42 @@
 
         <f7-list-item>
           <f7-label>時間</f7-label>
-          <f7-input type="text" :value="order.hour + ' 時 ' + order.minus + ' 分'"/>
+          <f7-input type="text" :value="order.hour + ' 時 ' + order.minus + ' 分'" 
+                    @change = "(e) => { updateWorkOrder ('assignee', e.target.value)}" />
         </f7-list-item>
       </f7-list>
       
       <f7-block-title>結案簽收</f7-block-title>
       <f7-block>
         <f7-buttons>
-          <f7-button @click="sign ('customerSign', order.customerSign)" class="open-popup">客戶簽名</f7-button>
-          <f7-button @click="sign ('selfSign', order.selfSign)" class="open-popup">簽名</f7-button>
+          <f7-button @click = "sign ('customerSign', order.customerSign)" class="popup-open">客戶簽名</f7-button>
+          <f7-button @click = "sign ('selfSign', order.selfSign)" class="popup-open">簽名</f7-button>
         </f7-buttons>
       </f7-block>
 
       <f7-block-title>備忘錄</f7-block-title>
       <f7-list form>
         <f7-list-item>
-          <f7-input type="textarea" placeholder="fill out detail" :value="order.note"></f7-input>
+          <f7-input type="textarea" placeholder="fill out detail" :value="order.note"
+                    @change = "(e) => { updateWorkOrder ('note', e.target.value)}">
+          </f7-input>
         </f7-list-item>
       </f7-list>
+
+      <f7-block>
+        <f7-buttons v-if="order.key !== 0">
+          <f7-button color = "pink" fill @click = "saveWorkOrder">儲存</f7-button>
+          <f7-button color = "lightblue" fill @click = "deleteWorkOrder">刪除</f7-button>
+        </f7-buttons>
+        <f7-button v-else color="red" @click = "saveWorkOrder">新建工作</f7-button>
+      </f7-block>
+
     </f7-block>
     <f7-popup class="sign">
       <canvas id="canvas" > </canvas>
       <f7-buttons>
-        <f7-button @click="cleanDraw">清除</f7-button>
-        <f7-button @click="closePopup">關閉簽名</f7-button>
+        <f7-button @click = "cleanDraw">清除</f7-button>
+        <f7-button @click = "closePopup" class="popup-close">關閉簽名</f7-button>
       </f7-buttons>
     </f7-popup>
   </f7-page>
@@ -134,6 +153,7 @@
 <script>
 import Utils from '../utils/utils';
 import DrawApp from '../components/draw';
+import Loader from '../loader/loader';
 
 export default {
   data: function () {
@@ -145,17 +165,20 @@ export default {
         "14F", "15F", "16F", "17F", "18F", "19F"
       ],
       signColor : "#000000",
-      signType : "selfSign"
+      signType : "selfSign",
+      mode: 'new'
     }
   },
   computed: {
+    id () {
+      return this.$store.state.workOrderId;
+    },
     order () {
       return this.$store.state.selectedWorkOrder;
     }
   },
   methods:{
     sign (signType, data = {}) {
-      
       this.signType = signType;
       this.drawApp.enablePant (true);
 
@@ -165,6 +188,8 @@ export default {
       if (clickExist && clickDragExist === true) 
       {
         this.drawApp.setDrawing (this.signColor, data.clickX, data.clickY, data.clickDrag);
+      } else {
+        this.drawApp.clean ();
       }
       
       this.$f7.popup ('.sign');
@@ -217,8 +242,36 @@ export default {
       };
 
       this.$store.commit ('updateSelectedWorkOrder', payload);
-
       this.$f7.closeModal('.sign', true);
+    },
+    dBCallback (string) {
+      this.$f7.alert (string, "");
+    },
+    deleteWorkOrder () {
+      this.$f7.confirm ('確定刪除' + this.order.title +'?', "", 
+          function (ok) {
+              Loader.deleteWorkOrder (this.id, this.dBCallback.bind(this, '刪除成功'));
+          }
+      );
+    },
+    saveWorkOrder () {
+
+      let payload = Object.assign (
+        {}, this.order, 
+        {lastUpdated: new Date ().getTime ()}
+      );
+
+      if (payload.key)
+      {
+        delete payload.key;
+      }
+      
+      if (this.id == 0)
+      {
+        Loader.addNewWorkOrder (payload, this.dBCallback.bind (this, '新建成功'))
+      } else {
+        Loader.updateWorkOrder (this.id, payload, this.dBCallback.bind(this, '儲存成功') );
+      }
     }
   },
   mounted() {
@@ -231,24 +284,6 @@ export default {
 }
 </script>
 <style lang="sass" scoped >
-p{
-  text-align:center;
-}
-h4{
-  font-size: 16px;
-  color:black;
-}
-h5{
-  font-size: 14px;
-  margin: 0;
-}
-.red{
-  color:#ff6868;
-}
-.progress{
-  width:100%;
-  height:60px;
-}
 .icon{
   width:25%;
   display:inline-block;
@@ -259,23 +294,6 @@ h5{
     width:60px;
     height:60px;
   }
-}
-.sub-title{
-  background: #ff6868;
-  padding: 10px;
-  width: 80%;
-  margin: 10px auto;
-  text-align: center;
-  color: white;
-}
-.content-item{
-  width:50%;
-  float:left;
-  min-height:103px;
-  text-align: center;
-}
-.content-block{
-  margin:20px 0;
 }
 
 /* fix issue for slider on chrome and firefox */

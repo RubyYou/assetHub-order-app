@@ -11,12 +11,12 @@
       <f7-view id="main-view" navbar-through :dynamic-navbar="true" main>
         <!-- iOS Theme Navbar -->
         <f7-navbar v-if="$theme.ios">
-          <f7-nav-center sliding> 工單 </f7-nav-center>
+          <f7-nav-center sliding> 工作清單 </f7-nav-center>
         </f7-navbar>
 
         <!-- Pages -->
         <f7-pages>
-          <f7-page>
+          <f7-page data-page="workorder">
             <!-- Material Theme Navbar -->
             <f7-navbar v-if="$theme.material">
               <f7-nav-left>
@@ -30,7 +30,7 @@
             <f7-list media-list class="close">
               <f7-list-item
                       v-for="order in workOrders"
-                      :title="task.title"
+                      :title="order.title"
                       :ref="order.key"
                       :link="'/workorders/' + order.key"
                       :subtitle = "order.assignee"

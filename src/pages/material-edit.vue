@@ -1,6 +1,6 @@
 <template>
-  <f7-page>
-    <f7-navbar title="新增" back-link="Back" sliding></f7-navbar>
+  <f7-page data-page="workorder-edit">
+    <f7-navbar title="材料清單" back-link="Back" sliding></f7-navbar>
     <f7-block class="camera">
       <f7-link @click="takePicture">
         <f7-icon f7="camera_fill" color="pink" size="50px"></f7-icon>

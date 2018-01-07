@@ -14,7 +14,7 @@ export default class DrawApp {
 
         if(data === null)
         {
-            this._color = "#3f51b5";
+            this._color = "#000000";
             this._clickX = [];
             this._clickY = [];
             this._clickDrag = [];

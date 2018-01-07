@@ -21,11 +21,13 @@ const workOrderDefaultData = {
   title: "地上層服務核心區",
   type: "月定期維護",
   selfSign: {
+    color: "#000000",
     clickX: [],
     clickY: [],
     clickDrag: []
   },
   customerSign: {
+    color: "#000000",
     clickX: [],
     clickY: [],
     clickDrag: []

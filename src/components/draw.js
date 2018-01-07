@@ -1,9 +1,9 @@
 
 export default class DrawApp {
 
-    constructor (){
-        this._width = window.innerWidth;
-        this._height = window.innerHeight;
+    constructor (width, height) {
+        this._width = width;
+        this._height = height;
         this._pant = false;
         this.initialized = false;
         this.reset(null);

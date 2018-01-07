@@ -109,18 +109,24 @@
       <f7-block-title>結案簽收</f7-block-title>
       <f7-block>
         <f7-buttons>
-          <f7-button @click="sign (order.customerSign)">客戶簽名</f7-button>
-          <f7-button @click="sign (order.selfSign)">簽名</f7-button>
+          <f7-button @click="sign ('customerSign', order.customerSign)" class="open-popup">客戶簽名</f7-button>
+          <f7-button @click="sign ('selfSign', order.selfSign)" class="open-popup">簽名</f7-button>
         </f7-buttons>
       </f7-block>
 
       <f7-block-title>備忘錄</f7-block-title>
-      <f7-block>
-        <f7-input type="textarea" placeholder="fill out detail" :value="order.note"></f7-input>
-      </f7-block>
+      <f7-list form>
+        <f7-list-item>
+          <f7-input type="textarea" placeholder="fill out detail" :value="order.note"></f7-input>
+        </f7-list-item>
+      </f7-list>
     </f7-block>
-    <f7-popup>
-      <canvas id="canvas"> </canvas>
+    <f7-popup class="sign">
+      <canvas id="canvas" > </canvas>
+      <f7-buttons>
+        <f7-button @click="cleanDraw">清除</f7-button>
+        <f7-button @click="closePopup">關閉簽名</f7-button>
+      </f7-buttons>
     </f7-popup>
   </f7-page>
 </template>
@@ -138,7 +144,8 @@ export default {
         "6F", "7F", "8F", "9F", "10F", "11F", "12F", "13F",
         "14F", "15F", "16F", "17F", "18F", "19F"
       ],
-      signColor : "#000000"
+      signColor : "#000000",
+      signType : "selfSign"
     }
   },
   computed: {
@@ -147,18 +154,21 @@ export default {
     }
   },
   methods:{
-    sign (data) {
-      let drawData = data;
-
-      console.assert (data !== undefined || typeof data === "object");
-      console.assert (Array.isArray (data.clickX) && Array.isArray (data.clickY) && Array.isArray (data.clickDrag));
+    sign (signType, data = {}) {
       
-      this.sign = new DrawApp ();
+      this.signType = signType;
+      this.drawApp.enablePant (true);
 
-      if (data !== undefined) 
+      const clickExist = Array.isArray (data.clickX) === true && Array.isArray (data.clickX) === true;
+      const clickDragExist =  Array.isArray (data.clickDrag) === true;
+
+      if (clickExist && clickDragExist === true) 
       {
-        this.sign.setDrawing (this.signColor, data.clickX, data.clickY, data.clickDrag);
+        this.drawApp.setDrawing (this.signColor, data.clickX, data.clickY, data.clickDrag);
       }
+      
+      this.$f7.popup ('.sign');
+
     },
     getImage (imgName) {
       let src = '';
@@ -188,17 +198,35 @@ export default {
       return 'img/' + src;
     },
     updateWorkOrder (name, data) {
-
       const payload = {
         name: name,
         data: data
       };
 
       this.$store.commit ('updateSelectedWorkOrder', payload);
+    },
+    cleanDraw () {
+      this.drawApp.clean ();
+    },
+    closePopup () {
+      this.drawApp.enablePant (false);
+
+      const payload = {
+        name: this.signType,
+        data: this.drawApp.getDrawData ()
+      };
+
+      this.$store.commit ('updateSelectedWorkOrder', payload);
+
+      this.$f7.closeModal('.sign', true);
     }
   },
-  mounted(){
-    console.log (this.$store.state.selectedWorkOrder, this.order.location, this.order.type);
+  mounted() {
+    const width = window.innerWidth;
+    const height = window.innerHeight * 0.8;
+    this.drawApp = new DrawApp (width, height);
+
+    console.log (this.$store.state.selectedWorkOrder);
   }
 }
 </script>
@@ -250,7 +278,7 @@ h5{
   margin:20px 0;
 }
 
-/* fix issue for slider */
+/* fix issue for slider on chrome and firefox */
 .range-slider input[type="range"]::-webkit-slider-thumb { 
     border: 1px solid silver;
     background-color: white;

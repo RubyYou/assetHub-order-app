@@ -1,59 +1,47 @@
 <template>
-  <f7-page>
-    <f7-navbar title="新增" back-link="Back" sliding></f7-navbar>
-    <f7-block class="camera">
-      <f7-link @click="takePicture">
-        <f7-icon f7="camera_fill" color="pink" size="50px"></f7-icon>
-        <p> material </p>
-      </f7-link>
+  <f7-page data-page="materials">
+    <f7-navbar >
+      <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
+      <f7-nav-center>材料清單</f7-nav-center>
+    </f7-navbar>
+    <f7-list media-list class="close">
+      <f7-list-item
+        v-for="material in materials"
+        :title="order.title"
+        :ref="order.key"
+        :link="'/materials/' + order.key"
+        :subtitle = "order.assignee"
+        @click="setWorkOrderId (order.key)"
+        :media="setProgressImg (order.progress)">
+      </f7-list-item>
+    </f7-list>
+    <f7-block class="close">
+      <f7-grid>
+        <f7-col>
+          <f7-button fill color="pink" href="/materials/0" 
+            @click="setWorkOrderId(0)"> 
+            新增項目
+          </f7-button>
+        </f7-col>
+      </f7-grid>
     </f7-block>
-  </f7-page>
+    </f7-page>
+  </div>
 </template>
 
+
 <script>
-import Loader, { testImage } from '../loader/loader.js';
+import Loader from '../loader/loader.js';
 import Utils from '../utils/utils.js';
 
 export default {
   computed: {
-    task () {
-      return this.$store.state.mode;
-    },
-    imageData (){
-      return this.$store.state.imageData;
+    materials () {
+      return this.$store.state.materials;
     }
   },
-  methods:{
-    takePicture: function() {
-      let srcType = Camera.PictureSourceType.CAMERA;
-      let options = this.setOptions (srcType);
-      navigator.camera.getPicture (this.successCallback, this.onFail, options);
-      //this.successCallback (testImage);
-    },
-    setOptions: function (srcType) {
-      var options = {
-          quality: 50,
-          destinationType: Camera.DestinationType.DATA_URL,
-          // In this app, dynamically set the picture source, Camera or photo gallery
-          sourceType: srcType,
-          encodingType: Camera.EncodingType.JPEG,
-          mediaType: Camera.MediaType.PICTURE,
-          allowEdit: true,
-          correctOrientation: true  //Corrects Android orientation quirks
-      }
-      return options;
-    },
-    successCallback: function (imageData) {
-      let imageInfo = "data:image/jpeg;base64," + imageData;
-      this.$store.commit ("storeImage", imageInfo);
-      this.$router.loadPage('/item/0');
-    },
-    onFail: function (message) {
-      alert('Failed because: ' + message);
-    }
-  },
-  mounted (){
-    this.$store.commit ("addNewItem");
+  methods: {
+
   }
 }
 </script>

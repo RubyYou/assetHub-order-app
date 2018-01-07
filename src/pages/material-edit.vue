@@ -16,8 +16,8 @@ import Utils from '../utils/utils.js';
 
 export default {
   computed: {
-    task () {
-      return this.$store.state.mode;
+    materials () {
+      return this.$store.state.materials;
     }
   },
   methods:{

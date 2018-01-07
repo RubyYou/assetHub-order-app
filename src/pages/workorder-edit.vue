@@ -2,7 +2,7 @@
   <f7-page data-page="workorder-edit">
 
     <f7-navbar >
-      <f7-nav-left back-link="Back" sliding></f7-nav-left>
+      <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
       <f7-nav-center>{{order.title}}</f7-nav-center>
     </f7-navbar> 
 
@@ -56,7 +56,7 @@
 
         <f7-list-item smart-select title="維護類型">
           <select name="type" v-model="order.maintainType" 
-                  @change="(e) => { updateWorkOrder ('maintainType', e.target.value)}">
+            @change="(e) => { updateWorkOrder ('maintainType', e.target.value)}">
             <option value="yearly">每年維護</option>
             <option value="halfYear">半年期維護</option>
             <option value="monthly">月定期維護</option>
@@ -78,13 +78,13 @@
 
         <f7-list-item>
           <f7-label>結束時間</f7-label>
-          <f7-input type="text" :value="new Date(order.endTime).toString()"
-                    @change = "(e) => { updateWorkOrder ('endTime', e.target.value)}" />
+          <input class="endTime" type="date" value="2014-04-30" 
+              @change = "(e) => { updateWorkOrder ('endTime', e.target.value)}" />
         </f7-list-item>
 
         <f7-list-item>
-          <f7-label>狀態更新</f7-label>
-          <f7-input type="text" :value="new Date(order.lastUpdated).toString()" readOnly />
+          <f7-label>更新時間</f7-label>
+          <input class="lastUpdated" type="date" value="2014-02-30" readOnly />
         </f7-list-item>
 
         <f7-list-item>
@@ -109,8 +109,13 @@
 
         <f7-list-item>
           <f7-label>時間</f7-label>
-          <f7-input type="text" :value="order.hour + ' 時 ' + order.minus + ' 分'" 
-                    @change = "(e) => { updateWorkOrder ('assignee', e.target.value)}" />
+
+          <f7-input type="number" :value="order.hour" max="10"
+                    @change = "(e) => { updateWorkOrder ('hour', e.target.value)}" />
+          <p>時</p>
+          <f7-input type="number" :value="order.minus" max="59"
+                    @change = "(e) => { updateWorkOrder ('minus', e.target.value)}" />
+          <p>分</p>
         </f7-list-item>
       </f7-list>
       
@@ -125,7 +130,7 @@
       <f7-block-title>備忘錄</f7-block-title>
       <f7-list form>
         <f7-list-item>
-          <f7-input type="textarea" placeholder="fill out detail" :value="order.note"
+          <f7-input type="textarea" placeholder="Fill out detail" :value="order.note"
                     @change = "(e) => { updateWorkOrder ('note', e.target.value)}">
           </f7-input>
         </f7-list-item>
@@ -178,6 +183,19 @@ export default {
     }
   },
   methods:{
+    formateISODate (element, epochTime) {
+      console.assert (typeof epochTime === 'number');
+
+      const d = new Date (epochTime);
+      const month = d.getUTCMonth() + 1;
+      const formatedMonth = (month) < 10 ? ("0" + month) : month;
+      const formatedDay = d.getUTCDate() < 10 ? ("0" +  d.getUTCDate()) : d.getUTCDate();
+      const isoDate = d.getUTCFullYear() + "-" + formatedMonth + "-" + formatedDay;
+
+      this.$$ (element)[0].value  = isoDate;
+
+      return isoDate;
+    },
     sign (signType, data = {}) {
       this.signType = signType;
       this.drawApp.enablePant (true);
@@ -249,9 +267,9 @@ export default {
     },
     deleteWorkOrder () {
       this.$f7.confirm ('確定刪除' + this.order.title +'?', "", 
-          function (ok) {
-              Loader.deleteWorkOrder (this.id, this.dBCallback.bind(this, '刪除成功'));
-          }
+        function (ok) {
+          Loader.deleteWorkOrder (this.id, this.dBCallback.bind(this, '刪除成功'));
+        }
       );
     },
     saveWorkOrder () {
@@ -265,7 +283,7 @@ export default {
       {
         delete payload.key;
       }
-      
+
       if (this.id == 0)
       {
         Loader.addNewWorkOrder (payload, this.dBCallback.bind (this, '新建成功'))
@@ -278,12 +296,15 @@ export default {
     const width = window.innerWidth;
     const height = window.innerHeight * 0.8;
     this.drawApp = new DrawApp (width, height);
-
-    console.log (this.$store.state.selectedWorkOrder);
+    this.formateISODate ('.endTime', this.order.endTime);
+    this.formateISODate ('.lastUpdated', this.order.lastUpdated);
   }
 }
 </script>
 <style lang="sass" scoped >
+p{
+  margin: 0;
+}
 .icon{
   width:25%;
   display:inline-block;
@@ -294,13 +315,5 @@ export default {
     width:60px;
     height:60px;
   }
-}
-
-/* fix issue for slider on chrome and firefox */
-.range-slider input[type="range"]::-webkit-slider-thumb { 
-    border: 1px solid silver;
-    background-color: white;
-    border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 </style>

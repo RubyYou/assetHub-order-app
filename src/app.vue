@@ -28,7 +28,7 @@
             </f7-navbar>
             <f7-block>
               <f7-link href="/workorders" > 工單列表 </f7-link>
-              <f7-link href="/materials"> 材料列表 </f7-link>
+              <!-- <f7-link href="/materials"> 材料列表 </f7-link> -->
             </f7-block>
           </f7-page>
         </f7-pages>
@@ -47,4 +47,16 @@ export default {
 
 <style>
 
+/* fix issue for slider on chrome and firefox */
+.range-slider input[type="range"]::-webkit-slider-thumb { 
+    border: 1px solid silver;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.list-block input[type=number] {
+  height: 30px;
+  text-align:center;
+}
 </style>

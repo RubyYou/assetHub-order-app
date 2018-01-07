@@ -35,7 +35,9 @@ const defaultWorkOrder = {
   note: "",
   "images" : []
 };
-// Image is coming from an album
+// TODO:Image is coming from camera, and can save to album
+
+// TODO: Material can work later after 1/19
 
 // state
 export default new Vuex.Store({

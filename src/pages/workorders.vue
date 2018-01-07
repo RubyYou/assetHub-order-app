@@ -1,20 +1,19 @@
 
 <template>
-  <!-- App -->
   <f7-page data-page="workorder">
     <f7-navbar >
-      <f7-nav-left back-link="Back" sliding></f7-nav-left>
+      <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
       <f7-nav-center>工單列表</f7-nav-center>
     </f7-navbar>
     <f7-list media-list class="close">
       <f7-list-item
-              v-for="order in workOrders"
-              :title="order.title"
-              :ref="order.key"
-              :link="'/workorders/' + order.key"
-              :subtitle = "order.assignee"
-              @click="setWorkOrderId (order.key)"
-              :media="setProgressImg (order.progress)">
+        v-for="order in workOrders"
+        :title="order.title"
+        :ref="order.key"
+        :link="'/workorders/' + order.key"
+        :subtitle = "order.assignee"
+        @click="setWorkOrderId (order.key)"
+        :media="setProgressImg (order.progress)">
       </f7-list-item>
     </f7-list>
     <f7-block class="close">

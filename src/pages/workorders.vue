@@ -41,7 +41,10 @@
             <f7-block class="close">
               <f7-grid>
                 <f7-col>
-                  <f7-button fill color="pink" href="/workorders/add"> 新增項目</f7-button>
+                  <f7-button fill color="pink" href="/workorders/0" 
+                    @click="setWorkOrderId(0)"> 
+                    新增項目
+                  </f7-button>
                 </f7-col>
               </f7-grid>
             </f7-block>

@@ -6,19 +6,19 @@ Vue.use(Vuex)
 
 // there is error here
 // use default data for creat New, 
-const workOrderDefaultData = {
+const defaultWorkOrder = {
   assignee : "",
   details : "",
   endTime: new Date().getTime (),
   hour: 1,
   lastUpdated: new Date().getTime (), 
-  location: "B3",
+  location: "B1",
   minus:0,
   progress: "in progress",
   progressTime: 0,
   showDatePicker: false,
-  supervisor: "Karen",
-  title: "地上層服務核心區",
+  supervisor: "",
+  title: "",
   type: "月定期維護",
   selfSign: {
     color: "#000000",
@@ -32,6 +32,7 @@ const workOrderDefaultData = {
     clickY: [],
     clickDrag: []
   },
+  note: "",
   "images" : []
 };
 // Image is coming from an album
@@ -55,18 +56,23 @@ export default new Vuex.Store({
       setWorkOrderId (state, key)
       {
         state.workOrderId = key;
-        const task = state.workOrders.filter (item => {
+        // addNew
+        if (key == 0) {
+          state.selectedWorkOrder = defaultWorkOrder;
+        } else {
+          state.selectedWorkOrder = state.workOrders.filter (item => {
             return item.key === key;
-        })[0];
-        state.selectedWorkOrder = task;
-      },
-      setMaterials (state, materials)
-      {
-        state.materials = materials;
+          })[0];
+        }
       },
       updateSelectedWorkOrder (state, payload) {
         // console.log (payload);
         state.selectedWorkOrder [payload.name] = payload.data;
+      },
+
+      setMaterials (state, materials)
+      {
+        state.materials = materials;
       }
     }
 });

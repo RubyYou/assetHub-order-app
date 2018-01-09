@@ -79,5 +79,17 @@ export default {
 
 .posts .f7-icons {
   margin-right: 10px;
+  vertical-align: sub;
 }
+
+.posts .content-block-title {
+  color: #216338;
+}
+
+.posts .card-header {
+  background:#d7fae3;
+  color: #107b42;
+  font-weight: 700;
+}
+
 </style>

@@ -19,8 +19,6 @@
 
 
 <script>
-import Loader from '../loader/loader.js';
-import Utils from '../utils/utils.js';
 import moment from 'moment';
 
 export default {
@@ -65,5 +63,14 @@ export default {
   height: 40px;
   vertical-align: middle;
   margin-right: 20px;
+  border: 3px solid white;
+  box-shadow: 1px 1px 7px #7b6565;
+}
+.checkIn .content-block-title {
+  color: #ff5722;
+}
+.checkIn .card-header{
+    background: #fd7621;
+    color: white;
 }
 </style>

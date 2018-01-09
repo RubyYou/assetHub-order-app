@@ -3,8 +3,8 @@ export const vehicles = {
       date: new Date('2018-01-03').getTime (),
       vehicles: [
         { name: '挖土機', model: 'M1236' },
-        { name: '重車', model: 'S4623' },
-        { name: '拖車', model: 'T46963' }
+        { name: '重量機', model: 'S4623' },
+        { name: '推土機', model: 'T46963' }
       ]
     },
     'key2': {
@@ -12,15 +12,15 @@ export const vehicles = {
       vehicles: [
         { name: '挖土機', model: 'M1236' },
         { name: '推土機', model: 'S4623' },
-        { name: '拖車', model: 'T46963' }
+        { name: '混泥土機', model: 'T46963' }
       ]
     },
     'key3': {
       date: new Date('2018-01-05').getTime (),
       vehicles: [
         { name: '挖土機', model: 'M1236' },
-        { name: '重車', model: 'S4623' },
-        { name: '拖車', model: 'T46963' }
+        { name: '混泥土機', model: 'S4623' },
+        { name: '重量機', model: 'T46963' }
       ]
     }
 };
@@ -102,14 +102,16 @@ export const posts = {
         date: new Date('2018-01-03').getTime (),
         list: [
             { 
-                title: '緊急事件', 
+                title: '警察局位置', 
                 info: 'When a JSON object is saved to the database, the object properties are automatically mapped to database child locations in a nested fashion.', 
-                type: 'urgent'
+                type: 'urgent',
+                url: 'give map location'
             },
             { 
-                title: '木作圖更新', 
+                title: '附近醫院位置', 
                 info: 'When a JSON object is saved to the database, the object properties are automatically mapped to database child locations in a nested fashion.', 
-                type: 'normal'
+                type: 'normal',
+                url: 'give map location'
             },
             { 
                 title: '車輛調度', 

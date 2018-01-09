@@ -16,6 +16,7 @@ const materialDB = "material"; // TODO: not implement yet
 const vehicleDB = "vehicle";   // TODO: change to "vehicles"
 const employeeDB = "employee"; 
 const postDB = "post";
+const messagesDB = "messages";
 
 class Loader {
 
@@ -39,6 +40,7 @@ class Loader {
         this._processInfoToStore (vehicleDB, 'setVehicles');
         this._processInfoToStore (employeeDB, 'setEmployees');
         this._processInfoToStore (postDB, 'setPosts');
+        this._processInfoToStore (messagesDB, 'setMessages');
     }
 
     _processInfoToStore (dbName, actionName) {

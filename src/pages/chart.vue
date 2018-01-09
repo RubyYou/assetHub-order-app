@@ -31,9 +31,6 @@
 
 
 <script>
-import Loader from '../loader/loader.js';
-import Utils from '../utils/utils.js';
-
 export default {
   computed: {
     materials () {

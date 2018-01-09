@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { vehicles, employees, posts } from '../utils/data'
+import { vehicles, employees, posts, messages } from '../utils/data'
 import Utils from '../utils/utils'
 
 Vue.use(Vuex)
@@ -50,6 +50,7 @@ export default new Vuex.Store({
       vehicles: {},
       employees: {},
       posts: {},
+      messages: [],
 
       materials: [],
       materialId: null,
@@ -88,6 +89,10 @@ export default new Vuex.Store({
       setPosts (state, info) {
         // TODO: need to write data from info
         state.posts = Utils.sortObjectByDate (posts);
+      },
+
+      setMessages (state, info) {
+        state.messages = messages;
       },
 
       setMaterials (state, materials) {

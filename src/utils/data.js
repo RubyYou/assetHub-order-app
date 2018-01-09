@@ -92,7 +92,8 @@ export const employees = {
               location: 'B1', 
               job : '勘查現場設備',
               arrived: new Date('2018-01-05 8:10').getTime (),
-              avatar: 'img/avatar/4.jpg'}
+              avatar: 'img/avatar/4.jpg'
+            }
         ]
     }
 };
@@ -141,4 +142,25 @@ export const posts = {
         ]
     }
 };
-  
+
+
+export const messages = [
+    {
+        day: 'Friday',
+        time: '13:34'
+    },
+    {
+        name: 'Vladimir',
+        text: '現場勘察完成了嗎',
+        avatar: 'img/avatar/4.jpg',
+        date: '13:34',
+        type: 'received'
+    },
+    {
+        name: 'Jane',
+        text: '部份完成，還有20%',
+        type: 'sent',
+        avatar: 'img/avatar/3.jpg',
+        date: '13:50'
+    }
+];

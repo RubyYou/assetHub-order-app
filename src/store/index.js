@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import Loader from '../loader/loader.js';
+import { vehicles, employees, posts } from '../utils/data'
+import Utils from '../utils/utils'
 
 Vue.use(Vuex)
 
-// there is error here
 // use default data for creat New, 
 const defaultWorkOrder = {
   assignee : "",
@@ -35,6 +35,7 @@ const defaultWorkOrder = {
   note: "",
   "images" : []
 };
+
 // TODO:Image is coming from camera, and can save to album
 
 // TODO: Material can work later after 1/19
@@ -45,6 +46,10 @@ export default new Vuex.Store({
       workOrders: [],
       workOrderId: null,
       selectedWorkOrder : {},
+
+      vehicles: {},
+      employees: {},
+      posts: {},
 
       materials: [],
       materialId: null,
@@ -58,7 +63,6 @@ export default new Vuex.Store({
       setWorkOrderId (state, key)
       {
         state.workOrderId = key;
-        // addNew
         if (key == 0) {
           state.selectedWorkOrder = defaultWorkOrder;
         } else {
@@ -71,8 +75,22 @@ export default new Vuex.Store({
         state.selectedWorkOrder [payload.name] = payload.data;
       },
 
-      setMaterials (state, materials)
-      {
+      setVehicles (state, info) {
+        // TODO: need to write data from info
+        state.vehicles = Utils.sortObjectByDate (vehicles);
+      },
+
+      setEmployees (state, info) {
+        // TODO: need to write data from info
+        state.employees = Utils.sortObjectByDate (employees);
+      },
+
+      setPosts (state, info) {
+        // TODO: need to write data from info
+        state.posts = Utils.sortObjectByDate (posts);
+      },
+
+      setMaterials (state, materials) {
         state.materials = materials;
       }
     }

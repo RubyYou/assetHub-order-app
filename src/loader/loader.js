@@ -11,8 +11,11 @@ const config = {
     messagingSenderId: "836178416951"
 };
 
-const workOrderDB = "carehub";  // TODO: need to change data base key node
-const materialDB = "material";
+const workOrderDB = "carehub"; // TODO: change to "workorder"
+const materialDB = "material"; // TODO: not implement yet
+const vehicleDB = "vehicle";   // TODO: change to "vehicles"
+const employeeDB = "employee"; 
+const postDB = "post";
 
 class Loader {
 
@@ -21,33 +24,36 @@ class Loader {
         firebase.initializeApp(config);
         this._storage = firebase.storage().ref();
         this._workOrderDB = firebase.database().ref(workOrderDB); 
-        this._materialDB = firebase.database().ref(materialDB);
+        //this._materialDB = firebase.database().ref(materialDB);
+        
+        this._vehicleDB = firebase.database().ref(vehicleDB);
+        this._employeeDB = firebase.database().ref(employeeDB);
+        this._postDB = firebase.database().ref(postDB);
+
         this._init ();
     }
 
     _init ()
     {
+        this._processInfoToStore (workOrderDB, 'setWorkOrders');
+        this._processInfoToStore (vehicleDB, 'setVehicles');
+        this._processInfoToStore (employeeDB, 'setEmployees');
+        this._processInfoToStore (postDB, 'setPosts');
+    }
+
+    _processInfoToStore (dbName, actionName) {
+
         var databaseRef = firebase.database().ref();
-        
-        databaseRef.child(workOrderDB).on('value', (snapshots) => { 
+        databaseRef.child (dbName).on ('value', (snapshots) => { 
             let items = [];
-            console.log('done workOrderDB snapshot', snapshots.val());
+            //console.log('DB: ', dbName, snapshots.val());
             snapshots.forEach( snap => {
                 var data = Object.assign ({}, snap.val(), {key: snap.key});
                 items.push (data);
             });
-            store.commit('setWorkOrders', items);
+
+            store.commit (actionName, items);
         });
-        
-        databaseRef.child(materialDB).on('value', (snapshots) => { 
-            let materials = [];
-            console.log('done material snapshot', snapshots.val());
-            snapshots.forEach( snap => {
-                var data = Object.assign ({}, snap.val(), {key: snap.key});
-                materials.push(data);
-            });
-            store.commit('setMaterials', materials);
-        });        
     }
 
     addNewWorkOrder (payload, callback)
@@ -67,7 +73,7 @@ class Loader {
 
     deleteWorkOrder (key, callback)
     {
-        this._workOrderDB.child(key).remove(()=> {
+        this._workOrderDB.child (key).remove (() => {
             console.log ('delete finish', key);
             callback ();
         });

@@ -8,7 +8,7 @@ export default class Utils {
         return check;
     }
 
-    static dataURItoBlob(dataURI) {
+    static dataURItoBlob (dataURI) {
         // convert base64 to raw binary data held in a string
         // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
         var byteString = atob(dataURI.split(',')[1]);
@@ -30,5 +30,24 @@ export default class Utils {
         // write the ArrayBuffer to a blob, and you're done
         var blob = new Blob([ab], {type: mimeString});
         return blob;
-      }
+    }
+
+    static sortObjectByDate (data) {
+        console.assert (typeof data === "object");
+
+        let sortable = [];
+
+        for (let item in data) {
+            data[item].key = item;
+            sortable.push (data[item]);
+        }
+
+        const sortedData = sortable.sort ((a, b) => {
+            return new Date (b.date) - new Date (a.date);
+        });
+
+        console.log ('sortable', sortable);
+
+        return sortedData;
+    }
 }

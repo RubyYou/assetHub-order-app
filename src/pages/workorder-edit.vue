@@ -6,8 +6,8 @@
       <f7-nav-center>{{order.title}}</f7-nav-center>
     </f7-navbar> 
 
-    <f7-block>
-      <f7-block-title> 任務狀態 </f7-block-title>
+    <f7-block class="close">
+      <f7-block-title > 任務狀態 </f7-block-title>
       <br/>
       <div class="progress" >
         <div class="icon" @click="updateWorkOrder ('progress', 'start')">
@@ -101,7 +101,7 @@
 
         <f7-list-item smart-select title="服務地點">
           <select name="location" v-model="order.location" 
-                  @change="(e) => { updateWorkOrder ('location', e.target.value)}">
+                  @change="(e) => { updateWorkOrder ('location', e.target.value)}" >
             <option v-for="place in locations" 
                     :value="place" > {{place}} </option>
           </select>
@@ -117,6 +117,12 @@
                     @change = "(e) => { updateWorkOrder ('minus', e.target.value)}" />
           <p>分</p>
         </f7-list-item>
+
+         <f7-list-item>
+          <f7-label>詳細照片</f7-label>
+          <f7-button @click="openAlbum" fill> 觀看 > </f7-button>
+        </f7-list-item>
+
       </f7-list>
       
       <f7-block-title>結案簽收</f7-block-title>
@@ -183,6 +189,9 @@ export default {
     }
   },
   methods:{
+    openAlbum () {
+      this.album.open()
+    },
     formateISODate (element, epochTime) {
       console.assert (typeof epochTime === 'number');
 
@@ -298,12 +307,25 @@ export default {
     this.drawApp = new DrawApp (width, height);
     this.formateISODate ('.endTime', this.order.endTime);
     this.formateISODate ('.lastUpdated', this.order.lastUpdated);
+
+    this.album = this.$f7.photoBrowser ({
+      photos: [
+        'http://i.imgur.com/WRBNyoG.jpg',
+        'http://i.imgur.com/KaalRTb.jpg',
+        'http://i.imgur.com/P72QbFm.jpg'
+      ],
+      theme: 'dark',
+      type: 'popup'
+    });
   }
 }
 </script>
 <style lang="sass" scoped >
-p{
+.p{
   margin: 0;
+}
+.content-block-title{
+  margin: 15px 15px 10px;
 }
 .icon{
   width:25%;

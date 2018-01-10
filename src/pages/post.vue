@@ -1,5 +1,5 @@
 <template>
-  <f7-page data-page="materials">
+  <f7-page data-page="posts">
     <f7-navbar >
       <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
       <f7-nav-center>公告事項</f7-nav-center>
@@ -7,9 +7,10 @@
     <f7-block class="posts">
       <div v-for="post in posts">
         <f7-block-title>{{renderDate (post.date)}}</f7-block-title>
-        <f7-card class="facebook-card" v-for="item in post.list"
+        <f7-card v-html class="facebook-card" v-for="item in post.list"
           :title="renderHeader (item.title, item.type)" 
           :content="item.info"
+          :footer="renderFooter (item)"
           :inner="true">
         </f7-card>
       </div>
@@ -20,9 +21,10 @@
 
 
 <script>
-import Loader from '../loader/loader.js';
 import moment from 'moment';
+import Utils from '../utils/utils'
 import 'moment/locale/zh-tw';
+
 
 export default {
   data: function () {
@@ -31,7 +33,8 @@ export default {
         urgent : 'bolt_round_fill',
         normal : 'info_fill',
         important : 'bookmark_fill'
-      }
+      },
+      albumCount : 0
     }
   },
   computed: {
@@ -51,11 +54,40 @@ export default {
       return time + " " + day;
     },
     renderFooter (item) {
+      let map = '';
+      let album = '';
 
+      if (item.map) {
+        map = '<iframe src=\"' + item.map + '" width="300" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>';
+      }
+
+      if (item.images) {
+        this['album-' + this.albumCount] = this.$f7.photoBrowser ({
+          photos: item.images,
+          theme: 'dark',
+          type: 'popup'
+        });
+
+        const className = 'openAlbum-' + this.albumCount;        
+        album = '<a class="' + className + '"> 查看相關照片 </a>'
+        this.albumCount ++;
+      }
+
+      return map + album;
     }
   },
   mounted () {
     moment.locale('zh-tw');
+    
+    const touchEvent = Utils.isMobileOrTablet () ? 'touchstart' : 'click';
+
+    setTimeout (()=>{
+      for (let i = 0 ; i < this.albumCount -1; i++) {
+        this.$$('.openAlbum-' + i).on ('touchstart', () => {
+          this['album-' + i].open ();
+        });
+      }
+    }, 1000);
   }
 }
 </script>

@@ -5,8 +5,7 @@ import Routes from './routes.js'
 import store from './store'
 import App from './app.vue'
 
-
-Vue.use(Framework7Vue)
+Vue.use (Framework7Vue)
 
 // Init App
 new Vue({

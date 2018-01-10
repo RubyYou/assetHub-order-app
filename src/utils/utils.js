@@ -45,9 +45,7 @@ export default class Utils {
         const sortedData = sortable.sort ((a, b) => {
             return new Date (b.date) - new Date (a.date);
         });
-
-        console.log ('sortable', sortable);
-
+        
         return sortedData;
     }
 }

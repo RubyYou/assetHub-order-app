@@ -10,7 +10,7 @@ export default [
 
   {
     path: '/chart',
-    component: require ('./pages/chart.vue')
+    component: require ('./pages/chart-list.vue')
   },
   {
     path: '/vehicle',

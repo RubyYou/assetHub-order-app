@@ -177,7 +177,7 @@ export const waterPressure = {
     title : {
         text : '水壓計',
         align: 'center',
-        x: 'center'
+        x: 55
     },
     tooltip : {
         trigger: 'item',
@@ -193,22 +193,13 @@ export const waterPressure = {
                    + params.value[2];
         }
     },
-    toolbox: {
-        show : true,
-        feature : {
-            dataView : {show: true, readOnly: false},
-            saveAsImage : {show: true}
-        },
-        x: 300,
-        y: 10
-    },
     dataZoom: {
         show: true,
         start : 70
     },
     legend : {
         data : ['pressure'],
-        x: 55,
+        x: 260,
         y: 10
     },
     grid: {
@@ -256,7 +247,7 @@ export const crackMeasure = {
     title : {
         text : '裂縫計',
         align : 'center',
-        x : 'center'
+        x : 60
     },
     tooltip : {
         trigger: 'item',
@@ -272,22 +263,13 @@ export const crackMeasure = {
                    + params.value[2];
         }
     },
-    toolbox: {
-        show : true,
-        feature : {
-            dataView : {show: true, readOnly: false},
-            saveAsImage : {show: true}
-        },
-        x: 300,
-        y: 10
-    },
     dataZoom: {
         show: true,
         start : 70
     },
     legend : {
         data : ['裂縫'],
-        x: 55,
+        x: 280,
         y: 10
     },
     grid: {
@@ -603,23 +585,15 @@ export const sliperMeasure =  {
     title : {
         text : '地滑計',
         align: 'center',
-        x: 'center'
+        x: 55
     },
     tooltip : {
         trigger: 'axis'
     },
     legend: {
-        data:['最高','最低'],
-        x: 45,
+        data:['最高'],
+        x: 280,
         y: 10
-    },
-    toolbox: {
-        show : true,
-        feature : {
-            magicType : {show: true, type: ['line', 'bar']}
-        },
-        x: 300,
-        y: 5
     },
     calculable : true,
     dataZoom : {
@@ -666,7 +640,7 @@ export const tiltMeter =  {
     title : {
         text : '傾斜計',
         align: 'center',
-        x: 'center'
+        x: 55
     },
     tooltip : {
         trigger: 'item',
@@ -682,22 +656,13 @@ export const tiltMeter =  {
                    + params.value[2];
         }
     },
-    toolbox: {
-        show : true,
-        feature : {
-            dataView : {show: true, readOnly: false},
-            saveAsImage : {show: true}
-        },
-        x: 300,
-        y: 10
-    },
     dataZoom: {
         show: true,
         start : 70
     },
     legend : {
         data : ['水平位移'],
-        x: 55,
+        x: 250,
         y: 10
     },
     grid: {
@@ -720,7 +685,7 @@ export const tiltMeter =  {
             type: 'line',
             showAllSymbol: true,
             symbolSize: function (value){
-                return Math.round(value[2]/10) + 2;
+                return Math.round(value[2]/30) + 2;
             },
             data: (function () {
                 var d = [];
@@ -744,23 +709,14 @@ export const tiltMeter =  {
 export const waterLevel =  {
     title : {
         text : '水位觀測井',
-        x: 'center'
+        x: 55
     },
     tooltip : {
         trigger: 'axis'
     },
     legend: {
         data:['最高','最低'],
-        x: 30,
-        y: 10
-    },
-    toolbox: {
-        show : true,
-        feature : {
-            dataView : {readOnly:false},
-            magicType : {show: true, type: ['line', 'bar']},
-        },
-        x: 300,
+        x: 220,
         y: 10
     },
     calculable : true,
@@ -833,7 +789,7 @@ export const bodyTempature =  {
         }
     },
     toolbox: {
-        show : true,
+        show : false,
         feature : {
             dataView : {show: true, readOnly: false},
             saveAsImage : {show: true}

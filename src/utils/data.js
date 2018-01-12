@@ -176,6 +176,8 @@ export const messages = [
 export const waterPressure = {
     title : {
         text : '水壓計',
+        align: 'center',
+        x: 'center'
     },
     tooltip : {
         trigger: 'item',
@@ -196,14 +198,18 @@ export const waterPressure = {
         feature : {
             dataView : {show: true, readOnly: false},
             saveAsImage : {show: true}
-        }
+        },
+        x: 300,
+        y: 10
     },
     dataZoom: {
         show: true,
         start : 70
     },
     legend : {
-        data : ['series1']
+        data : ['pressure'],
+        x: 55,
+        y: 10
     },
     grid: {
         y2: 80
@@ -249,7 +255,8 @@ export const waterPressure = {
 export const crackMeasure = {
     title : {
         text : '裂縫計',
-    
+        align : 'center',
+        x : 'center'
     },
     tooltip : {
         trigger: 'item',
@@ -270,14 +277,18 @@ export const crackMeasure = {
         feature : {
             dataView : {show: true, readOnly: false},
             saveAsImage : {show: true}
-        }
+        },
+        x: 300,
+        y: 10
     },
     dataZoom: {
         show: true,
         start : 70
     },
     legend : {
-        data : ['裂縫']
+        data : ['裂縫'],
+        x: 55,
+        y: 10
     },
     grid: {
         y2: 80
@@ -285,7 +296,7 @@ export const crackMeasure = {
     xAxis : [
         {
             type : 'time',
-            splitNumber:10
+            splitNumber : 10
         }
     ],
     yAxis : [
@@ -299,7 +310,7 @@ export const crackMeasure = {
             type: 'line',
             showAllSymbol: true,
             symbolSize: function (value){
-                return Math.round(value[2]/10) + 2;
+                return Math.round(value[2]/30) + 2;
             },
             data: (function () {
                 var d = [];
@@ -309,8 +320,8 @@ export const crackMeasure = {
                 while (len++ < 200) {
                     d.push([
                         new Date(2016, 9, 1, 0, len * 3500),
-                        ( 5).toFixed(1) - 0,
-                        (40+Math.random()*5).toFixed(2) - 0
+                        (5).toFixed(1) - 0,
+                        (40+Math.random()*3).toFixed(2) - 0
                     ]);
                 }
                 return d;
@@ -322,8 +333,8 @@ export const crackMeasure = {
 export const rainAmount =  {
     title : {
         text: '雨量流量关系图',
-      
-        x: 'center'
+        align: 'center',
+        x: 50
     },
     tooltip : {
         trigger: 'axis',
@@ -335,17 +346,20 @@ export const rainAmount =  {
     },
     legend: {
         data:['流量','降雨量'],
-        x: 'left'
+        x: 230,
+        y: 10
     },
     toolbox: {
-        show : true,
+        show : false,
         feature : {
             mark : {show: true},
             dataView : {show: true, readOnly: false},
             magicType : {show: true, type: ['line', 'bar']},
             restore : {show: true},
             saveAsImage : {show: true}
-        }
+        },
+        x: 300,
+        y: 10
     },
     dataZoom : {
         show : true,
@@ -586,22 +600,26 @@ export const rainAmount =  {
 };
 
 export const sliperMeasure =  {
+    title : {
+        text : '地滑計',
+        align: 'center',
+        x: 'center'
+    },
     tooltip : {
         trigger: 'axis'
     },
     legend: {
-        data:['最高','最低']
+        data:['最高','最低'],
+        x: 45,
+        y: 10
     },
     toolbox: {
         show : true,
         feature : {
-            mark : {show: true},
-            dataZoom : {show: true},
-            dataView : {show: true},
-            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-            restore : {show: true},
-            saveAsImage : {show: true}
-        }
+            magicType : {show: true, type: ['line', 'bar']}
+        },
+        x: 300,
+        y: 5
     },
     calculable : true,
     dataZoom : {
@@ -644,9 +662,11 @@ export const sliperMeasure =  {
 };
 
 
-export const tiltMater =  {
+export const tiltMeter =  {
     title : {
         text : '傾斜計',
+        align: 'center',
+        x: 'center'
     },
     tooltip : {
         trigger: 'item',
@@ -667,14 +687,18 @@ export const tiltMater =  {
         feature : {
             dataView : {show: true, readOnly: false},
             saveAsImage : {show: true}
-        }
+        },
+        x: 300,
+        y: 10
     },
     dataZoom: {
         show: true,
         start : 70
     },
     legend : {
-        data : ['水平位移']
+        data : ['水平位移'],
+        x: 55,
+        y: 10
     },
     grid: {
         y2: 80
@@ -718,21 +742,26 @@ export const tiltMater =  {
 
 
 export const waterLevel =  {
+    title : {
+        text : '水位觀測井',
+        x: 'center'
+    },
     tooltip : {
         trigger: 'axis'
     },
     legend: {
-        data:['最高','最低']
+        data:['最高','最低'],
+        x: 30,
+        y: 10
     },
     toolbox: {
         show : true,
         feature : {
-            mark : {show: true},
             dataView : {readOnly:false},
-            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
-            restore : {show: true},
-            saveAsImage : {show: true}
-        }
+            magicType : {show: true, type: ['line', 'bar']},
+        },
+        x: 300,
+        y: 10
     },
     calculable : true,
     dataZoom : {
@@ -806,9 +835,7 @@ export const bodyTempature =  {
     toolbox: {
         show : true,
         feature : {
-           // mark : {show: true},
             dataView : {show: true, readOnly: false},
-            //restore : {show: true},
             saveAsImage : {show: true}
         }
     },

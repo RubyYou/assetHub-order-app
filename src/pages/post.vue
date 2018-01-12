@@ -58,7 +58,7 @@ export default {
       let album = '';
 
       if (item.map) {
-        map = '<iframe src=\"' + item.map + '" width="300" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>';
+        map = '<iframe src=\"' + item.map + '" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>';
       }
 
       if (item.images) {

@@ -16,7 +16,7 @@
             <f7-button @click="updateChart('tiltMater')"> 傾度管</f7-button>
             <f7-button @click="updateChart('waterLevel')"> 水位觀測井</f7-button>
         </f7-buttons>
-        <br />
+        <br /> <br />
         <Chart :chartData="chartData" ></Chart>
     </f7-block>
     </f7-page>
@@ -26,7 +26,7 @@
 <script>
 import Chart from '../components/chart.vue';
 import { waterPressure, crackMeasure, rainAmount, 
-        sliperMeasure, tiltMater, waterLevel, bodyTempature } from '../utils/data';
+        sliperMeasure, tiltMeter, waterLevel, bodyTempature } from '../utils/data';
 
 export default {
   components: {
@@ -40,7 +40,7 @@ export default {
             'crackMeasure' : crackMeasure,
             'rainAmount' : rainAmount,
             'sliperMeasure' : sliperMeasure,
-            'tiltMater' : tiltMater,
+            'tiltMater' : tiltMeter,
             'waterLevel' : waterLevel,
             'bodyTempature' : bodyTempature
         }

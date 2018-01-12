@@ -36,9 +36,10 @@ export default class DrawApp {
         this._canvas.setAttribute('width', this._width);
         this._canvas.setAttribute('height', this._height);
 
-        if(typeof G_vmlCanvasManager != 'undefined') {
-            this._canvas = G_vmlCanvasManager.initElement(this._canvas);
-        }
+        // cause issue on responsive, need to test if only need this on mobile
+        // if(typeof G_vmlCanvasManager != 'undefined') {
+        //     this._canvas = G_vmlCanvasManager.initElement(this._canvas);
+        // }
 
         this._context = this._canvas.getContext("2d");
         let that = this;

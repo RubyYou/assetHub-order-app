@@ -169,7 +169,6 @@ import Loader from '../loader/loader';
 export default {
   data: function () {
     return {
-      // TODO: move to DB as common config
       locations : [
         "B1", "B2", "B3", "1F", "2F", "3F", "4F", "5F", 
         "6F", "7F", "8F", "9F", "10F", "11F", "12F", "13F",

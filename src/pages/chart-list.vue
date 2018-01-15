@@ -13,7 +13,7 @@
         <br/>
         <f7-buttons>
             <f7-button @click="updateChart('sliperMeasure')"> 地滑計</f7-button>
-            <f7-button @click="updateChart('tiltMater')"> 傾度管</f7-button>
+            <f7-button @click="updateChart('tiltMater')"> 傾度計</f7-button>
             <f7-button @click="updateChart('waterLevel')"> 水位觀測井</f7-button>
         </f7-buttons>
         <br /> <br />

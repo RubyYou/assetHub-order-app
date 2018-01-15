@@ -11,7 +11,7 @@
       <f7-view id="main-view" navbar-through :dynamic-navbar="true" main>
         <!-- iOS Theme Navbar -->
         <f7-navbar v-if="$theme.ios">
-          <f7-nav-center sliding> AssetHub </f7-nav-center>
+          <f7-nav-center sliding> 勞工安全App </f7-nav-center>
         </f7-navbar>
         
         <!-- Pages -->

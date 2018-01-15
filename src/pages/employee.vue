@@ -17,7 +17,6 @@
   </f7-page>
 </template>
 
-
 <script>
 import moment from 'moment';
 

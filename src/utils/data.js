@@ -232,7 +232,7 @@ export const waterPressure = {
                 while (len++ < 200) {
                     d.push([
                         new Date(2016, 9, 1, 0, len * 3500),
-                        (30+Math.random(100)*200).toFixed(100) - 0,
+                        (30+Math.random(100)*200).toFixed(10) - 0,
                         (40+Math.random()*5).toFixed(2) - 0
                     ]);
                 }

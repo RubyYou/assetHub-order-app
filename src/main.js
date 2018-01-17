@@ -1,3 +1,5 @@
+import 'es6-promise/auto'
+import 'babel-polyfill'
 import Vue from 'vue'
 import Framework7 from 'framework7'
 import Framework7Vue from 'framework7-vue'

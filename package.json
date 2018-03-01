@@ -1,6 +1,6 @@
 {
-    "name": "WorkOrderAPP",
-    "displayName": "WorkOrderAPP",
+    "name": "CarehubAPP",
+    "displayName": "CarehubAPP",
     "version": "1.0.0",
     "description": "A sample Apache Cordova application that responds to the deviceready event.",
     "author": "Apache Cordova Team",

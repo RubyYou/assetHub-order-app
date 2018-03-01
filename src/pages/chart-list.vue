@@ -2,19 +2,19 @@
   <f7-page data-page="chart-list">
     <f7-navbar >
       <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
-      <f7-nav-center>災害監測</f7-nav-center>
+      <f7-nav-center>健康照顧監測</f7-nav-center>
     </f7-navbar>
     <f7-block>
         <f7-buttons>
-            <f7-button @click="updateChart('waterPressure')">水壓計</f7-button>
-            <f7-button @click="updateChart('crackMeasure')">裂縫計</f7-button>
-            <f7-button @click="updateChart('rainAmount')">雨量流量</f7-button>
+            <f7-button @click="updateChart('waterPressure')">睡眠品質</f7-button>
+            <f7-button @click="updateChart('crackMeasure')">血糖</f7-button>
+            <f7-button @click="updateChart('rainAmount')">血壓</f7-button>
         </f7-buttons>
         <br/>
         <f7-buttons>
-            <f7-button @click="updateChart('sliperMeasure')"> 地滑計</f7-button>
-            <f7-button @click="updateChart('tiltMater')"> 傾度計</f7-button>
-            <f7-button @click="updateChart('waterLevel')"> 水位觀測井</f7-button>
+            <f7-button @click="updateChart('sliperMeasure')"> 體溫</f7-button>
+            <f7-button @click="updateChart('tiltMater')"> 體重</f7-button>
+            <f7-button @click="updateChart('waterLevel')"> 脈搏</f7-button>
         </f7-buttons>
         <br /> <br />
         <Chart :chartData="chartData" ></Chart>

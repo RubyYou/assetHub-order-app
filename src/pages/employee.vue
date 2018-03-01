@@ -2,7 +2,7 @@
   <f7-page data-page="employee">
     <f7-navbar >
       <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
-      <f7-nav-center>工人打卡</f7-nav-center>
+      <f7-nav-center>上課打卡紀錄</f7-nav-center>
     </f7-navbar>
     <f7-block class="checkIn">
       <div v-for="today in checkIns">
@@ -37,8 +37,8 @@ export default {
       const date = new Date (epochTime);
       const time = moment (date).format ('LLL');
 
-      const locationHtml = '<p> 工作位置 : ' + location + '</p>';
-      const jobHtml = '<p> 工作內容 : ' + job + '</p>';
+      const locationHtml = '<p> 上課位置 : ' + location + '</p>';
+      const jobHtml = '<p> 上課內容 : ' + job + '</p>';
       const timeHtml = '<p> 打卡時間 : ' + time + '</p>';
 
       return locationHtml + jobHtml + timeHtml;

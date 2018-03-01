@@ -2,25 +2,25 @@ export const vehicles = {
     'key1': {
       date: new Date('2018-01-03').getTime (),
       vehicles: [
-        { name: '挖土機', model: 'M1236' },
-        { name: '重量機', model: 'S4623' },
-        { name: '推土機', model: 'T46963' }
+        { name: '餐飲科', model: 'M1236' },
+        { name: '健康課程', model: 'S4623' },
+        { name: '健康醫療', model: 'T46963' }
       ]
     },
     'key2': {
       date: new Date('2018-01-04').getTime (),
       vehicles: [
-        { name: '挖土機', model: 'M1236' },
-        { name: '推土機', model: 'S4623' },
-        { name: '混泥土機', model: 'T46963' }
+        { name: '體適能', model: 'M1236' },
+        { name: '維護管理', model: 'S4623' },
+        { name: '健康醫療', model: 'T46963' }
       ]
     },
     'key3': {
       date: new Date('2018-01-05').getTime (),
       vehicles: [
-        { name: '挖土機', model: 'M1236' },
-        { name: '混泥土機', model: 'S4623' },
-        { name: '重量機', model: 'T46963' }
+        { name: '維護管理', model: 'M1236' },
+        { name: '健康課程', model: 'S4623' },
+        { name: '維護管理', model: 'T46963' }
       ]
     }
 };
@@ -30,21 +30,21 @@ export const employees = {
         date: new Date('2018-01-03').getTime (),
         employees: [
             { name: '王小明', 
-              location: '2F', 
-              job: '勘查現場設備',
+              location: '2F教室', 
+              job: '手眼協調',
               arrived: new Date('2018-01-03 8:02').getTime (),
               avatar: 'img/avatar/1.jpg'
             },
             { name: '黃小明1d2', 
-              location: '山區', 
-              job : '啟動挖土機',
+              location: '2F教室', 
+              job : '凹凸觸感',
               arrived: new Date('2018-01-03 8:03').getTime (),
               avatar: 'img/avatar/2.jpg'
             },
             { 
               name : '張小華', 
-              location : 'B1',
-              job : '完成環境安裝',
+              location : '2F教室',
+              job : '凹凸觸感',
               arrived: new Date('2018-01-03 8:05').getTime (),
               avatar: 'img/avatar/3.jpg'
             }
@@ -55,20 +55,20 @@ export const employees = {
         employees: [
             { name: '王小明df', 
               location: '2F', 
-              job : '勘查現場設備',
+              job : '色彩訓練',
               arrived: new Date('2018-01-04 9:00').getTime (),
               avatar: 'img/avatar/4.jpg'
             },
             { 
               name: '黃小明df', 
-              location: '水箱', 
-              job : '完成環境安裝',
+              location: '3F', 
+              job : '色彩訓練',
               arrived: new Date('2018-01-04 8:35').getTime (),
               avatar: 'img/avatar/5.jpg'
             },
             { name: '張小華df', 
-              location: 'B1', 
-              job : '啟動挖土機',
+              location: '2F', 
+              job : '凹凸觸感',
               arrived: new Date('2018-01-04 7:25').getTime (),
               avatar: 'img/avatar/1.jpg'}
         ]
@@ -78,19 +78,19 @@ export const employees = {
         employees: [
             { name: '王小明', 
               location: '2F', 
-              job : '啟動挖土機',
+              job : '手眼協調',
               arrived: new Date('2018-01-05 8:00').getTime (),
               avatar: 'img/avatar/2.jpg'
             },
             { name: '黃小明dw', 
               location: 'Slop', 
-              job : '完成環境安裝',
+              job : '手眼協調',
               arrived: new Date('2018-01-05 8:20').getTime (),
               avatar: 'img/avatar/3.jpg'
             },
             { name: '張小華', 
               location: 'B1', 
-              job : '勘查現場設備',
+              job : '色彩訓練',
               arrived: new Date('2018-01-05 8:10').getTime (),
               avatar: 'img/avatar/4.jpg'
             }
@@ -104,15 +104,15 @@ export const posts = {
         list: [
             { 
                 title: '警察局位置', 
-                info: '萬盛派出所 <br/> 地址 ： 臺北市羅斯福路五段151號 <br/> 電話：<a href="tel:02-2931-2502">(02) 2931-2502</a>、<a href="tel:02-2932-7142">(02) 2932-7142</a>', 
+                info: '萬盛派出所 <br/> 地址 ： 臺中市羅斯福路五段151號 <br/> 電話：<a href="tel:02-2931-2502">(02) 2931-2502</a>、<a href="tel:02-2932-7142">(02) 2932-7142</a>', 
                 type: 'urgent',
                 map: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.888369896284!2d121.53671961624407!3d25.003908845648198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442aa1dbb3b7965%3A0x81398b61aff41f3e!2sNo.+151%2C+Section+5%2C+Roosevelt+Rd%2C+Wenshan+District%2C+Taipei+City%2C+116!5e0!3m2!1sen!2stw!4v1515587029086'
             },
             { 
                 title: '醫院位置', 
-                info: '臺北市萬芳醫院 <br/> 地址 : 台北市文山區興隆路三段111號 <br/> 電話 : <a href="tel:02-2930-7930">(02) 2930-7930</a>', 
+                info: '臺中市台中醫院 <br/> 地址 : 台中市三民路一段199號 <br/> 電話 : <a href="tel:02-2930-7930">(02) 2930-7930</a>', 
                 type: 'normal',
-                map: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3616.012401815357!2d121.55539581624403!3d24.999694545817004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442aa130e417883%3A0x94f8812bf0d318c4!2sNo.+111%2C+Section+3%2C+Xinglong+Road%2C+Wenshan+District%2C+Taipei+City%2C+116!5e0!3m2!1sen!2stw!4v1515587171707'
+                map: 'https://www.google.com/maps/embed?pb=!3m1!4b1!4m5!3m4!1s0x34693d0d828edcd7:0xa9433e90bb5d04f1!8m2!3d24.1403638!4d120.6756035'
             },
             { 
                 title: '緊急事故聯絡電話', 
@@ -126,7 +126,7 @@ export const posts = {
         list: [
             { 
                 title: '本日工作項目', 
-                info: '折模作業 <br/> 鋼筋綁紮', 
+                info: '打掃衛生 <br/> 住戶Ａ', 
                 type: 'important',
                 images: [
                     'http://www.ohcs-gz.net/uploads/20170609/1496996540792753.jpg',
@@ -134,8 +134,8 @@ export const posts = {
                 ]
             },
             { 
-                title: '應辦安全衛生事項', 
-                info: '安全帽 <br/> 吊掛作業', 
+                title: '應辦巡檢事項', 
+                info: 'ZoneA <br/> 巡檢作業', 
                 type: 'normal',
                 images: [
                     'http://www.alpinedirect.com.tw/images/kenting20071029.jpg',
@@ -144,7 +144,7 @@ export const posts = {
             },
             { 
                 title: '特別注意事項', 
-                info: '垃圾請集中放置 <br/> 如發生施工損鄰事件，受損戶請於本工程屋頂版燒置後一個月內前向新北市政府工務局提出，以免權益受損。', 
+                info: '垃圾請集中放置 <br/> 如發生施工損鄰事件，受損戶請於本單位後一個月內以免權益受損。', 
                 type: 'urgent'
             }
         ]
@@ -175,7 +175,7 @@ export const messages = [
 
 export const waterPressure = {
     title : {
-        text : '水壓計',
+        text : '睡眠',
         align: 'center',
         x: 55
     },
@@ -218,7 +218,7 @@ export const waterPressure = {
     ],
     series : [
         {
-            name: '雨量',
+            name: '血壓',
             type: 'line',
             showAllSymbol: true,
             symbolSize: function (value){
@@ -245,7 +245,7 @@ export const waterPressure = {
 
 export const crackMeasure = {
     title : {
-        text : '裂縫計',
+        text : '血糖',
         align : 'center',
         x : 60
     },
@@ -268,7 +268,7 @@ export const crackMeasure = {
         start : 70
     },
     legend : {
-        data : ['裂縫'],
+        data : ['血糖'],
         x: 280,
         y: 10
     },
@@ -288,7 +288,7 @@ export const crackMeasure = {
     ],
     series : [
         {
-            name: '裂縫',
+            name: '血糖',
             type: 'line',
             showAllSymbol: true,
             symbolSize: function (value){
@@ -314,7 +314,7 @@ export const crackMeasure = {
 
 export const rainAmount =  {
     title : {
-        text: '雨量流量关系图',
+        text: '血壓',
         align: 'center',
         x: 50
     },
@@ -327,7 +327,7 @@ export const rainAmount =  {
         }
     },
     legend: {
-        data:['流量','降雨量'],
+        data:['收縮壓','舒張壓'],
         x: 230,
         y: 10
     },
@@ -485,12 +485,12 @@ export const rainAmount =  {
     ],
     yAxis : [
         {
-            name : '流量(m^3/s)',
+            name : '收縮壓(m^3/s)',
             type : 'value',
             max : 500
         },
         {
-            name : '降雨量(mm)',
+            name : '舒張壓(mm)',
             type : 'value',
             axisLabel : {
                 formatter: function(v){
@@ -501,7 +501,7 @@ export const rainAmount =  {
     ],
     series : [
         {
-            name:'流量',
+            name:'舒張壓',
             type:'line',
             itemStyle: {normal: {areaStyle: {type: 'default'}}},
             data:[
@@ -541,7 +541,7 @@ export const rainAmount =  {
             ]
         },
         {
-            name:'降雨量',
+            name:'收縮壓',
             type:'line',
             yAxisIndex:1,
             itemStyle: {normal: {areaStyle: {type: 'default'}}},
@@ -583,7 +583,7 @@ export const rainAmount =  {
 
 export const sliperMeasure =  {
     title : {
-        text : '地滑計',
+        text : '體溫',
         align: 'center',
         x: 55
     },
@@ -638,7 +638,7 @@ export const sliperMeasure =  {
 
 export const tiltMeter =  {
     title : {
-        text : '傾斜計',
+        text : '體重',
         align: 'center',
         x: 55
     },
@@ -658,12 +658,12 @@ export const tiltMeter =  {
     },
     dataZoom: {
         show: true,
-        start : 70
+        start : 65
     },
     legend : {
-        data : ['水平位移'],
-        x: 250,
-        y: 10
+        data : ['體重'],
+        x: 80,
+        y: 60
     },
     grid: {
         y2: 80
@@ -681,7 +681,7 @@ export const tiltMeter =  {
     ],
     series : [
         {
-            name: '傾斜',
+            name: '體重',
             type: 'line',
             showAllSymbol: true,
             symbolSize: function (value){
@@ -708,7 +708,7 @@ export const tiltMeter =  {
 
 export const waterLevel =  {
     title : {
-        text : '水位觀測井',
+        text : '脈搏',
         x: 55
     },
     tooltip : {

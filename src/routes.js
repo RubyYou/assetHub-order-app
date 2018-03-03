@@ -4,6 +4,10 @@ export default [
     component: require ('./pages/workorders.vue')
   },
   {
+    path: '/check',
+    component: require ('./pages/space-check.vue')
+  },
+  {
     path: '/workorders/:key',
     component: require ('./pages/workorder-edit.vue')
   },

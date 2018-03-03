@@ -33,6 +33,10 @@
                 <div class="workorder"></div>
                 <h4> 工單列表 </h4> 
               </f7-link>
+              <f7-link href="/check" class="main-icon"> 
+                <div class="workorder"></div>
+                <h4> 局限空間作業檢點表 </h4> 
+              </f7-link>
               <f7-link href="/messager" class="main-icon"> 
                 <div class="messager"></div>
                 <h4> 團隊溝通 </h4> 

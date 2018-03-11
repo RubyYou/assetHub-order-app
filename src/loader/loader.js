@@ -11,10 +11,7 @@ const config = {
     messagingSenderId: "836178416951"
 };
 
-const workOrderDB = "carehub"; // TODO: change to "workorder"
-const materialDB = "material"; // TODO: not implement yet
-const vehicleDB = "vehicle";   // TODO: change to "vehicles"
-const employeeDB = "employee"; 
+const employeeDB = "employee";
 const postDB = "post";
 const messagesDB = "messages";
 
@@ -22,99 +19,37 @@ class Loader {
 
     constructor()
     {
-        firebase.initializeApp(config);
-        this._storage = firebase.storage().ref();
-        this._workOrderDB = firebase.database().ref(workOrderDB); 
-        //this._materialDB = firebase.database().ref(materialDB);
-        
-        this._vehicleDB = firebase.database().ref(vehicleDB);
-        this._employeeDB = firebase.database().ref(employeeDB);
-        this._postDB = firebase.database().ref(postDB);
 
-        this._init ();
+        //this._init ();
     }
 
+    // db connection stuff
     _init ()
     {
-        this._processInfoToStore (workOrderDB, 'setWorkOrders');
-        this._processInfoToStore (vehicleDB, 'setVehicles');
-        this._processInfoToStore (employeeDB, 'setEmployees');
-        this._processInfoToStore (postDB, 'setPosts');
-        this._processInfoToStore (messagesDB, 'setMessages');
+
     }
 
     _processInfoToStore (dbName, actionName) {
 
-        var databaseRef = firebase.database().ref();
-        databaseRef.child (dbName).on ('value', (snapshots) => { 
-            let items = [];
-            //console.log('DB: ', dbName, snapshots.val());
-            snapshots.forEach( snap => {
-                var data = Object.assign ({}, snap.val(), {key: snap.key});
-                items.push (data);
-            });
-
-            store.commit (actionName, items);
-        });
     }
 
-    addNewWorkOrder (payload, callback)
-    {
-        this._workOrderDB.push (payload).then (function () {
-            console.log ('updatePayload, finished');
-            callback ();
-        });
+    api () {
+        //resolve('success')
+        return 'success'
     }
 
-    updateWorkOrder (key, payload, callback)
-    {
-        firebase.database().ref (workOrderDB + "/" + key).set (payload).then (function () {
-            callback ();
-        });
+    async login (account, password, username) {
+        // Here is a new Promise api talk
+        console.log (account, password, username)
+        store.commit ('setUserInfo', {account, username})
+
+        const result = await this.api ()
+        return result
     }
 
-    deleteWorkOrder (key, callback)
-    {
-        this._workOrderDB.child (key).remove (() => {
-            console.log ('delete finish', key);
-            callback ();
-        });
+    getDownloadLink (imageUrl) {
+
     }
-
-    // addProject (name, callback)
-    // {
-    //     const payload = {
-    //         name: name,
-    //         lastUpdate: new Date ().getTime ()
-    //     };
-    //     this._projectDB.push(payload).then(function (){
-    //         callback();
-    //     });
-    // }
-
-    // updateProject (key, value)
-    // {
-    //     const payload = {
-    //         name: value,
-    //         lastUpdate: new Date ().getTime ()
-    //     };
-    //     console.log(payload);
-    //     firebase.database().ref("projects/" + key).set(payload).then (function(){
-    //         alert ('儲存完成');
-    //     });
-    // }
-
-    // deleteProject (key, callback)
-    // {
-    //     this._projectDB.child(key).remove(()=> {
-    //         alert ('刪除成功');
-    //         callback ();
-    //     });
-    // }
-
-    // getDownloadLink (imageUrl) {
-    //     return this._storage.child (imageUrl).getDownloadURL();
-    // }
 }
 
 export default new Loader ();

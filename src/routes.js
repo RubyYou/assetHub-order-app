@@ -8,6 +8,14 @@ export default [
     component: require ('./pages/space-check.vue')
   },
   {
+    path: '/vechiclecheck',
+    component: require ('./pages/vehiclecheck.vue')
+  },
+  {
+    path: '/worksafe',
+    component: require ('./pages/worksafecheck.vue')
+  },
+  {
     path: '/workorders/:key',
     component: require ('./pages/workorder-edit.vue')
   },

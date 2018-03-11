@@ -5,8 +5,8 @@
       <f7-nav-center>局限空間作業檢點表</f7-nav-center>
       <f7-subnavbar>
         <f7-segmented>
-          <f7-button tab-link="#tab1" tab-link-active>Tab 1</f7-button>
-          <f7-button tab-link="#tab2">Tab 2</f7-button>
+          <f7-button tab-link="#tab1" tab-link-active>局限空間作業檢點表</f7-button>
+          <f7-button tab-link="#tab2">局限空間作業設備檢查表</f7-button>
         </f7-segmented>
       </f7-subnavbar>
     </f7-navbar> 
@@ -253,8 +253,140 @@
 
     <!-- tab 2-->
     <f7-tab id="tab2">
-          <f7-block class="close">
-          tab 2
+      <f7-block class="close">
+        <f7-list form>
+          <f7-list-item smart-select title="局限空間作業場所告示牌">
+            <select name="check1" v-model="order.check1" 
+             @change = "(e) => { updateCheckOrder ('check1', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+    
+      
+          <f7-list-item smart-select title="工程告示牌">
+            <select name="check2" v-model="order.check2" 
+             @change = "(e) => { updateCheckOrder ('check2', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+
+      
+          <f7-list-item smart-select title="安全衛生告示牌">
+            <select name="check3" v-model="order.check3" 
+             @change = "(e) => { updateCheckOrder ('check3', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+
+          <f7-list-item smart-select title="工地安全衛生工作守則">
+            <select name="check4" v-model="order.check4" 
+             @change = "(e) => { updateCheckOrder ('check4', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="發電機（含接地）">
+            <select name="check5" v-model="order.check5" 
+             @change = "(e) => { updateCheckOrder ('check5', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="電氣設備（分電箱、漏電斷路器、無熔絲開關、接地）">
+            <select name="check6" v-model="order.check6" 
+             @change = "(e) => { updateCheckOrder ('check6', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="通風換氣設備">
+            <select name="check7" v-model="order.check7" 
+             @change = "(e) => { updateCheckOrder ('check7', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="開口護欄">
+            <select name="check8" v-model="order.check8" 
+             @change = "(e) => { updateCheckOrder ('check8', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="四用氣體偵測器（主動式）">
+            <select name="check9" v-model="order.check9" 
+             @change = "(e) => { updateCheckOrder ('check9', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="通訊設備（對講機）">
+            <select name="check10" v-model="order.check10" 
+             @change = "(e) => { updateCheckOrder ('check10', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="負背式安全帶加捲揚式防墜器">
+            <select name="check11" v-model="order.check11" 
+             @change = "(e) => { updateCheckOrder ('check11', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="空氣呼吸器（供氣式）">
+            <select name="check12" v-model="order.check12" 
+             @change = "(e) => { updateCheckOrder ('check12', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="生命偵測器">
+            <select name="check13" v-model="order.check13" 
+             @change = "(e) => { updateCheckOrder ('check13', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="井口氣體偵測電子顯示器(自動報警)">
+            <select name="check14" v-model="order.check14" 
+             @change = "(e) => { updateCheckOrder ('check14', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="安全帽">
+            <select name="check15" v-model="order.check15" 
+             @change = "(e) => { updateCheckOrder ('check15', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="安全鞋（防滑鞋）">
+            <select name="check16" v-model="order.check16" 
+             @change = "(e) => { updateCheckOrder ('check16', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          <f7-list-item smart-select title="照明設備">
+            <select name="check17" v-model="order.check17" 
+             @change = "(e) => { updateCheckOrder ('check17', e.target.value)}">
+              <option value="符合">符合</option>
+              <option value="不符合">不符合</option>
+            </select>
+          </f7-list-item>
+          
+
+
+
+
+        </f7-list>
+      
+      
           
           </f7-block>
     </f7-tab>
@@ -272,21 +404,18 @@ export default {
     }
   },
   computed: {
-    id () {
-      return this.$store.state.workOrderId;
-    },
     order () {
-      return this.$store.state.selectedWorkOrder;
+      return this.$store.state.checkOrder;
     }
   },
   methods:{
-    updateWorkOrder (name, data) {
+    updateCheckOrder (name, data) {
       const payload = {
         name: name,
         data: data
       };
       console.log (payload.name, payload.data)  
-      // this.$store.commit ('updateSelectedWorkOrder', payload);
+      this.$store.commit ('updateCheckOrder', payload);
     }
   },
   mounted() {

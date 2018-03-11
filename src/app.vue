@@ -11,7 +11,7 @@
       <f7-view id="main-view" navbar-through :dynamic-navbar="true" main>
         <!-- iOS Theme Navbar -->
         <f7-navbar v-if="$theme.ios">
-          <f7-nav-center sliding> 合勤健康共生宅管理App </f7-nav-center>
+          <f7-nav-center sliding> 勞工安全管理App </f7-nav-center>
         </f7-navbar>
         
         <!-- Pages -->
@@ -36,6 +36,14 @@
               <f7-link href="/check" class="main-icon"> 
                 <div class="workorder"></div>
                 <h4> 局限空間作業檢點表 </h4> 
+              </f7-link>
+              <f7-link href="/vechiclecheck" class="main-icon"> 
+                <div class="workorder"></div>
+                <h4> 一般車輛作業檢點 </h4> 
+              </f7-link>
+              <f7-link href="/worksafe" class="main-icon"> 
+                <div class="workorder"></div>
+                <h4> 作業安全檢查表</h4> 
               </f7-link>
               <f7-link href="/messager" class="main-icon"> 
                 <div class="messager"></div>

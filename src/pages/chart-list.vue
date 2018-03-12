@@ -1,9 +1,4 @@
 <template>
-  <f7-page data-page="chart-list">
-    <f7-navbar >
-      <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
-      <f7-nav-center>健康照顧監測</f7-nav-center>
-    </f7-navbar>
     <f7-block>
         <f7-buttons>
             <f7-button @click="updateChart('waterPressure')">睡眠品質</f7-button>
@@ -19,13 +14,11 @@
         <br /> <br />
         <Chart :chartData="chartData" ></Chart>
     </f7-block>
-    </f7-page>
-  </div>
 </template>
 
 <script>
 import Chart from '../components/chart.vue';
-import { waterPressure, crackMeasure, rainAmount, 
+import { waterPressure, crackMeasure, rainAmount,
         sliperMeasure, tiltMeter, waterLevel, bodyTempature } from '../utils/data';
 
 export default {

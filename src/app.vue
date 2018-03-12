@@ -17,7 +17,7 @@
               <div class="text-center logo"></div>
               <h3 class="title">勞工安全管理APP</h3>
               <div v-if="errorMessage.length > 0" class="error">
-                {{errorMessage}}
+                {{ errorMessage }}
               </div>
               <f7-list form ref="account-item">
                 <f7-list-item >
@@ -86,29 +86,37 @@ export default {
             highlightArea.getElementsByTagName ('input')[0].value = ''
             setTimeout (() => {
               highlightArea.classList.remove ("red")
-              this.setErrorMessage('')
-              console.log (self.errorInof)
+              this.setErrorMessage ('')
             }, 2000)
           }
         })
-        this.setErrorMessage("請填入正確帳號密碼")
-        console.log (notValidItems)
+        this.setErrorMessage ("請填入正確帳號密碼")
       } else {
-
+        this.setErrorMessage ("")
         const result = Loader.login (validItems.account, validItems.password, validItems.username)
         result.then(
           success => {
-            this.setErrorMessage("")
+            this.goToMain ()
           },
           error => {
-            this.setErrorMessage("帳號密碼不對，無法登入")
+            self.setErrorMessage("帳號密碼不對，無法登入")
           }
         )
       }
     },
     isEmpty (value) {
       return value === undefined || value === null || value === ''
+    },
+    goToMain () {
+      // this required to insert number and object as $router load not work
+      this.$f7Router.changeRoute ("/main", 0,{})
     }
+  },
+  mounted () {
+    setTimeout (() => {
+      this.goToMain ()
+    }, 1000)
+
   }
 }
 </script>

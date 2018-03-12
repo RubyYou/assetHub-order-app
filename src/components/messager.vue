@@ -1,13 +1,9 @@
 <template>
-  <f7-page data-page="materials">
-    <f7-navbar >
-      <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
-      <f7-nav-center>現場溝通</f7-nav-center>
-    </f7-navbar>
+  <div data-page="messager" class="messager-wrap" >
     <f7-messages >
-      <f7-message v-for= "message in messages" 
-        :name = "(message.name) ? message.name : null" 
-        :text = "(message.text) ? message.text : null" 
+      <f7-message v-for= "message in messages"
+        :name = "(message.name) ? message.name : null"
+        :text = "(message.text) ? message.text : null"
         :type = "(message.type) ? message.type : null"
         :avatar = "(message.avatar) ? message.avatar : null"
         :time = "(message.time) ? (message.time) : null"
@@ -17,22 +13,18 @@
       </f7-message>
     </f7-messages>
     <f7-messagebar placeholder="Message" send-link="Send" @submit="onSubmit"></f7-messagebar>
-    </f7-page>
   </div>
 </template>
 
-
 <script>
 export default {
+  props: [
+    'messages'
+  ],
   data: function () {
     return {
       name: 'ken',
       avatar:'img/avatar/1.jpg',
-    }
-  },
-  computed: {
-    messages () {
-      return this.$store.state.messages;
     }
   },
   methods: {
@@ -50,9 +42,21 @@ export default {
           return hours + ':' + minutes;
         })()
       });
-      // Clear Message Bar
       clear();
     }
+  },
+  mounted () {
+    console.log ('messager')
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.messager-wrap {
+  position: relative;
+  height: calc(100% - 50px);
+}
+.toolbar {
+  position: absolute;
+}
+</style>

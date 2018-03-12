@@ -1,32 +1,18 @@
-
-import firebase from 'firebase'
 import store from '../store/index'
-
-const config = {
-    apiKey: "AIzaSyABzMG21mytB-OW1mv37Rfh4tdpvSLaunQ",
-    authDomain: "torrid-inferno-9944.firebaseapp.com",
-    databaseURL: "https://torrid-inferno-9944.firebaseio.com",
-    projectId: "torrid-inferno-9944",
-    storageBucket: "torrid-inferno-9944.appspot.com",
-    messagingSenderId: "836178416951"
-};
-
-const employeeDB = "employee";
-const postDB = "post";
-const messagesDB = "messages";
+import { messages } from '../utils/data'
 
 class Loader {
 
     constructor()
     {
 
-        //this._init ();
+        this._init ();
     }
 
     // db connection stuff
     _init ()
     {
-
+        store.commit ('setMessages', messages )
     }
 
     _processInfoToStore (dbName, actionName) {
@@ -34,7 +20,6 @@ class Loader {
     }
 
     api () {
-        //resolve('success')
         return 'success'
     }
 

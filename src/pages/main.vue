@@ -26,7 +26,7 @@
     <f7-page-content tab id="tab2">forms </f7-page-content>
     <f7-page-content tab id="tab3">employee checkIns</f7-page-content>
     <f7-page-content tab id="tab4">
-        <ChartList />
+      <ChartList />
     </f7-page-content>
     <f7-page-content tab id="tab5">post</f7-page-content>
   </f7-page>

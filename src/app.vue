@@ -22,7 +22,12 @@
               <f7-list form ref="account-item">
                 <f7-list-item >
                   <f7-label >帳號</f7-label>
-                  <f7-input ref="account" type="text" placeholder="account"/>
+                  <f7-input type="select" v-model="accountValue">
+                    <option v-for="info in accounts"
+                            :value="info.account">
+                            {{ info.account }}
+                    </option>
+                  </f7-input>
                 </f7-list-item>
                 <f7-list-item ref="password-item">
                   <f7-label >密碼</f7-label>
@@ -47,11 +52,15 @@
 
 <script>
 import Loader from './loader/loader.js'
+import Login from './loader/login.js'
+import { accountInfo } from './utils/db-config'
 
 export default {
   data: function () {
     return {
-      errorMessage: ""
+      errorMessage: "",
+      accounts: accountInfo,
+      accountValue : accountInfo[0].account
     }
   },
   methods: {
@@ -63,7 +72,6 @@ export default {
       let self = this
       const inputs = [
         { ref: "username", "input": this.$refs.name, "area": this.$refs["name-item"]},
-        { ref: "account", "input": this.$refs.account, "area": this.$refs["account-item"]},
         { ref: "password", "input": this.$refs.password, "area": this.$refs["account-item"]}
       ]
 
@@ -91,32 +99,43 @@ export default {
           }
         })
         this.setErrorMessage ("請填入正確帳號密碼")
+        this.removeErrorMessage ()
       } else {
         this.setErrorMessage ("")
-        const result = Loader.login (validItems.account, validItems.password, validItems.username)
-        result.then(
-          success => {
-            this.goToMain ()
-          },
-          error => {
-            self.setErrorMessage("帳號密碼不對，無法登入")
-          }
+        Login.start (
+          this.accountValue,
+          validItems.password,
+          validItems.username,
+          this.loginSuccessHandler,
+          this.loginFailHandler
         )
       }
+    },
+    loginSuccessHandler () {
+      Loader.init ()
+      this.goToMain ()
+    },
+    loginFailHandler () {
+      this.setErrorMessage ("帳號密碼不對，無法登入")
+      this.removeErrorMessage ()
     },
     isEmpty (value) {
       return value === undefined || value === null || value === ''
     },
     goToMain () {
       // this required to insert number and object as $router load not work
-      this.$f7Router.changeRoute ("/main", 0,{})
+      this.$f7Router.changeRoute ("/main", 0, {})
+    },
+    removeErrorMessage () {
+      setTimeout (() => {
+        this.setErrorMessage ('')
+      }, 2000)
     }
   },
   mounted () {
-    setTimeout (() => {
-      this.goToMain ()
-    }, 1000)
-
+    // setTimeout (() => {
+    //   this.goToMain ()
+    // }, 1000)
   }
 }
 </script>

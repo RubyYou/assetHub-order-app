@@ -1,35 +1,34 @@
+import firebase from 'firebase'
 import store from '../store/index'
 import { messages } from '../utils/data'
+import { accountInfo, remoteConfig } from '../utils/db-config'
+import Utils from '../utils/utils'
 
 class Loader {
 
-    constructor()
-    {
+    constructor () { }
 
-        this._init ();
+    init () {
+        const db = remoteConfig.database
+        this._messagesDB = firebase.database().ref (db.messages);
+        this._formsDB = firebase.database().ref (db.forms);
+
+        this._setDataToStore (db.messages, 'setMessages')
+        this._setDataToStore (db.forms, 'setForms')
     }
 
-    // db connection stuff
-    _init ()
-    {
-        store.commit ('setMessages', messages )
-    }
+    _setDataToStore (dbName, actionName) {
+        const databaseRef = firebase.database().ref();
 
-    _processInfoToStore (dbName, actionName) {
-
-    }
-
-    api () {
-        return 'success'
-    }
-
-    async login (account, password, username) {
-        // Here is a new Promise api talk
-        console.log (account, password, username)
-        store.commit ('setUserInfo', {account, username})
-
-        const result = await this.api ()
-        return result
+        databaseRef.child (dbName).on ('value', (snapshots) => {
+            let items = [];
+            console.log('DB: ', dbName, snapshots.val());
+            snapshots.forEach( snap => {
+                const data = Object.assign ({}, snap.val(), {key: snap.key});
+                items.push (data);
+            });
+            store.commit (actionName, items);
+        });
     }
 
     getDownloadLink (imageUrl) {

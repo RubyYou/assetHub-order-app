@@ -23,7 +23,7 @@ export const localConfig = {
         gas: "",
         water: ""
     },
-    "postInfo": {},
+    "posthref": "/aaa",
     "checkInIP": "",
 }
 

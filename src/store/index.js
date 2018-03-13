@@ -14,6 +14,9 @@ export default new Vuex.Store ({
         name: ''
       },
       messages: [],
+      allforms: {},
+
+      // today's form
       forms: {}
     },
     mutations: {
@@ -28,14 +31,26 @@ export default new Vuex.Store ({
       },
 
       setForms (state, payload) {
-        state.forms = payload;
+        state.allforms = payload;
         // sort forms by dates
-      }
-    },
-    // not sure how do I use this
-    actions: {
-      increment (context) {
-        context.commit('increment')
+        // TODO: Get the form for today, the rest of them will sorted and display
+      },
+      updateForms (state, payload) {
+        console.assert (payload.formType, payload.formName)
+
+        if (!state.forms [payload.formType][payload.formName][payload.name]) {
+          state.forms [payload.formType][payload.formName][payload.name] = ''
+        }
+
+        state.forms [payload.formType] [payload.formName] [payload.name] = payload.data;
+      },
+      setFormStructure (state, payload) {
+        if (!state.forms [payload.formType]) {
+          state.forms [payload.formType] = {}
+        }
+        if (!state.forms [payload.formType][payload.formName]) {
+            state.forms [payload.formType][payload.formName] = {}
+        }
       }
     }
 });

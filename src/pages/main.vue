@@ -23,7 +23,9 @@
     <f7-page-content tab active id="tab1">
       <Messager :messages="messages" />
     </f7-page-content>
-    <f7-page-content tab id="tab2">forms </f7-page-content>
+    <f7-page-content tab id="tab2">
+      <Forms />
+    </f7-page-content>
     <f7-page-content tab id="tab3">employee checkIns</f7-page-content>
     <f7-page-content tab id="tab4">
       <ChartList />
@@ -35,11 +37,13 @@
 <script>
 import Messager from '../components/messager.vue'
 import ChartList from './chart-list.vue'
+import Forms from './forms/index.vue'
 
 export default {
   components: {
     Messager,
-    ChartList
+    ChartList,
+    Forms
   },
   computed: {
     messages () {

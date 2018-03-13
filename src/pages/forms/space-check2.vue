@@ -98,7 +98,6 @@ export default {
   },
   computed: {
     checks () {
-        // maybe create this whilst created
       return this.$store.state.forms [this.formType] [this.formName] || {}
     }
   },
@@ -115,6 +114,7 @@ export default {
     }
   },
   beforeCreate () {
+    // this has to do before get anything from forms
     const payload = {
       formName: "formB",
       formType: "spaceCheck"

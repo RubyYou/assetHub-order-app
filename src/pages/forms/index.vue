@@ -28,8 +28,6 @@
         </f7-block>
     </div>
 </template>
-
-
 <script>
 
 export default {

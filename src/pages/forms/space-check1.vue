@@ -4,10 +4,9 @@
       <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
       <f7-nav-center>局限空間作業檢點表</f7-nav-center>
     </f7-navbar>
-
-    <f7-block >
-      <f7-block-title>{{sectionA.title}}</f7-block-title>
-      <f7-list form v-for="item in sectionA.data" >
+    <div v-for="section in sections">
+      <f7-block-title>{{section.title}}</f7-block-title>
+      <f7-list form v-for="item in section.data" >
         <f7-list-item smart-select :title="item.title">
           <select
             :name="item.title"
@@ -26,200 +25,34 @@
           </f7-input>
         </f7-list-item>
       </f7-list>
-
-      <f7-block-title>{{sectionB.title}}</f7-block-title>
-      <f7-list form v-for="item in sectionB.data" >
-        <f7-list-item smart-select :title="item.title">
-          <select
-            :name="item.title"
-            v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
-            <option value="符合">符合</option>
-            <option value="不符合">不符合</option>
-          </select>
-        </f7-list-item>
-        <f7-list-item>
-          <f7-input type="textarea"
-                    :name="item.note"
-                    :placeholder="item.note"
-                    :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
-          </f7-input>
-        </f7-list-item>
-      </f7-list>
-      <f7-block-title>{{sectionC.title}}</f7-block-title>
-      <f7-list form v-for="item in sectionB.data" >
-        <f7-list-item smart-select :title="item.title">
-          <select
-            :name="item.title"
-            v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
-            <option value="符合">符合</option>
-            <option value="不符合">不符合</option>
-          </select>
-        </f7-list-item>
-        <f7-list-item>
-          <f7-input type="textarea"
-                    :name="item.note"
-                    :placeholder="item.note"
-                    :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
-          </f7-input>
-        </f7-list-item>
-      </f7-list>
-      <f7-block-title>{{sectionD.title}}</f7-block-title>
-      <f7-list form v-for="item in sectionB.data" >
-        <f7-list-item smart-select :title="item.title">
-          <select
-            :name="item.title"
-            v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
-            <option value="符合">符合</option>
-            <option value="不符合">不符合</option>
-          </select>
-        </f7-list-item>
-        <f7-list-item>
-          <f7-input type="textarea"
-                    :name="item.note"
-                    :placeholder="item.note"
-                    :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
-          </f7-input>
-        </f7-list-item>
-      </f7-list>
-      <f7-block-title>{{sectionE.title}}</f7-block-title>
-      <f7-list form v-for="item in sectionB.data" >
-        <f7-list-item smart-select :title="item.title">
-          <select
-            :name="item.title"
-            v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
-            <option value="符合">符合</option>
-            <option value="不符合">不符合</option>
-          </select>
-        </f7-list-item>
-        <f7-list-item>
-          <f7-input type="textarea"
-                    :name="item.note"
-                    :placeholder="item.note"
-                    :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
-          </f7-input>
-        </f7-list-item>
-      </f7-list>
-      <f7-block-title>{{sectionF.title}}</f7-block-title>
-      <f7-list form v-for="item in sectionB.data" >
-        <f7-list-item smart-select :title="item.title">
-          <select
-            :name="item.title"
-            v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
-            <option value="符合">符合</option>
-            <option value="不符合">不符合</option>
-          </select>
-        </f7-list-item>
-        <f7-list-item>
-          <f7-input type="textarea"
-                    :name="item.note"
-                    :placeholder="item.note"
-                    :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
-          </f7-input>
-        </f7-list-item>
-      </f7-list>
-      <f7-block-title>{{sectionG.title}}</f7-block-title>
-      <f7-list form v-for="item in sectionB.data" >
-        <f7-list-item smart-select :title="item.title">
-          <select
-            :name="item.title"
-            v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
-            <option value="符合">符合</option>
-            <option value="不符合">不符合</option>
-          </select>
-        </f7-list-item>
-        <f7-list-item>
-          <f7-input type="textarea"
-                    :name="item.note"
-                    :placeholder="item.note"
-                    :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
-          </f7-input>
-        </f7-list-item>
-      </f7-list>
-      <f7-block-title>{{sectionH.title}}</f7-block-title>
-      <f7-list form v-for="item in sectionB.data" >
-        <f7-list-item smart-select :title="item.title">
-          <select
-            :name="item.title"
-            v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
-            <option value="符合">符合</option>
-            <option value="不符合">不符合</option>
-          </select>
-        </f7-list-item>
-        <f7-list-item>
-          <f7-input type="textarea"
-                    :name="item.note"
-                    :placeholder="item.note"
-                    :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
-          </f7-input>
-        </f7-list-item>
-      </f7-list>
-      <f7-block-title>{{sectionI.title}}</f7-block-title>
-      <f7-list form v-for="item in sectionB.data" >
-        <f7-list-item smart-select :title="item.title">
-          <select
-            :name="item.title"
-            v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
-            <option value="符合">符合</option>
-            <option value="不符合">不符合</option>
-          </select>
-        </f7-list-item>
-        <f7-list-item>
-          <f7-input type="textarea"
-                    :name="item.note"
-                    :placeholder="item.note"
-                    :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
-          </f7-input>
-        </f7-list-item>
-      </f7-list>
-      <f7-block-title>{{sectionJ.title}}</f7-block-title>
-      <f7-list form v-for="item in sectionB.data" >
-        <f7-list-item smart-select :title="item.title">
-          <select
-            :name="item.title"
-            v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
-            <option value="符合">符合</option>
-            <option value="不符合">不符合</option>
-          </select>
-        </f7-list-item>
-        <f7-list-item>
-          <f7-input type="textarea"
-                    :name="item.note"
-                    :placeholder="item.note"
-                    :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
-          </f7-input>
-        </f7-list-item>
-      </f7-list>
+    </div>
+    <f7-block>
+      <p>表單簽收</p>
+      <SignPopup :signData="signData" />
+      <br/>
+      <f7-button fill green >儲存本表格</f7-button>
     </f7-block>
   </f7-page>
 </template>
 
 <script>
+import SignPopup from '../../components/signPopup.vue'
 
 export default {
-
+  components: {
+    SignPopup
+  },
   data: function () {
     return {
      formName: "formA",
      formType: "spaceCheck",
-     sectionA: {
+     signData: {
+       signA: {},
+       signB: {},
+       signC: {}
+     },
+     sections: [
+      {
       title: "一、許可",
       data: [
         { title: '必須要進去嗎', data:"check1",
@@ -233,7 +66,7 @@ export default {
         }
       ]
      },
-     sectionB: {
+     {
       title: "二、空氣測試",
       data: [
         { title: '空氣測試儀器是否已校正', data:"check4",
@@ -250,7 +83,7 @@ export default {
         }
       ]
      },
-     sectionC: {
+     {
       title: "三、監測",
       data: [
         { title: '是否將監測工作期間的空氣', data:"check8",
@@ -261,10 +94,10 @@ export default {
         },
         { title: '是否為非持續性監測', data:"check10",
           note: "改善措施內容", data_note: "check10Note"
-        },
+        }
       ]
      },
-     sectionD: {
+     {
       title: "四、通風",
       data: [
         { title: '是否已通風換氣過', data:"check11",
@@ -281,11 +114,10 @@ export default {
         },
         { title: '通風後是否再測定過（確認安全性）', data:"check15",
           note: "改善措施內容", data_note: "check15Note"
-        },
-
+        }
       ]
      },
-     sectionE: {
+     {
       title: "五、隔離",
       data: [
         { title: '是否已完全隔離危害能源', data:"check16",
@@ -302,7 +134,7 @@ export default {
         },
       ]
      },
-      sectionF: {
+     {
       title: "六、衣物/設備",
       data: [
         { title: '是否需特殊之工作服（安全鞋、防護衣、安全眼鏡等）', data:"check20",
@@ -313,10 +145,10 @@ export default {
         },
         { title: '是否需特殊工具（防火、防爆、具漏電斷路功能之工具）', data:"check22",
           note: "如是，請寫明", data_note: "check22Note"
-        },
+        }
       ]
      },
-     sectionG: {
+     {
       title: "七、呼吸防護具",
       data: [
         { title: '是否置備合格之呼吸防護具', data:"check23",
@@ -330,7 +162,7 @@ export default {
         },
       ]
      },
-     sectionH: {
+     {
       title: "八、救援設備",
       data: [
         { title: '於深水井上方設置1條救生母索，供監測人員使用', data:"check26",
@@ -344,7 +176,7 @@ export default {
         },
       ]
      },
-     sectionI: {
+     {
       title: "九、教育訓練",
       data: [
         { title: '是否已受過如何使用呼吸防護具的訓練', data:"check29",
@@ -358,7 +190,7 @@ export default {
         },
       ]
      },
-     sectionJ: {
+     {
       title: "十、監視/搶救",
       data: [
         { title: '是否有場外監視人員進行全程監視及通訊工作', data:"check32",
@@ -383,12 +215,12 @@ export default {
           note: "如是，請寫明", data_note: "check38Note"
         },
       ]
-     },
+     }
+     ]
     }
   },
   computed: {
     checks () {
-      // it might not exist in the store
       return this.$store.state.forms [this.formType] [this.formName] || {}
     }
   },
@@ -414,7 +246,6 @@ export default {
 }
 </script>
 <style lang="sass" scoped >
-
 .list-block{
     margin: 0;
 }
@@ -425,5 +256,7 @@ export default {
 .list-block textarea{
   height:80px
 }
+.page-content {
+  margin-top: 25px;
+}
 </style>
- No newline at end of file

@@ -246,7 +246,6 @@ export default {
       const key = ''
       const formInfo = { formName: this.formName, formType: this.formType}
       const payload = Object.assign({}, this.form, formInfo)
-      console.log (payload)
 
       if (key.length > 0) {
         Loader.updateForm (key, payload, this.saveComplete)

@@ -15,8 +15,8 @@ class Loader {
     init () {
         this._messagesDB = firebase.database().ref (db.messages);
         this._formsDB = firebase.database().ref (db.forms);
-        this._setDataToStore (db.messages, 'setMessages')
-        this._setDataToStore (db.forms, 'setForms')
+        this._setDataToStore (this._messagesDB , 'setMessages')
+        // this._setDataToStore (this._formsDB, 'setForms') // not sure if needed
         this._setTodayFormDB ()
     }
 
@@ -27,19 +27,19 @@ class Loader {
                 const firstNode = {"created": new Date().getTime ().toString ()}
                 todayForm.set(firstNode)
             }
+            this._setDataToStore (todayForm, 'setForms')
         })
     }
 
-    _setDataToStore (dbName, actionName) {
-        const databaseRef = firebase.database().ref(); // get FORM based on date INFO
+    _setDataToStore (dbRef, actionName) {
 
-        databaseRef.child (dbName).on ('value', (snapshots) => {
+        dbRef.on ('value', (snapshots) => {
             let items = [];
             snapshots.forEach( snap => {
                 const data = Object.assign ({}, snap.val(), {key: snap.key});
                 items.push (data);
             });
-            console.log('DB: ', dbName, snapshots.val());
+            console.log('DB: ', actionName, snapshots.val());
             store.commit (actionName, items);
         });
     }
@@ -47,13 +47,13 @@ class Loader {
 
     async createNewForm (payload, callback) {
         payload.createDate = new Date ().getTime ()
-        await this._formsDB.push (payload)
+        await this._formsDB.child (today).push (payload)
         console.log ('createNewForm, finished');
         callback ();
     }
 
     async updateForm (key, payload, callback) {
-        this._formsDB.child (key).set (payload)
+        this._formsDB.child (today).child (key).set (payload)
         console.log ('createNewForm, finished');
         callback ();
     }

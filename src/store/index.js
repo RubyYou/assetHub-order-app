@@ -15,7 +15,7 @@ export default new Vuex.Store ({
       },
       messages: [],
       allforms: {},
-      forms: {}, // today's form
+      todayForms: {}, // today's form
       selectedForm: {} // set currentItem
     },
     mutations: {
@@ -30,9 +30,7 @@ export default new Vuex.Store ({
       },
 
       setForms (state, payload) {
-        state.allforms = payload;
-        // sort forms by dates
-        // TODO: Get the form for today, the rest of them will sorted and display
+        state.todayForms = payload; // this is all today's Form
       },
       updateSelectedForm (state, payload) {
         console.assert (payload.formType && payload.formName)
@@ -45,14 +43,14 @@ export default new Vuex.Store ({
       },
       setSelectedForm (state, payload) {
 
-        if (!state.forms [payload.formType]) {
-            state.forms [payload.formType] = {}
+        if (!state.todayForms [payload.formType]) {
+            state.todayForms [payload.formType] = {}
         }
 
         // create new form if not exist
-        if (!state.forms [payload.formType][payload.formName]) {
+        if (!state.todayForms [payload.formType][payload.formName]) {
             const newForm = { signData: { signA: {}, signB: {}, signC: {}} }
-            state.forms [payload.formType][payload.formName] = newForm  //--> this happen only when saving form
+            state.todayForms [payload.formType][payload.formName] = newForm  //--> this happen only when saving form
             state.selectedForm = newForm
         } else {
             // use old form

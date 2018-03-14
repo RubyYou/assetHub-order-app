@@ -16,12 +16,12 @@ import Utils from '../utils/utils'
 class Login {
 
     constructor () {
-        this._accounts = accountInfo
+        this._accounts = accountInfo // default setup locally
         this._isRemote = false
         this._remoteLoginUser = null
     }
 
-    start (account, password, name, successHandler, failHandler) {
+    start (account, password, username, successHandler, failHandler) {
 
         this._isRemote = Utils.isOnline ()
         console.assert (typeof successHandler === 'function')
@@ -29,7 +29,7 @@ class Login {
 
         this.account = account
         this.password = password
-        this.name = name
+        this.username = username
         this.successHandler = successHandler
         this.failHandler = failHandler
 

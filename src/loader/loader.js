@@ -31,6 +31,18 @@ class Loader {
         });
     }
 
+    async createNewForm (payload, callback) {
+        await this._formsDB.push (payload)
+        console.log ('createNewForm, finished');
+        callback ();
+    }
+
+    async updateForm (key, payload, callback) {
+        this._formsDB.child (key).set (payload)
+        console.log ('createNewForm, finished');
+        callback ();
+    }
+
     getDownloadLink (imageUrl) {
 
     }

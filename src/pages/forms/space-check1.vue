@@ -10,8 +10,8 @@
         <f7-list-item smart-select :title="item.title">
           <select
             :name="item.title"
-            v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
+            v-model="form[item.data]"
+            @change = "(e) => { updateForm (item.data, e.target.value)}">
             <option value="符合">符合</option>
             <option value="不符合">不符合</option>
           </select>
@@ -20,23 +20,25 @@
           <f7-input type="textarea"
                     :name="item.note"
                     :placeholder="item.note"
-                    :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
+                    :value="form[item.data_note]"
+                    @change = "(e) => { updateForm (item.data_note, e.target.value)}">
           </f7-input>
         </f7-list-item>
       </f7-list>
     </div>
     <f7-block>
       <p>表單簽收</p>
-      <SignPopup :signData="signData" />
-      <br/>
-      <f7-button fill green >儲存本表格</f7-button>
+      <SignPopup :signData="form.signData" :updateSign="updateSign" /> <br/>
+      <f7-button fill green @click="saveForm">
+        儲存本表格
+      </f7-button>
     </f7-block>
   </f7-page>
 </template>
 
 <script>
 import SignPopup from '../../components/signPopup.vue'
+import Loader from '../../loader/loader'
 
 export default {
   components: {
@@ -46,11 +48,6 @@ export default {
     return {
      formName: "formA",
      formType: "spaceCheck",
-     signData: {
-       signA: {},
-       signB: {},
-       signC: {}
-     },
      sections: [
       {
       title: "一、許可",
@@ -220,12 +217,12 @@ export default {
     }
   },
   computed: {
-    checks () {
-      return this.$store.state.forms [this.formType] [this.formName] || {}
+    form () {
+      return this.$store.state.selectedForm
     }
   },
   methods:{
-    updateForms (name, data) {
+    updateForm (name, data) {
       const payload = {
         formName: this.formName,
         formType: this.formType,
@@ -233,15 +230,41 @@ export default {
         data: data
       };
       console.log (payload.formName, payload.formType, payload.name, payload.data)
-      this.$store.commit ('updateForms', payload);
+      this.$store.commit ('updateSelectedForm', payload);
+    },
+    updateSign (signType, drawData) {
+      const payload = {
+        formName: this.formName,
+        formType: this.formType,
+        name: 'signData',
+        data:  Object.assign({}, this.form.signData, {[signType]: drawData})
+      }
+      this.$store.commit ('updateSelectedForm', payload);
+      // do I need to make a storage to store sign
+    },
+    saveForm () {
+      const key = ''
+      const formInfo = { formName: this.formName, formType: this.formType}
+      const payload = Object.assign({}, this.form, formInfo)
+      console.log (payload)
+
+      if (key.length > 0) {
+        Loader.updateForm (key, payload, this.saveComplete)
+      } else {
+        Loader.createNewForm (payload, this.saveComplete)
+      }
+    },
+    saveComplete () {
+      console.log ('save Complete call back')
     }
   },
   beforeCreate () {
+    // setCurrentForm
     const payload = {
       formName: "formA",
       formType: "spaceCheck"
     }
-    this.$store.commit ('setFormStructure', payload);
+    this.$store.commit ('setSelectedForm', payload);
   }
 }
 </script>

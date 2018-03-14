@@ -20,17 +20,25 @@ import DrawApp from './draw';
 
 export default {
   props: {
-    signData: Object,
     updateSign: Function
   },
   data: function () {
     return {
-      signColor : "#000000",
-      signType : "signA"
+        signColor : "#000000",
+        signType : "signA"
+    }
+  },
+  computed: {
+    signData () {
+        const defaultInfo = { signA: {}, signB: {}, signC: {} }
+        const info = this.$store.getters.signData || defaultInfo
+        return info
     }
   },
   methods:{
     sign (signType, data = {}) {
+      const signData = this.$store.getters.getSignData
+      console.log(this.signData, signData)
       this.signType = signType;
       this.drawApp.enablePant (true);
       const clickExist = Array.isArray (data.clickX) === true && Array.isArray (data.clickX) === true;
@@ -48,7 +56,11 @@ export default {
     },
     closePopup () {
       this.drawApp.enablePant (false);
-      this.updateSign (this.signType, this.drawApp.getDrawData ())
+      const payload = {
+          type: this.signType,
+          data: this.drawApp.getDrawData ()
+      }
+      this.updateSign (payload)
       this.$f7.closeModal('.sign', true);
     }
   },

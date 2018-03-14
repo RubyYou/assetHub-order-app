@@ -12,7 +12,7 @@
           <select
             :name="item.title"
             v-model="checks[item.data]"
-            @change = "(e) => { updateForms (item.data, e.target.value)}">
+            @change = "(e) => { updateForm (item.data, e.target.value)}">
             <option value="符合">符合</option>
             <option value="不符合">不符合</option>
           </select>
@@ -22,7 +22,7 @@
                     :name="item.note"
                     :placeholder="item.note"
                     :value="checks[item.data_note]"
-                    @change = "(e) => { updateForms (item.data_note, e.target.value)}">
+                    @change = "(e) => { updateForm (item.data_note, e.target.value)}">
           </f7-input>
         </f7-list-item>
       </f7-list>
@@ -97,29 +97,28 @@ export default {
     }
   },
   computed: {
-    checks () {
-      return this.$store.state.forms [this.formType] [this.formName] || {}
+    form () {
+      return this.$store.state.selectedForm
     }
   },
+  // the method is all the same, should put into an action
   methods:{
-    updateForms (name, data) {
+    updateForm (name, data) {
       const payload = {
         formName: this.formName,
         formType: this.formType,
         name: name,
         data: data
       };
-      console.log (payload.formName, payload.formType, payload.name, payload.data)
-      this.$store.commit ('updateForms', payload);
+      this.$store.commit ('updateSelectedForm', payload);
     }
   },
   beforeCreate () {
-    // this has to do before get anything from forms
     const payload = {
       formName: "formB",
       formType: "spaceCheck"
     }
-    this.$store.commit ('setFormStructure', payload);
+    this.$store.commit ('setSelectedForm', payload);
   }
 }
 </script>

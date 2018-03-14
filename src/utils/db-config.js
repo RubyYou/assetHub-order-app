@@ -34,7 +34,7 @@ export const remoteConfig = {
     database: {
         accounts: "accounts",
         messages: "messageA",
-        forms: "formA"
+        forms: "formsA"
     },
     storage: {
         photos: "photoA",

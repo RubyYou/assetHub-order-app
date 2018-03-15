@@ -4,7 +4,7 @@
       <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
       <f7-nav-center>局限空間作業檢點表</f7-nav-center>
     </f7-navbar>
-    <div v-for="section in sections">
+    <div v-for="section in sections" class="wrap">
       <f7-block-title>{{section.title}}</f7-block-title>
       <f7-list form v-for="item in section.data" >
         <f7-list-item smart-select :title="item.title">
@@ -238,7 +238,7 @@ export default {
 .list-block textarea{
   height:80px
 }
-.page-content {
-  margin-top: 25px;
+.wrap {
+  margin-top: 60px;
 }
 </style>

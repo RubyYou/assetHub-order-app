@@ -60,7 +60,7 @@ export default {
             } else {
                 // use old form
                 state.selectedForm = selected [0]
-                selected [0].signData ? selected [0].signData : defaultSignData
+                state.signData = selected [0].signData ? selected [0].signData : defaultSignData
             }
         }
     }

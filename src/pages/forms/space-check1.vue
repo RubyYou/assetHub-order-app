@@ -29,7 +29,7 @@
     <f7-block>
       <p>表單簽收</p>
       <SignPopup :updateSign="updateSign" /> <br/>
-      <f7-button fill green @click="saveForm">
+      <f7-button fill green @click=" saveForm ($f7) ">
         儲存本表格
       </f7-button>
     </f7-block>
@@ -38,8 +38,8 @@
 
 <script>
 import SignPopup from '../../components/signPopup.vue'
-import Loader from '../../loader/loader'
 import { mapState, mapActions } from 'vuex'
+
 // IMPORTANT : Here sets which form to update
 const formInfo = { formName: "formA", formType: "spaceCheck" }
 
@@ -219,26 +219,9 @@ export default {
     }
   },
   computed: mapState ({
-    form: state => state.forms.selectedForm // nor reactive
+    form: state => state.forms.selectedForm
   }),
-  methods: Object.assign ({},
-    mapActions (['updateForm', 'updateSign']),
-    {
-      saveForm () {
-        // remove reactive data
-        const key = this.form.key
-        console.log ('save forms', this.form)
-        if (key && key.length > 0) {
-          Loader.updateForm (key, this.form, this.saveComplete)
-        } else {
-          Loader.createNewForm (this.form, this.saveComplete)
-        }
-      },
-      saveComplete () {
-        console.log ('save Complete call back')
-        // TODO: go back to previous page and
-      }
-  }),
+  methods: mapActions (['updateForm', 'updateSign', 'saveForm']),
   beforeCreate () {
     this.$store.commit ('setSelectedForm', formInfo);
   }

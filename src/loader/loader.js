@@ -53,8 +53,8 @@ class Loader {
     }
 
     async updateForm (key, payload, callback) {
-        this._formsDB.child (today).child (key).set (payload)
-        console.log ('createNewForm, finished');
+        await this._formsDB.child (today).child (key).set (payload)
+        console.log ('updateForm, finished');
         callback ();
     }
 

@@ -9,7 +9,6 @@ import Routes from './routes.js'
 import store from './store'
 import App from './app.vue'
 
-//wait unti Duncan sort the message out
 //const SocketInstance = socketio ('http://localhost:3001')
 Vue.use (Framework7Vue)
 //Vue.use (VueSocketIO, SocketInstance)

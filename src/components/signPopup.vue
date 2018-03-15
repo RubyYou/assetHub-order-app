@@ -17,6 +17,7 @@
 
 <script>
 import DrawApp from './draw';
+import { mapState } from 'vuex'
 
 export default {
   props: {
@@ -28,17 +29,11 @@ export default {
         signType : "signA"
     }
   },
-  computed: {
-    signData () {
-        const defaultInfo = { signA: {}, signB: {}, signC: {} }
-        const info = this.$store.getters.signData || defaultInfo
-        return info
-    }
-  },
+  computed: mapState ({
+    signData: state => state.forms.signData
+  }),
   methods:{
     sign (signType, data = {}) {
-      const signData = this.$store.getters.getSignData
-      console.log(this.signData, signData)
       this.signType = signType;
       this.drawApp.enablePant (true);
       const clickExist = Array.isArray (data.clickX) === true && Array.isArray (data.clickX) === true;

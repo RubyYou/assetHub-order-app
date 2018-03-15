@@ -51,8 +51,7 @@
 </template>
 
 <script>
-import Loader from './loader/loader.js'
-import Login from './loader/login.js'
+import { LoginAPI, FormAPI, MessageAPI } from './apis/'
 import { accountInfo } from './utils/db-config'
 
 export default {
@@ -102,7 +101,7 @@ export default {
         this.removeErrorMessage ()
       } else {
         this.setErrorMessage ("")
-        Login.start (
+        LoginAPI.start (
           this.accountValue,
           validItems.password,
           validItems.username,
@@ -112,7 +111,8 @@ export default {
       }
     },
     loginSuccessHandler () {
-      Loader.init ()
+      FormAPI.init ()
+      MessageAPI.init ()
       this.goToMain ()
     },
     loginFailHandler () {

@@ -3,7 +3,7 @@
   <f7-page tabs no-page-content>
     <f7-navbar >
       <div class="top-nav">
-        <f7-link tab-link="#tab1">
+        <f7-link tab-link="#tab1" active>
           <span class="icon messager"></span>
         </f7-link>
         <f7-link tab-link="#tab2">
@@ -21,7 +21,7 @@
       </div>
     </f7-navbar>
     <f7-page-content tab active id="tab1">
-      <Messager :messages="messages" />
+      <Messager />
     </f7-page-content>
     <f7-page-content tab id="tab2">
       <Forms />
@@ -44,11 +44,6 @@ export default {
     Messager,
     ChartList,
     Forms
-  },
-  computed: {
-    messages () {
-      return this.$store.state.messages;
-    }
   },
   methods:{
   }

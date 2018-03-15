@@ -30,7 +30,6 @@ export const localConfig = {
 // Firebase, db location remotely
 export const remoteConfig = {
     name: "梅花西工地",
-    accounts: accountInfo,
     database: {
         accounts: "accounts",
         messages: "messageA",

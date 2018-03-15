@@ -32,7 +32,7 @@ export default {
   computed: mapState ({
     signData: state => state.forms.signData
   }),
-  methods:{
+  methods: {
     sign (signType, data = {}) {
       this.signType = signType;
       this.drawApp.enablePant (true);

@@ -1,4 +1,4 @@
-import Loader from '../loader/loader'
+import FormAPI from '../apis/form'
 const defaultSignData =  { signA: {}, signB: {}, signC: {} }
 
 export default {
@@ -25,9 +25,9 @@ export default {
             const formData = Object.assign ({}, state.selectedForm, { signData: state.signData})
             // console.log (JSON.parse(JSON.stringify(formData)))
             if (key && key.length > 0) {
-                Loader.updateForm (key, formData, f7.hidePreloader)
+                FormAPI.updateForm (key, formData, f7.hidePreloader)
             } else {
-                Loader.createNewForm (formData, f7.hidePreloader)
+                FormAPI.createNewForm (formData, f7.hidePreloader)
             }
         }
     },

@@ -6,9 +6,8 @@
         :text = "message.text"
         :type = "renderType (message.name)"
         :avatar = "avatar"
-        :time = "message.time"
-        :date = "(message.date) ? (message.date) : null"
-        :day = "(message.day) ? (message.day) : null"
+        :time = "renderTime (message.date)"
+        :date = "renderDate (message.date)"
       >
       </f7-message>
     </f7-messages>
@@ -19,11 +18,12 @@
 <script>
 import { mapState } from 'vuex'
 import MessageAPI from '../apis/message'
+import moment from 'moment'
 
 export default {
   data: function () {
     return {
-      avatar:'img/worker.png',
+      avatar:'img/user.png',
     }
   },
   computed: mapState ({
@@ -34,6 +34,16 @@ export default {
     renderType (name) {
       return this.userInfo.username === name ? 'sent' : 'received'
     },
+    renderDate (epochTime) {
+      const date = new Date (epochTime);
+      const time = moment (date).format ('LL');
+      const day = moment(date).format('dddd');
+      const fromNow = moment(date).fromNow ();
+      return time + " " + day + " ( " + fromNow + " )";
+    },
+    renderTime (epochTime) {
+      return 'some time'
+    },
     onSubmit (text, clear) {
       if (text.trim().length === 0) return;
       const payload = {
@@ -41,14 +51,7 @@ export default {
         text: text,
         date: new Date ().getTime ()
       }
-      // this.messages.push({
-      //   name: this.userInfo.username,
-      //   avatar: this.avatar,
-      //   text: text,
-      //   type: 'sent',
-      //   date: this.getTime ()
-      // });
-      MessageAPI.submitMessages (payload)
+      MessageAPI.submit (payload)
       clear();
     },
     getTime () {
@@ -59,7 +62,7 @@ export default {
     }
   },
   mounted () {
-    console.log ('messager')
+
   }
 }
 </script>

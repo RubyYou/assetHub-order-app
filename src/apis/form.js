@@ -1,7 +1,6 @@
 import firebase from 'firebase'
 import store from '../store/index'
-import { messages } from '../utils/data'
-import { accountInfo, remoteConfig } from '../utils/db-config'
+import { remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import moment from 'moment'
 

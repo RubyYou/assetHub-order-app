@@ -1,14 +1,10 @@
 <template>
   <f7-page data-page="posts">
-    <f7-navbar >
-      <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
-      <f7-nav-center>公告事項</f7-nav-center>
-    </f7-navbar>
     <f7-block class="posts">
       <div v-for="post in posts">
         <f7-block-title>{{renderDate (post.date)}}</f7-block-title>
         <f7-card v-html class="facebook-card" v-for="item in post.list"
-          :title="renderHeader (item.title, item.type)" 
+          :title="renderHeader (item.title, item.type)"
           :content="item.info"
           :footer="renderFooter (item)"
           :inner="true">
@@ -16,7 +12,6 @@
       </div>
     </f7-block>
     </f7-page>
-  </div>
 </template>
 
 
@@ -24,7 +19,7 @@
 import moment from 'moment';
 import Utils from '../utils/utils'
 import 'moment/locale/zh-tw';
-
+import { posts } from '../utils/data'
 
 export default {
   data: function () {
@@ -34,12 +29,8 @@ export default {
         normal : 'info_fill',
         important : 'bookmark_fill'
       },
-      albumCount : 0
-    }
-  },
-  computed: {
-    posts () {
-      return this.$store.state.posts;
+      albumCount : 0,
+      posts : posts
     }
   },
   methods: {
@@ -68,7 +59,7 @@ export default {
           type: 'popup'
         });
 
-        const className = 'openAlbum-' + this.albumCount;        
+        const className = 'openAlbum-' + this.albumCount;
         album = '<a class="' + className + '"> 查看相關照片 </a>'
         this.albumCount ++;
       }
@@ -78,7 +69,7 @@ export default {
   },
   mounted () {
     moment.locale('zh-tw');
-    
+
     const touchEvent = Utils.isMobileOrTablet () ? 'touchstart' : 'click';
 
     setTimeout (()=>{

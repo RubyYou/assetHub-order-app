@@ -30,7 +30,9 @@
     <f7-page-content tab id="tab4">
       <ChartList />
     </f7-page-content>
-    <f7-page-content tab id="tab5">post</f7-page-content>
+    <f7-page-content tab id="tab5">
+      <!--<Posts />-->
+    </f7-page-content>
   </f7-page>
 </template>
 
@@ -38,12 +40,14 @@
 import Messager from '../components/messager.vue'
 import ChartList from './chart-list.vue'
 import Forms from './forms/index.vue'
+import Posts from '../components/post.vue'
 
 export default {
   components: {
     Messager,
     ChartList,
-    Forms
+    Forms,
+    Posts
   },
   methods:{
   }

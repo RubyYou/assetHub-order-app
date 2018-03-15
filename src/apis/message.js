@@ -1,11 +1,10 @@
 import firebase from 'firebase'
 import store from '../store/index'
-import { messages } from '../utils/data'
 import { accountInfo, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import moment from 'moment'
 
-const today = moment().format('l').split("/").join("-").toString()
+const Limit = 100
 const db = remoteConfig.database
 
 class MessageAPI {
@@ -18,21 +17,27 @@ class MessageAPI {
     }
 
     _setDataToStore () {
-        this._messagesDB.limitToLast (4).on ('value', (snapshots) => {
-            let items = [];
-            snapshots.forEach( snap => {
-                const data = Object.assign ({}, snap.val(), {key: snap.key});
-                items.push (data);
-            });
-            console.log('DB: ', 'setMessages', snapshots.val());
-            store.commit ('setMessages', items);
+        // in the beginning set limit
+        this._messagesDB
+            .orderByChild('date')
+            .limitToLast (Limit)
+            .on ('value', (snapshots) => {
+                let items = [];
+                snapshots.forEach( snap => {
+                    const data = Object.assign ({}, snap.val(), {key: snap.key});
+                    if (data.name ) {
+                        items.push (data)
+                    }
+                });
+                console.log('DB: ', 'setMessages', snapshots.val(), items);
+                store.commit ('setMessages', items);
         });
     }
 
-    submitMessages (payload) {
+    submit (payload) {
         this._messagesDB.push (payload)
+        // later listen to what's new in the data
     }
-
 }
 
 export default new MessageAPI ();

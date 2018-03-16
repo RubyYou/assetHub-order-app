@@ -10,5 +10,9 @@ export default [
   {
     path: '/forms/space-check2',
     component: require ('./pages/forms/space-check2.vue')
+  },
+  {
+    path: '/forms/standard/:formDataName',
+    component: require ('./pages/forms/standard.vue')
   }
 ]

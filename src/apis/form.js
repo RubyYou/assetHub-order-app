@@ -20,7 +20,7 @@ class FormAPI {
         const todayForm = this._formsDB.child (today)
         todayForm.once ('value', (snapshot) => {
             if (!snapshot.exists ()) {
-                const firstNode = {"created": new Date().getTime ().toString ()}
+                const firstNode = {"created": new Date().getTime ()}
                 todayForm.set(firstNode)
             }
             this._setDataToStore (todayForm, 'setForms')
@@ -32,14 +32,15 @@ class FormAPI {
             let items = [];
             snapshots.forEach( snap => {
                 const data = Object.assign ({}, snap.val(), {key: snap.key});
-                items.push (data);
+                if (data.key !== "created") {
+                    items.push (data);
+                }
             });
             console.log('DB: ', actionName, snapshots.val());
             store.commit (actionName, items);
         });
     }
 
-    // this will move to socket
     async createNewForm (payload, callback) {
         payload.createDate = new Date ().getTime ()
         await this._formsDB.child (today).push (payload)

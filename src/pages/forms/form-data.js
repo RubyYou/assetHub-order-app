@@ -470,7 +470,117 @@ export const FacilityCheckFormA = {
     ]
 }
 
-
+export const FacilityCheckFormB = {
+  formTitle: "門型起重機每月定期檢查表",
+  url: '/forms/standard/FacilityCheckFormB',
+  sections: [
+    { title: "過捲預防裝置",
+      content: [
+        { title: '1.吊物升降極限開關 (動作是否確實螺絲有否鬆弛)', data:"check1",
+          note: "改善處理情形", data_note: "check1Note"
+        }]
+    },
+    { title: "剎車器",
+      content: [
+        { title: '2.電磁升降剎車 (反覆操作上升查看其動作狀況停止位置)', data:"check2",
+          note: "改善處理情形", data_note: "check2Note"
+        },
+        { title: '3.電磁走行剎車 (反覆操作上升查看其動作狀況停止位置)', data:"check3",
+          note: "改善處理情形", data_note: "check3Note"
+        },
+        { title: '4.電流或其他控制下降剎車 (查看降落速度是否適當)', data:"check4",
+          note: "改善處理情形", data_note: "check4Note"
+        }]
+    },
+    { title: "警報裝置",
+      content: [
+        { title: '5.行走警鈴 (行走時響亮)', data:"check5",
+          note: "改善處理情形", data_note: "check5Note"
+        },
+        { title: '6.喇叭 (按動時鳴叫)', data:"check6",
+          note: "改善處理情形", data_note: "check6Note"
+        }]
+    },
+    { title: "鋼索",
+      content: [
+        { title: '7.鋼索 (檢示有無損傷斷裂)', data:"check7",
+          note: "改善處理情形", data_note: "check7Note"
+        }]
+    },
+    { title: "吊鍊",
+      content: [
+        { title: '8.吊鍊 (檢示有無損傷斷裂)', data:"check8",
+          note: "改善處理情形", data_note: "check8Note"
+        }]
+    },
+    { title: "吊鉤",
+      content: [
+        { title: '9.吊鉤 (檢示有無損傷斷裂)', data:"check9",
+          note: "改善處理情形", data_note: "check9Note"
+        },
+        { title: '10.吊鉤安全栓 (檢示有無損傷斷裂)', data:"check10",
+          note: "改善處理情形", data_note: "check10Note"
+        },
+        { title: '11.配線 (被覆是否剝損劣化)', data:"check11",
+          note: "改善處理情形", data_note: "check11Note"
+        }]
+    },
+    { title: "配線",
+      content: [
+        { title: '12.配線 (終端螺栓是否鬆弛)', data:"check12",
+          note: "改善處理情形", data_note: "check12Note"
+        },
+        { title: '13.配線 (絕緣 儀器測定 0.1MΩ以上)', data:"check13",
+          note: "改善處理情形", data_note: "check13Note"
+        }]
+    },
+    { title: "集電裝置",
+      content: [
+        { title: '14.集電裝置 (螺絲是否鬆弛 / 檢視是否磨耗)', data:"check14",
+          note: "改善處理情形", data_note: "check14Note"
+        }]
+    },
+    { title: "配電盤",
+      content: [
+        { title: '15.配電盤 (檢視有無異狀)', data:"check15",
+          note: "改善處理情形", data_note: "check15Note"
+        },
+        { title: '16.無熔絲斷路器 (核定電流通過是否跳脫)', data:"check16",
+          note: "改善處理情形", data_note: "check16Note"
+        }]
+    },
+    { title: "開關",
+      content: [
+        { title: '17.保險絲 (保險絲是否符合規定)', data:"check17",
+          note: "改善處理情形", data_note: "check17Note"
+        },
+        { title: '18.電磁接觸 (螺絲是否鬆弛是否接觸不良)', data:"check18",
+          note: "改善處理情形", data_note: "check18Note"
+        }]
+    },
+    { title: "控制器",
+      content: [
+        { title: '19.直接控制器 (反覆操作查看其動作狀況)', data:"check19",
+          note: "改善處理情形", data_note: "check19Note"
+        },
+        { title: '20.間接控制器 (反覆操作查看其動作狀況及電譯情形)', data:"check20",
+          note: "改善處理情形", data_note: "check20Note"
+        }]
+    },
+    { title: "鋼纜",
+      content: [
+        { title: '21.鋼纜 (檢視)', data:"check21",
+          note: "改善處理情形", data_note: "check21Note"
+        }]
+    },
+    { title: "捲揚機",
+      content: [
+        { title: '22.主副捲揚盤 (有無損傷及異狀)', data:"check22",
+          note: "改善處理情形", data_note: "check22Note"
+        }]
+    }
+  ]
+}
 
 export const FacilityCheckFormC = {
   formTitle: "挖土機作業安全",
@@ -511,6 +621,70 @@ export const FacilityCheckFormC = {
     },
     { title: '確認操作室頂棚關閉防止土石、物體飛落', data:"check12",
       note: "改善措施內容", data_note: "check12Note"
+    }
+  ]
+}
+
+export const FacilityCheckFormD = {
+  formTitle: "吊掛用具作業安全自動檢查表",
+  url: '/forms/standardSections/FacilityCheckFormD',
+  sections: [
+    { title: "吊索",
+      content: [
+        { title: '鋼索的一燃間有10﹪以上的素線截斷者', data:"check1",
+          note: "改善措施內容", data_note: "check1Note"
+        },
+        { title: '直徑減少達公稱直徑7﹪以上者', data:"check2",
+          note: "改善措施內容", data_note: "check2Note"
+        },
+        { title: '已扭結者', data:"check3",
+          note: "改善措施內容", data_note: "check3Note"
+        },
+        { title: '有顯著變形或腐蝕者', data:"check4",
+          note: "改善措施內容", data_note: "check4Note"
+        },
+        { title: '末端結頭部分異常者', data:"check5",
+          note: "改善措施內容", data_note: "check5Note"
+        },
+        { title: '鋼索套有裂紋產生', data:"check6",
+          note: "改善措施內容", data_note: "check6Note"
+        },
+        { title: '鋼索套有變形情形，並壓迫且傷及鋼。', data:"check7",
+          note: "改善措施內容", data_note: "check7Note"
+        }
+      ]
+    },
+    { title: "吊鏈",
+      content: [
+        { title: '延伸長度超過5﹪以上', data:"check8",
+          note: "改善處理情形", data_note: "check8Note"
+        },
+        { title: '環的斷面直徑減少10﹪以上', data:"check9",
+          note: "改善處理情形", data_note: "check9Note"
+        },
+        { title: '有無龜裂', data:"check10",
+          note: "改善處理情形", data_note: "check10Note"
+        },
+        { title: '有無顯著變形', data:"check11",
+          note: "改善處理情形", data_note: "check11Note"
+        }
+      ]
+    },
+    { title: "吊勾、吊環",
+      content: [
+        { title: '有無顯著變形', data:"check12",
+          note: "改善處理情形", data_note: "check12Note"
+        },
+        { title: '有無顯著磨耗', data:"check13",
+          note: "改善處理情形", data_note: "check13Note"
+        },
+        { title: '有無龜裂情形', data:"check14",
+          note: "改善處理情形", data_note: "check14Note"
+        },
+        { title: '防滑舌片有無正常', data:"check15",
+          note: "改善處理情形", data_note: "check15Note"
+        }
+      ]
     }
   ]
 }
@@ -589,6 +763,141 @@ export const FacilityCheckFormF = {
     { title: '立柱、踏腳桁、橫檔等之損傷狀況', data:"check7",
       note: "改善措施內容", data_note: "check7Note"
     }
+  ]
+}
+
+export const FacilityCheckFormG = {
+  formTitle: "施工爬梯（上下設備）作業安全自動檢查表",
+  url: '/forms/standardSections/FacilityCheckFormG',
+  sections: [
+    { title: "墜落防止",
+      content: [
+        { title: '對組裝或拆卸作業人員之安全帽或安全帶是否監督確實配戴', data:"check1",
+          note: "改善措施內容", data_note: "check1Note"
+        },
+        { title: '材料是否經檢查無缺陷後方始用', data:"check2",
+          note: "改善措施內容", data_note: "check2Note"
+        },
+        { title: '與加強環固定處是否牢固', data:"check3",
+          note: "改善措施內容", data_note: "check3Note"
+        }
+      ]
+    },
+    { title: "飛落防止",
+      content: [
+        { title: '吊升或卸放材料、器具、工具等是否使用吊索、吊帶等', data:"check4",
+          note: "改善處理情形", data_note: "check4Note"
+        },
+        { title: '搭設完畢後於井口應緊接掛上防護網。', data:"check5",
+          note: "改善處理情形", data_note: "check5Note"
+        },
+        { title: '是否設置警示區嚴禁無關人員進入組、拆作業區域', data:"check6",
+          note: "改善處理情形", data_note: "check6Note"
+        }
+      ]
+    },
+    { title: "倒塌防止",
+      content: [
+        { title: '架材之按裝、鬆弛狀況', data:"check7",
+          note: "改善處理情形", data_note: "check7Note"
+        },
+        { title: '架材是否損傷', data:"check8",
+          note: "改善處理情形", data_note: "check8Note"
+        },
+        { title: '固定處之下沈、滑動之狀況', data:"check9",
+          note: "改善處理情形", data_note: "check9Note"
+        },
+        { title: '固定材料與固定金屬配件之損傷及腐蝕狀況', data:"check10",
+          note: "改善處理情形", data_note: "check10Note"
+        },
+        { title: '組立時是否在垂直向以≦3.0M與加強環妥實連接', data:"check11",
+          note: "改善處理情形", data_note: "check11Note"
+        }
+      ]
+    }
+  ]
+}
+
+export const FacilityCheckFormH = {
+  formTitle: "人員搭乘設備每月定期檢查紀錄表",
+  url: '/forms/standardSections/FacilityCheckFormH',
+  sections: [
+    { title: "",
+      content: [
+        { input: '編號', data_input:"number"},
+        { input: '型式', data_input:"type"},
+        { input: '積載荷重 (公斤)', data_input:"Kilogram"},
+      ]
+    },
+    { title: "1.過捲預防裝置",
+      content: [
+        { title: '過捲預防裝置固定應良好且動作正常', data:"check1"}
+      ]
+    },
+    { title: "2.制動器",
+      content: [
+        { title: '吊升或卸放材料、器具、工具等是否使用吊索、吊帶等', data:"check2"},
+      ]
+    },
+    { title: "3.控制裝置",
+      content: [
+        { title: '1.漏電自動斷電裝置性能應良好', data:"check4"},
+        { title: '2.操作按鈕、應標示操作功能、名稱、方向功能良好', data:"check5"},
+      ]
+    },
+    { title: "4.安全裝置",
+      content: [
+        { title: '1.手動操縱器性能良好；設有兩處時須有不得同時操作之功能', data:"check6"},
+        { title: '2.各極限開關(下降防撞、走行、起伏、迴旋、伸縮等)之性能應良好', data:"check7"},
+        { title: '3.緊急停止開關性能應良好', data:"check8"},
+        { title: '4.工作台之傾斜矯正裝置性能良好', data:"check9"},
+        { title: '5.救命用纖維索、安全帶及金屬配件安裝確實，無腐蝕、損傷或龜裂', data:"check10"},
+        { title: '6.自動控速裝置或自動制止下降之裝置性能應良好', data:"check11"},
+      ]
+    },
+    { title: "5.支架、吊臂及基礎座等",
+      content: [
+        { title: '1.檢視本體部份架設方式，固定應良好', data:"check12"},
+        { title: '2.檢視零件無腐蝕、變形、龜裂', data:"check13"},
+        { title: '3.檢視與鋼索之安裝，使用鉤環確實做好。 ', data:"check14"}
+      ]
+    },
+    { title: "6.工作台",
+      content: [
+        { title: '1.作業床板、扶手及圍柵等應無腐蝕、損傷、龜裂', data:"check15"},
+        { title: '2.接合處之固定螺栓、螺帽應無鬆脫', data:"check16"},
+      ]
+    },
+    { title: "7.升降裝置",
+      content: [
+        { title: '升降裝置安裝固定應良好，且運轉正常、無異音', data:"check17"}
+      ]
+    },
+    { title: "8.配電盤",
+      content: [
+        { title: '固定良好，外觀無損傷或變形、電線接頭無鬆脫、絕緣無劣化', data:"check18"},
+      ]
+    },
+    { title: "9.鋼索",
+      content: [
+        { title: '1.一撚間無10%以上之素線斷裂', data:"check19"},
+        { title: '2.直徑減少無達公稱直徑之7%以上', data:"check20"},
+        { title: '3.鋼索無顯著之扭結、變形或腐蝕', data:"check21"},
+        { title: '4.鋼索末端固定正確，具防脫或自緊性能', data:"check22"}
+      ]
+    },
+    { title: "10.軌道",
+      content: [
+        { title: '1.軌道無顯著撓曲、損傷或腐蝕；軌道固定壓夾無鬆動、銹蝕', data:"check23"},
+        { title: '2.錨定基礎固定螺絲無鬆動、腐蝕或龜裂', data:"check24"},
+        { title: '3.軌道末端車輪阻擋器固定良好，無腐蝕或龜裂', data:"check25"}
+      ]
+    },
+    { title: "11.其他",
+      content: [
+        { note: "其他", data_note: "check26Note"},
+      ]
+    },
   ]
 }
 
@@ -717,6 +1026,71 @@ export const SafetyCheckFormB = {
     },
     { title: '混凝土壓送車輸送管等有觸及高壓線路之虞時，是否設置絕緣套管並派專人指揮以保持安全距離', data:"check11",
       note: "改善措施內容", data_note: "check11Note"
+    }
+  ]
+}
+
+export const SafetyCheckFormC = {
+  formTitle: "通風作業安全自動檢查表",
+  url: '/forms/standardSections/SafetyCheckFormC',
+  sections: [
+    { title: "一般規定",
+      content: [
+        { title: '勞工進入集水井從事作業前，是否先行通風30分鐘', data:"check1",
+          note: "改善措施內容", data_note: "check1Note"
+        },
+        { title: '是否依規定施作現場，有足夠自然通風或機械通風', data:"check2",
+          note: "改善措施內容", data_note: "check2Note"
+        },
+        { title: '作業前測試氧氣濃度未達到18％時是否禁止勞工作業', data:"check3",
+          note: "改善措施內容", data_note: "check3Note"
+        },
+        { title: '作業前測試有害氣體濃度達危害值時是否禁止勞工作業', data:"check4",
+          note: "改善措施內容", data_note: "check4Note"
+        }
+      ]
+    },
+    { title: "機具設備",
+      content: [
+        { title: '機械馬達是否設置避免人員、廢物吸入之防護罩', data:"check5",
+          note: "改善處理情形", data_note: "check5Note"
+        },
+        { title: '機械四周是否設置護欄及警示標誌', data:"check6",
+          note: "改善處理情形", data_note: "check6Note"
+        },
+        { title: '通風管是否依據集水井開挖深度延伸，而依序通風管口位置(進、出)設置', data:"check7",
+          note: "改善處理情形", data_note: "check7Note"
+        }
+      ]
+    },
+    { title: "安全管理",
+      content: [
+        { title: '缺氧作業主管是否在現場，監督勞工作業', data:"check8",
+          note: "改善處理情形", data_note: "check8Note"
+        },
+        { title: '是否指派專人每日檢查並負責通風設備開、關及管制', data:"check9",
+          note: "改善處理情形", data_note: "check9Note"
+        },
+        { title: '作業期間於井口設置1位監視人員全程監視開挖人員作業情形', data:"check10",
+          note: "改善處理情形", data_note: "check10Note"
+        }
+      ]
+    },
+    { title: "災害防止",
+      content: [
+        { title: '收工後是否指派專人巡視，確認無人員施工在關閉通風設備', data:"check11",
+          note: "改善處理情形", data_note: "check11Note"
+        },
+        { title: '機械通風設備，電線是否架高，有無破皮現象', data:"check12",
+          note: "改善處理情形", data_note: "check12Note"
+        },
+        { title: '通風設備故障時，有安全之虞，是否立即停止作業，並疏散到通風良好處', data:"check13",
+          note: "改善處理情形", data_note: "check13Note"
+        },
+        { title: '於集水井工程，支撐架每層設置1條救生母索，供監測人員使用', data:"check14",
+          note: "改善處理情形", data_note: "check14Note"
+        }
+      ]
     }
   ]
 }

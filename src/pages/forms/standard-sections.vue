@@ -4,27 +4,35 @@
       <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
       <f7-nav-center>{{formTitle}}</f7-nav-center>
     </f7-navbar>
-    <div v-for="section in sections" class="wrap">
-      <f7-block-title>{{section.title}}</f7-block-title>
-      <f7-list form v-for="item in section.content" >
-        <f7-list-item smart-select :title="item.title">
-          <select
-            :name="item.title"
-            v-model="form[item.data]"
-            @change = "(e) => { updateForm ({name: item.data, data: e.target.value})}">
-            <option value="符合">符合</option>
-            <option value="不符合">不符合</option>
-          </select>
-        </f7-list-item>
-        <f7-list-item>
-          <f7-input type="textarea"
-                    :name="item.note"
-                    :placeholder="item.note"
-                    :value="form[item.data_note]"
-                    @change = "(e) => { updateForm ({name: item.data_note, data: e.target.value})}">
-          </f7-input>
-        </f7-list-item>
-      </f7-list>
+    <div class="standard-form">
+        <div v-for="section in sections" >
+            <f7-block-title>{{section.title}}</f7-block-title>
+            <f7-list form v-for="item in section.content" >
+                <f7-list-item v-if="item.input">
+                    <f7-label>{{item.input}}</f7-label>
+                    <f7-input type="text" v-model="form[item.data_input]"/>
+                </f7-list-item>
+
+                <f7-list-item v-if="item.title" smart-select :title="item.title">
+                <select
+                    :name="item.title"
+                    v-model="form[item.data]"
+                    @change = "(e) => { updateForm ({name: item.data, data: e.target.value})}">
+                    <option value="符合">符合</option>
+                    <option value="不符合">不符合</option>
+                </select>
+                </f7-list-item>
+
+                <f7-list-item v-if="item.note">
+                <f7-input type="textarea"
+                            :name="item.note"
+                            :placeholder="item.note"
+                            :value="form[item.data_note]"
+                            @change = "(e) => { updateForm ({name: item.data_note, data: e.target.value})}">
+                </f7-input>
+                </f7-list-item>
+            </f7-list>
+        </div>
     </div>
     <f7-block>
       <p>表單簽收</p>
@@ -74,7 +82,8 @@ export default {
 .list-block textarea{
   height:80px
 }
-.wrap {
-  margin-top: 60px;
+
+.standard-form {
+    margin-top:60px;
 }
 </style>

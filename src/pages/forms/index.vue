@@ -45,8 +45,8 @@ export default {
     return {
       formStructure : {
         'space': [
-            {title: "局限空間作業設備檢查表", href: '/forms/space-check2'}, // change to standardWithSections
-            {title: "局限空間作業檢點表", href: '/forms/space-check1' }
+            {title: "局限空間作業檢點表", href: '/forms/standardSections/SpaceCheckFormA' },
+            {title: "局限空間作業設備檢查表", href: '/forms/standardSections/SpaceCheckFormB'},
         ],
         'vehicle': [
             {title: "一般車輛每日作業檢點表", href: '/forms/standard/VehicleCheckFormA'}, // done
@@ -54,7 +54,7 @@ export default {
             {title: "車輛系營建機械每月安全自動檢查表", href: '/forms/standard/VehicleCheckFormC'}, // done
         ],
         'facility': [
-            //{title: "門型起重機每日安全自動檢查表", href: '/forms/facility-check1'}, // standWith Section, no data
+            {title: "門型起重機每日安全自動檢查表", href: '/forms/standardSections/FacilityCheckFormA'}, // standWith Section, no data
             //{title: "門型起重機每月定期檢查表", href: '/forms/facility-check1'}, // standWith Section, no data
             {title: "挖土機作業安全", href: '/forms/standard/FacilityCheckFormC'}, // standard
             //{title: "吊掛用具作業安全自動檢查表", href: '/forms/facility-check3'}, // standardWith Section

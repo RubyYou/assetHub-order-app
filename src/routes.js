@@ -14,5 +14,9 @@ export default [
   {
     path: '/forms/standard/:formDataName',
     component: require ('./pages/forms/standard.vue')
+  },
+  {
+    path: '/forms/standardSections/:formDataName',
+    component: require ('./pages/forms/standard-sections.vue')
   }
 ]

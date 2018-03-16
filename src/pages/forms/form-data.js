@@ -1,10 +1,9 @@
 export const SpaceCheckFormA = {
     formTitle: "局限空間作業檢點表",
-    url: '/forms/space-check1',
+    url: '/forms/standardSections/SpaceCheckFormA',
     sections: [
-     {
-     title: "一、許可",
-     data: [
+     { title: "一、許可",
+      content: [
        { title: '必須要進去嗎', data:"check1",
          note: "改善措施內容", data_note: "check1Note"
        },
@@ -14,11 +13,10 @@ export const SpaceCheckFormA = {
        { title: '是否已提供緊急聯絡電話', data:"check3",
          note: "改善措施內容", data_note: "check3Note"
        }
-     ]
-    },
+      ]},
     {
      title: "二、空氣測試",
-     data: [
+     content: [
        { title: '空氣測試儀器是否已校正', data:"check4",
          note: "改善措施內容", data_note: "check4Note"
        },
@@ -35,7 +33,7 @@ export const SpaceCheckFormA = {
     },
     {
      title: "三、監測",
-     data: [
+     content: [
        { title: '是否將監測工作期間的空氣', data:"check8",
          note: "改善措施內容", data_note: "check8Note"
        },
@@ -49,7 +47,7 @@ export const SpaceCheckFormA = {
     },
     {
      title: "四、通風",
-     data: [
+     content: [
        { title: '是否已通風換氣過', data:"check11",
          note: "改善措施內容", data_note: "check11Note"
        },
@@ -69,7 +67,7 @@ export const SpaceCheckFormA = {
     },
     {
      title: "五、隔離",
-     data: [
+     content: [
        { title: '是否已完全隔離危害能源', data:"check16",
          note: "改善措施內容", data_note: "check16Note"
        },
@@ -86,7 +84,7 @@ export const SpaceCheckFormA = {
     },
     {
      title: "六、衣物/設備",
-     data: [
+     content: [
        { title: '是否需特殊之工作服（安全鞋、防護衣、安全眼鏡等）', data:"check20",
          note: "如是，請寫明", data_note: "check20Note"
        },
@@ -100,7 +98,7 @@ export const SpaceCheckFormA = {
     },
     {
      title: "七、呼吸防護具",
-     data: [
+     content: [
        { title: '是否置備合格之呼吸防護具', data:"check23",
          note: "如是，請寫明", data_note: "check23Note"
        },
@@ -114,7 +112,7 @@ export const SpaceCheckFormA = {
     },
     {
      title: "八、救援設備",
-     data: [
+     content: [
        { title: '於深水井上方設置1條救生母索，供監測人員使用', data:"check26",
          note: "如是，請寫明", data_note: "check26Note"
        },
@@ -128,7 +126,7 @@ export const SpaceCheckFormA = {
     },
     {
      title: "九、教育訓練",
-     data: [
+     content: [
        { title: '是否已受過如何使用呼吸防護具的訓練', data:"check29",
          note: "如是，請寫明", data_note: "check29Note"
        },
@@ -142,7 +140,7 @@ export const SpaceCheckFormA = {
     },
     {
      title: "十、監視/搶救",
-     data: [
+     content: [
        { title: '是否有場外監視人員進行全程監視及通訊工作', data:"check32",
          note: "如是，請寫明", data_note: "check32Note"
        },
@@ -171,10 +169,10 @@ export const SpaceCheckFormA = {
 
 export const SpaceCheckFormB = {
   formTitle: "局限空間作業設備檢查表",
-  url: '/forms/space-check2',
-  section: {
-    title: "檢查項目",
-    data: [
+  url: '/forms/standardSections/SpaceCheckFormB',
+  sections: [
+    { title: "檢查項目",
+      content: [
       { title: '1.局限空間作業場所告示牌', data:"check1",
         note: "備註", data_note: "check1Note"
       },
@@ -228,6 +226,7 @@ export const SpaceCheckFormB = {
       }
     ]
   }
+  ]
 }
 
 export const VehicleCheckFormA = {
@@ -385,6 +384,93 @@ export const VehicleCheckFormC = {
     }
   ]
 }
+
+export const FacilityCheckFormA = {
+  formTitle: "門型起重機每日安全自動檢查表",
+  url: '/forms/standard/FacilityCheckFormA',
+  sections: [
+    { title: "一般規定",
+      content: [
+        { title: '作業人員是否穿著防滑性佳之安全鞋', data:"check1",
+          note: "改善措施內容", data_note: "check1Note"
+        },
+        { title: '強風、大雨等惡劣氣候時是否禁止工作', data:"check2",
+          note: "改善措施內容", data_note: "check2Note"
+        },
+        { title: '操作人員是否於起重機吊有荷重時離開操作位置', data:"check3",
+          note: "改善措施內容", data_note: "check3Note"
+        },
+        { title: '對作業器具、工具、安全帽及安全帶是否檢查後方才使用', data:"check4",
+          note: "改善措施內容", data_note: "check4Note"
+        },
+        { title: '從事塔吊組、拆之移動式起重機具是否經檢查合格', data:"check5",
+          note: "改善措施內容", data_note: "check5Note"
+        },
+        { title: '固定式起重機操作手、吊掛手是否已有合格證照', data:"check6",
+          note: "改善措施內容", data_note: "check6Note"
+        }
+      ]},
+      { title: "墜落防止",
+        content: [
+          { title: '攀登梯、階梯構材有否銹蝕、鬆動', data:"check7",
+            note: "改善措施內容", data_note: "check7Note"
+          },
+          { title: '構台補強是否足夠', data:"check8",
+            note: "改善措施內容", data_note: "check8Note"
+          },
+          { title: '人員安全帽、安全帶是否已確實使用', data:"check9",
+            note: "改善措施內容", data_note: "check9Note"
+          }]
+      },
+      { title: "飛落防止",
+        content: [
+          { title: '吊具、鋼索是否已有截斷、磨損、變形、扭結', data:"check10",
+            note: "改善措施內容", data_note: "check10Note"
+          },
+          { title: '過捲預防及過負荷預防裝置是否正常', data:"check11",
+            note: "改善措施內容", data_note: "check11Note"
+          },
+          { title: '吊鉤防止吊物脫落之防滑舌片裝置是否正常', data:"check12",
+            note: "改善措施內容", data_note: "check12Note"
+          },
+          { title: '吊物是否超過額定荷重', data:"check13",
+            note: "改善措施內容", data_note: "check13Note"
+          },
+          { title: '門型固定式起重機作業時是否嚴禁人員進入吊掛物之下方', data:"check14",
+            note: "改善措施內容", data_note: "check14Note"
+          }]
+      },
+      { title: "倒塌防止",
+        content: [
+        { title: '桁架、鞍架、伸臂等結構是否安裝穩固', data:"check15",
+          note: "改善措施內容", data_note: "check15Note"
+        },
+        { title: '齒輪、軸、制動裝置、捲胴、槽輪等機械性能是否正常', data:"check16",
+          note: "改善措施內容", data_note: "check16Note"
+        },
+        { title: '強風時制動裝置是否放置空擋', data:"check17",
+          note: "改善措施內容", data_note: "check17Note"
+        }]
+      },
+      { title: "感電防止",
+        content: [
+        { title: '開關器是否正常', data:"check18",
+          note: "改善措施內容", data_note: "check18Note"
+        },
+        { title: '配線、供電線有否破損', data:"check19",
+          note: "改善措施內容", data_note: "check19Note"
+        },
+        { title: '警報裝置、控制裝置等電器部份是否正常', data:"check20",
+          note: "改善措施內容", data_note: "check20Note"
+        },
+        { title: '各分電盤是否裝設高速型漏電斷路器(額定感度電流30mA，跳脫時間0.1秒以內)', data:"check21",
+          note: "改善措施內容", data_note: "check21Note"
+        }]
+      }
+    ]
+}
+
+
 
 export const FacilityCheckFormC = {
   formTitle: "挖土機作業安全",

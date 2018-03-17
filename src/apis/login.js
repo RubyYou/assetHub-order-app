@@ -72,7 +72,7 @@ class LoginAPI {
         const dbName = remoteConfig.database.accounts
         const databaseRef = firebase.database().ref();
 
-        databaseRef.child (dbName).on ('value', (snapshots) => {
+        databaseRef.child (dbName).once ('value', (snapshots) => {
             let items = [];
             console.log('DB: ', dbName, snapshots.val());
             snapshots.forEach( snap => {

@@ -17,7 +17,7 @@ export default new Vuex.Store ({
         account: '',
         username: ''
       },
-      messages: []
+      allMessages : []
     },
     mutations: {
       setUserInfo (state, payload) {
@@ -25,9 +25,25 @@ export default new Vuex.Store ({
         state.userInfo.username = payload.username
       },
 
-      setMessages (state, payload) {
-        // get the latest 15
-        state.messages = payload;
+      setMessagesByDate (state, { date, messages }) {
+        // formate
+        const itemExist = state.allMessages.find ( (day ) => { return day.date === date })
+        console.log('itemExist', itemExist)
+
+        if (itemExist) {
+          itemExist.messages = messages
+        } else {
+          // if date not exist, do a sort and clone
+          let clone = state.allMessages.slice (0)
+          clone.push ( {date: date, messages: messages}) // day specific
+          clone.sort((a, b) => {
+            const epochA = new Date (a.date).getTime()
+            const epochB = new Date (b.date).getTime()
+            return epochA - epochB
+          })
+          console.log(clone)
+          state.allMessages = clone
+        }
       }
     }
 });

@@ -1,18 +1,21 @@
 <template>
   <div data-page="messager" class="messager-wrap" >
-    <div v-for="message in messages" class="messages">
-      <div v-if="message.created" class="messages-date">
-          {{renderDate (message.created)}}
+    <div v-for="day in allMessages" class="messages">
+      <div class="messages-date">
+          {{renderDate (day.date)}}
       </div>
-      <div v-else :class="renderClass(message.username)">
+      <div v-for="message in day.messages"
+          :class="renderClass (message.username)">
         <div class="message-name">{{message.username}}</div>
-        <div v-html="renderText(message)" class="message-text"></div>
+        <div v-html="renderText (message)" class="message-text"></div>
         <div style="background-image:url(img/user.png)" class="message-avatar"></div>
         <div class="message-label">{{renderTime(message.time)}}</div>
       </div>
     </div>
     <f7-messagebar placeholder="Message" @submit="onSubmit">
-      <div slot="before-textarea">camera</div>
+      <div slot="before-textarea">
+        <i class="f7-icons camera">camera_fill</i>
+      </div>
       <span slot="send-link">送出</span>
     </f7-messagebar>
   </div>
@@ -32,7 +35,7 @@ export default {
   },
   computed: mapState ({
     userInfo: state => state.userInfo,
-    messages: state => state.messages
+    allMessages: state => state.allMessages
   }),
   methods: {
     renderClass (username) {
@@ -59,8 +62,8 @@ export default {
       MessageAPI.submit ({text: text})
       clear();
     },
-    renderDate (epochTime) {
-      return TimeUtils.getDate (epochTime)
+    renderDate (date) {
+      return TimeUtils.getDate (date)
     },
     renderTime (epochTime) {
       const date = new Date (epochTime);
@@ -76,6 +79,8 @@ export default {
 /* scoped css won't succeed if doesn't has class name in tempalte */
 .messager-wrap {
   position: relative;
+  overflow-y: scroll;
+  padding-bottom: 120px;
 }
 .toolbar {
   position: fixed;
@@ -88,6 +93,12 @@ export default {
 .message-received .message-text {
   padding-left: 40px;
 }
+
+.f7-icons.camera {
+  margin-right: 10px;
+  color: #077bff;
+}
+
 </style>
 
 <style lang="scss" global>

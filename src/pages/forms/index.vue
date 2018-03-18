@@ -4,7 +4,7 @@
         <f7-block-title>空間作業檢點表</f7-block-title>
         <f7-list>
             <f7-list-item
-                v-for="form in formStructure.space"
+                v-for="form in formList.space"
                 :link="form.href"
                 :title="form.title">
             </f7-list-item>
@@ -13,7 +13,7 @@
          <f7-block-title>車輛作業檢點表</f7-block-title>
         <f7-list>
             <f7-list-item
-                v-for="form in formStructure.vehicle"
+                v-for="form in formList.vehicle"
                 :link="form.href"
                 :title="form.title">
             </f7-list-item>
@@ -22,7 +22,7 @@
        <f7-block-title>機具作業檢點表</f7-block-title>
         <f7-list>
             <f7-list-item
-                v-for="form in formStructure.facility"
+                v-for="form in formList.facility"
                 :link="form.href"
                 :title="form.title">
             </f7-list-item>
@@ -31,7 +31,7 @@
         <f7-block-title>勞工安全作業檢點表</f7-block-title>
         <f7-list>
             <f7-list-item
-                v-for="form in formStructure.safety"
+                v-for="form in formList.safety"
                 :link="form.href"
                 :title="form.title">
             </f7-list-item>
@@ -43,7 +43,7 @@
 export default {
   data: function (){
     return {
-      formStructure : {
+      formList : {
         'space': [
             {title: "局限空間作業檢點表", href: '/forms/standardSections/SpaceCheckFormA' },
             {title: "局限空間作業設備檢查表", href: '/forms/standardSections/SpaceCheckFormB'},

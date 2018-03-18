@@ -1,3 +1,6 @@
+import { SlideChartFormA, SlideChartFormB } from '../charts/chart-form-data'
+export { SlideChartFormA, SlideChartFormB }
+
 export const SpaceCheckFormA = {
     formTitle: "局限空間作業檢點表",
     url: '/forms/standardSections/SpaceCheckFormA',

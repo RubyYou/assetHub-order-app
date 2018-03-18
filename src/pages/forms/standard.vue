@@ -8,7 +8,9 @@
     <f7-list form v-for="item in content" >
       <f7-list-item v-if="item.input">
         <f7-label>{{item.input}}</f7-label>
-        <f7-input type="text" v-model="form[item.data_input]"/>
+        <f7-input :type="item.input_type || 'text'"
+                  v-model="form[item.data_input]"
+                  @change = "(e) => { updateForm ({name: item.data_input, data: e.target.value})}" />
       </f7-list-item>
 
       <f7-list-item v-if="item.title" smart-select :title="item.title">
@@ -34,8 +36,10 @@
       </f7-list-item>
     </f7-list>
     <f7-block >
-      <p>表單簽收</p>
-      <SignPopup :updateSign="updateSign" /> <br/>
+      <div v-if="sign !== false">
+        <p>表單簽收</p>
+        <SignPopup :updateSign="updateSign" /> <br/>
+      </div>
       <f7-button fill green @click=" saveForm ($f7) ">
         儲存本表格
       </f7-button>

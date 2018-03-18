@@ -36,7 +36,6 @@
                 :title="form.title">
             </f7-list-item>
         </f7-list>
-        <br/><br/>
     </div>
 </template>
 <script>

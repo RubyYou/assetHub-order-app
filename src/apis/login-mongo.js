@@ -4,7 +4,6 @@ import { accountInfo, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import request from 'superagent'
 
-// Initialize Firebase
 const config = {
     api: "http://localhost:3000/api/v1",
     signin: '/signin'

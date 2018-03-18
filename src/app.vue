@@ -120,7 +120,7 @@ export default {
       }
     },
     loginSuccessHandler() {
-      // FormAPI.init();
+      FormAPI.init();
       // MessageAPI.init();
       this.goToMain();
     },
@@ -142,13 +142,15 @@ export default {
     }
   },
   mounted() {
-    // setTimeout (() => {
-    //  LoginAPI.start (
-    //       "總指揮", 0, "Ruby",
-    //       this.loginSuccessHandler,
-    //       this.loginFailHandler
-    //     )
-    // }, 200)
+    setTimeout(() => {
+      LoginAPI.start(
+        "總指揮",
+        0,
+        "Ruby",
+        this.loginSuccessHandler,
+        this.loginFailHandler
+      );
+    }, 200);
   }
 };
 </script>

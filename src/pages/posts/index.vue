@@ -3,7 +3,7 @@
     <br/><br/><br/>
     <f7-card v-html class="facebook-card" v-for="item in posts"
       :title="renderHeader (item.title, item.type)"
-      :content="item.info"
+      :content="renderContent (item)"
       :footer="renderFooter (item)"
       :inner="true">
     </f7-card>
@@ -39,13 +39,17 @@ export default {
       const day = moment (date).calendar ();
       return time + " " + day;
     },
-    renderFooter (item) {
-      let map = '';
-      let album = '';
+    renderContent (item) {
+      let html = item.info
 
       if (item.map) {
-        map = '<iframe src=\"' + item.map + '" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>';
+        html += '<br/><iframe src=\"' + item.map + '" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>';
       }
+
+      return html
+    },
+    renderFooter (item) {
+      let album = '';
 
       if (item.images) {
         this['album-' + this.albumCount] = this.$f7.photoBrowser ({
@@ -59,7 +63,7 @@ export default {
         this.albumCount ++;
       }
 
-      return map + album;
+      return album;
     }
   },
   mounted () {
@@ -97,7 +101,6 @@ export default {
   color:white;
   font-weight: 700;
 }
-
 .f7-icons {
   margin-right: 10px;
   vertical-align: sub;

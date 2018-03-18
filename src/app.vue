@@ -139,7 +139,7 @@ export default {
           this.loginSuccessHandler,
           this.loginFailHandler
         )
-    }, 200)
+    }, 500)
   }
 }
 </script>

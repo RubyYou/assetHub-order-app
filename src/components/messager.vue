@@ -1,11 +1,12 @@
 <template>
-  <f7-page data-page="messager" class="messager-wrap">
+  <f7-page data-page="messager"  class="messager-wrap">
     <f7-messages v-for="day in allMessages">
       <div class="messages-date">
           {{renderDate (day.date)}}
       </div>
       <div v-for="message in day.messages"
-          :class="renderClass (message.username)">
+          :class="renderClass (message.username)"
+          @click="triggerAction(message)">
         <div class="message-name">{{message.username}}</div>
         <div v-html="renderText (message)" class="message-text"></div>
         <div style="background-image:url(img/user.png)" class="message-avatar"></div>
@@ -28,6 +29,9 @@ import TimeUtils from '../utils/time-utils'
 import moment from 'moment'
 
 export default {
+  props: {
+    onSwitchMode: Function
+  },
   data: function () {
     return {
       avatar:'img/user.png',
@@ -46,11 +50,7 @@ export default {
       var html = ''
 
       if (message.type === "form") {
-        // Only allow to open today's form
-        const isToday = TimeUtils.isSameAsToday (message.time)
-        html = isToday ?
-              '<a class="aaa" href=\"' + message.url + '\">' + message.formName + '</a> 更新' :
-              '<p>' + message.formName + '更新</p>'
+        html = '<p class="highlight">' + message.formName + '更新</p>'
       } else {
         html = '<p>' + message.text + '</p>'
       }
@@ -70,6 +70,13 @@ export default {
       const fromNow = moment(date).fromNow ();
       return fromNow
     },
+    triggerAction (message) {
+      const isToday = TimeUtils.isSameAsToday (message.time)
+      if (message.type === "form" && isToday) {
+        this.onSwitchMode("forms")
+        this.$f7Router.changeRoute (message.url, 0, {})
+      }
+    },
     handleScroll (event) {
       if (event.target.scrollTop === 0) {
         MessageAPI.getPrevious()
@@ -80,8 +87,8 @@ export default {
     // this is dynamic created element, after component mounted
     setTimeout (() => {
       const ele = document.getElementsByClassName('messages-content')[0]
-      ele.addEventListener('scroll', this.handleScroll)
-    }, 500)
+      ele && ele.addEventListener('scroll', this.handleScroll)
+    }, 2000)
   },
   destroyed () {
     const ele = document.getElementsByClassName('messages-content')[0]
@@ -114,21 +121,21 @@ export default {
 <style lang="scss" global>
 .message-received {
   .message-text {
-     a {
-      color: #e46a5d;
-    }
     p {
       margin: 0;
+      &.highlight{
+        color: #e46a5d;
+      }
     }
   }
 }
 .message-sent {
   .message-text {
-    a {
-      color: #e1f936;
-    }
     p {
       margin: 0;
+      &.highlight{
+        color: #e1f936;
+      }
     }
   }
 }

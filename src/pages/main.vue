@@ -1,6 +1,6 @@
 
 <template>
-  <f7-page tabs no-page-content>
+  <f7-page data-page="main" >
     <f7-navbar >
       <div class="top-nav">
         <f7-link @click="switchMode('messager')">
@@ -21,7 +21,7 @@
       </div>
     </f7-navbar>
     <f7-page-content>
-        <Messager v-if="mode === 'messager'" />
+        <Messager v-if="mode === 'messager'" :onSwitchMode="switchMode"/>
         <Forms v-if="mode === 'forms'" />
         <ChartList v-if="mode === 'charts'"/>
     </f7-page-content>

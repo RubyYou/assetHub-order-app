@@ -24,6 +24,7 @@
         <Messager v-if="mode === 'messager'" :onSwitchMode="switchMode"/>
         <Forms v-if="mode === 'forms'" />
         <ChartList v-if="mode === 'charts'"/>
+        <Posts v-if="mode === 'posts'"/>
     </f7-page-content>
   </f7-page>
 </template>
@@ -32,7 +33,7 @@
 import Messager from '../components/messager.vue'
 import ChartList from './chart-list.vue'
 import Forms from './forms/index.vue'
-import Posts from '../components/post.vue'
+import Posts from './posts/index.vue'
 
 export default {
   components: {

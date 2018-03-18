@@ -45,6 +45,7 @@
         "framework7-vue": "^0.9.4",
         "moment": "^2.20.1",
         "socket.io-client": "^2.0.4",
+        "superagent": "^3.8.2",
         "utf-8-validate": "^4.0.0",
         "vue": "^2.2.6",
         "vue-socket.io": "^2.1.1-a",

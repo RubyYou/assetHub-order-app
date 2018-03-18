@@ -134,7 +134,7 @@ export default {
   },
   mounted () {
     setTimeout (() => {
-     LoginAPI.start (
+      LoginAPI.start (
           "總指揮", 0, "Ruby",
           this.loginSuccessHandler,
           this.loginFailHandler

@@ -97,8 +97,4 @@ export default {
   }
 }
 
-.page-content {
-  margin: 50px 0;
-}
-
 </style>

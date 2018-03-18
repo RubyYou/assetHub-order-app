@@ -27,21 +27,19 @@ export default new Vuex.Store ({
 
       setMessagesByDate (state, { date, messages }) {
         // formate
-        const itemExist = state.allMessages.find ( (day ) => { return day.date === date })
-        console.log('itemExist', itemExist)
+        const existItem = state.allMessages.find ( (day ) => { return day.date === date })
 
-        if (itemExist) {
-          itemExist.messages = messages
+        if (existItem) {
+          existItem.messages = messages
         } else {
           // if date not exist, do a sort and clone
           let clone = state.allMessages.slice (0)
-          clone.push ( {date: date, messages: messages}) // day specific
+          clone.push ( {date: date, messages: messages}) // day specific messages
           clone.sort((a, b) => {
             const epochA = new Date (a.date).getTime()
             const epochB = new Date (b.date).getTime()
             return epochA - epochB
           })
-          console.log(clone)
           state.allMessages = clone
         }
       }

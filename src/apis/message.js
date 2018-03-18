@@ -34,8 +34,9 @@ class MessageAPI {
         this._getDayMessage (today, 'on') // listen to the  today's change
     }
 
-    _getDayMessage (dbDate, eventType) {
+    _getDayMessage (dbDate, eventType, callback) {
         console.assert (eventType)
+        console.assert (callback == undefined || typeof callback === 'function')
 
         const dbRef = this._messagesDB.child (dbDate)
         dbRef[eventType] ('value', (snapshots) => {
@@ -47,13 +48,14 @@ class MessageAPI {
                 items.push (data)
             });
             store.commit ('setMessagesByDate', {date: dbDate, messages: items})
+            callback && callback ()
         })
     }
 
-    getPreviousMessages () {
+    getPrevious () {
         const aDayBefore = TimeUtils.substractDayToDBFormate (this._daysInChat)
-        this._getDayMessage (aDayBefore, 'once')
-        this._daysInChat ++
+        const callback = () => { this._daysInChat ++ }
+        this._getDayMessage (aDayBefore, 'once', callback)
     }
 
     submit (payload) {

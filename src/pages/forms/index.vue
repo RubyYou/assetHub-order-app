@@ -1,5 +1,6 @@
 <template>
-    <div data-page="forms" class="messager-wrap">
+    <div data-page="forms" class="form-page">
+        <br/><br/>
         <f7-block-title>空間作業檢點表</f7-block-title>
         <f7-list>
             <f7-list-item

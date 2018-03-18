@@ -1,6 +1,6 @@
 <template>
-  <div data-page="messager" class="messager-wrap" >
-    <div v-for="day in allMessages" class="messages">
+  <f7-page data-page="messager" class="messager-wrap">
+    <f7-messages v-for="day in allMessages">
       <div class="messages-date">
           {{renderDate (day.date)}}
       </div>
@@ -11,14 +11,14 @@
         <div style="background-image:url(img/user.png)" class="message-avatar"></div>
         <div class="message-label">{{renderTime(message.time)}}</div>
       </div>
-    </div>
+    </f7-messages>
     <f7-messagebar placeholder="Message" @submit="onSubmit">
       <div slot="before-textarea">
         <i class="f7-icons camera">camera_fill</i>
       </div>
       <span slot="send-link">送出</span>
     </f7-messagebar>
-  </div>
+  </f7-page>
 </template>
 
 <script>
@@ -69,21 +69,31 @@ export default {
       const date = new Date (epochTime);
       const fromNow = moment(date).fromNow ();
       return fromNow
+    },
+    handleScroll (event) {
+      if (event.target.scrollTop === 0) {
+        MessageAPI.getPrevious()
+      }
     }
   },
-  mounted () {}
+  mounted () {
+    // this is dynamic created element, after component mounted
+    setTimeout (() => {
+      const ele = document.getElementsByClassName('messages-content')[0]
+      ele.addEventListener('scroll', this.handleScroll)
+    }, 500)
+  },
+  destroyed () {
+    const ele = document.getElementsByClassName('messages-content')[0]
+    ele && ele.removeEventListener('scroll', this.handleScroll)
+  }
 }
 </script>
 
 <style scoped>
-/* scoped css won't succeed if doesn't has class name in tempalte */
 .messager-wrap {
   position: relative;
-  overflow-y: scroll;
-  padding-bottom: 120px;
-}
-.toolbar {
-  position: fixed;
+  padding-top: 44px;
 }
 
 .message-sent .message-text {

@@ -53,9 +53,14 @@ class FormAPI {
     }
 
     async updateForm (key, payload, callback) {
-        // await this._formsDB.child(today).child(key).set(payload)
-        // console.log('updateForm, finished')
-        callback()
+        request
+            .put(config.api + config.form)
+            .send({ formID: this._formsDB, updataData: payload, key: key })
+            .end((err, result) => {
+                this._setTodayFormDB()
+                console.log('updateForm, finished')
+                callback()
+            })
     }
 
     getDownloadLink (imageUrl) {

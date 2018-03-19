@@ -21,7 +21,8 @@ export default {
             commit('updateSignData', { type, data })
         },
         saveForm ({ state, commit }, f7) {
-            const key = state.selectedForm.key
+            // change key to mongodb _id
+            const key = state.selectedForm._id
 
             f7.showPreloader('儲存中');
             const formData = Object.assign({}, state.selectedForm, { signData: state.signData })
@@ -31,7 +32,6 @@ export default {
 
             const callback = () => {
                 f7.hidePreloader()
-                console.log(formInfo)
                 // MessageAPI.submit({
                 //     type: 'form',
                 //     url: formInfo.url,
@@ -42,6 +42,7 @@ export default {
             }
 
             if (key && key.length > 0) {
+                console.log('updateForm')
                 FormAPI.updateForm(key, formData, callback)
             } else {
                 FormAPI.createNewForm(formData, callback)

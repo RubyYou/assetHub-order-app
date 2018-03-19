@@ -9,49 +9,48 @@ const db = remoteConfig.database
 
 class FormAPI {
 
-    constructor () { }
+    constructor() { }
 
     init () {
-        this._formsDB = firebase.database().ref (db.forms);
-        this._setTodayFormDB ()
+        this._formsDB = firebase.database().ref(db.forms);
+        this._setTodayFormDB()
     }
 
     _setTodayFormDB () {
-        const todayForm = this._formsDB.child (today)
-        todayForm.once ('value', (snapshot) => {
-            if (!snapshot.exists ()) {
-                const firstNode = {"created": new Date().getTime ()}
+        const todayForm = this._formsDB.child(today)
+        todayForm.once('value', (snapshot) => {
+            if (!snapshot.exists()) {
+                const firstNode = { "created": new Date().getTime() }
                 todayForm.set(firstNode)
             }
-            this._setDataToStore (todayForm, 'setForms')
+            this._setDataToStore(todayForm, 'setForms')
         })
     }
 
     _setDataToStore (dbRef, actionName) {
-        dbRef.on ('value', (snapshots) => {
+        dbRef.on('value', (snapshots) => {
             let items = [];
-            snapshots.forEach( snap => {
-                const data = Object.assign ({}, snap.val(), {key: snap.key});
+            snapshots.forEach(snap => {
+                const data = Object.assign({}, snap.val(), { key: snap.key });
                 if (data.key !== "created") {
-                    items.push (data);
+                    items.push(data);
                 }
             });
-            console.log('DB: ', actionName, snapshots.val());
-            store.commit (actionName, items);
+            store.commit(actionName, items);
         });
     }
 
     async createNewForm (payload, callback) {
-        payload.createDate = new Date ().getTime ()
-        await this._formsDB.child (today).push (payload)
-        console.log ('createNewForm, finished');
-        callback ();
+        payload.createDate = new Date().getTime()
+        await this._formsDB.child(today).push(payload)
+        console.log('createNewForm, finished');
+        callback();
     }
 
     async updateForm (key, payload, callback) {
-        await this._formsDB.child (today).child (key).set (payload)
-        console.log ('updateForm, finished');
-        callback ();
+        await this._formsDB.child(today).child(key).set(payload)
+        console.log('updateForm, finished');
+        callback();
     }
 
     getDownloadLink (imageUrl) {
@@ -59,4 +58,4 @@ class FormAPI {
     }
 }
 
-export default new FormAPI ();
+export default new FormAPI();

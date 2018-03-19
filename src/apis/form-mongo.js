@@ -23,45 +23,39 @@ class FormAPI {
     }
 
     _setTodayFormDB () {
-        const todayForm = []
-        // request.get(config.api + config.form + this._formsDB).
-        // const todayForm = this._formsDB.child(today)
-        // todayForm.once('value', (snapshot) => {
-        //     if (!snapshot.exists()) {
-        //         const firstNode = { "created": new Date().getTime() }
-        //         todayForm.set(firstNode)
-        //     }
-        this._setDataToStore(todayForm, 'setForms')
-        // })
+        let todayForm = []
+        request
+            .get(config.api + config.form + '/' + this._formsDB)
+            .query('toDay=' + today)
+            .end((err, result) => {
+                todayForm = result.body.results
+                console.log('todayForm', todayForm)
+                this._setDataToStore('setForms', todayForm)
+            })
     }
 
-    _setDataToStore (dbRef, actionName) {
-        // dbRef.on('value', (snapshots) => {
-        let items = [];
-        //     snapshots.forEach(snap => {
-        //         const data = Object.assign({}, snap.val(), { key: snap.key });
-        //         if (data.key !== "created") {
-        //             items.push(data);
-        //         }
-        //     });
-        //     console.log('DB: ', actionName, snapshots.val());
-        store.commit(actionName, items);
-        // });
+    _setDataToStore (actionName, payload) {
+        store.commit(actionName, payload)
     }
 
     async createNewForm (payload, callback) {
         payload.createDate = new Date().getTime()
         payload.formDate = today
         console.log('payload', payload)
-        // await this._formsDB.child(today).push(payload)
-        // console.log('createNewForm, finished');
-        callback();
+        request
+            .post(config.api + config.form)
+            .send({ formID: this._formsDB, insertData: payload })
+            .end((err, result) => {
+                this._setTodayFormDB()
+                console.log('createNewForm, finished')
+                callback()
+            })
     }
 
     async updateForm (key, payload, callback) {
         // await this._formsDB.child(today).child(key).set(payload)
-        // console.log('updateForm, finished');
-        callback();
+        // console.log('updateForm, finished')
+        callback()
     }
 
     getDownloadLink (imageUrl) {
@@ -69,4 +63,4 @@ class FormAPI {
     }
 }
 
-export default new FormAPI();
+export default new FormAPI()

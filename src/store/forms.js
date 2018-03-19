@@ -1,4 +1,5 @@
 import { FormAPI, MessageAPI } from '../apis'
+// import MessageAPI from '../apis/message'
 import * as Forms from '../pages/forms/form-data'
 const defaultSignData = { signA: {}, signB: {}, signC: {} }
 

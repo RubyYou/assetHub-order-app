@@ -1,22 +1,4 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
         <!--
@@ -30,20 +12,33 @@
         -->
         <meta charset="UTF-8">
         <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;'"> -->
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
+        <!-- <meta name="format-detection" content="telephone=no"> -->
+        <!-- <meta name="msapplication-tap-highlight" content="no"> -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="msapplication-starturl" content="/">
+        <link rel="icon" type="image/png" sizes="128x128" href="img/icons/icon-128.png">
+        <link rel="apple-touch-icon" type="image/png" sizes="128x128" href="img/icons/icon-128.png">
+        <link rel="icon" type="image/png" sizes="256x256" href="img/icons/icon-256.png">
+        <link rel="apple-touch-icon" type="image/png" sizes="256x245" href="img/icons/icon-256.png">
+        <link rel="apple-touch-startup-image" href="img/icons/startup-screen-640x920.png" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" >
+        <link rel="apple-touch-startup-image" href="img/icons/startup-screen-768x1004.png" media="(device-width: 768px) and (orientation: portrait)">
+        <link rel="apple-touch-startup-image" href="img/icons/startup-screen-1242x2208.png" media="(device-width: 414px) and (-webkit-device-pixel-ratio: 3)"  />
+
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="manifest" href="manifest.json">
+        <link rel="manifest" href="js/manifest.json">
+
         <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
         <link rel="stylesheet" href="css/framework7.ios.min.css">
         <link rel="stylesheet" href="css/framework7-icons.css">
         <link rel="stylesheet" href="css/app.css">
-        <title>工單</title>
+        <title>勞工安全管理APP</title>
     </head>
     <body>
         <div id="app"></div>
         <script type="text/javascript" src="js/echarts-all.js"></script>
-        <script type="text/javascript" src="cordova.js"></script>
+        <!-- <script type="text/javascript" src="cordova.js"></script> -->
         <script type="text/javascript" src="js/build.js"></script>
+        <script type="text/javascript" src="js/service.js"></script>
     </body>
 </html>

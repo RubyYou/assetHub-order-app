@@ -7,7 +7,7 @@ import moment from 'moment'
 
 const db = remoteConfig.database
 const yesterday = TimeUtils.substractDayToDBFormate (1)
-const dayBefore = TimeUtils.substractDayToDBFormate (2) // use do while loop
+const dayBefore = TimeUtils.substractDayToDBFormate (2)
 const today = TimeUtils.substractDayToDBFormate (0)
 
 // message get into store's formate
@@ -24,8 +24,14 @@ class MessageAPI {
     }
 
     init () {
-        this._messagesDB = firebase.database ().ref (db.messages);
-        this._getDefaultMessages () // use do while
+        // online login
+        if (Utils.isOnline()) {
+            this._messagesDB = firebase.database ().ref (db.messages);
+            this._getDefaultMessages () // Use do while
+        } else {
+        // offline login
+            console.log ('offline, getInfo from IndexDB or localstorage');
+        }
     }
 
     _getDefaultMessages () {

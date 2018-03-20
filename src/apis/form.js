@@ -13,8 +13,14 @@ class FormAPI {
     constructor () { }
 
     init () {
-        this._formsDB = firebase.database().ref (db.forms);
-        this._setTodayFormDB ()
+        // online login
+        if (Utils.isOnline()) {
+            this._formsDB = firebase.database().ref (db.forms);
+            this._setTodayFormDB ()
+        } else {
+        // offline login
+            console.log ('offline, getInfo from IndexDB');
+        }
     }
 
     _setTodayFormDB () {

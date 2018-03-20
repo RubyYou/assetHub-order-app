@@ -52,22 +52,16 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "d52eed5bdf22a61207b9768c7466a3bf"
+    "revision": "b1ffd990831f5f70982259aa7c8750b7"
   },
   {
     "url": "js/build.js",
-    "revision": "5e6aeb64fec0b83e343bb311822da5d6"
+    "revision": "2e9732dfce4cdd61ec758b4e6491f6f1"
   },
   {
     "url": "js/echarts-all.js",
     "revision": "7209476e49874839e712842940c29add"
-  },
-  {
-    "url": "js/service.js",
-    "revision": "10558ae9a2d381c6fbb6dd14a2838f38"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
-
-workbox.routing.registerRoute(/https:\/\/water-safety-construction.firebaseio.com/, workbox.strategies.staleWhileRevalidate(), 'GET');

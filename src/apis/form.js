@@ -16,14 +16,18 @@ class FormAPI {
     init () {
         // online login
         if (Utils.isOnline()) {
-            this._formsDB = firebase.database().ref (db.forms);
-            this._setTodayFormDB ()
+            this._setRemoteDB ()
         } else {
             // offline login, only able to see today's form
             IndexDB.get('forms').then(forms => {
                 store.commit ('setForms', forms)
             });
         }
+    }
+
+    _setRemoteDB () {
+        this._formsDB = firebase.database().ref (db.forms);
+        this._setTodayFormDB ()
     }
 
     _setTodayFormDB () {
@@ -73,11 +77,12 @@ class FormAPI {
     async _saveToIndexDB (key, payload) {
         // get existing form and store in TempForm
         const tempForms = await IndexDB.get ('tempForms') // array
-        const tempFormClone = []
+        let tempFormClone = []
         if (tempForms && tempForms.length > 0) {
-            tempFormClone = tempForms.splice()
+            tempFormClone = tempForms.slice(0)
         }
         tempFormClone.push ({[key]: payload})
+        console.log ('tempFormClone', tempFormClone)
         return await IndexDB.set('tempForms', tempFormClone)
     }
 
@@ -86,6 +91,7 @@ class FormAPI {
         const isTempExist = tempForms && tempForms.length > 0
 
         if (!isTempExist) { return }
+        this._setRemoteDB ()
 
         tempForms.map (form => {
             const key = Object.keys(form)[0]

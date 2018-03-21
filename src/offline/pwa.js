@@ -33,7 +33,7 @@ class PwaController {
 
     _offlineService () {
         this._updateOnlineStatus ()
-
+        // move this to individual
         // shallow clone
         const allMessages = JSON.parse (JSON.stringify (store.getters.messages))
         const forms = JSON.parse (JSON.stringify (store.getters.todayForms))
@@ -42,16 +42,16 @@ class PwaController {
         IndexDB.set ('forms', forms )
     }
 
-    async _onlineService () {
+    _onlineService () {
         this._updateOnlineStatus ()
         // remove stuff indexDB and so allow it to access remotely
-        await FormAPI.reconnect ()
-        await MessageAPI.reconnect ()
+        FormAPI.reconnect ()
+        MessageAPI.reconnect ()
     }
 
     _updateOnlineStatus () {
         this._online = navigator.onLine
-        console.log ('_registerConnectionListener', this._online)
+        //console.log ('_registerConnectionListener', this._online)
     }
 
 }

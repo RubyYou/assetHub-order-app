@@ -27,8 +27,7 @@ class MessageAPI {
     init () {
         // online messages
         if (Utils.isOnline()) {
-            this._messagesDB = firebase.database ().ref (db.messages);
-            this._getDefaultMessages () // Use do while
+            this._setRemoteDB()
         } else {
             // offline messages
             IndexDB.get('allMessages').then(allMessages => {
@@ -37,6 +36,11 @@ class MessageAPI {
                 })
             });
         }
+    }
+
+    _setRemoteDB () {
+        this._messagesDB = firebase.database ().ref (db.messages);
+        this._getDefaultMessages () // Use do while
     }
 
     _getDefaultMessages () {
@@ -90,20 +94,25 @@ class MessageAPI {
         console.log (tempMessages)
         if (!isTempExist) { return }
 
+        this._setRemoteDB ()
+        // TODO: fail here
         tempMessages.map (message => {
-            this._messagesDB.child (tempMessages.date).push (tempMessages.data)
+            this._messagesDB.child (message.date).push (message.data)
         })
+
         IndexDB.delete ('tempMessages')
         IndexDB.delete ('allMessages') // normal one
     }
 
-    _saveToIndexDB (payload) {
+    async _saveToIndexDB (payload) {
         const tempMessages = await IndexDB.get ('tempMessages') // array
-        const tempMessagesClone = []
+        let tempMessagesClone = []
         if (tempMessages && tempMessages.length > 0) {
-            tempMessagesClone = tempMessages.splice()
+            tempMessagesClone = tempMessages.slice(0)
         }
         tempMessagesClone.push (payload)
+        console.log ('tempMessagesClone', tempMessagesClone)
+
         IndexDB.set ('tempMessages', tempMessagesClone)
     }
 }

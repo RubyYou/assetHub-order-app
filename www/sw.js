@@ -51,12 +51,52 @@ self.__precacheManifest = [
     "revision": "fb1d983fdd086a2b5df39ee5b0b3d796"
   },
   {
+    "url": "img/icons/icon-128.png",
+    "revision": "c53bae65078938a678267efb21454811"
+  },
+  {
+    "url": "img/icons/icon-256.png",
+    "revision": "6f042e521e4b4b9c5e0d610113298649"
+  },
+  {
+    "url": "img/icons/icon-48.png",
+    "revision": "967b80ffef2a99d090229cf0fbd9f6ea"
+  },
+  {
+    "url": "img/icons/icon-512.png",
+    "revision": "0aef130ed2cf6bd2384fb3d919cf8755"
+  },
+  {
+    "url": "img/icons/icon-72.png",
+    "revision": "6f06a2accc69151d7cc9e39138c8a29c"
+  },
+  {
+    "url": "img/icons/startup-screen-1242x2208.png",
+    "revision": "02ed7dee6fcb4245c3ab30f747b5aa64"
+  },
+  {
+    "url": "img/icons/startup-screen-640x920.png",
+    "revision": "848cd7c0c63f4ca31dcf4825c491864f"
+  },
+  {
+    "url": "img/icons/startup-screen-768x1004.png",
+    "revision": "211b69a71c36f0a19371afac0eaf4fb3"
+  },
+  {
+    "url": "img/map.png",
+    "revision": "b2f8b3146988a4818fe2744de5022d17"
+  },
+  {
+    "url": "img/user.png",
+    "revision": "ec6ae4324768e2c3f9d258c93470c16e"
+  },
+  {
     "url": "index.html",
     "revision": "d927cf720cf5532a665bfa0317967edd"
   },
   {
     "url": "js/build.js",
-    "revision": "225bab917d76b7ab165c2fe535c4bbbf"
+    "revision": "ad20ce16decae6b98bfcbd92549a0ef9"
   },
   {
     "url": "js/echarts-all.js",

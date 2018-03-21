@@ -85,7 +85,7 @@ export default {
   beforeCreate () {
     console.assert (this.$route.params.formDataName)
     formName = this.$route.params.formDataName
-    console.log ('formDataName', formName)
+    //console.log ('formDataName', formName)
     this.$store.commit ('setSelectedForm', formName);
   }
 }

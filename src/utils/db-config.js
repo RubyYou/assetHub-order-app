@@ -38,5 +38,13 @@ export const remoteConfig = {
     storage: {
         photos: "photoA",
         pdf: "pdfA"
+    },
+    api: {
+        url: 'http://localhost:3000/api/v1',
+        socket: 'ws://localhost:3001'
+        actions: {
+            signin: '/signin',
+            forms: '/forms',
+        }
     }
 }

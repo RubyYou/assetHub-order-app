@@ -2,9 +2,10 @@ import firebase from 'firebase'
 import store from '../store/index'
 import { remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
+import TimeUtils from '../utils/time-utils'
 import moment from 'moment'
 
-const today = moment().format('l').split("/").join("-").toString()
+const today = TimeUtils.substractDayToDBFormate (0)
 const db = remoteConfig.database
 
 class FormAPI {

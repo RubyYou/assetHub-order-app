@@ -1,55 +1,57 @@
 
 <template>
-  <f7-page tabs no-page-content>
+  <f7-page data-page="main" >
     <f7-navbar >
       <div class="top-nav">
-        <f7-link tab-link="#tab1" active>
+        <f7-link @click="switchMode('messager')">
           <span class="icon messager"></span>
         </f7-link>
-        <f7-link tab-link="#tab2">
+        <f7-link @click="switchMode('forms')">
           <span class="icon forms"></span>
         </f7-link>
-        <f7-link tab-link="#tab3">
+        <f7-link>
           <span class="icon employee"></span>
         </f7-link>
-        <f7-link tab-link="#tab4">
+        <f7-link @click="switchMode('charts')">
           <span class="icon chart-list"></span>
         </f7-link>
-        <f7-link tab-link="#tab5">
+        <f7-link @click="switchMode ('posts')">
           <span class="icon post"></span>
         </f7-link>
       </div>
     </f7-navbar>
-    <f7-page-content tab active id="tab1">
-      <Messager />
-    </f7-page-content>
-    <f7-page-content tab id="tab2">
-      <Forms />
-    </f7-page-content>
-    <f7-page-content tab id="tab3">employee checkIns</f7-page-content>
-    <f7-page-content tab id="tab4">
-      <ChartList />
-    </f7-page-content>
-    <f7-page-content tab id="tab5">
-      <!--<Posts />-->
+    <f7-page-content>
+        <Messager v-if="mode === 'messager'" :onSwitchMode="switchMode"/>
+        <Forms v-if="mode === 'forms'" />
+        <Charts v-if="mode === 'charts'"/>
+        <Posts v-if="mode === 'posts'"/>
     </f7-page-content>
   </f7-page>
 </template>
 
 <script>
 import Messager from '../components/messager.vue'
-import ChartList from './chart-list.vue'
+import Charts from './charts/index.vue'
 import Forms from './forms/index.vue'
-import Posts from '../components/post.vue'
+import Posts from './posts/index.vue'
 
 export default {
   components: {
     Messager,
-    ChartList,
+    Charts,
     Forms,
     Posts
   },
+ data: function (){
+    return {
+      mode: "messager"
+    }
+  },
   methods:{
+    switchMode(name) {
+
+      this.mode = name
+    }
   }
 }
 </script>
@@ -61,21 +63,23 @@ export default {
 
 .top-nav {
   width: 80%;
-  margin: 0 auto;
-  .tab-link.link{
+  margin: 10px auto 0;
+  a {
     width: 20%;
     float: left;
+    display: inline-block;
   }
-  .tab-link.link.active{
+  a.active{
     background: #e46a5d;
   }
 }
 
 .icon{
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   background-size:contain;
   margin: 0 auto;
+  display: block;
   &.forms {
     background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCA1MTIuMDAyIDUxMi4wMDIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMi4wMDIgNTEyLjAwMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTJweCIgaGVpZ2h0PSI1MTJweCI+CjxjaXJjbGUgc3R5bGU9ImZpbGw6I0ZGNjI2MjsiIGN4PSIyNTYuMDAxIiBjeT0iMjU2IiByPSIyNTYiLz4KPGc+Cgk8cG9seWdvbiBzdHlsZT0iZmlsbDojRkYzMTRGOyIgcG9pbnRzPSIxODkuODk2LDEwNy43NDYgMjQxLjYyMywxNTkuNDczIDE2MS40NTIsMTU5LjQ3MyAxNjEuNDUyLDExOC42NjIgMTY4LjY1NywxMDcuNzQ2ICAiLz4KCTxwYXRoIHN0eWxlPSJmaWxsOiNGRjMxNEY7IiBkPSJNNTEyLjAwMSwyNTZjMC00LjExOC0wLjEwNy04LjIxMS0wLjMtMTIuMjc5TDM4OS4wMDUsMTIxLjAyNSAgIGMwLjAwMi0xLjM3Mi0yNDYuNzgyLDI3Ny4xOTctMjQ2Ljc4MiwyNzcuMTk3bDguNzI2LDguNzI2Yy0xMS4xNjYsNC4zNDQtMTcuOTQyLDYuOTY4LTE3Ljk0Miw2Ljk0Mmw5Ni43ODUsOTYuNzg1ICAgYzguNjE4LDAuODc2LDE3LjM2MSwxLjMyNiwyNi4yMSwxLjMyNkMzOTcuMzg1LDUxMiw1MTIuMDAxLDM5Ny4zODQsNTEyLjAwMSwyNTZ6Ii8+CjwvZz4KPHJlY3QgeD0iMTg5Ljg4OSIgeT0iMTIxLjAxOCIgc3R5bGU9ImZpbGw6I0ZGQUQ5RTsiIHdpZHRoPSIxOTkuMTExIiBoZWlnaHQ9IjI5Mi44NTciLz4KPHJlY3QgeD0iMTYxLjQ0NSIgeT0iMTIxLjAxOCIgc3R5bGU9ImZpbGw6I0ZGRDBDQTsiIHdpZHRoPSIxOTkuMTExIiBoZWlnaHQ9IjI5Mi44NTciLz4KPHJlY3QgeD0iMTMzIiB5PSIxMjEuMDE4IiBzdHlsZT0iZmlsbDojRkZGRkZGOyIgd2lkdGg9IjE5OS4xMTEiIGhlaWdodD0iMjkyLjg1NyIvPgo8cmVjdCB4PSIyMzQuMTU5IiB5PSIxMjEuMDE4IiBzdHlsZT0iZmlsbDojRThFOEU4OyIgd2lkdGg9Ijk3Ljk1MiIgaGVpZ2h0PSIyOTIuODU3Ii8+CjxwYXRoIHN0eWxlPSJmaWxsOiMzNjY2OTU7IiBkPSJNMTg0LjcyNCwxMjEuMDI1YzAtNC45OTEtNC4wNi05LjMzOC05LjA1MS05LjMzOHMtOS4wNTEsNC4wNi05LjA1MSw5LjA1MXY1Ni4wOTIgIGMwLDQuOTkxLDQuMDYsOS4wNTEsOS4wNTEsOS4wNTFzOS4wNTEtNC4wNiw5LjA1MS05LjA1MXYtMTUuMjI5YzAtMi44NTcsMi4zMTUtNS4xNzIsNS4xNzItNS4xNzJjMi44NTcsMCw1LjE3MiwyLjMxNSw1LjE3Miw1LjE3MiAgdjE1LjIyOWMwLDEwLjY5My04LjcwMSwxOS4zOTQtMTkuMzk0LDE5LjM5NHMtMTkuMzk0LTguNzAxLTE5LjM5NC0xOS4zOTR2LTU2LjA5MmMwLTEwLjY5Myw4LjcwMS0xOS4zOTQsMTkuMzk0LTE5LjM5NCAgczE5LjM5NCw4Ljk4OCwxOS4zOTQsMTkuNjgySDE4NC43MjR6Ii8+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
   }
@@ -95,10 +99,6 @@ export default {
   &.post {
     background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8Y2lyY2xlIHN0eWxlPSJmaWxsOiMwMDVDODM7IiBjeD0iMjU2IiBjeT0iMjU2IiByPSIyNTYiLz4KPHBhdGggc3R5bGU9ImZpbGw6IzAwMjYzRjsiIGQ9Ik01MTIsMjU2YzAtMS4xNjctMC4wMjktMi4zMjYtMC4wNDQtMy40ODlsLTc2LjQ1Ny03Ni45ODNsLTAuMzcsMC41NzJsLTUyLjMyNC01Mi4wNDFsLTE5LjMwOSwzMi4zMzIgIGwtNTYuNzktNTYuNzlsLTI0LjgwMSw5OS41NjhMOTEuODU0LDM1MS43NjJMMjUyLjA0Miw1MTEuOTVjMS4zMTksMC4wMiwyLjYzNSwwLjA1LDMuOTU4LDAuMDVDMzk3LjM4NSw1MTIsNTEyLDM5Ny4zODUsNTEyLDI1NnoiLz4KPHBvbHlnb24gc3R5bGU9ImZpbGw6I0FFNEUzMjsiIHBvaW50cz0iMjYwLjk4NSw0MDYuNzAyIDE5OC4wODYsNDI3LjkzIDE1My44MzIsMzAxLjQyOSAyMTYuNzMyLDI4MC4yICIvPgo8cGF0aCBzdHlsZT0iZmlsbDojRkZGRkZGOyIgZD0iTTM5MS4wNTMsMzQwLjcwOWMwLDAtMTQ3Ljk2OC00MC43NjktMjQ3LjgwNy01Ljg0M2wtMjYuNjY1LTc2LjIyMyAgQzIxNi40MiwyMjMuNzE3LDMwNi43MDYsOTkuNiwzMDYuNzA2LDk5LjZMMzkxLjA1MywzNDAuNzA5eiIvPgo8cGF0aCBzdHlsZT0iZmlsbDojRTBFMEUwOyIgZD0iTTEzMi43NTMsMzA0Ljg3MmwxMC40OTMsMjkuOTk1Yzk5Ljg0LTM0LjkyNywyNDcuODA4LDUuODQzLDI0Ny44MDgsNS44NDNsLTQyLjYzNS0xMjEuODc1ICBMMTMyLjc1MywzMDQuODcyeiIvPgo8cGF0aCBzdHlsZT0iZmlsbDojRkY2ODM4OyIgZD0iTTMwNi43MDYsOTkuNmMwLDAtMTEuMjk4LDE1LjUyNi0zMC4zMDUsMzcuMTMxbDY3LjgwOSwxOTMuODM1ICBjMjguMzMsNS4wNDYsNDYuODQ0LDEwLjE0Myw0Ni44NDQsMTAuMTQzTDMwNi43MDYsOTkuNnoiLz4KPHBhdGggc3R5bGU9ImZpbGw6I0FFNEUzMjsiIGQ9Ik0zMTAuNDI1LDIzMy45OTFsMzMuNzg1LDk2LjU3NWMyOC4zMyw1LjA0Niw0Ni44NDQsMTAuMTQzLDQ2Ljg0NCwxMC4xNDNsLTQyLjYzNS0xMjEuODc1ICBMMzEwLjQyNSwyMzMuOTkxeiIvPgo8cG9seWdvbiBzdHlsZT0iZmlsbDojRkY2ODM4OyIgcG9pbnRzPSI5MS44NTQsMzUxLjc2MiAxNDMuMjQ2LDMzNC44NjcgMTE2LjU4MSwyNTguNjQ0IDY1LjUyNiwyNzYuNTA0ICIvPgo8cG9seWdvbiBzdHlsZT0iZmlsbDojQUU0RTMyOyIgcG9pbnRzPSI4Mi40NjgsMzI0LjkzMyA5MS44NTQsMzUxLjc2MiAxNDMuMjQ2LDMzNC44NjcgMTMyLjc1MywzMDQuODcyICIvPgo8cmVjdCB4PSIzOTYuMzk0IiB5PSIxNjIuODgzIiB0cmFuc2Zvcm09Im1hdHJpeCgtMC4zOTA1IC0wLjkyMDYgMC45MjA2IC0wLjM5MDUgMzgyLjE0MTYgNjUwLjQ1ODQpIiBzdHlsZT0iZmlsbDojRkZEQzAwOyIgd2lkdGg9IjIwIiBoZWlnaHQ9IjcxLjY5Ii8+Cjxwb2x5Z29uIHN0eWxlPSJmaWxsOiNGRkMwMDA7IiBwb2ludHM9IjQ0My4zMSwxOTMuOTM5IDQzOC45MjIsMTgzLjU5NSAzNzIuNzI0LDIxMS4xMjcgMzc3LjMxLDIyMS45MzkgIi8+CjxyZWN0IHg9IjM1Mi4wNzYiIHk9IjExNy42NTEiIHRyYW5zZm9ybT0ibWF0cml4KC0wLjkxNjcgLTAuMzk5NiAwLjM5OTYgLTAuOTE2NyA2MzUuNDA0NSA0MjUuNjgzNSkiIHN0eWxlPSJmaWxsOiNGRkRDMDA7IiB3aWR0aD0iMjAiIGhlaWdodD0iNTcuOTEyIi8+CjxyZWN0IHg9IjM4Mi4yODIiIHk9IjI1OC4yODEiIHRyYW5zZm9ybT0ibWF0cml4KC0wLjk3MiAtMC4yMzQ4IDAuMjM0OCAtMC45NzIgNzQ3Ljk3OTEgNjI1LjYyMjkpIiBzdHlsZT0iZmlsbDojRkZDMDAwOyIgd2lkdGg9IjU3LjkwOSIgaGVpZ2h0PSIxOS45OTkiLz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==);
   }
-}
-
-.page-content {
-  margin: 50px 0;
 }
 
 </style>

@@ -4,6 +4,7 @@ import { remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import TimeUtils from '../utils/time-utils'
 import moment from 'moment'
+import IndexDB from '../offline/indexDB' // change to controller
 
 const today = TimeUtils.substractDayToDBFormate (0)
 const db = remoteConfig.database
@@ -18,8 +19,10 @@ class FormAPI {
             this._formsDB = firebase.database().ref (db.forms);
             this._setTodayFormDB ()
         } else {
-        // offline login
-            console.log ('offline, getInfo from IndexDB');
+            // offline login, only able to see today's form
+            IndexDB.get('forms').then( forms => {
+                store.commit ('setForms', forms)
+            });
         }
     }
 
@@ -50,19 +53,43 @@ class FormAPI {
 
     async createNewForm (payload, callback) {
         payload.createDate = new Date ().getTime ()
-        await this._formsDB.child (today).push (payload)
-        console.log ('createNewForm, finished');
+        if (!Utils.isOnline()) {
+            await this._storeFormToIndexDB (0, payload)
+        } else {
+            await this._formsDB.child (today).push (payload)
+        }
         callback ();
     }
 
     async updateForm (key, payload, callback) {
-        await this._formsDB.child (today).child (key).set (payload)
-        console.log ('updateForm, finished');
+        if (!Utils.isOnline()) {
+            await this._storeFormToIndexDB (key, payload)
+        } else {
+            await this._formsDB.child (today).child (key).set (payload)
+        }
         callback ();
     }
 
-    getDownloadLink (imageUrl) {
+    async _storeFormToIndexDB (key, payload) {
+        // get existing form and store in TempForm
+        return await IndexDB.set ('tempForms', { [key]: payload })
+    }
 
+    async reconnect () {
+        const tempForms = await IndexDB.get ('tempForms')
+        const isTempExist = Object.keys (tempForms).length > 0
+
+        if (!isTempExist) { return }
+
+        // tell File API to send
+        for (item in tempForms) {
+            if (item == 0) {
+                await this._formsDB.child (today).push (tempForms[item])
+            } else {
+                await this._formsDB.child (today).child (item).set (tempForms[item])
+            }
+        }
+        return 'success'
     }
 }
 

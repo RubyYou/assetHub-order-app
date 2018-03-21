@@ -1,7 +1,7 @@
 
 import store from '../store/index'
-import idb from 'idb'
-
+import IndexDB from './indexDB'
+import { FileAPI, MessageAPI } from '../apis/index'
 // progressive web app api,
 // this is used process caching and managing offline services
 class PwaController {
@@ -12,8 +12,6 @@ class PwaController {
 
         this._registerServiceWorker ()
         this._registerConnectionListener ()
-        this._registerIndexDB ()
-        this._setDataToDB ()
     }
 
     _registerServiceWorker () {
@@ -35,60 +33,27 @@ class PwaController {
 
     _offlineService () {
         this._updateOnlineStatus ()
-        const payload = JSON.parse (JSON.stringify ({
-            allMessages: store.getters.messages,
-            forms: store.getters.todayForms
-        }))
 
-        console.log (payload)
+        // shallow clone
+        const allMessages = JSON.parse (JSON.stringify (store.getters.messages))
+        const forms = JSON.parse (JSON.stringify (store.getters.todayForms))
 
-        this._dbPromise.then (db => {
-            console.log ('db open')
-            const tx = db.transaction ('data', 'readwrite')
-            const store = tx.objectStore ('data')
-
-            store.put ({message: "aaa"}, 'dataset').then (() => {
-                console.log ('DB Promise done')
-                tx.complete;
-            }).catch(() => {
-                tx.abort ();
-                throw Error ('Data were not added to the store');
-            })
-        })
+        IndexDB.set ('allMessages', allMessages )
+        IndexDB.set ('forms', forms )
     }
 
-    _onlineService () {
+    async _onlineService () {
         this._updateOnlineStatus ()
-        // remove stuff in indexDB and access remotely
+        // remove stuff indexDB and so allow it to access remotely
+        await FileAPI.reconnect ()
+        await MessageAPI.reconnect ()
+
+        IndexDB.clear()
     }
 
     _updateOnlineStatus () {
         this._online = navigator.onLine
         console.log ('_registerConnectionListener', this._online)
-    }
-
-    _registerIndexDB () {
-        if (!('indexedDB' in window)) { return }
-        // this is a promise
-        this._dbPromise = idb.open('runtime-data', 1, db => {
-            db.createObjectStore('data')
-        })
-    }
-
-    _setDataToDB () {
-        this._dbPromise.then (db => {
-            console.log ('db open')
-            const tx = db.transaction ('data', 'readwrite')
-            const store = tx.objectStore ('data')
-
-            store.put ('dataset', { message: "aaa"} ).then (() => {
-                console.log ('DB Promise done')
-                tx.complete;
-            }).catch(() => {
-                tx.abort ();
-                throw Error ('Data were not added to the store');
-            })
-        })
     }
 }
 

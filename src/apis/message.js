@@ -4,6 +4,7 @@ import { accountInfo, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import TimeUtils from '../utils/time-utils'
 import moment from 'moment'
+import IndexDB from '../offline/indexDB' // change to controller
 
 const db = remoteConfig.database
 const yesterday = TimeUtils.substractDayToDBFormate (1)
@@ -29,8 +30,12 @@ class MessageAPI {
             this._messagesDB = firebase.database ().ref (db.messages);
             this._getDefaultMessages () // Use do while
         } else {
-        // offline login
-            console.log ('offline, getInfo from IndexDB or localstorage');
+            // offline login
+            IndexDB.get('allMessages').then(allMessages => {
+                allMessages.map (item => {
+                    store.commit ('setMessagesByDate', {date: item.date, messages: item.messages})
+                })
+            });
         }
     }
 
@@ -43,6 +48,8 @@ class MessageAPI {
     _getDayMessage (dbDate, eventType, callback) {
         console.assert (eventType)
         console.assert (callback == undefined || typeof callback === 'function')
+
+        if (!Utils.isOnline()) { return }
 
         const dbRef = this._messagesDB.child (dbDate)
         dbRef[eventType] ('value', (snapshots) => {

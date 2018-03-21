@@ -63,11 +63,7 @@ class LoginAPI {
                 this._remoteLoginUser = user
                 this._authenticateRemotely ()
             } else {
-                console.log ('offline now, use to be online');
-                // localStorage.setItem("username", "John");
-                // listen to user offline, then insert information to Localstorage for cachine purpose
                 this._remoteLoginUser = null
-                this.fail ()
             }
         })
     }

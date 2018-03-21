@@ -14,9 +14,9 @@
       </div>
     </f7-messages>
     <f7-messagebar placeholder="Message" @submit="onSubmit">
-      <div slot="before-textarea">
+      <!--<div slot="before-textarea">
         <i class="f7-icons camera">camera_fill</i>
-      </div>
+      </div>-->
       <span slot="send-link">送出</span>
     </f7-messagebar>
   </f7-page>

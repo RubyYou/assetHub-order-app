@@ -1,5 +1,0 @@
-class SocketController {
-    constructor() {
-
-    }
-}

@@ -52,7 +52,12 @@
 
 <script>
 import { LoginAPI, FormAPI, MessageAPI } from "./apis/";
-import { accountInfo } from "./utils/db-config";
+import { accountInfo, remoteConfig } from "./utils/db-config";
+import { mapState } from "vuex";
+import Socket from "./utils/socket";
+
+// regeister socket
+Socket.init();
 
 export default {
   data: function() {
@@ -62,6 +67,9 @@ export default {
       accountValue: accountInfo[0].account
     };
   },
+  computed: mapState({
+    userInfo: state => state.userInfo
+  }),
   methods: {
     setErrorMessage: function(value) {
       this.errorMessage = value;
@@ -120,7 +128,12 @@ export default {
       }
     },
     loginSuccessHandler() {
-      FormAPI.init();
+      console.log("userInfo111", this.userInfo);
+      this.$socket.emit("join", {
+        userName: this.userInfo.username,
+        roomName: remoteConfig.database.messages
+      });
+      // FormAPI.init();
       // MessageAPI.init();
       this.goToMain();
     },
@@ -141,14 +154,16 @@ export default {
       }, 2000);
     }
   },
-  mounted () {
-    setTimeout (() => {
-      LoginAPI.start (
-          "總指揮", 0, "Ruby",
-          this.loginSuccessHandler,
-          this.loginFailHandler
-        )
-    }, 500)
+  mounted() {
+    setTimeout(() => {
+      LoginAPI.start(
+        "總指揮",
+        0,
+        "Ruby",
+        this.loginSuccessHandler,
+        this.loginFailHandler
+      );
+    }, 500);
   }
 };
 </script>

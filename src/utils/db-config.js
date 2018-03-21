@@ -40,11 +40,11 @@ export const remoteConfig = {
         pdf: "pdfA"
     },
     api: {
-        url: 'http://localhost:3000/api/v1',
-        socket: 'ws://localhost:3001'
+        url: "http://localhost:3000/api/v1",
+        socket: "ws://localhost:3001",
         actions: {
-            signin: '/signin',
-            forms: '/forms',
+            signin: "/signin",
+            forms: "/forms"
         }
     }
 }

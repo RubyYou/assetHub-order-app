@@ -54,7 +54,7 @@ class FormAPI {
     async createNewForm (payload, callback) {
         payload.createDate = new Date ().getTime ()
         if (!Utils.isOnline()) {
-            await this._storeFormToIndexDB (0, payload)
+            await this._saveToIndexDB (0, payload)
         } else {
             await this._formsDB.child (today).push (payload)
         }
@@ -63,25 +63,25 @@ class FormAPI {
 
     async updateForm (key, payload, callback) {
         if (!Utils.isOnline()) {
-            await this._storeFormToIndexDB (key, payload)
+            await this._saveToIndexDB (key, payload)
         } else {
             await this._formsDB.child (today).child (key).set (payload)
         }
         callback ();
     }
 
-    async _storeFormToIndexDB (key, payload) {
+    async _saveToIndexDB (key, payload) {
         // get existing form and store in TempForm
         return await IndexDB.set ('tempForms', { [key]: payload })
     }
 
     async reconnect () {
         const tempForms = await IndexDB.get ('tempForms')
-        const isTempExist = Object.keys (tempForms).length > 0
+        const isTempExist = tempForms && Object.keys (tempForms).length > 0
 
         if (!isTempExist) { return }
 
-        // tell File API to send
+        // tell Form API to send
         for (item in tempForms) {
             if (item == 0) {
                 await this._formsDB.child (today).push (tempForms[item])

@@ -49,8 +49,6 @@ class MessageAPI {
         console.assert (eventType)
         console.assert (callback == undefined || typeof callback === 'function')
 
-        if (!Utils.isOnline()) { return }
-
         const dbRef = this._messagesDB.child (dbDate)
         dbRef[eventType] ('value', (snapshots) => {
             let items = [];
@@ -66,6 +64,7 @@ class MessageAPI {
     }
 
     getPrevious () {
+        if (!Utils.isOnline()) { return }
         const aDayBefore = TimeUtils.substractDayToDBFormate (this._daysInChat)
         const callback = () => { this._daysInChat ++ }
         this._getDayMessage (aDayBefore, 'once', callback)
@@ -76,7 +75,27 @@ class MessageAPI {
             username: store.state.userInfo.username,
             time : new Date ().getTime ()
         })
-        this._messagesDB.child (today).push (data)
+        if (!Utils.isOnline()) {
+            this._saveToIndexDB ({date: today, data: data})
+            // TODO: need to tell user he is offline
+        } else  {
+            this._messagesDB.child (today).push (data)
+        }
+    }
+    // this also need to happen
+    async reconnect () {
+        const tempMessages = await IndexDB.get ('tempMessages')
+        const isTempExist = tempMessages && Object.keys (tempMessages).length > 0
+        console.log (tempMessages)
+        if (!isTempExist) { return }
+
+        this._messagesDB.child (tempMessages.date).push (tempMessages.data)
+        // clear message if has any
+    }
+
+    _saveToIndexDB (payload) {
+        // clone the exist one
+        IndexDB.set ('tempMessages', payload)
     }
 }
 

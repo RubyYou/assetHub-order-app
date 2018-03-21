@@ -1,7 +1,7 @@
 
 import store from '../store/index'
 import IndexDB from './indexDB'
-import { FileAPI, MessageAPI } from '../apis/index'
+import { FormAPI, MessageAPI } from '../apis/index'
 // progressive web app api,
 // this is used process caching and managing offline services
 class PwaController {
@@ -45,7 +45,7 @@ class PwaController {
     async _onlineService () {
         this._updateOnlineStatus ()
         // remove stuff indexDB and so allow it to access remotely
-        await FileAPI.reconnect ()
+        await FormAPI.reconnect ()
         await MessageAPI.reconnect ()
 
         IndexDB.clear()

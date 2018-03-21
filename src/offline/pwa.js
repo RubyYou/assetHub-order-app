@@ -27,7 +27,7 @@ class PwaController {
     }
 
     _registerConnectionListener () {
-        window.addEventListener ('online',  this._onlineService.bind (this))
+        window.addEventListener ('online', this._onlineService.bind (this))
         window.addEventListener ('offline', this._offlineService.bind (this))
     }
 
@@ -47,14 +47,13 @@ class PwaController {
         // remove stuff indexDB and so allow it to access remotely
         await FormAPI.reconnect ()
         await MessageAPI.reconnect ()
-
-        IndexDB.clear()
     }
 
     _updateOnlineStatus () {
         this._online = navigator.onLine
         console.log ('_registerConnectionListener', this._online)
     }
+
 }
 
 export default new PwaController ();

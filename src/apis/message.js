@@ -25,12 +25,12 @@ class MessageAPI {
     }
 
     init () {
-        // online login
+        // online messages
         if (Utils.isOnline()) {
             this._messagesDB = firebase.database ().ref (db.messages);
             this._getDefaultMessages () // Use do while
         } else {
-            // offline login
+            // offline messages
             IndexDB.get('allMessages').then(allMessages => {
                 allMessages.map (item => {
                     store.commit ('setMessagesByDate', {date: item.date, messages: item.messages})
@@ -75,6 +75,7 @@ class MessageAPI {
             username: store.state.userInfo.username,
             time : new Date ().getTime ()
         })
+
         if (!Utils.isOnline()) {
             this._saveToIndexDB ({date: today, data: data})
             // TODO: need to tell user he is offline
@@ -85,17 +86,25 @@ class MessageAPI {
     // this also need to happen
     async reconnect () {
         const tempMessages = await IndexDB.get ('tempMessages')
-        const isTempExist = tempMessages && Object.keys (tempMessages).length > 0
+        const isTempExist = tempMessages && tempMessages.length > 0
         console.log (tempMessages)
         if (!isTempExist) { return }
 
-        this._messagesDB.child (tempMessages.date).push (tempMessages.data)
-        // clear message if has any
+        tempMessages.map (message => {
+            this._messagesDB.child (tempMessages.date).push (tempMessages.data)
+        })
+        IndexDB.delete ('tempMessages')
+        IndexDB.delete ('allMessages') // normal one
     }
 
     _saveToIndexDB (payload) {
-        // clone the exist one
-        IndexDB.set ('tempMessages', payload)
+        const tempMessages = await IndexDB.get ('tempMessages') // array
+        const tempMessagesClone = []
+        if (tempMessages && tempMessages.length > 0) {
+            tempMessagesClone = tempMessages.splice()
+        }
+        tempMessagesClone.push (payload)
+        IndexDB.set ('tempMessages', tempMessagesClone)
     }
 }
 

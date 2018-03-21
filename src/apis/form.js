@@ -20,7 +20,7 @@ class FormAPI {
             this._setTodayFormDB ()
         } else {
             // offline login, only able to see today's form
-            IndexDB.get('forms').then( forms => {
+            IndexDB.get('forms').then(forms => {
                 store.commit ('setForms', forms)
             });
         }
@@ -72,24 +72,32 @@ class FormAPI {
 
     async _saveToIndexDB (key, payload) {
         // get existing form and store in TempForm
-        return await IndexDB.set ('tempForms', { [key]: payload })
+        const tempForms = await IndexDB.get ('tempForms') // array
+        const tempFormClone = []
+        if (tempForms && tempForms.length > 0) {
+            tempFormClone = tempForms.splice()
+        }
+        tempFormClone.push ({[key]: payload})
+        return await IndexDB.set('tempForms', tempFormClone)
     }
 
     async reconnect () {
         const tempForms = await IndexDB.get ('tempForms')
-        const isTempExist = tempForms && Object.keys (tempForms).length > 0
+        const isTempExist = tempForms && tempForms.length > 0
 
         if (!isTempExist) { return }
 
-        // tell Form API to send
-        for (item in tempForms) {
-            if (item == 0) {
-                await this._formsDB.child (today).push (tempForms[item])
+        tempForms.map (form => {
+            const key = Object.keys(form)[0]
+            if (key == 0) {
+                this._formsDB.child(today).push(form)
             } else {
-                await this._formsDB.child (today).child (item).set (tempForms[item])
+                this._formsDB.child(today).child(key).set(form)
             }
-        }
-        return 'success'
+        })
+
+        IndexDB.delete ('tempForms')
+        IndexDB.delete ('forms')
     }
 }
 

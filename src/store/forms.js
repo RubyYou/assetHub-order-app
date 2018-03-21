@@ -10,6 +10,9 @@ export default {
         signData: defaultSignData
     },
     getters : {
+        todayForms: state => {
+            return state.todayForms
+        }
     },
     actions : {
         updateForm ({state, commit}, {name, data}) {

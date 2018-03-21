@@ -38,5 +38,9 @@ export const remoteConfig = {
     storage: {
         photos: "photoA",
         pdf: "pdfA"
+    },
+    indexDB: {
+        name: "runtime-store",
+        tableName: "data"
     }
 }

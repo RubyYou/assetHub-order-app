@@ -43,5 +43,10 @@ export default new Vuex.Store ({
           state.allMessages = clone
         }
       }
+    },
+    getters : {
+      messages: state => {
+        return state.allMessages
+      }
     }
 });

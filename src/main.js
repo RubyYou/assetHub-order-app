@@ -8,6 +8,7 @@ import Framework7Vue from 'framework7-vue'
 import Routes from './routes.js'
 import store from './store'
 import App from './app.vue'
+import PwaController from './offline/pwa'
 
 //const SocketInstance = socketio ('http://localhost:3001')
 Vue.use (Framework7Vue)

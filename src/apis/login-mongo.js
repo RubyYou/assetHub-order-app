@@ -15,6 +15,7 @@ class LoginAPI {
         this._isRemote = false
         this._remoteLoginUser = null
         this.roomName = remoteConfig.database.messages
+        this.formName = remoteConfig.database.forms
     }
 
     start (account, password, username, successHandler, failHandler) {
@@ -68,7 +69,8 @@ class LoginAPI {
         const payload = {
             account: this.account,
             username: this.username,
-            roomName: this.roomName
+            roomName: this.roomName,
+            formName: this.formName
         }
         store.commit('setUserInfo', payload)
         this.successHandler()

@@ -16,7 +16,8 @@ export default new Vuex.Store({
     userInfo: {
       account: '',
       username: '',
-      roomName: ''
+      roomName: '',
+      formName: ''
     },
     allMessages: []
   },
@@ -30,6 +31,7 @@ export default new Vuex.Store({
       state.userInfo.account = payload.account
       state.userInfo.username = payload.username
       state.userInfo.roomName = payload.roomName
+      state.userInfo.formName = payload.formName
     },
 
     setMessagesByDate (state, { date, messages }) {

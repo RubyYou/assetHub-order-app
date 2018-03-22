@@ -1,15 +1,10 @@
 
-import store from '../store/index'
-import IndexDB from './indexDB'
-import { FormAPI, MessageAPI } from '../apis/index'
 // progressive web app api,
 // this is used process caching // This is for OFFLINE static caching
-class PwaController {
+class CacheController {
 
     constructor () {
-        this._online = false
         this._registerServiceWorker ()
-        //this._registerConnectionListener ()
     }
 
     _registerServiceWorker () {
@@ -22,9 +17,10 @@ class PwaController {
                 });
             });
         } else  {
-            alert ('there is no offline service') // manually doing cachine
+            // use window.applicationCache
+            alert ('本機器目前不支援線下使用中') // manually doing cachine
         }
     }
 }
 
-export default new PwaController ();
+export default new CacheController ();

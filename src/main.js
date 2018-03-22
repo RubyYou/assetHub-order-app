@@ -1,14 +1,14 @@
 // import 'es6-promise/auto' // this may not need, will increase 6mb even minified
 import 'babel-polyfill'
 import Vue from 'vue'
-// import socketio from 'socket.io' --> this has breaking changes for arrow function
-//import VueSocketIO from 'vue-socket.io'
+// import socketio from 'socket.io' //--> this has breaking changes for arrow function in production
+// import VueSocketIO from 'vue-socket.io'
 import Framework7 from 'framework7'
 import Framework7Vue from 'framework7-vue'
 import Routes from './routes.js'
 import store from './store'
 import App from './app.vue'
-import PwaController from './offline/pwa'
+import CacheController from './offline/cacheController'
 
 //const SocketInstance = socketio ('http://localhost:3001')
 Vue.use (Framework7Vue)

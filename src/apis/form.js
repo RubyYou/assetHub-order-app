@@ -36,18 +36,19 @@ class FormAPI {
 
     async _online () {
         this._setRemoteDB ()
-        console.log ('')
         const tempForms = await IndexDB.get ('tempForms')
         const isTempExist = tempForms && tempForms.length > 0
 
         if (!isTempExist) { return }
 
         tempForms.map (form => {
-            const key = Object.keys(form)[0]
-            if (key == 0) {
-                this._formsDB.child(today).push(form)
-            } else {
+
+            if (form.key) {
+                const key = form.key
+                delete form.key
                 this._formsDB.child(today).child(key).set(form)
+            } else {
+                this._formsDB.child(today).push(form)
             }
         })
 
@@ -94,7 +95,7 @@ class FormAPI {
     async createNewForm (payload, callback) {
         payload.createDate = new Date ().getTime ()
         if (!Utils.isOnline()) {
-            await this._saveToIndexDB (0, payload)
+            await this._saveToIndexDB (null, payload)
         } else {
             await this._formsDB.child (today).push (payload)
         }
@@ -116,9 +117,16 @@ class FormAPI {
         if (tempForms && tempForms.length > 0) {
             tempFormClone = tempForms.slice(0)
         }
-        tempFormClone.push ({[key]: payload})
-        console.log ('tempFormClone', tempFormClone)
-        return await IndexDB.set('tempForms', tempFormClone)
+
+        let repeatedItem = tempFormClone.find (item => {return item.key === key})
+        if (repeatedItem) {
+            repeatedItem = payload;
+        } else {
+            tempFormClone.push (payload)
+        }
+
+        //console.log ('tempFormClone', tempFormClone)
+        IndexDB.set('tempForms', tempFormClone)
     }
 }
 

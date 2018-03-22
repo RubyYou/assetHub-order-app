@@ -25,6 +25,7 @@
         <Forms v-if="mode === 'forms'" />
         <Charts v-if="mode === 'charts'"/>
         <Posts v-if="mode === 'posts'"/>
+
     </f7-page-content>
   </f7-page>
 </template>
@@ -40,16 +41,16 @@ export default {
     Messager,
     Charts,
     Forms,
-    Posts
+    Posts,
+    CheckIns
   },
- data: function (){
+  data: function () {
     return {
       mode: "messager"
     }
   },
-  methods:{
+  methods: {
     switchMode(name) {
-
       this.mode = name
     }
   }

@@ -26,21 +26,52 @@ class MessageAPI {
 
     init () {
         // online messages
-        if (Utils.isOnline()) {
-            this._setRemoteDB()
+        if (Utils.isOnline ()) {
+            this._connectRemoteDB ()
         } else {
-            // offline messages
-            IndexDB.get('allMessages').then(allMessages => {
-                allMessages.map (item => {
-                    store.commit ('setMessagesByDate', {date: item.date, messages: item.messages})
-                })
-            });
+            this._getContentFromIndexDB ()
         }
+
+        this._registerService ()
     }
 
-    _setRemoteDB () {
+    _getContentFromIndexDB () {
+        IndexDB.get('allMessages').then(allMessages => {
+            allMessages.map (item => {
+                store.commit ('setMessagesByDate', { date: item.date, messages: item.messages})
+            })
+        });
+    }
+
+    _registerService () {
+        window.addEventListener ('online', this._online.bind (this))
+        window.addEventListener ('offline', this._offline.bind (this))
+    }
+
+    async _online () {
+        this._connectRemoteDB ()
+
+        const tempMessages = await IndexDB.get ('tempMessages')
+        const isTempExist = tempMessages && tempMessages.length > 0
+
+        if (!isTempExist) { return }
+
+        tempMessages.map (message => {
+            this._messagesDB.child (message.date).push (message.data)
+        })
+
+        IndexDB.delete ('tempMessages')
+        IndexDB.delete ('allMessages') // normal one
+    }
+
+    _offline () {
+        const allMessages = JSON.parse (JSON.stringify (store.getters.messages))
+        IndexDB.set ('allMessages', allMessages )
+    }
+
+    _connectRemoteDB () {
         this._messagesDB = firebase.database ().ref (db.messages);
-        this._getDefaultMessages () // Use do while
+        this._getDefaultMessages ()
     }
 
     _getDefaultMessages () {
@@ -62,7 +93,7 @@ class MessageAPI {
                 let data = Object.assign ({}, snap.val(), {key: snap.key});
                 items.push (data)
             });
-            store.commit ('setMessagesByDate', {date: dbDate, messages: items})
+            store.commit ('setMessagesByDate', { date: dbDate, messages: items })
             callback && callback ()
         })
     }
@@ -80,39 +111,24 @@ class MessageAPI {
             time : new Date ().getTime ()
         })
 
-        if (!Utils.isOnline()) {
-            this._saveToIndexDB ({date: today, data: data})
-            // TODO: need to tell user he is offline
-        } else  {
+        if (Utils.isOnline()) {
             this._messagesDB.child (today).push (data)
+        } else  {
+            store.commit ('setPendingMessage', { date: today, message: data }) // this should show pending
+            this._saveToIndexDB ({date: today, data: data})
+            console.log (data)
         }
-    }
-    // this also need to happen
-    async reconnect () {
-        const tempMessages = await IndexDB.get ('tempMessages')
-        const isTempExist = tempMessages && tempMessages.length > 0
-        console.log (tempMessages)
-        if (!isTempExist) { return }
-
-        this._setRemoteDB ()
-        // TODO: fail here
-        tempMessages.map (message => {
-            this._messagesDB.child (message.date).push (message.data)
-        })
-
-        IndexDB.delete ('tempMessages')
-        IndexDB.delete ('allMessages') // normal one
     }
 
     async _saveToIndexDB (payload) {
-        const tempMessages = await IndexDB.get ('tempMessages') // array
+        const tempMessages = await IndexDB.get ('tempMessages')
         let tempMessagesClone = []
         if (tempMessages && tempMessages.length > 0) {
-            tempMessagesClone = tempMessages.slice(0)
+            tempMessagesClone = tempMessages.slice (0)
         }
-        tempMessagesClone.push (payload)
-        console.log ('tempMessagesClone', tempMessagesClone)
 
+        tempMessagesClone.push (payload)
+        //console.log ('tempMessagesClone', tempMessagesClone)
         IndexDB.set ('tempMessages', tempMessagesClone)
     }
 }

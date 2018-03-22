@@ -28,7 +28,7 @@ self.__precacheManifest = [
   },
   {
     "url": "css/build.css",
-    "revision": "d41d8cd98f00b204e9800998ecf8427e"
+    "revision": "752f257825d77f6e8a192a4f2bf3d343"
   },
   {
     "url": "css/framework7-icons.css",
@@ -92,11 +92,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "d927cf720cf5532a665bfa0317967edd"
+    "revision": "1c82fd4656166a7a296c6f4089256536"
   },
   {
     "url": "js/build.js",
-    "revision": "ad20ce16decae6b98bfcbd92549a0ef9"
+    "revision": "a8fc3d46c2d993e8bfb7931ac96726af"
   },
   {
     "url": "js/echarts-all.js",

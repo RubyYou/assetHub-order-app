@@ -74,7 +74,7 @@ class LoginAPI {
 
         databaseRef.child (dbName).once ('value', (snapshots) => {
             let items = [];
-            console.log('DB: ', dbName, snapshots.val());
+            //console.log('DB: ', dbName, snapshots.val());
             snapshots.forEach( snap => {
                 const data = Object.assign ({}, snap.val(), {key: snap.key});
                 items.push (data);

@@ -11,18 +11,54 @@ const db = remoteConfig.database
 
 class FormAPI {
 
-    constructor () { }
+    constructor () {}
 
     init () {
         // online login
         if (Utils.isOnline()) {
             this._setRemoteDB ()
         } else {
-            // offline login, only able to see today's form
-            IndexDB.get('forms').then(forms => {
-                store.commit ('setForms', forms)
-            });
+            this._getContentFromIndexDB ()
         }
+        this._registerService ()
+    }
+
+    _getContentFromIndexDB () {
+        IndexDB.get('forms').then(forms => {
+            store.commit ('setForms', forms)
+        });
+    }
+
+    _registerService () {
+        window.addEventListener ('online', this._online.bind (this))
+        window.addEventListener ('offline', this._offline.bind (this))
+    }
+
+    async _online () {
+        this._setRemoteDB ()
+        console.log ('')
+        const tempForms = await IndexDB.get ('tempForms')
+        const isTempExist = tempForms && tempForms.length > 0
+
+        if (!isTempExist) { return }
+
+        tempForms.map (form => {
+            const key = Object.keys(form)[0]
+            if (key == 0) {
+                this._formsDB.child(today).push(form)
+            } else {
+                this._formsDB.child(today).child(key).set(form)
+            }
+        })
+
+        IndexDB.delete ('tempForms')
+        IndexDB.delete ('forms')
+    }
+
+    _offline () {
+        // shallow clone
+        const forms = JSON.parse (JSON.stringify (store.getters.todayForms))
+        IndexDB.set ('forms', forms )
     }
 
     _setRemoteDB () {
@@ -67,7 +103,7 @@ class FormAPI {
 
     async updateForm (key, payload, callback) {
         if (!Utils.isOnline()) {
-            await this._saveToIndexDB (key, payload)
+            this._saveToIndexDB (key, payload)
         } else {
             await this._formsDB.child (today).child (key).set (payload)
         }
@@ -75,7 +111,6 @@ class FormAPI {
     }
 
     async _saveToIndexDB (key, payload) {
-        // get existing form and store in TempForm
         const tempForms = await IndexDB.get ('tempForms') // array
         let tempFormClone = []
         if (tempForms && tempForms.length > 0) {
@@ -84,26 +119,6 @@ class FormAPI {
         tempFormClone.push ({[key]: payload})
         console.log ('tempFormClone', tempFormClone)
         return await IndexDB.set('tempForms', tempFormClone)
-    }
-
-    async reconnect () {
-        const tempForms = await IndexDB.get ('tempForms')
-        const isTempExist = tempForms && tempForms.length > 0
-
-        if (!isTempExist) { return }
-        this._setRemoteDB ()
-
-        tempForms.map (form => {
-            const key = Object.keys(form)[0]
-            if (key == 0) {
-                this._formsDB.child(today).push(form)
-            } else {
-                this._formsDB.child(today).child(key).set(form)
-            }
-        })
-
-        IndexDB.delete ('tempForms')
-        IndexDB.delete ('forms')
     }
 }
 

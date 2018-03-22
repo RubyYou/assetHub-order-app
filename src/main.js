@@ -1,7 +1,7 @@
-import 'es6-promise/auto'
+// import 'es6-promise/auto' // this may not need, will increase 6mb even minified
 import 'babel-polyfill'
 import Vue from 'vue'
-import socketio from 'socket.io'
+// import socketio from 'socket.io' --> this has breaking changes for arrow function
 //import VueSocketIO from 'vue-socket.io'
 import Framework7 from 'framework7'
 import Framework7Vue from 'framework7-vue'

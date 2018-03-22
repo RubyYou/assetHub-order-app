@@ -3,15 +3,13 @@ import store from '../store/index'
 import IndexDB from './indexDB'
 import { FormAPI, MessageAPI } from '../apis/index'
 // progressive web app api,
-// this is used process caching and managing offline services
+// this is used process caching // This is for OFFLINE static caching
 class PwaController {
 
     constructor () {
         this._online = false
-        this._dbPromise = null
-
         this._registerServiceWorker ()
-        this._registerConnectionListener ()
+        //this._registerConnectionListener ()
     }
 
     _registerServiceWorker () {
@@ -23,37 +21,10 @@ class PwaController {
                     console.log('SW registration failed: ', registrationError);
                 });
             });
+        } else  {
+            alert ('there is no offline service') // manually doing cachine
         }
     }
-
-    _registerConnectionListener () {
-        window.addEventListener ('online', this._onlineService.bind (this))
-        window.addEventListener ('offline', this._offlineService.bind (this))
-    }
-
-    _offlineService () {
-        this._updateOnlineStatus ()
-        // move this to individual
-        // shallow clone
-        const allMessages = JSON.parse (JSON.stringify (store.getters.messages))
-        const forms = JSON.parse (JSON.stringify (store.getters.todayForms))
-
-        IndexDB.set ('allMessages', allMessages )
-        IndexDB.set ('forms', forms )
-    }
-
-    _onlineService () {
-        this._updateOnlineStatus ()
-        // remove stuff indexDB and so allow it to access remotely
-        FormAPI.reconnect ()
-        MessageAPI.reconnect ()
-    }
-
-    _updateOnlineStatus () {
-        this._online = navigator.onLine
-        //console.log ('_registerConnectionListener', this._online)
-    }
-
 }
 
 export default new PwaController ();

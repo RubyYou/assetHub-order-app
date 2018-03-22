@@ -47,14 +47,14 @@ export default {
       return "message message-" + type
     },
     renderText (message){
-      var html = ''
+      let html = ''
+      let pendingClass = message.pending ? ' pending' : ''
 
       if (message.type === "form") {
-        html = '<p class="highlight">' + message.formName + '更新</p>'
+        html = '<p class="highlight"'+ pendingClass +'>' + message.formName + '更新</p>'
       } else {
-        html = '<p>' + message.text + '</p>'
+        html = '<p class="'+ pendingClass +'">' + message.text +'</p>'
       }
-
       return html
     },
     onSubmit (text, clear) {
@@ -103,14 +103,6 @@ export default {
   padding-top: 44px;
 }
 
-.message-sent .message-text {
-  padding-right: 40px;
-}
-
-.message-received .message-text {
-  padding-left: 40px;
-}
-
 .f7-icons.camera {
   margin-right: 10px;
   color: #077bff;
@@ -126,6 +118,9 @@ export default {
       &.highlight{
         color: #e46a5d;
       }
+      &.pending {
+        opacity: 0.5;
+      }
     }
   }
 }
@@ -135,6 +130,9 @@ export default {
       margin: 0;
       &.highlight{
         color: #e1f936;
+      }
+      &.pending {
+        opacity: 0.5;
       }
     }
   }

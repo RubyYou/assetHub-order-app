@@ -15,6 +15,7 @@ class LoginAPI {
         this._accounts = accountInfo // default setup locally
         this._isRemote = false
         this._remoteLoginUser = null
+        this.roomName = remoteConfig.database.messages
     }
 
     start (account, password, username, successHandler, failHandler) {
@@ -70,7 +71,8 @@ class LoginAPI {
     succcess () {
         const payload = {
             account: this.account,
-            username: this.username
+            username: this.username,
+            roomName: this.roomName
         }
         store.commit('setUserInfo', payload)
         this.successHandler()

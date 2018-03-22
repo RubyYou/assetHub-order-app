@@ -21,6 +21,7 @@ export default {
             commit('updateSignData', { type, data })
         },
         saveForm ({ state, commit }, f7) {
+
             // change key to mongodb _id
             const key = state.selectedForm._id
 

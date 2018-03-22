@@ -54,10 +54,6 @@
 import { LoginAPI, FormAPI, MessageAPI } from "./apis/";
 import { accountInfo, remoteConfig } from "./utils/db-config";
 import { mapState } from "vuex";
-import Socket from "./utils/socket";
-
-// regeister socket
-Socket.init();
 
 export default {
   data: function() {
@@ -128,12 +124,7 @@ export default {
       }
     },
     loginSuccessHandler() {
-      console.log("userInfo111", this.userInfo);
-      this.$socket.emit("join", {
-        userName: this.userInfo.username,
-        roomName: remoteConfig.database.messages
-      });
-      // FormAPI.init();
+      FormAPI.init();
       // MessageAPI.init();
       this.goToMain();
     },

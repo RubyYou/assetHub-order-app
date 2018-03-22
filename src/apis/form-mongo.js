@@ -41,7 +41,6 @@ class FormAPI {
     async createNewForm (payload, callback) {
         payload.createDate = new Date().getTime()
         payload.formDate = today
-        console.log('payload', payload)
         request
             .post(config.api + config.form)
             .send({ formID: this._formsDB, insertData: payload })

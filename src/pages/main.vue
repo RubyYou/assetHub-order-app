@@ -34,10 +34,6 @@ import Messager from "../components/messager.vue";
 import Charts from "./charts/index.vue";
 import Forms from "./forms/index.vue";
 import Posts from "./posts/index.vue";
-import Socket from "../utils/socket";
-
-// regeister socket
-Socket.init();
 
 export default {
   components: {
@@ -50,11 +46,6 @@ export default {
     return {
       mode: "messager"
     };
-  },
-  sockets: {
-    join: data => {
-      console.log("user join room", data);
-    }
   },
   methods: {
     switchMode(name) {

@@ -1,4 +1,3 @@
-import firebase from 'firebase'
 import store from '../store/index'
 import { accountInfo, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
@@ -38,9 +37,6 @@ class LoginAPI {
             this._authenticate(this._accounts)
         }
     }
-    // _initFirebase () {
-    //     firebase.apps.length <= 0 && firebase.initializeApp(config)
-    // }
 
     _authenticate (allInfo, account, password) {
         const validatedAccount = allInfo.filter(item => {

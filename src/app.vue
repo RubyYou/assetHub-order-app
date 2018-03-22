@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { LoginAPI, FormAPI, MessageAPI } from "./apis/";
+import { LoginAPI, FormAPI, MessageAPI, SocketAPI } from "./apis";
 import { accountInfo, remoteConfig } from "./utils/db-config";
 import { mapState } from "vuex";
 
@@ -126,6 +126,7 @@ export default {
     loginSuccessHandler() {
       FormAPI.init();
       // MessageAPI.init();
+      SocketAPI.init();
       this.goToMain();
     },
     loginFailHandler() {

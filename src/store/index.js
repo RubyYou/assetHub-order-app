@@ -5,43 +5,50 @@ import { accountInfo, localConfig, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import forms from './forms'
 
-Vue.use (Vuex)
+Vue.use(Vuex)
 
 // state
-export default new Vuex.Store ({
-    modules: {
-      forms,
+export default new Vuex.Store({
+  modules: {
+    forms,
+  },
+  state: {
+    userInfo: {
+      account: '',
+      username: '',
+      roomName: ''
     },
-    state: {
-      userInfo : {
-        account: '',
-        username: ''
-      },
-      allMessages : []
+    allMessages: []
+  },
+  getters: {
+    getUserInfo: state => {
+      return state.userInfo
+    }
+  },
+  mutations: {
+    setUserInfo (state, payload) {
+      state.userInfo.account = payload.account
+      state.userInfo.username = payload.username
+      state.userInfo.roomName = payload.roomName
     },
-    mutations: {
-      setUserInfo (state, payload) {
-        state.userInfo.account = payload.account
-        state.userInfo.username = payload.username
-      },
 
-      setMessagesByDate (state, { date, messages }) {
-        // formate
-        const existItem = state.allMessages.find ( (day ) => { return day.date === date })
+    setMessagesByDate (state, { date, messages }) {
+      // formate
+      const existItem = state.allMessages.find((day) => { return day.date === date })
 
-        if (existItem) {
-          existItem.messages = messages
-        } else {
-          // if date not exist, do a sort and clone
-          let clone = state.allMessages.slice (0)
-          clone.push ( {date: date, messages: messages}) // day specific messages
-          clone.sort((a, b) => {
-            const epochA = new Date (a.date).getTime()
-            const epochB = new Date (b.date).getTime()
-            return epochA - epochB
-          })
-          state.allMessages = clone
-        }
+      if (existItem) {
+        existItem.messages = messages
+      } else {
+        // if date not exist, do a sort and clone
+        let clone = state.allMessages.slice(0)
+        clone.push({ date: date, messages: messages }) // day specific messages
+        clone.sort((a, b) => {
+          const epochA = new Date(a.date).getTime()
+          const epochB = new Date(b.date).getTime()
+          return epochA - epochB
+        })
+        state.allMessages = clone
       }
     }
+  }
 });

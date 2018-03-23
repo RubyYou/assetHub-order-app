@@ -24,6 +24,7 @@ class SocketAPI {
 
         this.socket.on('getDayMessage', data => {
             console.log(data)
+            store.commit('setMessagesByDate', { date: data.date, messages: data.result })
         })
     }
 
@@ -60,8 +61,15 @@ class SocketAPI {
         this.socket.emit('sendMessage', this.messageData)
     }
 
-    getMessages () {
-
+    getMessages (date) {
+        console.log(date)
+        this.state = store.getters.getUserInfo
+        this.querytData = {
+            userName: this.state.userName,
+            roomName: this.state.roomName,
+            date: date
+        }
+        this.socket.emit('getMessages', this.querytData)
     }
 
     _registerData () {

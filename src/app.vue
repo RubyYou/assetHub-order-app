@@ -124,9 +124,9 @@ export default {
       }
     },
     loginSuccessHandler() {
-      FormAPI.init();
-      // MessageAPI.init();
       SocketAPI.init();
+      FormAPI.init();
+      MessageAPI.init();
       this.goToMain();
     },
     loginFailHandler() {

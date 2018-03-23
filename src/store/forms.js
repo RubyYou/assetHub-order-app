@@ -40,9 +40,7 @@ export default {
                 MessageAPI.submit({
                     type: 'form',
                     url: formInfo.url,
-                    formName: formInfo.formTitle,
-                    time: new Date().getTime().toString(),
-                    messageDate: today
+                    formName: formInfo.formTitle
                 })
             }
 

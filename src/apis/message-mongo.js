@@ -5,8 +5,8 @@ import TimeUtils from '../utils/time-utils'
 import { SocketAPI } from './index'
 
 const db = remoteConfig.database
-const yesterday = TimeUtils.substractDayToDBFormate(1)
-const dayBefore = TimeUtils.substractDayToDBFormate(2) // use do while loop
+// const yesterday = TimeUtils.substractDayToDBFormate(1)
+// const dayBefore = TimeUtils.substractDayToDBFormate(2) // use do while loop
 const today = TimeUtils.substractDayToDBFormate(0)
 
 // message get into store's formate
@@ -30,10 +30,13 @@ class MessageAPI {
     _getDefaultMessages () {
         // this._getDayMessage (dayBefore, 'once')
         // this._getDayMessage (yesterday, 'once')
-        // this._getDayMessage (today, 'on') // listen to the  today's change
+        this._getDayMessage(today) // listen to the  today's change
     }
 
-    _getDayMessage (dbDate, eventType, callback) {
+    _getDayMessage (date, callback) {
+        SocketAPI.getMessages(date)
+        callback && callback()
+
         // console.assert (eventType)
         // console.assert (callback == undefined || typeof callback === 'function')
 
@@ -52,17 +55,18 @@ class MessageAPI {
     }
 
     getPrevious () {
-        // const aDayBefore = TimeUtils.substractDayToDBFormate (this._daysInChat)
-        // const callback = () => { this._daysInChat ++ }
-        // this._getDayMessage (aDayBefore, 'once', callback)
+        const aDayBefore = TimeUtils.substractDayToDBFormate(this._daysInChat)
+        const callback = () => { this._daysInChat++ }
+        this._getDayMessage(aDayBefore, callback)
     }
 
     submit (payload) {
-        SocketAPI.sendMessage(payload)
-        // const data = Object.assign({}, payload, {
-        //     username: store.state.userInfo.username,
-        //     time : new Date ().getTime ()
-        // })
+        const data = Object.assign({}, payload, {
+            username: store.state.userInfo.username,
+            time: new Date().getTime().toString(),
+            messageDate: today
+        })
+        SocketAPI.sendMessage(data)
         // this._messagesDB.child (today).push (data)
     }
 }

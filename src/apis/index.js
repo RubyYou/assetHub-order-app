@@ -1,4 +1,4 @@
-import MessageAPI from './message'
+import MessageAPI from './message-mongo'
 import FormAPI from './form-mongo'
 import LoginAPI from './login-mongo'
 import SocketAPI from './socket'

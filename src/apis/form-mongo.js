@@ -1,12 +1,11 @@
 import store from '../store/index'
 import { remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
-import moment from 'moment'
 import request from 'superagent'
 import Socket from './socket'
+import TimeUtils from '../utils/time-utils'
 
-const today = moment().format('YYYY-MM-DD').toString()
-console.log('today', today)
+const today = TimeUtils.substractDayToDBFormate(0)
 const db = remoteConfig.database
 const api = remoteConfig.api.url
 const formAction = remoteConfig.api.actions.forms
@@ -40,7 +39,7 @@ class FormAPI {
     }
 
     async createNewForm (payload, callback) {
-        payload.createDate = new Date().getTime()
+        payload.createDate = new Date().getTime().toString()
         payload.formDate = today
         Socket.createNewForm(payload)
         setTimeout(() => {

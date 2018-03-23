@@ -1,7 +1,10 @@
 import { FormAPI, MessageAPI } from '../apis'
 // import MessageAPI from '../apis/message'
 import * as Forms from '../pages/forms/form-data'
+import TimeUtils from '../utils/time-utils'
+
 const defaultSignData = { signA: {}, signB: {}, signC: {} }
+const today = TimeUtils.substractDayToDBFormate(0)
 
 export default {
     state: {
@@ -33,13 +36,14 @@ export default {
 
             const callback = () => {
                 f7.hidePreloader()
-                // MessageAPI.submit({
-                //     type: 'form',
-                //     url: formInfo.url,
-                //     formName: formInfo.formTitle
-                // })
-                // TODO: Fetch form from other days and
-                // if the form is in different date, should be read only
+                console.log('formInfo', formInfo)
+                MessageAPI.submit({
+                    type: 'form',
+                    url: formInfo.url,
+                    formName: formInfo.formTitle,
+                    time: new Date().getTime().toString(),
+                    messageDate: today
+                })
             }
 
             if (key && key.length > 0) {

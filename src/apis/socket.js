@@ -21,6 +21,10 @@ class SocketAPI {
             console.log('setTodayFormDB', data)
             FormAPI.setTodayFormDB()
         })
+
+        this.socket.on('getDayMessage', data => {
+            console.log(data)
+        })
     }
 
     createNewForm (formvalues) {
@@ -47,7 +51,13 @@ class SocketAPI {
     }
 
     sendMessage (message) {
-
+        this.state = store.getters.getUserInfo
+        this.messageData = {
+            userName: this.state.userName,
+            roomName: this.state.roomName,
+            message: message
+        }
+        this.socket.emit('sendMessage', this.messageData)
     }
 
     getMessages () {

@@ -63,35 +63,40 @@ class CheckInAPI {
 
     _setRemoteDB () {
         this._profileDB = firebase.database().ref (db.profile)
-        this._cardDB = firebase.database().ref (db.cards)
-        this._todayMappingDB = firebase.database().ref (db.cardProfileMapping).child (today)
-        this._todayCheckInHistoryDB = firebase.database().ref (db.checkinHistory).child (today)
+        // this._cardDB = firebase.database().ref (db.cards)
+        // this._todayMappingDB = firebase.database().ref (db.cardProfileMapping).child (today)
+        // this._todayCheckInHistoryDB = firebase.database().ref (db.checkinHistory).child (today)
 
-        this._setDataToStore (this._profileDB, 'setProfiles')
-        this._setDataToStore (this._cardDB, 'setCardIDs')
-        this._setDataToStore (this._todayMappingDB, 'setTodayMappingHistory')
-        this._setDataToStore (this._todayCheckInHistoryDB, 'setTodayCheckInHistory')
+        this._setDataToStore (this._profileDB.child ('staff'), 'setStaffProfile')
+        this._setDataToStore (this._profileDB.child ('vehicle'), 'setVehicleProfile')
+        // this._setDataToStore (this._cardDB, 'setCardIDs')
+        // this._setDataToStore (this._todayMappingDB, 'setTodayMappingHistory')
+        // this._setDataToStore (this._todayCheckInHistoryDB, 'setTodayCheckInHistory')
     }
 
     _setDataToStore (dbRef, actionName) {
         dbRef.on ('value', (snapshots) => {
             let items = [];
-            snapshots.forEach( snap => {
+            snapshots.forEach (snap => {
                 const data = Object.assign ({}, snap.val(), {key: snap.key});
+                items.push (data)
             });
-            console.log('DB: ', actionName, snapshots.val());
+            console.log('DB: ', actionName, snapshots.val(), items);
             store.commit (actionName, items);
         });
     }
 
-    async createProfile (payload, callback) {
+    createProfile (type, payload) {
         payload.createDate = new Date ().getTime ()
         if (!Utils.isOnline()) {
             // await this._saveToIndexDB (null, payload)
         } else {
-            await this._profileDB.push (payload)
+            this._profileDB.child (type).push (payload)
         }
-        callback && callback ();
+    }
+
+    deleteProfile (type, key) {
+        this._profileDB.child (type).child (key).remove ()
     }
 
     // async updateForm (key, payload, callback) {

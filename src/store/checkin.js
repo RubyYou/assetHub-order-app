@@ -13,7 +13,7 @@
         vehicleType: "", // 起重機  挖土機 吊機 (select)
     }
 */
-import { CheckInAPI } from '../apis/'
+import CheckInAPI from '../apis/checkin' // --> there are some weird error, can not use index
 
 export default {
     state : {
@@ -34,32 +34,35 @@ export default {
             console.assert (type === "staff" || type === "vehicle")
             CheckInAPI.createProfile (type, info)
         },
-        createProfileCardMapping () {
-            //CheckInAPI.createMapping (type, info)
-        },
-        removeProfile () {
-            //CheckInAPI.deleteProfile ()
-        },
-        removeMapping () {
-            //CheckInAPI.deleteMapping ()
+        // createProfileCardMapping () {
+        //     //CheckInAPI.createMapping (type, info)
+        // },
+        deleteProfile ({state, commit}, {type, key}) {
+            CheckInAPI.deleteProfile (type, key)
         }
+        // removeMapping () {
+        //     //CheckInAPI.deleteMapping ()
+        // }
     },
     mutations : {
-        // get all profiles from db and store here
-        setProfiles (state, {type, info}) {
-
+        // // get all profiles from db and store here
+        setStaffProfile (state, payload) {
+            state.staff = payload
         },
-        // get all card ids and store here
-        setCardIDs (state, {type, info}) {
-
-        },
-        //get all card Mapping for today
-        setTodayMappingHistory (state, {type, info}) {
-
-        },
-        // get all checkIn history
-        setTodayCheckInHistory () {
-
+        setVehicleProfile (state, payload) {
+            state.vehicle = payload
         }
+        // // get all card ids and store here
+        // setCardIDs (state, {type, info}) {
+
+        // },
+        // //get all card Mapping for today
+        // setTodayMappingHistory (state, {type, info}) {
+
+        // },
+        // // get all checkIn history
+        // setTodayCheckInHistory () {
+
+        // }
     }
 }

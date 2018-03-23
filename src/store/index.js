@@ -10,8 +10,8 @@ Vue.use (Vuex)
 // state
 export default new Vuex.Store ({
     modules: {
-      forms,
-      checkin
+      forms: forms,
+      checkin: checkin
     },
     state: {
       userInfo : {

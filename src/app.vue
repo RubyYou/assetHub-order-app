@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { LoginAPI, FormAPI, MessageAPI, CheckInAPI } from './apis/index'
+import { MessageAPI, FormAPI, LoginAPI, CheckInAPI} from './apis/index'
 import { accountInfo } from './utils/db-config'
 
 export default {

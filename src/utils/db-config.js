@@ -39,9 +39,9 @@ export const remoteConfig = {
         messages: "messageA",
         forms: "formsA",
         profile: "profileA", // this include car profile and staff profile
-        cards: "cardsA",
+        cards: "cardsA", // this has all card ID for both car and staff
         cardProfileMapping: "cardProfileMappingA", // this include card+staff and card+car mapping
-        checkinHistory: "checkinHistoryA",
+        checkinHistory: "checkinHistoryA"
     },
     storage: {
         photos: "photoA",

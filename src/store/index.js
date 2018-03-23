@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { accountInfo, localConfig, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import forms from './forms'
+import checkin from './checkin'
 
 Vue.use (Vuex)
 
@@ -10,6 +11,7 @@ Vue.use (Vuex)
 export default new Vuex.Store ({
     modules: {
       forms,
+      checkin
     },
     state: {
       userInfo : {

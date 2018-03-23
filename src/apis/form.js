@@ -4,7 +4,7 @@ import { remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import TimeUtils from '../utils/time-utils'
 import moment from 'moment'
-import IndexDB from '../offline/indexDB' // change to controller
+import IndexDB from '../offline/indexDB'
 
 const today = TimeUtils.substractDayToDBFormate (0)
 const db = remoteConfig.database

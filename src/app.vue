@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { LoginAPI, FormAPI, MessageAPI } from './apis/'
+import { LoginAPI, FormAPI, MessageAPI, CheckInAPI } from './apis/index'
 import { accountInfo } from './utils/db-config'
 
 export default {
@@ -111,8 +111,10 @@ export default {
       }
     },
     loginSuccessHandler () {
+      console.log (FormAPI, MessageAPI, CheckInAPI)
       FormAPI.init ()
       MessageAPI.init ()
+      CheckInAPI.init ()
       this.goToMain ()
     },
     loginFailHandler () {

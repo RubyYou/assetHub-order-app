@@ -4,7 +4,7 @@
 class CacheController {
 
     constructor () {
-        this._registerServiceWorker ()
+        //this._registerServiceWorker ()
     }
 
     _registerServiceWorker () {
@@ -17,8 +17,8 @@ class CacheController {
                 });
             });
         } else  {
-            // use window.applicationCache
-            alert ('本機器目前不支援線下使用中') // manually doing cachine
+            alert ('本機器目前不支援線下使用中')
+            // TODO:manually doing cache use window.applicationCache
         }
     }
 }

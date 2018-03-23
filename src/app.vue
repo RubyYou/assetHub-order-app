@@ -134,11 +134,11 @@ export default {
   },
   mounted () {
     setTimeout (() => {
-      // LoginAPI.start (
-      //     "總指揮", 0, "Ruby",
-      //     this.loginSuccessHandler,
-      //     this.loginFailHandler
-      //   )
+      LoginAPI.start (
+        "總指揮", 0, "Ruby",
+        this.loginSuccessHandler,
+        this.loginFailHandler
+      )
     }, 500)
   }
 }

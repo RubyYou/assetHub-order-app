@@ -45,7 +45,7 @@ export default {
     mutations : {
         // get all profiles from db and store here
         setProfiles (state, {type, info}) {
-            state [type] = info
+
         },
         // get all card ids and store here
         setCardIDs (state, {type, info}) {

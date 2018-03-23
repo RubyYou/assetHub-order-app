@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { vehicles, employees, posts, messages } from '../utils/data'
 import { accountInfo, localConfig, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import forms from './forms'

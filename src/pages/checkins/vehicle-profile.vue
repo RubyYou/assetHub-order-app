@@ -37,12 +37,11 @@
                 <i class="f7-icons" @click="deleteProfile(vehicle.key)">delete_round_fill</i>
             </f7-list-item>
         </f7-list>
-
     </f7-page>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 
 const type = "vehicle" //!IMPORTANT (vehicle creation)
 

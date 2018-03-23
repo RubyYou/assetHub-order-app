@@ -23,7 +23,7 @@
         <f7-tabs>
             <f7-tab id="tab1" active> <StaffProfile /> </f7-tab>
             <f7-tab id="tab2"><VehicleProfile /></f7-tab>
-            <f7-tab id="tab3"></f7-tab>
+            <f7-tab id="tab3"><StaffMapping /></f7-tab>
             <f7-tab id="tab4"></f7-tab>
         </f7-tabs>
     </div>
@@ -34,19 +34,14 @@
 import { mapState, mapActions } from 'vuex'
 import StaffProfile from './staff-profile.vue'
 import VehicleProfile from './vehicle-profile.vue'
+import StaffMapping from './staff-mapping.vue'
 
 export default {
     name: "checkIns",
     components: {
         StaffProfile,
-        VehicleProfile
-    },
-    data: function () {
-        return {}
-    },
-    computed: mapState ({}),
-    beforeCreate () {
-
+        VehicleProfile,
+        StaffMapping
     }
 }
 </script>

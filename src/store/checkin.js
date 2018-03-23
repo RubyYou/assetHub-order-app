@@ -34,28 +34,21 @@ export default {
             console.assert (type === "staff" || type === "vehicle")
             CheckInAPI.createProfile (type, info)
         },
-        // createProfileCardMapping () {
-        //     //CheckInAPI.createMapping (type, info)
-        // },
         deleteProfile ({state, commit}, {type, key}) {
             CheckInAPI.deleteProfile (type, key)
+        },
+        createMapping ({state, commit}, {type, info}) {
+            CheckInAPI.createMapping (type, info)
+        },
+        deleteMapping ({state, commit}, {type, key}) {
+            CheckInAPI.deleteMapping (type, key)
         }
-        // removeMapping () {
-        //     //CheckInAPI.deleteMapping ()
-        // }
     },
     mutations : {
         // // get all profiles from db and store here
-        setStaffProfile (state, payload) {
-            state.staff = payload
-        },
-        setVehicleProfile (state, payload) {
-            state.vehicle = payload
+        setStateInfo (state, {name, data}) {
+            state[name] = data
         }
-        // // get all card ids and store here
-        // setCardIDs (state, {type, info}) {
-
-        // },
         // //get all card Mapping for today
         // setTodayMappingHistory (state, {type, info}) {
 

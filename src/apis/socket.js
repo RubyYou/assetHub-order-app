@@ -17,8 +17,8 @@ class SocketAPI {
         this._registerData()
         this.socket.emit('join', this.userData)
 
-        this.socket.on('FinishCreateNewForm', data => {
-            console.log('FinishCreateNewForm', data)
+        this.socket.on('setTodayFormDB', data => {
+            console.log('setTodayFormDB', data)
             FormAPI.setTodayFormDB()
         })
     }
@@ -32,6 +32,26 @@ class SocketAPI {
             formvalues: formvalues
         }
         this.socket.emit('createNewForm', this.insertData)
+    }
+
+    updateOldForm (key, formvalues) {
+        this.state = store.getters.getUserInfo
+        this.updateData = {
+            userName: this.state.userName,
+            roomName: this.state.roomName,
+            formName: this.state.formName,
+            formvalues: formvalues,
+            key: key
+        }
+        this.socket.emit('updateOldForm', this.updateData)
+    }
+
+    sendMessage (message) {
+
+    }
+
+    getMessages () {
+
     }
 
     _registerData () {

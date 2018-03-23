@@ -45,7 +45,7 @@ class FormAPI {
         Socket.createNewForm(payload)
         setTimeout(() => {
             callback()
-        }, 3000);
+        }, 2000);
 
         // request
         //     .post(config.api + config.form)
@@ -58,6 +58,10 @@ class FormAPI {
     }
 
     async updateForm (key, payload, callback) {
+        Socket.updateOldForm(key, payload)
+        setTimeout(() => {
+            callback()
+        }, 2000);
         // request
         //     .put(config.api + config.form)
         //     .send({ formID: this._formsDB, updataData: payload, key: key })

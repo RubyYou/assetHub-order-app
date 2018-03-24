@@ -72,6 +72,10 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
+.content-block-title {
+    margin: 25px 15px 10px;
+    line-height: 1.3;
+}
 .mapping-staff{
     margin-top: 30px;
 }
@@ -86,5 +90,16 @@ export default {
 }
 .button.button-fill {
     width: 100%;
+}
+.mapping-staff {
+    .item-inner{
+        p {
+            font-size: 12px;
+            color: #929292;
+        }
+        i.f7-icons {
+            color: #929292;
+        }
+    }
 }
 </style>

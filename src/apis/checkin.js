@@ -65,16 +65,18 @@ class CheckInAPI {
         this._profileDB = firebase.database().ref (db.profile)
         this._cardDB = firebase.database().ref (db.cards)
         this._todayMappingDB = firebase.database().ref (db.cardProfileMapping).child (today)
-        // this._todayCheckInHistoryDB = firebase.database().ref (db.checkinHistory).child (today)
+        this._todayCheckInHistoryDB = firebase.database().ref (db.checkinHistory).child (today)
 
         this._setDataToStoreByStateName (this._profileDB.child ('staff'), 'staff')
         this._setDataToStoreByStateName (this._profileDB.child ('vehicle'), 'vehicle')
+
         this._setCardIDByStateName (this._cardDB.child ('staff'), 'staffCardIds')
         this._setCardIDByStateName (this._cardDB.child ('vehicle'), 'vehicleCardIds')
+        this._setCardIDByStateName (this._cardDB.child ('RFID'), 'RFID')
+
         this._setDataToStoreByStateName (this._todayMappingDB.child('staff'), 'staffCardMapping')
         this._setDataToStoreByStateName (this._todayMappingDB.child('vehicle'), 'vehicleCardMapping')
-
-        // this._setDataToStore (this._todayCheckInHistoryDB, 'setTodayCheckInHistory')
+        this._setTodyCheckInHistory ()
     }
 
     _setDataToStoreByStateName (dbRef, stateName) {
@@ -98,6 +100,17 @@ class CheckInAPI {
             });
             const payload = {name : stateName, data: items}
             store.commit ('setStateInfo', payload);
+        });
+    }
+
+    _setTodyCheckInHistory () {
+        this._todayCheckInHistoryDB.on ('value', (snapshots) => {
+            let items = [];
+            snapshots.forEach (snap => {
+                items.push (snap.val())
+            })
+            console.log('DB: ', items);
+            store.dispatch ('createHistoryData', items); // sort out data inside modules
         });
     }
 
@@ -126,15 +139,6 @@ class CheckInAPI {
     deleteMapping (type, key) {
         this._todayMappingDB.child (type).child (key).remove ()
     }
-
-    // async updateForm (key, payload, callback) {
-    //     if (!Utils.isOnline()) {
-    //         this._saveToIndexDB (key, payload)
-    //     } else {
-    //         await this._formsDB.child (today).child (key).set (payload)
-    //     }
-    //     callback ();
-    // }
 
     // async _saveToIndexDB (key, payload) {
     //     const tempForms = await IndexDB.get ('tempForms') // array

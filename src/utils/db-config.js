@@ -42,5 +42,13 @@ export const remoteConfig = {
     indexDB: {
         name: "runtime-store",
         tableName: "data"
+    },
+    api: {
+        url: "http://localhost:3000/api/v1",
+        socket: "ws://localhost:3001",
+        actions: {
+            signin: "/signin",
+            forms: "/forms"
+        }
     }
 }

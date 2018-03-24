@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import Messager from '../components/messager.vue'
-import Charts from './charts/index.vue'
-import Forms from './forms/index.vue'
-import Posts from './posts/index.vue'
+import Messager from "../components/messager.vue";
+import Charts from "./charts/index.vue";
+import Forms from "./forms/index.vue";
+import Posts from "./posts/index.vue";
 
 export default {
   components: {
@@ -42,18 +42,17 @@ export default {
     Forms,
     Posts
   },
- data: function (){
+  data: function() {
     return {
       mode: "messager"
-    }
+    };
   },
-  methods:{
+  methods: {
     switchMode(name) {
-
-      this.mode = name
+      this.mode = name;
     }
   }
-}
+};
 </script>
 
 <style lang="sass" scoped>

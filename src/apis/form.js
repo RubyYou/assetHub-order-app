@@ -68,27 +68,26 @@ class FormAPI {
     }
 
     _setTodayFormDB () {
-        const todayForm = this._formsDB.child (today)
-        todayForm.once ('value', (snapshot) => {
-            if (!snapshot.exists ()) {
-                const firstNode = {"created": new Date().getTime ()}
+        const todayForm = this._formsDB.child(today)
+        todayForm.once('value', (snapshot) => {
+            if (!snapshot.exists()) {
+                const firstNode = { "created": new Date().getTime() }
                 todayForm.set(firstNode)
             }
-            this._setDataToStore (todayForm, 'setForms')
+            this._setDataToStore(todayForm, 'setForms')
         })
     }
 
     _setDataToStore (dbRef, actionName) {
-        dbRef.on ('value', (snapshots) => {
+        dbRef.on('value', (snapshots) => {
             let items = [];
-            snapshots.forEach( snap => {
-                const data = Object.assign ({}, snap.val(), {key: snap.key});
+            snapshots.forEach(snap => {
+                const data = Object.assign({}, snap.val(), { key: snap.key });
                 if (data.key !== "created") {
-                    items.push (data);
+                    items.push(data);
                 }
             });
-            console.log('DB: ', actionName, snapshots.val());
-            store.commit (actionName, items);
+            store.commit(actionName, items);
         });
     }
 
@@ -130,4 +129,4 @@ class FormAPI {
     }
 }
 
-export default new FormAPI ();
+export default new FormAPI();

@@ -5,25 +5,34 @@ import { accountInfo, localConfig, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import forms from './forms'
 
-Vue.use (Vuex)
+Vue.use(Vuex)
 
 // state
-export default new Vuex.Store ({
-    modules: {
-      forms,
+export default new Vuex.Store({
+  modules: {
+    forms,
+  },
+  state: {
+    userInfo: {
+      account: '',
+      username: '',
+      roomName: '',
+      formName: ''
     },
-    state: {
-      userInfo : {
-        account: '',
-        username: ''
-      },
-      allMessages : []
+    allMessages: []
+  },
+  getters: {
+    getUserInfo: state => {
+      return state.userInfo
+    }
+  },
+  mutations: {
+    setUserInfo (state, payload) {
+      state.userInfo.account = payload.account
+      state.userInfo.username = payload.username
+      state.userInfo.roomName = payload.roomName
+      state.userInfo.formName = payload.formName
     },
-    mutations: {
-      setUserInfo (state, payload) {
-        state.userInfo.account = payload.account
-        state.userInfo.username = payload.username
-      },
 
       setMessagesByDate (state, { date, messages }) {
         // formate
@@ -58,4 +67,5 @@ export default new Vuex.Store ({
         return state.allMessages
       }
     }
+  }
 });

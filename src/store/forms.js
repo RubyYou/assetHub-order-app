@@ -1,10 +1,13 @@
-import FormAPI from '../apis/form'
-import MessageAPI from '../apis/message'
+import { FormAPI, MessageAPI } from '../apis'
+// import MessageAPI from '../apis/message'
 import * as Forms from '../pages/forms/form-data'
-const defaultSignData =  { signA: {}, signB: {}, signC: {} }
+import TimeUtils from '../utils/time-utils'
+
+const defaultSignData = { signA: {}, signB: {}, signC: {} }
+const today = TimeUtils.substractDayToDBFormate(0)
 
 export default {
-    state : {
+    state: {
         todayForms: {}, // today's form
         selectedForm: {}, // set currentItem
         signData: defaultSignData
@@ -14,58 +17,59 @@ export default {
             return state.todayForms
         }
     },
-    actions : {
-        updateForm ({state, commit}, {name, data}) {
-            console.log (name, data)
-            commit ('updateSelectedForm', {name, data})
+    actions: {
+        updateForm ({ state, commit }, { name, data }) {
+            console.log(name, data)
+            commit('updateSelectedForm', { name, data })
         },
-        updateSign ({state, commit}, {type, data}) {
-            console.log (type, data)
-            commit ('updateSignData', {type, data})
+        updateSign ({ state, commit }, { type, data }) {
+            console.log(type, data)
+            commit('updateSignData', { type, data })
         },
-        saveForm ({state, commit}, f7) {
-            const key = state.selectedForm.key
+        saveForm ({ state, commit }, f7) {
+
+            // change key to mongodb _id
+            const key = state.selectedForm._id
 
             f7.showPreloader('儲存中');
-            const formData = Object.assign ({}, state.selectedForm, {signData: state.signData})
-            const formInfo = Forms [formData.formName]
+            const formData = Object.assign({}, state.selectedForm, { signData: state.signData })
+            const formInfo = Forms[formData.formName]
 
-            console.assert (typeof formInfo === "object")
+            console.assert(typeof formInfo === "object")
 
             const callback = () => {
-                f7.hidePreloader ()
-                console.log (formInfo)
-                MessageAPI.submit ({
+                f7.hidePreloader()
+                console.log('formInfo', formInfo)
+                MessageAPI.submit({
                     type: 'form',
                     url: formInfo.url,
                     formName: formInfo.formTitle
                 })
-                // TODO: Fetch form from other days and
-                // if the form is in different date, should be read only
             }
 
             if (key && key.length > 0) {
-                FormAPI.updateForm (key, formData, callback)
+                console.log('updateForm')
+                FormAPI.updateForm(key, formData, callback)
             } else {
-                FormAPI.createNewForm (formData, callback)
+                FormAPI.createNewForm(formData, callback)
             }
         }
     },
-    mutations : {
+    mutations: {
         setForms (state, payload) {
             state.todayForms = payload;
         },
-        updateSignData (state, {type, data}) {
-            state.signData [type] = data;
+        updateSignData (state, { type, data }) {
+            state.signData[type] = data;
         },
-        updateSelectedForm (state, {name, data}) {
-            if (!state.selectedForm [name]) {
-                state.selectedForm [name] = ''
+        updateSelectedForm (state, { name, data }) {
+            if (!state.selectedForm[name]) {
+                state.selectedForm[name] = ''
             }
-            state.selectedForm [name] = data;
+            state.selectedForm[name] = data;
         },
         setSelectedForm (state, formName) {
-            const selected = state.todayForms.filter (item => {
+            const selected = state.todayForms.filter(item => {
                 return item.formName === formName
             })
 
@@ -76,8 +80,8 @@ export default {
                 state.signData = defaultSignData
             } else {
                 // use old form
-                state.selectedForm = selected [0]
-                state.signData = selected [0].signData ? selected [0].signData : defaultSignData
+                state.selectedForm = selected[0]
+                state.signData = selected[0].signData ? selected[0].signData : defaultSignData
             }
         }
     }

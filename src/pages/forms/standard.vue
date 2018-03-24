@@ -48,7 +48,6 @@
   </f7-page>
 </template>
 <script>
-
 /* ***
   dataInput example
   {
@@ -63,32 +62,32 @@
   }
 */
 
-import SignPopup from '../../components/signPopup.vue'
-import { mapState, mapActions } from 'vuex'
-import * as FormData from './form-data'
+import SignPopup from "../../components/signPopup.vue";
+import { mapState, mapActions } from "vuex";
+import * as FormData from "./form-data";
 
 // IMPORTANT : Here sets which form to update
-let formName = ""
+let formName = "";
 
 export default {
-  name : formName,
+  name: formName,
   components: {
     SignPopup
   },
-  data: function () {
-    return FormData[formName]
+  data: function() {
+    return FormData[formName];
   },
-  computed: mapState ({
+  computed: mapState({
     form: state => state.forms.selectedForm
   }),
-  methods: mapActions (['updateForm', 'updateSign', 'saveForm']),
-  beforeCreate () {
-    console.assert (this.$route.params.formDataName)
-    formName = this.$route.params.formDataName
-    //console.log ('formDataName', formName)
-    this.$store.commit ('setSelectedForm', formName);
+  methods: mapActions(["updateForm", "updateSign", "saveForm"]),
+  beforeCreate() {
+    console.assert(this.$route.params.formDataName);
+    formName = this.$route.params.formDataName;
+    console.log("formDataName", formName);
+    this.$store.commit("setSelectedForm", formName);
   }
-}
+};
 </script>
 <style lang="sass" scoped >
 .list-block{
@@ -108,6 +107,6 @@ export default {
 </style>
 <style global>
 .list-block .item-title {
-    white-space: initial;
+  white-space: initial;
 }
 </style>

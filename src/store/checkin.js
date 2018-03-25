@@ -52,21 +52,20 @@ export default {
             let vehicleHistory = []
 
             items.map (item => {
-                const staffCard = state.staffCardMapping.find (card => card.cardID === item.cardID)
-                const vehicleCard = state.vehicleCardMapping.find (card => card.cardID === item.cardID)
+                const staffCard = state.staffCardMapping.find (card => parseInt(card.cardID) == parseInt(item.cardID))
+                const vehicleCard = state.vehicleCardMapping.find (card => parseInt(card.cardID) == parseInt(item.cardID))
                 let locationInfo  = null
                 let cardInfo = null
 
                 if (staffCard) {
-                    locationInfo = state.RFID.find (card => card.cardID === staffCard.cardID)
+                    locationInfo = state.RFID.find (location => location.locationID === item.locationID)
                     cardInfo = Object.assign({}, staffCard, {location: locationInfo.location}, {time: item.time})
                     delete cardInfo.createDate
                     //console.log ('staffCard', cardInfo)
-
                     staffHistory.push (cardInfo)
 
                 } else if (vehicleCard) {
-                    locationInfo = state.RFID.find (card => card.cardID === vehicleCard.cardID)
+                    locationInfo = state.RFID.find (location => location.locationID === item.locationID)
                     cardInfo = Object.assign({}, vehicleCard, {location: locationInfo.location},  {time: item.time})
                     delete cardInfo.createDate
                     //console.log ('vehicleCard', cardInfo)

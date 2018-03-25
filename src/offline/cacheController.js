@@ -4,7 +4,7 @@
 class CacheController {
 
     constructor () {
-        //this._registerServiceWorker ()
+        this._registerServiceWorker ()
     }
 
     _registerServiceWorker () {

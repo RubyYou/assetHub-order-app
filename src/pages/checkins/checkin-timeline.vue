@@ -1,5 +1,5 @@
 <template>
-    <f7-page data-page="staff-record" class="record">
+    <f7-page data-page="checkin-timeline" class="timeline">
         <f7-timeline sides>
             <f7-timeline-item
                 v-for="history in historys"
@@ -18,11 +18,18 @@ import moment from 'moment'
 import { mapState } from 'vuex'
 
 export default {
-    name: "staff-history",
+    name: "checkin-timeline",
+    props: {
+        content: Object,
+        dataType: String
+    },
     // adding s in the end of word to help iteration
-    computed: mapState ({
-        historys: state => state.checkin.staffCheckInHistory
-    }),
+    computed: {
+        historys () {
+            const cardFrom = this.dataType === "staff" ? "staffCheckInHistory" : "vehicleCheckInHistory"
+            return this.$store.state.checkin[cardFrom]
+        }
+    },
     methods: {
         getDate (epochTime) {
             const day = new Date (epochTime);
@@ -35,7 +42,9 @@ export default {
             return time
         },
         getContent (info) {
-            return '<p><b> 人員 </b> ' + info.username +
+            const name = this.content.profileName
+
+            return '<p><b> ' + name + ' </b> ' + info.profileName +
                     "</p><p><b> 地點</b> " + info.location + "</p>"
         }
     }
@@ -43,12 +52,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.record{
+.timeline{
     margin-top: 30px;
 }
 </style>
 <style lang="scss" global>
-.record .timeline-item-inner {
+.timeline .timeline-item-inner {
     b {
         color: #168888;
     }

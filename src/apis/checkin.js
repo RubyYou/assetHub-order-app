@@ -86,7 +86,7 @@ class CheckInAPI {
                 const data = Object.assign ({}, snap.val(), {key: snap.key});
                 items.push (data)
             });
-            console.log('DB: ', 'setStateInfo', snapshots.val(), items);
+            //console.log('DB: ', 'setStateInfo', snapshots.val(), items);
             const payload = { name: stateName, data: items}
             store.commit ('setStateInfo', payload);
         });
@@ -99,6 +99,7 @@ class CheckInAPI {
                 items.push (snap.val())
             });
             const payload = {name : stateName, data: items}
+            //console.log ('_setCardIDByStateName', items);
             store.commit ('setStateInfo', payload);
         });
     }

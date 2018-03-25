@@ -1,5 +1,5 @@
 <template>
-    <f7-page data-page="mapping-staff" class="mapping-staff">
+    <f7-page data-page="card-mapping" class="card-mapping">
         <f7-block-title>{{content.title}} <br/> {{date}}</f7-block-title>
         <div class="add" @click="togglePanel">
             <i v-if="mode==='normal'" class="f7-icons">add_round_fill</i>
@@ -8,15 +8,18 @@
         <!-- create Mapping -->
         <f7-list id="create-mapping" v-if="mode==='create'" form>
             <f7-list-item>
-                <f7-label>工作人員</f7-label>
-                <select name="username" >
-                    <option v-for="staff in staffs" :value="staff['姓名']">{{staff['姓名']}}</option>
+                <f7-label>{{content.mapInfo.profileLabel}}</f7-label>
+                <select name="profileName" >
+                    <option v-for="profile in profiles"
+                            :value="profile[content.mapInfo.profileLabel]">
+                            {{profile[content.mapInfo.profileLabel]}}
+                    </option>
                 </select>
             </f7-list-item>
             <f7-list-item>
-                <f7-label>卡片ID</f7-label>
+                <f7-label>{{content.mapInfo.cardLabel}}</f7-label>
                 <select name="cardID" >
-                    <option v-for="cardId in cardIds" :value="cardId">{{cardId}}</option>
+                    <option v-for="cardID in cardIDs" :value="cardID">{{cardID}}</option>
                 </select>
             </f7-list-item>
             <f7-list-item>
@@ -26,8 +29,8 @@
 
         <f7-list class="mapping-list" form>
             <f7-list-item v-for="mapping in mappings">
-                <p><b>卡片ID: </b><br/> {{mapping.cardID}}</p>
-                <p><b>使用者姓名: </b><br/>{{mapping.username}}</p>
+                <p><b>{{content.mapInfo.cardLabel}}</b><br/> {{mapping.cardID}}</p>
+                <p><b>{{content.mapInfo.profileLabel}}</b><br/>{{mapping.profileName}}</p>
                 <i class="f7-icons" @click="deleteMapping(mapping.key)">delete_round_fill</i>
             </f7-list-item>
         </f7-list>
@@ -41,7 +44,7 @@ import TimeUtils from '../../utils/time-utils'
 const today = TimeUtils.substractDayToDBFormate (0)
 
 export default {
-    name: "staff-mapping",
+    name: "card-mapping",
     props: {
         content: Object,
         dataType: String
@@ -52,20 +55,19 @@ export default {
             date: TimeUtils.getDate (today)
         }
     },
-    // adding s in the end of word to help iteration
-    computed: mapState ({
-        profiles: state => state.checkin[this.dataType],
-        cardIds: state => {
-            // ?? bug, can not find data type
-            const cardFrom = this.dataType === "staff" ? "staffCardIds" : "vehicleCardIds"
-            return state.checkin[cardFrom]
+    computed: {
+        profiles () {
+            return this.$store.state.checkin[this.dataType];
         },
-        mappings: state => {
-             // ?? bug, can not find data type
+        cardIDs () {
+            const cardFrom = this.dataType === "staff" ? "staffCardIds" : "vehicleCardIds"
+            return this.$store.state.checkin[cardFrom]
+        },
+        mappings () {
             const mappingFrom = this.dataType === "staff" ? "staffCardMapping" : "vehicleCardMapping"
-            return state.checkin[mappingFrom]
+            return this.$store.state.checkin[mappingFrom]
         }
-    }),
+    },
     methods: {
         createMapping () {
             // TODO: add form validation
@@ -89,7 +91,7 @@ export default {
     margin: 25px 15px 10px;
     line-height: 1.3;
 }
-.mapping-staff{
+.card-mapping{
     margin-top: 30px;
 }
 .list-block {
@@ -104,7 +106,7 @@ export default {
 .button.button-fill {
     width: 100%;
 }
-.mapping-staff {
+.card-mapping{
     .item-inner{
         p {
             font-size: 12px;

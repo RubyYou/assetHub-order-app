@@ -25,13 +25,12 @@
             </f7-list-item>
         </f7-list>
 
-        <!-- TODO: this need to try real data-->
         <f7-list class="profile-list" form>
-            <f7-list-item v-for="staff in staffs">
-                <p><b>姓名: </b><br/> {{staff["姓名"]}}</p>
-                <p><b>公司名稱: </b><br/>{{staff["公司名稱"]}}</p>
-                <p><b>工作項目: </b><br/>{{staff["工作項目"]}}</p>
-                <p><b>血型: </b><br/>{{staff["血型"]}}</p>
+            <f7-list-item v-for="profile in profiles">
+                <p v-for="input in content.inputs">
+                    <b>{{input}} :</b><br/>{{profile[input]}}</p>
+                <p v-for="radio in content.radios">
+                    <b>{{Object.keys(radio)[0]}} :</b> {{profile[Object.keys(radio)[0]]}}</p>
                 <i class="f7-icons" @click="deleteProfile(staff.key)">delete_round_fill</i>
             </f7-list-item>
         </f7-list>
@@ -54,10 +53,12 @@ export default {
             type: this.dataType
         }
     },
-    computed: mapState ({
-        staffs: state => state.checkin.staff,
-        vehicle: state => state.checkin.vehicle
-    }),
+    computed: {
+        profiles () {
+            console.log ('profiles-', this.dataType)
+            return this.$store.state.checkin[this.dataType];
+        }
+    },
     methods: {
         createProfile () {
             // TODO: add form validation

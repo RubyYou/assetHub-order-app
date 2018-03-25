@@ -2,11 +2,11 @@
     <f7-page data-page="checkIns">
     <!-- Need a coustom one as icon formate not support f7-icons -->
     <f7-toolbar tabbar bottom labels>
-        <f7-link tab-link="#tab1" >
+        <f7-link tab-link="#tab1" active>
             <i class="f7-icons">add_round_fill</i>
-            <span class="tabbar-label">人員履歷</span>
+            <span class="tabbar-label">{{profile[dataType].title}}</span>
         </f7-link>
-        <f7-link tab-link="#tab2" active>
+        <f7-link tab-link="#tab2" >
             <i class="f7-icons">document_text_fill</i>
             <span class="tabbar-label">建立卡片記錄</span>
         </f7-link>
@@ -17,20 +17,22 @@
     </f7-toolbar>
     <div class="checkIn-wrap">
         <f7-tabs>
-            <f7-tab id="tab1">
+            <f7-tab id="tab1" active>
                 <Profile
                     :content="getProfile ()"
                     :dataType="dataType"
                 />
             </f7-tab>
-            <f7-tab id="tab2" active>
+            <f7-tab id="tab2">
                 <CardMapping
                     :content="getMapping ()"
                     :dataType="dataType"
                 />
             </f7-tab>
             <f7-tab id="tab3">
-                <CheckInRecord />
+                <CheckInTimeline
+                    :content="getCheckinHistory ()"
+                    :dataType="dataType"/>
             </f7-tab>
         </f7-tabs>
     </div>
@@ -41,7 +43,7 @@
 import { mapState, mapActions } from 'vuex'
 import Profile from './profile.vue'
 import CardMapping from './card-mapping.vue'
-import CheckInRecord from './checkin-record.vue'
+import CheckInTimeline from './checkin-timeline.vue'
 
 export default {
     props: {
@@ -51,7 +53,7 @@ export default {
     components: {
         Profile,
         CardMapping,
-        CheckInRecord
+        CheckInTimeline
     },
     data: function (){
         return {
@@ -73,11 +75,27 @@ export default {
             mapping: {
                 staff: {
                     title: "今日人員卡片配對",
+                    mapInfo: {
+                        profileLabel: "姓名",
+                        cardLabel: "卡片ID"
+                    },
                     createBtn : "新建人員卡片配對"
                 },
                 vehicle: {
                     title: "今日車輛卡片配對",
+                    mapInfo: {
+                        profileLabel: "車輛編號",
+                        cardLabel: "卡片ID"
+                    },
                     createBtn: "新建車輛卡片配對"
+                }
+            },
+            checkinHistroy: {
+                staff: {
+                    profileName: "工作人員"
+                },
+                vehicle: {
+                    profileName: "車輛編號"
                 }
             }
         }
@@ -88,6 +106,9 @@ export default {
         },
         getMapping () {
             return this.mapping[this.dataType]
+        },
+        getCheckinHistory () {
+            return this.checkinHistroy[this.dataType]
         }
     }
 }

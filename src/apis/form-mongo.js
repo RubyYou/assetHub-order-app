@@ -4,56 +4,74 @@ import Utils from '../utils/utils'
 import request from 'superagent'
 import Socket from './socket'
 import TimeUtils from '../utils/time-utils'
+import { SocketAPI } from './index'
+import IndexDB from '../offline/indexDB' // change to controller
 
 const today = TimeUtils.substractDayToDBFormate(0)
-const db = remoteConfig.database
-const api = remoteConfig.api.url
-const formAction = remoteConfig.api.actions.forms
-
 
 class FormAPI {
 
     constructor() { }
 
     init () {
-        this._formsDB = db.forms
-        this._api = api
-        this._formAction = formAction
-        this.setTodayFormDB()
+        Utils.isOnline() ? this._setRemoteDB() : this._getContentFromIndexDB()
+        this._registerService()
     }
 
-    setTodayFormDB () {
-        let todayForm = []
-        request
-            .get(this._api + this._formAction + '/' + this._formsDB)
-            .query('toDay=' + today)
-            .end((err, result) => {
-                todayForm = result.body.results
-                console.log('todayForm', todayForm)
-                this._setDataToStore('setForms', todayForm)
-            })
+    _setRemoteDB () {
+        SocketAPI.getForms(today)
     }
 
-    _setDataToStore (actionName, payload) {
-        store.commit(actionName, payload)
+    __getContentFromIndexDB () {
+        IndexDB.get('forms').then(forms => {
+            store.commit('setForms', forms)
+        })
+    }
+
+    _registerService () {
+        window.addEventListener('online', this._online.bind(this))
+        // window.addEventListener('offline', this._offline.bind(this))
+    }
+
+    async _online () {
+        this._setRemoteDB()
+        const tempForms = await IndexDB.get('tempForms')
+        const isTempExist = tempForms && tempForms.length > 0
+
+        if (!isTempExist) { return }
+
+        tempForms.map(form => {
+            console.log('online form', form)
+            // if (form.key) {
+            //     const key = form.key
+            //     delete form.key
+            //     this._formsDB.child(today).child(key).set(form)
+            // } else {
+            //     this._formsDB.child(today).push(form)
+            // }
+        })
+
+        // IndexDB.delete('tempForms')
+        // IndexDB.delete('forms')
+    }
+
+    _offline () {
+        // shallow clone
+        const forms = JSON.parse(JSON.stringify(store.getters.todayForms))
+        IndexDB.set('forms', forms)
     }
 
     async createNewForm (payload, callback) {
         payload.createDate = new Date().getTime().toString()
         payload.formDate = today
-        Socket.createNewForm(payload)
+        if (!Utils.isOnline()) {
+            await this._saveToIndexDB(null, payload)
+        } else {
+            Socket.createNewForm(payload)
+        }
         setTimeout(() => {
             callback()
         }, 2000);
-
-        // request
-        //     .post(config.api + config.form)
-        //     .send({ formID: this._formsDB, insertData: payload })
-        //     .end((err, result) => {
-        //         this._setTodayFormDB()
-        //         console.log('createNewForm, finished')
-        //         callback()
-        //     })
     }
 
     async updateForm (key, payload, callback) {
@@ -61,18 +79,24 @@ class FormAPI {
         setTimeout(() => {
             callback()
         }, 2000);
-        // request
-        //     .put(config.api + config.form)
-        //     .send({ formID: this._formsDB, updataData: payload, key: key })
-        //     .end((err, result) => {
-        //         this._setTodayFormDB()
-        //         console.log('updateForm, finished')
-        //         callback()
-        //     })
     }
 
-    getDownloadLink (imageUrl) {
+    async _saveToIndexDB (key, payload) {
+        const tempForms = await IndexDB.get('tempForms') // array
+        let tempFormClone = []
+        if (tempForms && tempForms.length > 0) {
+            tempFormClone = tempForms.slice(0)
+        }
 
+        let repeatedItem = tempFormClone.find(item => { return item.key === key })
+        if (repeatedItem) {
+            repeatedItem = payload;
+        } else {
+            tempFormClone.push(payload)
+        }
+
+        //console.log ('tempFormClone', tempFormClone)
+        IndexDB.set('tempForms', tempFormClone)
     }
 }
 

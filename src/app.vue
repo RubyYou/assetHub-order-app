@@ -74,9 +74,17 @@ export default {
     checkValidation() {
       let self = this;
       const inputs = [
-        { ref: "username", input: this.$refs.name, area: this.$refs["name-item"]},
-        { ref: "password", input: this.$refs.password, area: this.$refs["account-item"]}
-      ]
+        {
+          ref: "username",
+          input: this.$refs.name,
+          area: this.$refs["name-item"]
+        },
+        {
+          ref: "password",
+          input: this.$refs.password,
+          area: this.$refs["account-item"]
+        }
+      ];
 
       let notValidItems = [];
       let validItems = {};

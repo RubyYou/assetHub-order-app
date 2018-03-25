@@ -15,17 +15,30 @@ class SocketAPI {
     init () {
         this.socket = SockeyIoClient.connect(remoteConfig.api.socket)
         this._registerData()
-        this.socket.emit('join', this.userData)
 
-        this.socket.on('setTodayFormDB', data => {
-            console.log('setTodayFormDB', data)
-            FormAPI.setTodayFormDB()
-        })
+        this.socket.emit('join', this.userData)
 
         this.socket.on('getDayMessage', data => {
             console.log(data)
             store.commit('setMessagesByDate', { date: data.date, messages: data.result })
         })
+
+        this.socket.on('getDayForms', data => {
+            console.log(data)
+            store.commit('setForms', data.result)
+        })
+    }
+
+    getForms (date) {
+        this.state = store.getters.getUserInfo
+        this.state = store.getters.getUserInfo
+        this.querytData = {
+            userName: this.state.userName,
+            roomName: this.state.roomName,
+            formName: this.state.formName,
+            date: date
+        }
+        this.socket.emit('getDayForms', this.querytData)
     }
 
     createNewForm (formvalues) {
@@ -76,7 +89,7 @@ class SocketAPI {
         this.state = store.getters.getUserInfo
         this.userData = {
             account: this.state.account,
-            username: this.state.username,
+            userName: this.state.username,
             roomName: this.state.roomName,
             formName: this.state.formName
         }

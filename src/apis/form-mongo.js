@@ -30,7 +30,7 @@ class FormAPI {
 
     _registerService () {
         window.addEventListener('online', this._online.bind(this))
-        // window.addEventListener('offline', this._offline.bind(this))
+        window.addEventListener('offline', this._offline.bind(this))
     }
 
     async _online () {
@@ -41,18 +41,17 @@ class FormAPI {
         if (!isTempExist) { return }
 
         tempForms.map(form => {
-            console.log('online form', form)
-            // if (form.key) {
-            //     const key = form.key
-            //     delete form.key
-            //     this._formsDB.child(today).child(key).set(form)
-            // } else {
-            //     this._formsDB.child(today).push(form)
-            // }
+            if (form._id) {
+                const key = form._id
+                delete form._id
+                SocketAPI.updateOldForm(key, form)
+            } else {
+                SocketAPI.createNewForm(form)
+            }
         })
 
-        // IndexDB.delete('tempForms')
-        // IndexDB.delete('forms')
+        IndexDB.delete('tempForms')
+        IndexDB.delete('forms')
     }
 
     _offline () {

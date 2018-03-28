@@ -19,12 +19,10 @@ class SocketAPI {
         this.socket.emit('join', this.userData)
 
         this.socket.on('getDayMessage', data => {
-            console.log(data)
             store.commit('setMessagesByDate', { date: data.date, messages: data.result })
         })
 
         this.socket.on('getDayForms', data => {
-            console.log(data)
             store.commit('setForms', data.result)
         })
     }

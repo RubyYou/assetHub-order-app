@@ -53,14 +53,12 @@ class MessageAPI {
         this._connectRemoteDB()
 
         const tempMessages = await IndexDB.get('tempMessages')
-        console.log('tempMessages', tempMessages)
         const isTempExist = tempMessages && tempMessages.length > 0
 
         if (!isTempExist) { return }
 
         tempMessages.map(message => {
-            console.log(message)
-            SocketAPI.sendMessage(message)
+            SocketAPI.sendMessage(message.data)
         })
 
         IndexDB.delete('tempMessages')
@@ -89,7 +87,6 @@ class MessageAPI {
         } else {
             store.commit('setPendingMessage', { date: today, message: data }) // this should show pending
             this._saveToIndexDB({ date: today, data: data })
-            console.log(data)
         }
     }
 

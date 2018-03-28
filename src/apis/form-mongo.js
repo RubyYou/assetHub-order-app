@@ -14,15 +14,15 @@ class FormAPI {
     constructor() { }
 
     init () {
-        Utils.isOnline() ? this._setRemoteDB() : this._getContentFromIndexDB()
+        Utils.isOnline() ? this._connectRemoteDB() : this._getContentFromIndexDB()
         this._registerService()
     }
 
-    _setRemoteDB () {
+    _connectRemoteDB () {
         SocketAPI.getForms(today)
     }
 
-    __getContentFromIndexDB () {
+    _getContentFromIndexDB () {
         IndexDB.get('forms').then(forms => {
             store.commit('setForms', forms)
         })
@@ -34,7 +34,7 @@ class FormAPI {
     }
 
     async _online () {
-        this._setRemoteDB()
+        this._connectRemoteDB()
         const tempForms = await IndexDB.get('tempForms')
         const isTempExist = tempForms && tempForms.length > 0
 

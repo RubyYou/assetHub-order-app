@@ -147,15 +147,15 @@ export default {
     }
   },
   mounted() {
-    setTimeout(() => {
-      LoginAPI.start(
-        "總指揮",
-        0,
-        "Ruby",
-        this.loginSuccessHandler,
-        this.loginFailHandler
-      );
-    }, 500);
+    // setTimeout(() => {
+    //   LoginAPI.start(
+    //     "總指揮",
+    //     0,
+    //     "Ruby",
+    //     this.loginSuccessHandler,
+    //     this.loginFailHandler
+    //   );
+    // }, 500);
   }
 };
 </script>

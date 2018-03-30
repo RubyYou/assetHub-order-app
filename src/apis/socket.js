@@ -29,7 +29,6 @@ class SocketAPI {
 
     getForms (date) {
         this.state = store.getters.getUserInfo
-        this.state = store.getters.getUserInfo
         this.querytData = {
             userName: this.state.userName,
             roomName: this.state.roomName,

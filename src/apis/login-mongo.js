@@ -3,11 +3,6 @@ import { accountInfo, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import request from 'superagent'
 
-const config = {
-    api: "http://localhost:3000/api/v1",
-    signin: '/signin'
-}
-
 class LoginAPI {
 
     constructor() {
@@ -48,7 +43,7 @@ class LoginAPI {
     }
 
     _signin () {
-        request.post(config.api + config.signin)
+        request.post(remoteConfig.api.url + remoteConfig.api.actions.signin)
             .send({
                 account: this.account,
                 password: this.password

@@ -44,8 +44,8 @@ export const remoteConfig = {
         tableName: "data"
     },
     api: {
-        url: "http://localhost:3000/api/v1",
-        socket: "ws://localhost:3001",
+        url: "http://dev.iot.airhub.io/api/v1",
+        socket: "ws://dev.iot.airhub.io",
         actions: {
             signin: "/signin",
             forms: "/forms"

@@ -8,7 +8,7 @@ import Framework7Vue from 'framework7-vue'
 import Routes from './routes.js'
 import store from './store'
 import App from './app.vue'
-import CacheController from './offline/cacheController'
+//import CacheController from './offline/cacheController'
 
 //const SocketInstance = socketio ('http://localhost:3001')
 Vue.use (Framework7Vue)

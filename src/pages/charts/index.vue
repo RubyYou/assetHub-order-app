@@ -33,8 +33,8 @@
 <script>
 //<Chart :chartData="chartData" ></Chart>
 import Chart from '../../components/chart.vue';
-import { waterPressure, crackMeasure, rainAmount,
-        sliperMeasure, tiltMeter, waterLevel, bodyTempature } from '../../utils/data';
+// import { waterPressure, crackMeasure, rainAmount,
+//         sliperMeasure, tiltMeter, waterLevel, bodyTempature } from '../../utils/data';
 
 export default {
 //   components: {
@@ -42,16 +42,16 @@ export default {
 //   },
   data: function () {
     return {
-        chartData: waterPressure,
-        dataMap : {
-            'waterPressure' : waterPressure,
-            'crackMeasure' : crackMeasure,
-            'rainAmount' : rainAmount,
-            'sliperMeasure' : sliperMeasure,
-            'tiltMater' : tiltMeter,
-            'waterLevel' : waterLevel,
-            'bodyTempature' : bodyTempature
-        },
+        // chartData: waterPressure,
+        // dataMap : {
+        //     'waterPressure' : waterPressure,
+        //     'crackMeasure' : crackMeasure,
+        //     'rainAmount' : rainAmount,
+        //     'sliperMeasure' : sliperMeasure,
+        //     'tiltMater' : tiltMeter,
+        //     'waterLevel' : waterLevel,
+        //     'bodyTempature' : bodyTempature
+        // },
         chartList : {
             'weight' : [
                 { title: '拉力計', href: '/charts/weight' }, // all not implemented

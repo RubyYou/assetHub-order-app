@@ -1,8 +1,8 @@
-import { remoteConfig } from "../utils/db-config";
+import { localConfig } from "../utils/db-config";
 import idb from 'idb'
 
-const DBName = remoteConfig.indexDB.name
-const TBName = remoteConfig.indexDB.tableName
+const DBName = localConfig.indexDB.name
+const TBName = localConfig.indexDB.tableName
 
 const dbPromise = idb.open(DBName, 1, upgradeDB => {
     upgradeDB.createObjectStore(TBName);

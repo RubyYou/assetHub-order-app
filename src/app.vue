@@ -51,9 +51,8 @@
 </template>
 
 <script>
-import { LoginAPI, FormAPI, MessageAPI, SocketAPI } from "./apis";
-import { accountInfo, remoteConfig } from "./utils/db-config";
-import { mapState } from "vuex";
+import { MessageAPI, FormAPI, LoginAPI, CheckInAPI} from './apis/index'
+import { accountInfo } from './utils/db-config'
 
 export default {
   data: function() {
@@ -123,11 +122,12 @@ export default {
         );
       }
     },
-    loginSuccessHandler() {
-      SocketAPI.init();
-      FormAPI.init();
-      MessageAPI.init();
-      this.goToMain();
+    loginSuccessHandler () {
+      console.log (FormAPI, MessageAPI, CheckInAPI)
+      FormAPI.init ()
+      MessageAPI.init ()
+      CheckInAPI.init ()
+      this.goToMain ()
     },
     loginFailHandler() {
       this.setErrorMessage("帳號密碼不對，無法登入");
@@ -146,16 +146,14 @@ export default {
       }, 2000);
     }
   },
-  mounted() {
-    // setTimeout(() => {
-    //   LoginAPI.start(
-    //     "總指揮",
-    //     0,
-    //     "Ruby",
-    //     this.loginSuccessHandler,
-    //     this.loginFailHandler
-    //   );
-    // }, 500);
+  mounted () {
+    setTimeout (() => {
+      LoginAPI.start (
+        "總指揮", 0, "Ruby",
+        this.loginSuccessHandler,
+        this.loginFailHandler
+      )
+    }, 500)
   }
 };
 </script>

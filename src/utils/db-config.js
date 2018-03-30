@@ -18,13 +18,17 @@ export const accountInfo = [
 
 // locally should have info in sellphone
 export const localConfig = {
-    "accounts": accountInfo,
-    "sensorIP": {
+    accounts: accountInfo,
+    sensorIP: {
         gas: "",
         water: ""
     },
-    "posthref": "/aaa",
-    "checkInIP": "",
+    posthref: "/aaa",
+    checkInIP: "",
+    indexDB: {
+        name: "runtime-store",
+        tableName: "offlineData"
+    }
 }
 
 // Firebase, db location remotely
@@ -33,7 +37,11 @@ export const remoteConfig = {
     database: {
         accounts: "accounts",
         messages: "messageA",
-        forms: "formsA"
+        forms: "formsA",
+        profile: "profileA", // this include car profile and staff profile
+        cards: "cardsA", // this has all card ID for both car and staff
+        cardProfileMapping: "cardProfileMappingA", // this include card+staff and card+car mapping
+        checkinHistory: "checkinHistoryA"
     },
     storage: {
         photos: "photoA",

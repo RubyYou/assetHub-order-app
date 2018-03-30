@@ -23,7 +23,7 @@ export default class TimeUtils {
     }
 
     /**
-     * get consistent formate compare from Today
+     * get consistent formate date compare from Today
     */
     static substractDayToDBFormate (substract) {
         console.assert (typeof substract === 'number')

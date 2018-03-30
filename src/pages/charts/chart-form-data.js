@@ -20,12 +20,12 @@ export const SlideChartFormA = {
               'B面'
             ]
         },
-        { input: '0.00', data_input: '0.00', input_type: 'number'},
-        { input: '0.50', data_input: '0.50', input_type: 'number'},
-        { input: '1.00', data_input: '1.00', input_type: 'number'},
-        { input: '1.50', data_input: '1.50', input_type: 'number'},
-        { input: '2.00', data_input: '2.00', input_type: 'number'},
-        { input: '2.50', data_input: '2.50', input_type: 'number'},
+        {
+            customComponent: {
+                name: "RepeatInput",
+                input: {max: 70, min: 0, step: 0.5, type: "number", toFixed: 2}
+            }
+        }
     ]
 }
 

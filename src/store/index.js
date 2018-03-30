@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { vehicles, employees, posts, messages } from '../utils/data'
 import { accountInfo, localConfig, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import forms from './forms'
+import checkin from './checkin'
 
 Vue.use(Vuex)
 
@@ -18,6 +18,10 @@ export default new Vuex.Store({
       username: '',
       roomName: '',
       formName: ''
+export default new Vuex.Store ({
+    modules: {
+      forms: forms,
+      checkin: checkin
     },
     allMessages: []
   },

@@ -16,9 +16,9 @@ class CacheController {
                     console.log('SW registration failed: ', registrationError);
                 });
             });
-        } else {
-            // use window.applicationCache
-            alert('本機器目前不支援線下使用中') // manually doing cachine
+        } else  {
+            alert ('本機器目前不支援線下使用中')
+            // TODO:manually doing cache use window.applicationCache
         }
     }
 }

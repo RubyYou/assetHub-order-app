@@ -6,21 +6,21 @@ import TimeUtils from '../utils/time-utils'
 import moment from 'moment'
 import IndexDB from '../offline/indexDB'
 
-const today = TimeUtils.substractDayToDBFormate (0)
+const today = TimeUtils.substractDayToDBFormate(0)
 const db = remoteConfig.database
 
 class CheckInAPI {
 
-    constructor () {}
+    constructor() { }
 
     init () {
         // online login
         if (Utils.isOnline()) {
-            this._setRemoteDB ()
+            this._setRemoteDB()
         } else {
-            this._getContentFromIndexDB ()
+            this._getContentFromIndexDB()
         }
-        this._registerService ()
+        this._registerService()
     }
 
     _getContentFromIndexDB () {
@@ -30,12 +30,12 @@ class CheckInAPI {
     }
 
     _registerService () {
-        window.addEventListener ('online', this._online.bind (this))
-        window.addEventListener ('offline', this._offline.bind (this))
+        window.addEventListener('online', this._online.bind(this))
+        window.addEventListener('offline', this._offline.bind(this))
     }
 
     async _online () {
-        this._setRemoteDB ()
+        this._setRemoteDB()
         // const tempForms = await IndexDB.get ('tempForms')
         // const isTempExist = tempForms && tempForms.length > 0
 
@@ -62,83 +62,83 @@ class CheckInAPI {
     }
 
     _setRemoteDB () {
-        this._profileDB = firebase.database().ref (db.profile)
-        this._cardDB = firebase.database().ref (db.cards)
-        this._todayMappingDB = firebase.database().ref (db.cardProfileMapping).child (today)
-        this._todayCheckInHistoryDB = firebase.database().ref (db.checkinHistory).child (today)
+        this._profileDB = firebase.database().ref(db.profile)
+        this._cardDB = firebase.database().ref(db.cards)
+        this._todayMappingDB = firebase.database().ref(db.cardProfileMapping).child(today)
+        this._todayCheckInHistoryDB = firebase.database().ref(db.checkinHistory).child(today)
 
-        this._setDataToStoreByStateName (this._profileDB.child ('staff'), 'staff')
-        this._setDataToStoreByStateName (this._profileDB.child ('vehicle'), 'vehicle')
+        this._setDataToStoreByStateName(this._profileDB.child('staff'), 'staff')
+        this._setDataToStoreByStateName(this._profileDB.child('vehicle'), 'vehicle')
 
-        this._setCardIDByStateName (this._cardDB.child ('staff'), 'staffCardIds')
-        this._setCardIDByStateName (this._cardDB.child ('vehicle'), 'vehicleCardIds')
-        this._setCardIDByStateName (this._cardDB.child ('RFID'), 'RFID')
+        this._setCardIDByStateName(this._cardDB.child('staff'), 'staffCardIds')
+        this._setCardIDByStateName(this._cardDB.child('vehicle'), 'vehicleCardIds')
+        this._setCardIDByStateName(this._cardDB.child('RFID'), 'RFID')
 
-        this._setDataToStoreByStateName (this._todayMappingDB.child('staff'), 'staffCardMapping')
-        this._setDataToStoreByStateName (this._todayMappingDB.child('vehicle'), 'vehicleCardMapping')
-        this._setTodyCheckInHistory ()
+        this._setDataToStoreByStateName(this._todayMappingDB.child('staff'), 'staffCardMapping')
+        this._setDataToStoreByStateName(this._todayMappingDB.child('vehicle'), 'vehicleCardMapping')
+        this._setTodyCheckInHistory()
     }
 
     _setDataToStoreByStateName (dbRef, stateName) {
-        dbRef.on ('value', (snapshots) => {
+        dbRef.on('value', (snapshots) => {
             let items = [];
-            snapshots.forEach (snap => {
-                const data = Object.assign ({}, snap.val(), {key: snap.key});
-                items.push (data)
+            snapshots.forEach(snap => {
+                const data = Object.assign({}, snap.val(), { key: snap.key });
+                items.push(data)
             });
             //console.log('DB: ', 'setStateInfo', snapshots.val(), items);
-            const payload = { name: stateName, data: items}
-            store.commit ('setStateInfo', payload);
+            const payload = { name: stateName, data: items }
+            store.commit('setStateInfo', payload);
         });
     }
 
     _setCardIDByStateName (dbRef, stateName) {
-        dbRef.once ('value', (snapshots) => {
+        dbRef.once('value', (snapshots) => {
             let items = [];
-            snapshots.forEach (snap => {
-                items.push (snap.val())
+            snapshots.forEach(snap => {
+                items.push(snap.val())
             });
-            const payload = {name : stateName, data: items}
+            const payload = { name: stateName, data: items }
             //console.log ('_setCardIDByStateName', items);
-            store.commit ('setStateInfo', payload);
+            store.commit('setStateInfo', payload);
         });
     }
 
     _setTodyCheckInHistory () {
-        this._todayCheckInHistoryDB.on ('value', (snapshots) => {
+        this._todayCheckInHistoryDB.on('value', (snapshots) => {
             let items = [];
-            snapshots.forEach (snap => {
-                items.push (snap.val())
+            snapshots.forEach(snap => {
+                items.push(snap.val())
             })
             console.log('DB: ', items);
-            store.dispatch ('createHistoryData', items); // sort out data inside modules
+            store.dispatch('createHistoryData', items); // sort out data inside modules
         });
     }
 
     createProfile (type, payload) {
-        payload.createDate = new Date ().getTime ()
+        payload.createDate = new Date().getTime()
         if (!Utils.isOnline()) {
             // await this._saveToIndexDB (null, payload)
         } else {
-            this._profileDB.child (type).push (payload)
+            this._profileDB.child(type).push(payload)
         }
     }
 
     deleteProfile (type, key) {
-        this._profileDB.child (type).child (key).remove ()
+        this._profileDB.child(type).child(key).remove()
     }
 
     createMapping (type, payload) {
-        payload.createDate = new Date ().getTime ()
+        payload.createDate = new Date().getTime()
         if (!Utils.isOnline()) {
             // await this._saveToIndexDB (null, payload)
         } else {
-            this._todayMappingDB.child (type).push (payload)
+            this._todayMappingDB.child(type).push(payload)
         }
     }
 
     deleteMapping (type, key) {
-        this._todayMappingDB.child (type).child (key).remove ()
+        this._todayMappingDB.child(type).child(key).remove()
     }
 
     // async _saveToIndexDB (key, payload) {
@@ -160,4 +160,4 @@ class CheckInAPI {
     // }
 }
 
-export default new CheckInAPI ();
+export default new CheckInAPI();

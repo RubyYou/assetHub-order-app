@@ -19,7 +19,7 @@
     "scripts": {
         "watchify": "watchify -vd -p browserify-hmr -e src/main.js -o www/js/build.js",
         "serve": "http-server -o -c 1 -a localhost",
-        "dev": "npm-run-all --parallel watchify sw",
+        "dev": "npm-run-all --parallel watchify serve sw",
         "build:production": "cross-env NODE_ENV=production browserify  -e src/main.js | uglifyjs -c warnings=false -m > www/js/build.js sw",
         "build": "cross-env NODE_ENV=production browserify -g envify -p [ vueify/plugins/extract-css -o www/css/build.css ] -e src/main.js | uglifyjs -c warnings=false -m > www/js/build.js",
         "sw": "workbox generateSW"
@@ -47,11 +47,10 @@
         "framework7-vue": "^0.9.4",
         "idb": "^2.1.1",
         "moment": "^2.20.1",
-        "socket.io-client": "^2.0.4",
+        "socket.io-client": "^2.1.0",
         "superagent": "^3.8.2",
         "utf-8-validate": "^4.0.0",
         "vue": "^2.2.6",
-        "vue-socket.io": "^2.1.1-a",
         "vue-template-compiler": "^2.2.6",
         "vuex": "^3.0.0"
     },

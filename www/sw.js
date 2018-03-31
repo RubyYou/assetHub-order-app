@@ -11,7 +11,7 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.0.1/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -28,11 +28,7 @@ self.__precacheManifest = [
   },
   {
     "url": "css/build.css",
-<<<<<<< HEAD
-    "revision": "edc3fff5d70d91a7380f02a90bedb711"
-=======
-    "revision": "b936c9e06961e7a7634f11237ff514c7"
->>>>>>> checkins
+    "revision": "09dd169e3be1f3878c7bde658348560f"
   },
   {
     "url": "css/framework7-icons.css",
@@ -97,13 +93,10 @@ self.__precacheManifest = [
   {
     "url": "index.html",
     "revision": "88c529da31431d925073d001aef75c96"
-<<<<<<< HEAD
-=======
   },
   {
     "url": "js/build.js",
-    "revision": "d41d8cd98f00b204e9800998ecf8427e"
->>>>>>> checkins
+    "revision": "0886820bd6b2dab55c5c891572515ee5"
   },
   {
     "url": "js/echarts-all.js",

@@ -10,7 +10,8 @@ Vue.use(Vuex)
 // state
 export default new Vuex.Store({
   modules: {
-    forms,
+    forms: forms,
+    checkin: checkin
   },
   state: {
     userInfo: {
@@ -18,10 +19,6 @@ export default new Vuex.Store({
       username: '',
       roomName: '',
       formName: ''
-export default new Vuex.Store ({
-    modules: {
-      forms: forms,
-      checkin: checkin
     },
     allMessages: []
   },

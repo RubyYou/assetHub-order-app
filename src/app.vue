@@ -51,8 +51,14 @@
 </template>
 
 <script>
-import { MessageAPI, FormAPI, LoginAPI, CheckInAPI} from './apis/index'
-import { accountInfo } from './utils/db-config'
+import {
+  MessageAPI,
+  FormAPI,
+  LoginAPI,
+  CheckInAPI,
+  SocketAPI
+} from "./apis/index";
+import { accountInfo } from "./utils/db-config";
 
 export default {
   data: function() {
@@ -62,9 +68,6 @@ export default {
       accountValue: accountInfo[0].account
     };
   },
-  computed: mapState({
-    userInfo: state => state.userInfo
-  }),
   methods: {
     setErrorMessage: function(value) {
       this.errorMessage = value;
@@ -122,12 +125,12 @@ export default {
         );
       }
     },
-    loginSuccessHandler () {
-      console.log (FormAPI, MessageAPI, CheckInAPI)
-      FormAPI.init ()
-      MessageAPI.init ()
-      CheckInAPI.init ()
-      this.goToMain ()
+    loginSuccessHandler() {
+      SocketAPI.init();
+      FormAPI.init();
+      MessageAPI.init();
+      CheckInAPI.init();
+      this.goToMain();
     },
     loginFailHandler() {
       this.setErrorMessage("帳號密碼不對，無法登入");
@@ -146,14 +149,16 @@ export default {
       }, 2000);
     }
   },
-  mounted () {
-    setTimeout (() => {
-      LoginAPI.start (
-        "總指揮", 0, "Ruby",
+  mounted() {
+    setTimeout(() => {
+      LoginAPI.start(
+        "總指揮",
+        0,
+        "Ruby",
         this.loginSuccessHandler,
         this.loginFailHandler
-      )
-    }, 500)
+      );
+    }, 500);
   }
 };
 </script>

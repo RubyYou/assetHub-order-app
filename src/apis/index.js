@@ -4,5 +4,4 @@ import LoginAPI from './login-mongo'
 import SocketAPI from './socket'
 import CheckInAPI from './checkin'
 
-export { MessageAPI, FormAPI, LoginAPI, CheckInAPI }
-export { MessageAPI, FormAPI, LoginAPI, SocketAPI }
+export { MessageAPI, FormAPI, LoginAPI, CheckInAPI, SocketAPI }

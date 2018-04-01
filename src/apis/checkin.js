@@ -14,7 +14,6 @@ class CheckInAPI {
     constructor () {}
 
     init () {
-        // online login
         if (Utils.isOnline()) {
             this._setRemoteDB ()
         } else {
@@ -24,9 +23,10 @@ class CheckInAPI {
     }
 
     _getContentFromIndexDB () {
-        // IndexDB.get('profiles').then(profiles => {
-        //     store.commit ('setProfiles', profiles)
-        // });
+
+        IndexDB.get('checkin').then (checkin => {
+            store.commit ('setAllCheckInInfo', checkin)
+        });
     }
 
     _registerService () {
@@ -34,31 +34,39 @@ class CheckInAPI {
         window.addEventListener ('offline', this._offline.bind (this))
     }
 
-    async _online () {
+    _online () {
         this._setRemoteDB ()
-        // const tempForms = await IndexDB.get ('tempForms')
-        // const isTempExist = tempForms && tempForms.length > 0
 
-        // if (!isTempExist) { return }
+        const sendDBInfo = async (tempDBName, realDB) => {
+            const tempDB = await IndexDB.get (tempDBName)
+            console.log ('online', tempDB)
+            const isTempDBExist = tempDB && tempDB.length > 0
+            if (!!isTempDBExist) { return }
 
-        // tempForms.map (form => {
-        //     if (form.key) {
-        //         const key = form.key
-        //         delete form.key
-        //         this._formsDB.child(today).child(key).set(form)
-        //     } else {
-        //         this._formsDB.child(today).push(form)
-        //     }
-        // })
+            // tempDB.map (item => {
+            //     if (item.key) {
+            //         const key = form.key
+            //         delete form.key
+            //         this._formsDB.child(today).child(key).set(form)
+            //     } else {
+            //         this._formsDB.child(today).push(form)
+            //     }
+            // })
+            // IndexDB.delete (dbName)
+        }
 
-        // IndexDB.delete ('tempForms')
-        // IndexDB.delete ('forms')
+        sendDBInfo ('tempProfile', this._profileDB)
+        sendDBInfo ('tempMapping', this._todayMappingDB)
+
+        IndexDB.delete ('checkin')
     }
 
     _offline () {
         // shallow clone
-        // const forms = JSON.parse (JSON.stringify (store.getters.todayForms))
-        // IndexDB.set ('forms', forms )
+
+        const allCheckInInfo = JSON.parse (JSON.stringify (store.getters.allCheckInInfo))
+        console.log ('offline', allCheckInInfo)
+        IndexDB.set ('checkin', allCheckInInfo )
     }
 
     _setRemoteDB () {
@@ -98,7 +106,7 @@ class CheckInAPI {
             snapshots.forEach (snap => {
                 items.push (snap.val())
             });
-            const payload = {name : stateName, data: items}
+            const payload = {name: stateName, data: items}
             //console.log ('_setCardIDByStateName', items);
             store.commit ('setStateInfo', payload);
         });
@@ -111,53 +119,62 @@ class CheckInAPI {
                 items.push (snap.val())
             })
             console.log('DB: ', items);
-            store.dispatch ('createHistoryData', items); // sort out data inside modules
+            store.dispatch ('createHistoryData', items);
         });
     }
 
     createProfile (type, payload) {
         payload.createDate = new Date ().getTime ()
         if (!Utils.isOnline()) {
-            // await this._saveToIndexDB (null, payload)
+            this._saveToIndexDB ('tempProfile', 'create', null, payload)
         } else {
             this._profileDB.child (type).push (payload)
         }
     }
 
     deleteProfile (type, key) {
-        this._profileDB.child (type).child (key).remove ()
+        if (!Utils.isOnline()) {
+            this._saveToIndexDB ('tempProfile', 'delete', key, null)
+        } else {
+            this._profileDB.child (type).child (key).remove ()
+        }
     }
 
     createMapping (type, payload) {
         payload.createDate = new Date ().getTime ()
         if (!Utils.isOnline()) {
-            // await this._saveToIndexDB (null, payload)
+            this._saveToIndexDB ('tempMapping', 'create', null, payload)
         } else {
             this._todayMappingDB.child (type).push (payload)
         }
     }
 
     deleteMapping (type, key) {
-        this._todayMappingDB.child (type).child (key).remove ()
+        if (!Utils.isOnline()) {
+            this._saveToIndexDB ('tempMapping', 'delete', key, null)
+        } else {
+            this._todayMappingDB.child (type).child (key).remove ()
+        }
     }
 
-    // async _saveToIndexDB (key, payload) {
-    //     const tempForms = await IndexDB.get ('tempForms') // array
-    //     let tempFormClone = []
-    //     if (tempForms && tempForms.length > 0) {
-    //         tempFormClone = tempForms.slice(0)
-    //     }
+    async _saveToIndexDB (dbName, action, key, payload) {
+        const tempDB= await IndexDB.get (dbName) // array
 
-    //     let repeatedItem = tempFormClone.find (item => {return item.key === key})
-    //     if (repeatedItem) {
-    //         repeatedItem = payload;
-    //     } else {
-    //         tempFormClone.push (payload)
-    //     }
+        let tempDBClone = []
+        if (tempDB && tempDB.length > 0) {
+            tempDBClone = tempDB.slice(0)
+        }
 
-    //     //console.log ('tempFormClone', tempFormClone)
-    //     IndexDB.set('tempForms', tempFormClone)
-    // }
+        let repeatedItem = tempDBClone.find (item => {return item.key === key})
+        if (repeatedItem) {
+            repeatedItem = payload;
+        } else {
+            tempDBClone.push (payload)
+        }
+
+        console.log ('tempDBClone', tempDBClone)
+        IndexDB.set(dbName, tempDBClone)
+    }
 }
 
 export default new CheckInAPI ();

@@ -30,6 +30,9 @@ export default {
         RFID: [] // this include location info and id
     },
     getters : {
+        allCheckInInfo: state => {
+            return state
+        }
     },
     actions : {
         createProfile ({state, commit}, {type, info}) {
@@ -78,9 +81,15 @@ export default {
         }
     },
     mutations : {
-        // get all profiles from db and store here
         setStateInfo (state, {name, data}) {
-            state[name] = data
+            state [name] = data
+        },
+        setAllCheckInInfo (state, payload) {
+            payload.forEach (item => {
+                const key = Object.keys (item)[0]
+                console.log ('setAllCheckInInfo', key, item)
+                state [key] = item
+            })
         }
     }
 }

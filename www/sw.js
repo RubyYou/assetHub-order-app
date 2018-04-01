@@ -96,7 +96,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/build.js",
-    "revision": "0886820bd6b2dab55c5c891572515ee5"
+    "revision": "a9d2991ec102084b08dc6863cc63dc3b"
   },
   {
     "url": "js/echarts-all.js",

@@ -61,6 +61,15 @@ class CheckInAPI {
     }
 
     _setRemoteDB () {
+        SocketAPI.getRFIDCard()
+        SocketAPI.getStaffCard()
+        SocketAPI.getVehicleCard()
+        SocketAPI.getStaffProfile()
+        SocketAPI.getVehicleProfile()
+        SocketAPI.getTodayStaffCardMapping()
+        SocketAPI.getTodayVehicleCardMapping()
+        SocketAPI.getTodyCheckInHistory()
+
         // this._profileDB = firebase.database().ref(db.profile)
         // this._cardDB = firebase.database().ref(db.cards)
         // this._todayMappingDB = firebase.database().ref(db.cardProfileMapping).child(today)

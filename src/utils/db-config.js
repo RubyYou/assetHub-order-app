@@ -38,8 +38,15 @@ export const remoteConfig = {
         accounts: "accounts",
         messages: "messageA",
         forms: "formsA",
-        profile: "profileA", // this include car profile and staff profile
-        cards: "cardsA", // this has all card ID for both car and staff
+        profile: {
+            staff: 'staffProfileA',
+            vehicle: 'vehicleProfileA'
+        }, // this include car profile and staff profile
+        cards: {
+            rdid: 'RFIDCardA',
+            staff: 'staffCardA',
+            vehicle: 'vehicleCardA'
+        }, // this has all card ID for both car and staff
         cardProfileMapping: "cardProfileMappingA", // this include card+staff and card+car mapping
         checkinHistory: "checkinHistoryA"
     },

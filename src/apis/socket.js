@@ -25,6 +25,24 @@ class SocketAPI {
         this.socket.on('getDayForms', data => {
             store.commit('setForms', data.result)
         })
+
+        this.socket.on('getRFIDCard', data => {
+            const payload = { name: 'RFID', data: data.result }
+            console.log('getRFIDCard', payload)
+            store.commit('setStateInfo', payload)
+        })
+
+        this.socket.on('getStaffCard', data => {
+            const payload = { name: 'staffCardIds', data: data.result }
+            console.log('getStaffCard', payload)
+            store.commit('setStateInfo', payload)
+        })
+
+        this.socket.on('getVehicleCard', data => {
+            const payload = { name: 'vehicleCardIds', data: data.result }
+            console.log('getVehicleCard', payload)
+            store.commit('setStateInfo', payload)
+        })
     }
 
     getForms (date) {
@@ -36,6 +54,56 @@ class SocketAPI {
             date: date
         }
         this.socket.emit('getDayForms', this.querytData)
+    }
+
+    getRFIDCard () {
+        this.state = store.getters.getUserInfo
+        this.querytData = {
+            userName: this.state.userName,
+            roomName: this.state.roomName,
+            rfid: remoteConfig.database.cards.rdid
+        }
+        this.socket.emit('getRFIDCard', this.querytData)
+    }
+
+    getStaffCard () {
+        this.state = store.getters.getUserInfo
+        this.querytData = {
+            userName: this.state.userName,
+            roomName: this.state.roomName,
+            staff: remoteConfig.database.cards.staff
+        }
+        this.socket.emit('getStaffCard', this.querytData)
+    }
+
+    getVehicleCard () {
+        this.state = store.getters.getUserInfo
+        this.querytData = {
+            userName: this.state.userName,
+            roomName: this.state.roomName,
+            vehicle: remoteConfig.database.cards.vehicle
+        }
+        this.socket.emit('getVehicleCard', this.querytData)
+    }
+
+    getStaffProfile () {
+
+    }
+
+    getVehicleProfile () {
+
+    }
+
+    getTodayStaffCardMapping () {
+
+    }
+
+    getTodayVehicleCardMapping () {
+
+    }
+
+    getTodyCheckInHistory () {
+
     }
 
     createNewForm (formvalues) {

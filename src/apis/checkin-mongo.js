@@ -7,7 +7,8 @@ import SocketAPI from './socket'
 
 const today = TimeUtils.substractDayToDBFormate(0)
 const db = remoteConfig.database
-
+const STAFF = 'staff'
+const VEHICLE = 'vehicle'
 class CheckInAPI {
 
     constructor() { }
@@ -66,9 +67,9 @@ class CheckInAPI {
         SocketAPI.getVehicleCard()
         SocketAPI.getStaffProfile()
         SocketAPI.getVehicleProfile()
-        SocketAPI.getTodayStaffCardMapping()
-        SocketAPI.getTodayVehicleCardMapping()
-        SocketAPI.getTodyCheckInHistory()
+        SocketAPI.getTodayStaffCardMapping(today)
+        SocketAPI.getTodayVehicleCardMapping(today)
+        SocketAPI.getTodyCheckInHistory(today)
 
         // this._profileDB = firebase.database().ref(db.profile)
         // this._cardDB = firebase.database().ref(db.cards)
@@ -126,7 +127,11 @@ class CheckInAPI {
     createProfile (type, payload) {
         payload.type = type
         payload.createDate = today
-        SocketAPI.createStaffProfile(payload)
+        if (type === STAFF) {
+            SocketAPI.createStaffProfile(payload)
+        } else if (type === VEHICLE) {
+            SocketAPI.createVehicleProfile(payload)
+        }
         // if (!Utils.isOnline()) {
         //     // await this._saveToIndexDB (null, payload)
         // } else {
@@ -139,11 +144,19 @@ class CheckInAPI {
             key: key,
             today: today
         }
-        SocketAPI.deleteStaffProfile(payload)
+        if (type === STAFF) {
+            SocketAPI.deleteStaffProfile(payload)
+        } else if (type === VEHICLE) {
+            SocketAPI.deleteVehiclerofile(payload)
+        }
     }
 
     createMapping (type, payload) {
-        // payload.createDate = new Date().getTime()
+        console.log(type, payload)
+        payload.createDate = today
+        payload.type = type
+        SocketAPI.createMapping(payload)
+
         // if (!Utils.isOnline()) {
         //     // await this._saveToIndexDB (null, payload)
         // } else {
@@ -152,6 +165,14 @@ class CheckInAPI {
     }
 
     deleteMapping (type, key) {
+        let payload = {
+            key: key,
+            today: today,
+            type: type
+        }
+        console.log('deleteMapping', key)
+        SocketAPI.deleteMapping(payload)
+
         // this._todayMappingDB.child(type).child(key).remove()
     }
 

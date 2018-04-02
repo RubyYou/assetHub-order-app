@@ -206,19 +206,54 @@ class SocketAPI {
     }
 
     createVehicleProfile (payload) {
-
+        this.state = store.getters.getUserInfo
+        this.insertData = {
+            userName: this.state.username,
+            roomName: this.state.roomName,
+            vehicle: remoteConfig.database.profile.vehicle,
+            payload: payload
+        }
+        console.log('createVehicleProfile', this.insertData)
+        this.socket.emit('createVehicleProfile', this.insertData)
     }
 
-    deleteVehiclerofile (key) {
-
+    deleteVehiclerofile (payload) {
+        this.state = store.getters.getUserInfo
+        this.deleteData = {
+            userName: this.state.username,
+            roomName: this.state.roomName,
+            vehicle: remoteConfig.database.profile.vehicle,
+            date: payload.today,
+            key: payload.key
+        }
+        console.log('deleteVehiclerofile', this.deleteData)
+        this.socket.emit('deleteVehiclerofile', this.deleteData)
     }
 
     createMapping (payload) {
-
+        this.state = store.getters.getUserInfo
+        this.insertData = {
+            userName: this.state.username,
+            roomName: this.state.roomName,
+            cardProfileMapping: remoteConfig.database.cardProfileMapping,
+            payload: payload
+        }
+        console.log('createMapping', this.insertData)
+        this.socket.emit('createMapping', this.insertData)
     }
 
-    deleteMapping (key) {
-
+    deleteMapping (payload) {
+        this.state = store.getters.getUserInfo
+        this.deleteData = {
+            userName: this.state.username,
+            roomName: this.state.roomName,
+            cardProfileMapping: remoteConfig.database.cardProfileMapping,
+            date: payload.today,
+            type: payload.type,
+            key: payload.key
+        }
+        console.log('deleteMapping', this.deleteData)
+        this.socket.emit('deleteMapping', this.deleteData)
     }
 
     createNewForm (formvalues) {

@@ -135,6 +135,11 @@ class CheckInAPI {
 
     deleteProfile (type, key) {
         // this._profileDB.child(type).child(key).remove()
+        let payload = {
+            key: key,
+            today: today
+        }
+        SocketAPI.deleteStaffProfile(payload)
     }
 
     createMapping (type, payload) {

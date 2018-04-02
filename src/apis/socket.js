@@ -81,11 +81,6 @@ class SocketAPI {
             // store.dispatch('createHistoryData', data.result)
         })
 
-        this.socket.on('createStaffProfile', data => {
-            console.log('createStaffProfile', data.result)
-            const payload = { name: 'staff', data: data.result }
-            store.commit('setStateInfo', payload)
-        })
     }
 
     getForms (date) {
@@ -197,13 +192,14 @@ class SocketAPI {
         this.socket.emit('createStaffProfile', this.insertData)
     }
 
-    deleteStaffProfile (key) {
+    deleteStaffProfile (payload) {
         this.state = store.getters.getUserInfo
         this.deleteData = {
             userName: this.state.username,
             roomName: this.state.roomName,
             staff: remoteConfig.database.profile.staff,
-            key: key
+            date: payload.today,
+            key: payload.key
         }
         console.log('deleteStaffProfile', this.deleteData)
         this.socket.emit('deleteStaffProfile', this.deleteData)

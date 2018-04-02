@@ -3,7 +3,7 @@ import { remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import TimeUtils from '../utils/time-utils'
 import IndexDB from '../offline/indexDB'
-import { SocketAPI } from './index'
+import SocketAPI from './socket'
 
 const today = TimeUtils.substractDayToDBFormate(0)
 const db = remoteConfig.database
@@ -124,11 +124,12 @@ class CheckInAPI {
     }
 
     createProfile (type, payload) {
-        // payload.createDate = new Date().getTime()
+        payload.type = type
+        payload.createDate = today
+        SocketAPI.createStaffProfile(payload)
         // if (!Utils.isOnline()) {
         //     // await this._saveToIndexDB (null, payload)
         // } else {
-        //     this._profileDB.child(type).push(payload)
         // }
     }
 

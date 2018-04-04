@@ -35,18 +35,11 @@ export const localConfig = {
 export const remoteConfig = {
     name: "梅花西工地",
     database: {
-        accounts: "accounts",
-        messages: "messageA",
+        accounts: "accountsA",
+        messages: "messagesA",
         forms: "formsA",
-        profile: {
-            staff: 'staffProfileA',
-            vehicle: 'vehicleProfileA'
-        }, // this include car profile and staff profile
-        cards: {
-            rdid: 'RFIDCardA',
-            staff: 'staffCardA',
-            vehicle: 'vehicleCardA'
-        }, // this has all card ID for both car and staff
+        profile: "profilesA", // this include car profile and staff profile
+        cards: "cardsA", // this has all card ID for both car and staff
         cardProfileMapping: "cardProfileMappingA", // this include card+staff and card+car mapping
         checkinHistory: "checkinHistoryA"
     },

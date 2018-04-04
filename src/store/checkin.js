@@ -12,6 +12,56 @@
         companyName: "aaaa",
         vehicleType: "", // 起重機  挖土機 吊機 (select)
     }
+
+    mongodb model schema
+    cardsA :[
+        {
+            // RFID
+            "_id" : ObjectId("5ac253550c81af5499d25a84"),
+            "serialNO" : "y8327ryufewfkew",
+            "machineName" : "card1",
+            "location" : {
+                "longitude" : 0.0001,
+                "latitude" : 11.0001
+            },
+            "type":"RFID"
+        },
+        {
+            // staff
+            "_id" : ObjectId("5ac253550c81af5499d25a85"),
+            "cardNo" : "y8327ryufewfkew1",
+            "cardName" : "card1",
+            "type":"STAFF"
+        },
+        {
+            // vehicle
+            "_id" : ObjectId("5ac253550c81af5499d25a86"),
+            "cardNo" : "y8327ryufewfkew2",
+            "cardName" : "card1",
+            "type":"VEHICLE"
+        }
+    ]
+
+    profileA :[
+        {
+            // staff
+            "_id" : ObjectId("5ac253550c81af5499d25a85"),
+            name: "",
+            companyName: "aaaa",
+            workType: "", // 水泥工 、模板工、打石工 (select)
+            bloodType: "" ,// Ｏ Ａ B AB (select)
+            "type":"STAFF"
+        },
+        {
+            // vehicle
+            "_id" : ObjectId("5ac253550c81af5499d25a86"),
+            number: "aaaa",
+            companyName: "aaaa",
+            vehicleType: "", // 起重機  挖土機 吊機 (select)
+            "type":"VEHICLE"
+        }
+    ]
+
 */
 import CheckInAPI from '../apis/checkin-mongo' // --> there are some weird error, can not use index
 

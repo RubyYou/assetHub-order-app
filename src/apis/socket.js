@@ -99,7 +99,8 @@ class SocketAPI {
         this.querytData = {
             userName: this.state.username,
             roomName: this.state.roomName,
-            rfid: remoteConfig.database.cards.rdid
+            cards: remoteConfig.database.cards,
+            type: remoteConfig.types.RFID
         }
         this.socket.emit('getRFIDCard', this.querytData)
     }
@@ -109,7 +110,8 @@ class SocketAPI {
         this.querytData = {
             userName: this.state.username,
             roomName: this.state.roomName,
-            staff: remoteConfig.database.cards.staff
+            cards: remoteConfig.database.cards,
+            type: remoteConfig.types.STAFF
         }
         this.socket.emit('getStaffCard', this.querytData)
     }
@@ -119,7 +121,8 @@ class SocketAPI {
         this.querytData = {
             userName: this.state.username,
             roomName: this.state.roomName,
-            vehicle: remoteConfig.database.cards.vehicle
+            cards: remoteConfig.database.cards,
+            type: remoteConfig.types.VEHICLE
         }
         this.socket.emit('getVehicleCard', this.querytData)
     }

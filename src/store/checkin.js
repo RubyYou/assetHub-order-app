@@ -29,14 +29,14 @@
         {
             // staff
             "_id" : ObjectId("5ac253550c81af5499d25a85"),
-            "cardNo" : "y8327ryufewfkew1",
+            "cardID" : "y8327ryufewfkew1",
             "cardName" : "card1",
             "type":"STAFF"
         },
         {
             // vehicle
             "_id" : ObjectId("5ac253550c81af5499d25a86"),
-            "cardNo" : "y8327ryufewfkew2",
+            "cardID" : "y8327ryufewfkew2",
             "cardName" : "card1",
             "type":"VEHICLE"
         }
@@ -60,6 +60,36 @@
             vehicleType: "", // 起重機  挖土機 吊機 (select)
             "type":"VEHICLE"
         }
+    ]
+
+    cardProfileMappingA:[
+        {
+            // staff
+            "_id" : ObjectId("5ac253550c81af5499d25a85"),
+            cardID: "y8327ryufewfkew1",
+            profileName: "aaaa",
+            createDate: "" ,
+            "type":"STAFF"
+        },
+        {
+            // vehicle
+            "_id" : ObjectId("5ac253550c81af5499d25a86"),
+            cardID: "y8327ryufewfkew1",
+            profileName: "aaaa",
+            createDate: "" ,
+            "type":"VEHICLE"
+        }
+    ]
+
+    checkinHistoryA:[
+        {
+            // staff
+            "_id" : ObjectId("5ac253550c81af5499d25a85"),
+            cardID: "y8327ryufewfkew1",
+            serialNO: "y8327ryufewfkew",
+            createDate: "" ,
+            checkinTime:""
+        },
     ]
 
 */

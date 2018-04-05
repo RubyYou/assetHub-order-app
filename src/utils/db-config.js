@@ -51,6 +51,11 @@ export const remoteConfig = {
         name: "runtime-store",
         tableName: "data"
     },
+    types: {
+        RFID: "RFID",
+        STAFF: "STAFF",
+        VEHICLE: "VEHICLE",
+    },
     api: {
         url: "http://localhost:3000/api/v1",
         socket: "ws://localhost:3001",

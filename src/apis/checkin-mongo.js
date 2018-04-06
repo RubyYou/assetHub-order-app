@@ -71,67 +71,14 @@ class CheckInAPI {
         SocketAPI.getTodayVehicleCardMapping(today)
         SocketAPI.getTodyCheckInHistory(today)
 
-        // this._profileDB = firebase.database().ref(db.profile)
-        // this._cardDB = firebase.database().ref(db.cards)
-        // this._todayMappingDB = firebase.database().ref(db.cardProfileMapping).child(today)
-        // this._todayCheckInHistoryDB = firebase.database().ref(db.checkinHistory).child(today)
 
-        // this._setDataToStoreByStateName(this._profileDB.child('staff'), 'staff')
-        // this._setDataToStoreByStateName(this._profileDB.child('vehicle'), 'vehicle')
-
-        // this._setCardIDByStateName(this._cardDB.child('staff'), 'staffCardIds')
-        // this._setCardIDByStateName(this._cardDB.child('vehicle'), 'vehicleCardIds')
-        // this._setCardIDByStateName(this._cardDB.child('RFID'), 'RFID')
-
-        // this._setDataToStoreByStateName(this._todayMappingDB.child('staff'), 'staffCardMapping')
-        // this._setDataToStoreByStateName(this._todayMappingDB.child('vehicle'), 'vehicleCardMapping')
-        // this._setTodyCheckInHistory()
-    }
-
-    _setDataToStoreByStateName (dbRef, stateName) {
-        // dbRef.on('value', (snapshots) => {
-        //     let items = [];
-        //     snapshots.forEach(snap => {
-        //         const data = Object.assign({}, snap.val(), { key: snap.key });
-        //         items.push(data)
-        //     });
-        //     //console.log('DB: ', 'setStateInfo', snapshots.val(), items);
-        //     const payload = { name: stateName, data: items }
-        //     store.commit('setStateInfo', payload);
-        // });
-    }
-
-    _setCardIDByStateName (dbRef, stateName) {
-        // dbRef.once('value', (snapshots) => {
-        //     let items = [];
-        //     snapshots.forEach(snap => {
-        //         items.push(snap.val())
-        //     });
-        //     const payload = { name: stateName, data: items }
-        //     //console.log ('_setCardIDByStateName', items);
-        //     store.commit('setStateInfo', payload);
-        // });
-    }
-
-    _setTodyCheckInHistory () {
-        // this._todayCheckInHistoryDB.on('value', (snapshots) => {
-        //     let items = [];
-        //     snapshots.forEach(snap => {
-        //         items.push(snap.val())
-        //     })
-        //     console.log('DB: ', items);
-        //     store.dispatch('createHistoryData', items); // sort out data inside modules
-        // });
     }
 
     createProfile (type, payload) {
         payload.type = type
         payload.createDate = today
-        if (type === STAFF) {
-            SocketAPI.createStaffProfile(payload)
-        } else if (type === VEHICLE) {
-            SocketAPI.createVehicleProfile(payload)
-        }
+        SocketAPI.createProfile(payload)
+
         // if (!Utils.isOnline()) {
         //     // await this._saveToIndexDB (null, payload)
         // } else {
@@ -142,13 +89,10 @@ class CheckInAPI {
         // this._profileDB.child(type).child(key).remove()
         let payload = {
             key: key,
-            today: today
+            today: today,
+            type: type
         }
-        if (type === STAFF) {
-            SocketAPI.deleteStaffProfile(payload)
-        } else if (type === VEHICLE) {
-            SocketAPI.deleteVehiclerofile(payload)
-        }
+        SocketAPI.deleteProfile(payload)
     }
 
     createMapping (type, payload) {

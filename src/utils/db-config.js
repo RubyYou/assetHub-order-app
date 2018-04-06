@@ -52,9 +52,9 @@ export const remoteConfig = {
         tableName: "data"
     },
     types: {
-        RFID: "RFID",
-        STAFF: "STAFF",
-        VEHICLE: "VEHICLE",
+        RFID: "rfid",
+        STAFF: "staff",
+        VEHICLE: "vehicle",
     },
     api: {
         url: "http://localhost:3000/api/v1",

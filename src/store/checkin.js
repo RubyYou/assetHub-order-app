@@ -110,6 +110,15 @@ export default {
         RFID: [] // this include location info and id
     },
     getters: {
+        getRFID: state => {
+            return state.RFID
+        },
+        getstaffCardMapping: state => {
+            return state.staffCardMapping
+        },
+        getvehicleCardMapping: state => {
+            return state.vehicleCardMapping
+        },
     },
     actions: {
         createProfile ({ state, commit }, { type, info }) {
@@ -138,15 +147,16 @@ export default {
                 let cardInfo = null
 
                 if (staffCard) {
-                    locationInfo = state.RFID.find(location => location.locationID === item.locationID)
-                    cardInfo = Object.assign({}, staffCard, { location: locationInfo.location }, { time: item.time })
+                    locationInfo = state.RFID.find(location => location.serialNO === item.serialNO)
+                    cardInfo = Object.assign({}, staffCard, { location: locationInfo.machineName }, { time: item.checkinTime })
                     delete cardInfo.createDate
                     //console.log ('staffCard', cardInfo)
                     staffHistory.push(cardInfo)
+                    console.log("staffHistory", staffHistory)
 
                 } else if (vehicleCard) {
-                    locationInfo = state.RFID.find(location => location.locationID === item.locationID)
-                    cardInfo = Object.assign({}, vehicleCard, { location: locationInfo.location }, { time: item.time })
+                    locationInfo = state.RFID.find(location => location.serialNO === item.serialNO)
+                    cardInfo = Object.assign({}, vehicleCard, { location: locationInfo.machineName }, { time: item.checkinTime })
                     delete cardInfo.createDate
                     //console.log ('vehicleCard', cardInfo)
                     vehicleHistory.push(cardInfo)

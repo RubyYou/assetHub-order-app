@@ -10,8 +10,6 @@ class SocketAPI {
         this.userName = null
         this.roomName = null
         this.formName = null
-        this.staff = 'staff'
-        this.vehicle = 'vehicle'
     }
 
     init () {
@@ -58,12 +56,6 @@ class SocketAPI {
             store.commit('setStateInfo', payload)
         })
 
-        this.socket.on('getVehicleProfile', data => {
-            const payload = { name: 'vehicle', data: data.result }
-            console.log('getVehicleProfile', payload)
-            store.commit('setStateInfo', payload)
-        })
-
         this.socket.on('getTodayStaffCardMapping', data => {
             const payload = { name: 'staffCardMapping', data: data.result }
             console.log('getTodayStaffCardMapping', payload)
@@ -78,7 +70,7 @@ class SocketAPI {
 
         this.socket.on('getTodyCheckInHistory', data => {
             console.log('getTodyCheckInHistory', data.result)
-            // store.dispatch('createHistoryData', data.result)
+            store.dispatch('createHistoryData', data.result)
         })
 
     }
@@ -132,7 +124,8 @@ class SocketAPI {
         this.querytData = {
             userName: this.state.username,
             roomName: this.state.roomName,
-            staff: remoteConfig.database.profile.staff
+            profile: remoteConfig.database.profile,
+            type: remoteConfig.types.STAFF
         }
         this.socket.emit('getStaffProfile', this.querytData)
     }
@@ -142,7 +135,8 @@ class SocketAPI {
         this.querytData = {
             userName: this.state.username,
             roomName: this.state.roomName,
-            vehicle: remoteConfig.database.profile.vehicle
+            profile: remoteConfig.database.profile,
+            type: remoteConfig.types.VEHICLE
         }
         this.socket.emit('getVehicleProfile', this.querytData)
     }
@@ -153,7 +147,7 @@ class SocketAPI {
             userName: this.state.username,
             roomName: this.state.roomName,
             cardProfileMapping: remoteConfig.database.cardProfileMapping,
-            staff: this.staff,
+            type: remoteConfig.types.STAFF,
             date: today
         }
         this.socket.emit('getTodayStaffCardMapping', this.querytData)
@@ -165,7 +159,7 @@ class SocketAPI {
             userName: this.state.username,
             roomName: this.state.roomName,
             cardProfileMapping: remoteConfig.database.cardProfileMapping,
-            vehicle: this.vehicle,
+            type: remoteConfig.types.VEHICLE,
             date: today
         }
         this.socket.emit('getTodayVehicleCardMapping', this.querytData)
@@ -179,58 +173,35 @@ class SocketAPI {
             checkinHistory: remoteConfig.database.checkinHistory,
             date: today
         }
+        console.log("querytData", this.querytData)
         this.socket.emit('getTodyCheckInHistory', this.querytData)
 
     }
 
-    createStaffProfile (payload) {
+    createProfile (payload) {
         this.state = store.getters.getUserInfo
         this.insertData = {
             userName: this.state.username,
             roomName: this.state.roomName,
-            staff: remoteConfig.database.profile.staff,
+            profile: remoteConfig.database.profile,
             payload: payload
         }
-        console.log('createStaffProfile', this.insertData)
-        this.socket.emit('createStaffProfile', this.insertData)
+        console.log('createProfile', this.insertData)
+        this.socket.emit('createProfile', this.insertData)
     }
 
-    deleteStaffProfile (payload) {
+    deleteProfile (payload) {
         this.state = store.getters.getUserInfo
         this.deleteData = {
             userName: this.state.username,
             roomName: this.state.roomName,
-            staff: remoteConfig.database.profile.staff,
+            profile: remoteConfig.database.profile,
             date: payload.today,
-            key: payload.key
+            key: payload.key,
+            type: payload.type
         }
-        console.log('deleteStaffProfile', this.deleteData)
-        this.socket.emit('deleteStaffProfile', this.deleteData)
-    }
-
-    createVehicleProfile (payload) {
-        this.state = store.getters.getUserInfo
-        this.insertData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            vehicle: remoteConfig.database.profile.vehicle,
-            payload: payload
-        }
-        console.log('createVehicleProfile', this.insertData)
-        this.socket.emit('createVehicleProfile', this.insertData)
-    }
-
-    deleteVehiclerofile (payload) {
-        this.state = store.getters.getUserInfo
-        this.deleteData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            vehicle: remoteConfig.database.profile.vehicle,
-            date: payload.today,
-            key: payload.key
-        }
-        console.log('deleteVehiclerofile', this.deleteData)
-        this.socket.emit('deleteVehiclerofile', this.deleteData)
+        console.log('deleteProfile', this.deleteData)
+        this.socket.emit('deleteProfile', this.deleteData)
     }
 
     createMapping (payload) {

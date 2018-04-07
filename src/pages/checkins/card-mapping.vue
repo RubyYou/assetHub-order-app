@@ -75,11 +75,13 @@ export default {
       // TODO: add form validation
       const type = this.dataType;
       let info = this.$f7.formToData("#create-mapping");
-      this.$store.dispatch("createMapping", { type, info });
+      const f7 =  this.$f7;
+      this.$store.dispatch("createMapping", { type, info, f7 });
     },
-    deleteMapping(key) {
+    deleteMapping(_id) {
       const type = this.dataType;
-      this.$store.dispatch("deleteMapping", { type, key });
+      const f7 =  this.$f7;
+      this.$store.dispatch("deleteMapping", { type, _id, f7 });
     },
     togglePanel() {
       const mode = this.mode === "create" ? "normal" : "create";

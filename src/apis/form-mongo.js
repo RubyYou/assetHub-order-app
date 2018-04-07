@@ -95,7 +95,6 @@ class FormAPI {
             tempFormClone.push(payload)
         }
 
-        //console.log ('tempFormClone', tempFormClone)
         IndexDB.set('tempForms', tempFormClone)
     }
 }

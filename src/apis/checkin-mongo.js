@@ -35,35 +35,27 @@ class CheckInAPI {
 
         const sendDBInfo = async (tempDBName, realDB) => {
             const tempDB = await IndexDB.get (tempDBName)
-            console.log ('online', tempDB)
             const isTempDBExist = tempDB && tempDB.length > 0
             if (!isTempDBExist) { return }
 
-            // it is belong to profile or mapping
-            const isProfile = tempDBName.toLowerCase().indexOf('profile') > 0;
-            const createFunc = isProfile ? 'createProfile' : 'createMapping'
-            const deleteFunc = isProfile ? 'deleteProfile' : 'deleteMapping'
-
             tempDB.map (item => {
                 if (item._id) {
-                    SocketAPI[deleteFunc] (item)
+                    SocketAPI.createProfile (item)
                 } else {
-                    SocketAPI[createFunc] (item)
+                    SocketAPI.deleteProfile (item)
                 }
             })
             IndexDB.delete (tempDBName)
         }
 
+        // ONLY Profile can use offline
         sendDBInfo ('tempProfile', this._profileDB)
-        sendDBInfo ('tempMapping', this._todayMappingDB)
-
         IndexDB.delete ('checkin')
     }
 
     _offline () {
         // shallow clone
         const allCheckInInfo = JSON.parse (JSON.stringify (store.getters.allCheckInInfo))
-        console.log ('offline', allCheckInInfo)
         IndexDB.set ('checkin', allCheckInInfo)
     }
 
@@ -84,8 +76,10 @@ class CheckInAPI {
 
         if (!Utils.isOnline()) {
             this._saveToIndexDB ('tempProfile', 'create', null, payload)
+            this._showHidePreloader (f7, '本記錄暫存中, 連線後會再寄出本紀錄')
         } else {
             SocketAPI.createProfile(payload)
+            this._showHidePreloader (f7, '儲存中')
         }
     }
 
@@ -98,41 +92,41 @@ class CheckInAPI {
 
         if (!Utils.isOnline()) {
             this._saveToIndexDB ('tempProfile', 'delete', _id, payload)
+            this._showHidePreloader (f7, '本記錄暫存中, 連線後會再寄出本紀錄')
         } else {
             SocketAPI.deleteProfile(payload)
+            this._showHidePreloader (f7, '刪除中')
         }
     }
 
-    createMapping (type, payload) {
+    createMapping (type, payload, f7) {
         console.log(type, payload)
         payload.createDate = today
         payload.type = type
         if (!Utils.isOnline()) {
-            this._saveToIndexDB ('tempMapping', 'create', null, payload)
+            this._showHidePreloader (f7, '此功能無法線下使用')
         } else {
             SocketAPI.createMapping(payload)
+            this._showHidePreloader (f7, '儲存中')
         }
     }
 
-    deleteMapping (type, _id) {
+    deleteMapping (type, _id, f7) {
         let payload = {
             _id: _id,
             today: today,
             type: type
         }
         if (!Utils.isOnline()) {
-            this._saveToIndexDB ('tempMapping', 'delete', _id, payload)
+            this._showHidePreloader (f7, '此功能無法線下使用')
         } else {
-            console.log('deleteMapping', _id)
             SocketAPI.deleteMapping(payload)
+            this._showHidePreloader (f7, '刪除中')
         }
     }
 
     async _saveToIndexDB (dbName, action, _id, payload) {
         const tempDB= await IndexDB.get (dbName) // array
-
-        console.log (dbName, action, _id, payload)
-
         let tempDBClone = []
         if (tempDB && tempDB.length > 0) {
             tempDBClone = tempDB.slice(0)
@@ -147,6 +141,14 @@ class CheckInAPI {
 
         console.log ('tempDBClone', tempDBClone)
         IndexDB.set(dbName, tempDBClone)
+    }
+
+    _showHidePreloader (f7, message) {
+        console.assert (typeof message === 'string')
+        f7.showPreloader(message)
+        setTimeout(() => {
+            f7.hidePreloader()
+        }, 500);
     }
 }
 

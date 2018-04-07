@@ -124,18 +124,18 @@ export default {
         }
     },
     actions: {
-        createProfile ({ state, commit }, { type, info }) {
+        createProfile ({ state, commit }, { type, info, f7 }) {
             console.assert(type === "staff" || type === "vehicle")
-            CheckInAPI.createProfile(type, info)
+            CheckInAPI.createProfile(type, info, f7)
         },
-        deleteProfile ({ state, commit }, { type, key }) {
-            CheckInAPI.deleteProfile(type, key)
+        deleteProfile ({ state, commit }, { type, _id, f7 }) {
+            CheckInAPI.deleteProfile(type, _id, f7)
         },
-        createMapping ({ state, commit }, { type, info }) {
-            CheckInAPI.createMapping(type, info)
+        createMapping ({ state, commit }, { type, info, f7 }) {
+            CheckInAPI.createMapping(type, info, f7)
         },
-        deleteMapping ({ state, commit }, { type, key }) {
-            CheckInAPI.deleteMapping(type, key)
+        deleteMapping ({ state, commit }, { type, _id, f7 }) {
+            CheckInAPI.deleteMapping(type, _id, f7)
         },
 
         // create history data based on RFID and card Mapping information information

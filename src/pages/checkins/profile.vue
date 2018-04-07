@@ -64,11 +64,13 @@ export default {
       // TODO: add form validation
       const type = this.dataType;
       let info = this.$f7.formToData("#create-profile");
-      this.$store.dispatch("createProfile", { type, info });
+      const f7 =  this.$f7
+      this.$store.dispatch("createProfile", { type, info, f7});
     },
-    deleteProfile(key) {
+    deleteProfile(_id) {
       const type = this.dataType;
-      this.$store.dispatch("deleteProfile", { type, key });
+      const f7 =  this.$f7
+      this.$store.dispatch("deleteProfile", { type, _id, f7});
     },
     togglePanel() {
       const mode = this.mode === "create" ? "normal" : "create";

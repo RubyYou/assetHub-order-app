@@ -11,7 +11,7 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.0.0/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.0.1/workbox-sw.js");
 
 workbox.skipWaiting();
 workbox.clientsClaim();
@@ -92,11 +92,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "88c529da31431d925073d001aef75c96"
+    "revision": "63e97eff761a62e374d808cac02e73c6"
   },
   {
     "url": "js/build.js",
-    "revision": "d41d8cd98f00b204e9800998ecf8427e"
+    "revision": "10ad0b2bba2596c550e7b0d0a33dd48c"
   },
   {
     "url": "js/echarts-all.js",

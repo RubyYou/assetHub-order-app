@@ -1,0 +1,23 @@
+CACHE MANIFEST
+# 2010-02-10:v01
+
+CACHE:
+index.html
+js/build.js
+js/echarts-all.js
+img/map.png
+img/user.png
+css/app.css
+css/build.css
+css/framework7-icons.css
+css/framework7.ios.colors.min.css
+css/framework7.ios.min.css
+
+
+# Require the user to be online.
+NETWORK:
+*
+
+# offline.html will be served in place of all other .html files
+FALLBACK:
+# /index.html /offline.html

@@ -40,9 +40,9 @@ class CheckInAPI {
 
             tempDB.map (item => {
                 if (item._id) {
-                    SocketAPI.createProfile (item)
-                } else {
                     SocketAPI.deleteProfile (item)
+                } else {
+                    SocketAPI.createProfile (item)
                 }
             })
             IndexDB.delete (tempDBName)

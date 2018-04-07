@@ -19,7 +19,7 @@
             <f7-list-item>
                 <f7-label>{{content.mapInfo.cardLabel}}</f7-label>
                 <select name="cardID" >
-                    <option v-for="cardID in cardIDs" :value="cardID">{{cardID}}</option>
+                    <option v-for="cardID in cardIDs" :value="cardID._id">{{cardID._id}}</option>
                 </select>
             </f7-list-item>
             <f7-list-item>
@@ -31,60 +31,62 @@
             <f7-list-item v-for="mapping in mappings">
                 <p><b>{{content.mapInfo.cardLabel}}</b><br/> {{mapping.cardID}}</p>
                 <p><b>{{content.mapInfo.profileLabel}}</b><br/>{{mapping.profileName}}</p>
-                <i class="f7-icons" @click="deleteMapping(mapping.key)">delete_round_fill</i>
+                <i class="f7-icons" @click="deleteMapping(mapping._id)">delete_round_fill</i>
             </f7-list-item>
         </f7-list>
     </f7-page>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import TimeUtils from '../../utils/time-utils'
+import { mapState } from "vuex";
+import TimeUtils from "../../utils/time-utils";
 
-const today = TimeUtils.substractDayToDBFormate (0)
+const today = TimeUtils.substractDayToDBFormate(0);
 
 export default {
-    name: "card-mapping",
-    props: {
-        content: Object,
-        dataType: String
+  name: "card-mapping",
+  props: {
+    content: Object,
+    dataType: String
+  },
+  data: function() {
+    return {
+      mode: "normal",
+      date: TimeUtils.getDate(today)
+    };
+  },
+  computed: {
+    profiles() {
+      return this.$store.state.checkin[this.dataType];
     },
-    data: function () {
-        return {
-            mode: "normal",
-            date: TimeUtils.getDate (today)
-        }
+    cardIDs() {
+      const cardFrom =
+        this.dataType === "staff" ? "staffCardIds" : "vehicleCardIds";
+      return this.$store.state.checkin[cardFrom];
     },
-    computed: {
-        profiles () {
-            return this.$store.state.checkin[this.dataType];
-        },
-        cardIDs () {
-            const cardFrom = this.dataType === "staff" ? "staffCardIds" : "vehicleCardIds"
-            return this.$store.state.checkin[cardFrom]
-        },
-        mappings () {
-            const mappingFrom = this.dataType === "staff" ? "staffCardMapping" : "vehicleCardMapping"
-            return this.$store.state.checkin[mappingFrom]
-        }
-    },
-    methods: {
-        createMapping () {
-            // TODO: add form validation
-            const type = this.dataType
-            let info = this.$f7.formToData ('#create-mapping')
-            this.$store.dispatch ('createMapping', {type, info})
-        },
-        deleteMapping (key) {
-            const type = this.dataType
-            this.$store.dispatch ('deleteMapping', {type, key})
-        },
-        togglePanel () {
-            const mode = this.mode === 'create' ? 'normal' : 'create'
-            this.mode = mode
-        }
+    mappings() {
+      const mappingFrom =
+        this.dataType === "staff" ? "staffCardMapping" : "vehicleCardMapping";
+      return this.$store.state.checkin[mappingFrom];
     }
-}
+  },
+  methods: {
+    createMapping() {
+      // TODO: add form validation
+      const type = this.dataType;
+      let info = this.$f7.formToData("#create-mapping");
+      this.$store.dispatch("createMapping", { type, info });
+    },
+    deleteMapping(key) {
+      const type = this.dataType;
+      this.$store.dispatch("deleteMapping", { type, key });
+    },
+    togglePanel() {
+      const mode = this.mode === "create" ? "normal" : "create";
+      this.mode = mode;
+    }
+  }
+};
 </script>
 <style lang="sass" scoped>
 .content-block-title {

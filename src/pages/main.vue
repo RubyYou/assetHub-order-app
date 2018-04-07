@@ -52,14 +52,14 @@ export default {
   data: function () {
     return {
       mode: "messager"
-    }
+    };
   },
   methods: {
     switchMode(name) {
       this.mode = name
     }
   }
-}
+};
 </script>
 
 <style lang="sass" scoped>

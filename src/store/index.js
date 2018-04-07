@@ -5,58 +5,65 @@ import Utils from '../utils/utils'
 import forms from './forms'
 import checkin from './checkin'
 
-Vue.use (Vuex)
+Vue.use(Vuex)
 
 // state
-export default new Vuex.Store ({
-    modules: {
-      forms: forms,
-      checkin: checkin
+export default new Vuex.Store({
+  modules: {
+    forms: forms,
+    checkin: checkin
+  },
+  state: {
+    userInfo: {
+      account: '',
+      username: '',
+      roomName: '',
+      formName: ''
     },
-    state: {
-      userInfo : {
-        account: '',
-        username: ''
-      },
-      allMessages : []
+    allMessages: []
+  },
+  mutations: {
+    setUserInfo (state, payload) {
+      state.userInfo.account = payload.account
+      state.userInfo.username = payload.username
+      state.userInfo.roomName = payload.roomName
+      state.userInfo.formName = payload.formName
     },
-    mutations: {
-      setUserInfo (state, payload) {
-        state.userInfo.account = payload.account
-        state.userInfo.username = payload.username
-      },
 
-      setMessagesByDate (state, { date, messages }) {
-        // formate
-        const existItem = state.allMessages.find ((day) => { return day.date === date})
+    setMessagesByDate (state, { date, messages }) {
+      // formate
+      const existItem = state.allMessages.find((day) => { return day.date === date })
 
-        if (existItem) {
-          existItem.messages = messages
-        } else {
-          // if date not exist, do a sort and clone
-          let clone = state.allMessages.slice (0)
-          clone.push ({date: date, messages: messages}) // day specific messages
-          clone.sort ((a, b) => {
-            const epochA = new Date (a.date).getTime()
-            const epochB = new Date (b.date).getTime()
-            return epochA - epochB
-          })
-          state.allMessages = clone
-        }
-      },
-      setPendingMessage (state, {date, message}) {
-        const existItem = state.allMessages.find ( (day ) => { return day.date === date })
-        if (existItem) {
-          const clone = Object.assign ({}, message, {pending : true})
-          existItem.messages.push (clone)
-          console.log ('clone', clone)
-        }
-        console.log ('setPendingMessage', state.allMessages, existItem)
+      if (existItem) {
+        existItem.messages = messages
+      } else {
+        // if date not exist, do a sort and clone
+        let clone = state.allMessages.slice(0)
+        clone.push({ date: date, messages: messages }) // day specific messages
+        clone.sort((a, b) => {
+          const epochA = new Date(a.date).getTime()
+          const epochB = new Date(b.date).getTime()
+          return epochA - epochB
+        })
+        state.allMessages = clone
       }
     },
-    getters : {
-      messages: state => {
-        return state.allMessages
+    setPendingMessage (state, { date, message }) {
+      const existItem = state.allMessages.find((day) => { return day.date === date })
+      if (existItem) {
+        const clone = Object.assign({}, message, { pending: true })
+        existItem.messages.push(clone)
+        console.log('clone', clone)
       }
+      console.log('setPendingMessage', state.allMessages, existItem)
     }
-});
+  },
+  getters: {
+    messages: state => {
+      return state.allMessages
+    },
+    getUserInfo: state => {
+      return state.userInfo
+    }
+  }
+})

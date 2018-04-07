@@ -35,10 +35,10 @@ export const localConfig = {
 export const remoteConfig = {
     name: "梅花西工地",
     database: {
-        accounts: "accounts",
-        messages: "messageA",
+        accounts: "accountsA",
+        messages: "messagesA",
         forms: "formsA",
-        profile: "profileA", // this include car profile and staff profile
+        profile: "profilesA", // this include car profile and staff profile
         cards: "cardsA", // this has all card ID for both car and staff
         cardProfileMapping: "cardProfileMappingA", // this include card+staff and card+car mapping
         checkinHistory: "checkinHistoryA"
@@ -46,5 +46,22 @@ export const remoteConfig = {
     storage: {
         photos: "photoA",
         pdf: "pdfA"
+    },
+    indexDB: {
+        name: "runtime-store",
+        tableName: "data"
+    },
+    types: {
+        RFID: "rfid",
+        STAFF: "staff",
+        VEHICLE: "vehicle",
+    },
+    api: {
+        url: "http://localhost:3000/api/v1",
+        socket: "ws://localhost:3001",
+        actions: {
+            signin: "/signin",
+            forms: "/forms"
+        }
     }
 }

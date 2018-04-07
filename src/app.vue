@@ -51,99 +51,116 @@
 </template>
 
 <script>
-import { MessageAPI, FormAPI, LoginAPI, CheckInAPI} from './apis/index'
-import { accountInfo } from './utils/db-config'
+import {
+  MessageAPI,
+  FormAPI,
+  LoginAPI,
+  CheckInAPI,
+  SocketAPI
+} from "./apis/index";
+import { accountInfo } from "./utils/db-config";
 
 export default {
-  data: function () {
+  data: function() {
     return {
       errorMessage: "",
       accounts: accountInfo,
-      accountValue : accountInfo[0].account
-    }
+      accountValue: accountInfo[0].account
+    };
   },
   methods: {
-    setErrorMessage: function (value) {
-      this.errorMessage = value
+    setErrorMessage: function(value) {
+      this.errorMessage = value;
       //IMPORTANT: require a setter to udpate data and trigger reactive view update
     },
-    checkValidation () {
-      let self = this
+    checkValidation() {
+      let self = this;
       const inputs = [
-        { ref: "username", input: this.$refs.name, area: this.$refs["name-item"]},
-        { ref: "password", input: this.$refs.password, area: this.$refs["account-item"]}
-      ]
-
-      let notValidItems = []
-      let validItems = {}
-      inputs.map (item => {
-        const inputValue = item.input.$el.getElementsByTagName ('input')[0].value
-        if (this.isEmpty (inputValue)) {
-          notValidItems.push (item)
-        } else {
-          validItems[item.ref] = inputValue
+        {
+          ref: "username",
+          input: this.$refs.name,
+          area: this.$refs["name-item"]
+        },
+        {
+          ref: "password",
+          input: this.$refs.password,
+          area: this.$refs["account-item"]
         }
-      })
+      ];
+
+      let notValidItems = [];
+      let validItems = {};
+      inputs.map(item => {
+        const inputValue = item.input.$el.getElementsByTagName("input")[0]
+          .value;
+        if (this.isEmpty(inputValue)) {
+          notValidItems.push(item);
+        } else {
+          validItems[item.ref] = inputValue;
+        }
+      });
 
       if (notValidItems.length > 0) {
-        notValidItems.map (item => {
-          const highlightArea = item.area.$el
-          if (!highlightArea.classList.contains ('red')) {
-            highlightArea.classList.add ("red")
-            highlightArea.getElementsByTagName ('input')[0].value = ''
-            setTimeout (() => {
-              highlightArea.classList.remove ("red")
-              this.setErrorMessage ('')
-            }, 2000)
+        notValidItems.map(item => {
+          const highlightArea = item.area.$el;
+          if (!highlightArea.classList.contains("red")) {
+            highlightArea.classList.add("red");
+            highlightArea.getElementsByTagName("input")[0].value = "";
+            setTimeout(() => {
+              highlightArea.classList.remove("red");
+              this.setErrorMessage("");
+            }, 2000);
           }
-        })
-        this.setErrorMessage ("請填入正確帳號密碼")
-        this.removeErrorMessage ()
+        });
+        this.setErrorMessage("請填入正確帳號密碼");
+        this.removeErrorMessage();
       } else {
-        this.setErrorMessage ("")
-        LoginAPI.start (
+        this.setErrorMessage("");
+        LoginAPI.start(
           this.accountValue,
           validItems.password,
           validItems.username,
           this.loginSuccessHandler,
           this.loginFailHandler
-        )
+        );
       }
     },
-    loginSuccessHandler () {
-      console.log (FormAPI, MessageAPI, CheckInAPI)
-      FormAPI.init ()
-      MessageAPI.init ()
-      CheckInAPI.init ()
-      this.goToMain ()
+    loginSuccessHandler() {
+      SocketAPI.init();
+      FormAPI.init();
+      MessageAPI.init();
+      CheckInAPI.init();
+      this.goToMain();
     },
-    loginFailHandler () {
-      this.setErrorMessage ("帳號密碼不對，無法登入")
-      this.removeErrorMessage ()
+    loginFailHandler() {
+      this.setErrorMessage("帳號密碼不對，無法登入");
+      this.removeErrorMessage();
     },
-    isEmpty (value) {
-      return value === undefined || value === null || value === ''
+    isEmpty(value) {
+      return value === undefined || value === null || value === "";
     },
-    goToMain () {
+    goToMain() {
       // this required to insert number and object as $router load not work
-      this.$f7Router.changeRoute ("/main", 0, {})
+      this.$f7Router.changeRoute("/main", 0, {});
     },
-    removeErrorMessage () {
-      setTimeout (() => {
-        this.setErrorMessage ('')
-      }, 2000)
+    removeErrorMessage() {
+      setTimeout(() => {
+        this.setErrorMessage("");
+      }, 2000);
     }
   },
-  mounted () {
-    setTimeout (() => {
-      LoginAPI.start (
-        "總指揮", 0, "Ruby",
+  mounted() {
+    setTimeout(() => {
+      LoginAPI.start(
+        "總指揮",
+        0,
+        "Ruby",
         this.loginSuccessHandler,
         this.loginFailHandler
-      )
-    }, 500)
+      );
+    }, 500);
   }
-}
+};
 </script>
 
 <style lang="sass" scoped>

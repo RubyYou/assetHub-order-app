@@ -4,11 +4,11 @@
 class CacheController {
 
     constructor () {
-        if ('serviceWorker' in navigator) {
-            this._registerServiceWorker ()
-        } else {
-            this._registerApplicationCache ()
-        }
+        // if ('serviceWorker' in navigator) {
+        //     this._registerServiceWorker ()
+        // } else {
+        //     this._registerApplicationCache ()
+        // }
     }
 
     _registerServiceWorker () {
@@ -31,4 +31,4 @@ class CacheController {
     }
 }
 
-export default new CacheController ();
+export default new CacheController();

@@ -31,7 +31,7 @@
                     <b>{{input}} :</b><br/>{{profile[input]}}</p>
                 <p v-for="radio in content.radios">
                     <b>{{Object.keys(radio)[0]}} :</b> {{profile[Object.keys(radio)[0]]}}</p>
-                <i class="f7-icons" @click="deleteProfile(staff.key)">delete_round_fill</i>
+                <i class="f7-icons" @click="deleteProfile(profile._id)">delete_round_fill</i>
             </f7-list-item>
         </f7-list>
 
@@ -39,43 +39,43 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
-    name: "Profile",
-    props: {
-        content: Object,
-        dataType: String
-    },
-    data: function () {
-        return {
-            mode: "normal",
-            type: this.dataType
-        }
-    },
-    computed: {
-        profiles () {
-            console.log ('profiles-', this.dataType)
-            return this.$store.state.checkin[this.dataType];
-        }
-    },
-    methods: {
-        createProfile () {
-            // TODO: add form validation
-            const type = this.dataType
-            let info = this.$f7.formToData ('#create-profile')
-            this.$store.dispatch ('createProfile', {type, info})
-        },
-        deleteProfile (key) {
-            const type = this.dataType
-            this.$store.dispatch ('deleteProfile', {type, key})
-        },
-        togglePanel () {
-            const mode = this.mode === 'create' ? 'normal' : 'create'
-            this.mode = mode
-        }
+  name: "Profile",
+  props: {
+    content: Object,
+    dataType: String
+  },
+  data: function() {
+    return {
+      mode: "normal",
+      type: this.dataType
+    };
+  },
+  computed: {
+    profiles() {
+      console.log("profiles-", this.dataType);
+      return this.$store.state.checkin[this.dataType];
     }
-}
+  },
+  methods: {
+    createProfile() {
+      // TODO: add form validation
+      const type = this.dataType;
+      let info = this.$f7.formToData("#create-profile");
+      this.$store.dispatch("createProfile", { type, info });
+    },
+    deleteProfile(key) {
+      const type = this.dataType;
+      this.$store.dispatch("deleteProfile", { type, key });
+    },
+    togglePanel() {
+      const mode = this.mode === "create" ? "normal" : "create";
+      this.mode = mode;
+    }
+  }
+};
 </script>
 
 <style lang="sass" scoped>

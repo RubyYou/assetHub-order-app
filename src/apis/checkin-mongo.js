@@ -104,10 +104,10 @@ class CheckInAPI {
         payload.createDate = today
         payload.type = type
         if (!Utils.isOnline()) {
-            this._showHidePreloader (f7, '此功能無法線下使用')
+            this._showHidePreloader(f7, '此功能無法線下使用')
         } else {
             SocketAPI.createMapping(payload)
-            this._showHidePreloader (f7, '儲存中')
+            this._showHidePreloader(f7, '儲存中')
         }
     }
 
@@ -118,10 +118,10 @@ class CheckInAPI {
             type: type
         }
         if (!Utils.isOnline()) {
-            this._showHidePreloader (f7, '此功能無法線下使用')
+            this._showHidePreloader(f7, '此功能無法線下使用')
         } else {
             SocketAPI.deleteMapping(payload)
-            this._showHidePreloader (f7, '刪除中')
+            this._showHidePreloader(f7, '刪除中')
         }
     }
 

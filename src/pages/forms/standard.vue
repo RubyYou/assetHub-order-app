@@ -1,11 +1,15 @@
 <template>
-   <f7-page data-page="vehicle-check">
+   <f7-page data-page="standard">
     <f7-navbar >
       <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
       <f7-nav-center>{{formTitle}}</f7-nav-center>
     </f7-navbar>
     <div class="wrap">
     <f7-list form v-for="item in content" >
+      <RepeatInput
+          v-if="item.customComponent && item.customComponent.name === 'RepeatInput'"
+          :params="item.customComponent.input" />
+
       <f7-list-item v-if="item.input">
         <f7-label>{{item.input}}</f7-label>
         <f7-input :type="item.input_type || 'text'"
@@ -64,6 +68,7 @@
 */
 
 import SignPopup from '../../components/signPopup.vue'
+import RepeatInput from './components/repeat-input.vue'
 import { mapState, mapActions } from 'vuex'
 import * as FormData from './form-data'
 
@@ -73,7 +78,8 @@ let formName = ""
 export default {
   name : formName,
   components: {
-    SignPopup
+    SignPopup,
+    RepeatInput
   },
   data: function () {
     return FormData[formName]

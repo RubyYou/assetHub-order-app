@@ -1,5 +1,5 @@
 <template>
-   <f7-page data-page="space-check1">
+   <f7-page data-page="standard-sections">
     <f7-navbar >
       <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
       <f7-nav-center>{{formTitle}}</f7-nav-center>

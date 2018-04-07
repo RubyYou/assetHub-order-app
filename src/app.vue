@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { LoginAPI, FormAPI, MessageAPI } from './apis/'
+import { MessageAPI, FormAPI, LoginAPI, CheckInAPI} from './apis/index'
 import { accountInfo } from './utils/db-config'
 
 export default {
@@ -111,8 +111,10 @@ export default {
       }
     },
     loginSuccessHandler () {
+      console.log (FormAPI, MessageAPI, CheckInAPI)
       FormAPI.init ()
       MessageAPI.init ()
+      CheckInAPI.init ()
       this.goToMain ()
     },
     loginFailHandler () {
@@ -134,11 +136,11 @@ export default {
   },
   mounted () {
     setTimeout (() => {
-      // LoginAPI.start (
-      //     "總指揮", 0, "Ruby",
-      //     this.loginSuccessHandler,
-      //     this.loginFailHandler
-      //   )
+      LoginAPI.start (
+        "總指揮", 0, "Ruby",
+        this.loginSuccessHandler,
+        this.loginFailHandler
+      )
     }, 500)
   }
 }

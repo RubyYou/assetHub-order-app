@@ -80,6 +80,7 @@ class FormAPI {
         }, 2000);
     }
 
+    // not working
     async _saveToIndexDB (key, payload) {
         const tempForms = await IndexDB.get('tempForms') // array
         let tempFormClone = []

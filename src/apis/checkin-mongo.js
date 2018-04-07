@@ -9,24 +9,20 @@ const today = TimeUtils.substractDayToDBFormate(0)
 const db = remoteConfig.database
 const STAFF = 'staff'
 const VEHICLE = 'vehicle'
+
 class CheckInAPI {
 
     constructor() { }
 
     init () {
-        // online login
-        if (Utils.isOnline()) {
-            this._setRemoteDB()
-        } else {
-            this._getContentFromIndexDB()
-        }
+        Utils.isOnline() ? this._setRemoteDB() : this._getContentFromIndexDB()
         this._registerService()
     }
 
     _getContentFromIndexDB () {
-        // IndexDB.get('profiles').then(profiles => {
-        //     store.commit ('setProfiles', profiles)
-        // });
+        IndexDB.get('checkin').then(checkin => {
+            store.commit('setAllCheckInInfo', checkin)
+        });
     }
 
     _registerService () {
@@ -36,29 +32,39 @@ class CheckInAPI {
 
     async _online () {
         this._setRemoteDB()
-        // const tempForms = await IndexDB.get ('tempForms')
-        // const isTempExist = tempForms && tempForms.length > 0
 
-        // if (!isTempExist) { return }
+        const sendDBInfo = async (tempDBName, realDB) => {
+            const tempDB = await IndexDB.get (tempDBName)
+            console.log ('online', tempDB)
+            const isTempDBExist = tempDB && tempDB.length > 0
+            if (!isTempDBExist) { return }
 
-        // tempForms.map (form => {
-        //     if (form.key) {
-        //         const key = form.key
-        //         delete form.key
-        //         this._formsDB.child(today).child(key).set(form)
-        //     } else {
-        //         this._formsDB.child(today).push(form)
-        //     }
-        // })
+            // it is belong to profile or mapping
+            const isProfile = tempDBName.toLowerCase().indexOf('profile') > 0;
+            const createFunc = isProfile ? 'createProfile' : 'createMapping'
+            const deleteFunc = isProfile ? 'deleteProfile' : 'deleteMapping'
 
-        // IndexDB.delete ('tempForms')
-        // IndexDB.delete ('forms')
+            tempDB.map (item => {
+                if (item._id) {
+                    SocketAPI[deleteFunc] (item)
+                } else {
+                    SocketAPI[createFunc] (item)
+                }
+            })
+            IndexDB.delete (tempDBName)
+        }
+
+        sendDBInfo ('tempProfile', this._profileDB)
+        sendDBInfo ('tempMapping', this._todayMappingDB)
+
+        IndexDB.delete ('checkin')
     }
 
     _offline () {
         // shallow clone
-        // const forms = JSON.parse (JSON.stringify (store.getters.todayForms))
-        // IndexDB.set ('forms', forms )
+        const allCheckInInfo = JSON.parse (JSON.stringify (store.getters.allCheckInInfo))
+        console.log ('offline', allCheckInInfo)
+        IndexDB.set ('checkin', allCheckInInfo)
     }
 
     _setRemoteDB () {
@@ -70,73 +76,78 @@ class CheckInAPI {
         SocketAPI.getTodayStaffCardMapping(today)
         SocketAPI.getTodayVehicleCardMapping(today)
         SocketAPI.getTodyCheckInHistory(today)
-
-
     }
 
     createProfile (type, payload) {
         payload.type = type
         payload.createDate = today
-        SocketAPI.createProfile(payload)
 
-        // if (!Utils.isOnline()) {
-        //     // await this._saveToIndexDB (null, payload)
-        // } else {
-        // }
+        if (!Utils.isOnline()) {
+            this._saveToIndexDB ('tempProfile', 'create', null, payload)
+        } else {
+            SocketAPI.createProfile(payload)
+        }
     }
 
-    deleteProfile (type, key) {
-        // this._profileDB.child(type).child(key).remove()
+    deleteProfile (type, _id) {
         let payload = {
-            key: key,
+            _id: _id,
             today: today,
             type: type
         }
-        SocketAPI.deleteProfile(payload)
+
+        if (!Utils.isOnline()) {
+            this._saveToIndexDB ('tempProfile', 'delete', _id, payload)
+        } else {
+            SocketAPI.deleteProfile(payload)
+        }
     }
 
     createMapping (type, payload) {
         console.log(type, payload)
         payload.createDate = today
         payload.type = type
-        SocketAPI.createMapping(payload)
-
-        // if (!Utils.isOnline()) {
-        //     // await this._saveToIndexDB (null, payload)
-        // } else {
-        //     this._todayMappingDB.child(type).push(payload)
-        // }
+        if (!Utils.isOnline()) {
+            this._saveToIndexDB ('tempMapping', 'create', null, payload)
+        } else {
+            SocketAPI.createMapping(payload)
+        }
     }
 
-    deleteMapping (type, key) {
+    deleteMapping (type, _id) {
         let payload = {
-            key: key,
+            _id: _id,
             today: today,
             type: type
         }
-        console.log('deleteMapping', key)
-        SocketAPI.deleteMapping(payload)
-
-        // this._todayMappingDB.child(type).child(key).remove()
+        if (!Utils.isOnline()) {
+            this._saveToIndexDB ('tempMapping', 'delete', _id, payload)
+        } else {
+            console.log('deleteMapping', _id)
+            SocketAPI.deleteMapping(payload)
+        }
     }
 
-    // async _saveToIndexDB (key, payload) {
-    //     const tempForms = await IndexDB.get ('tempForms') // array
-    //     let tempFormClone = []
-    //     if (tempForms && tempForms.length > 0) {
-    //         tempFormClone = tempForms.slice(0)
-    //     }
+    async _saveToIndexDB (dbName, action, _id, payload) {
+        const tempDB= await IndexDB.get (dbName) // array
 
-    //     let repeatedItem = tempFormClone.find (item => {return item.key === key})
-    //     if (repeatedItem) {
-    //         repeatedItem = payload;
-    //     } else {
-    //         tempFormClone.push (payload)
-    //     }
+        console.log (dbName, action, _id, payload)
 
-    //     //console.log ('tempFormClone', tempFormClone)
-    //     IndexDB.set('tempForms', tempFormClone)
-    // }
+        let tempDBClone = []
+        if (tempDB && tempDB.length > 0) {
+            tempDBClone = tempDB.slice(0)
+        }
+
+        let repeatedItem = tempDBClone.find (item => {return item._id === _id})
+        if (repeatedItem) {
+            repeatedItem = payload;
+        } else {
+            tempDBClone.push (payload)
+        }
+
+        console.log ('tempDBClone', tempDBClone)
+        IndexDB.set(dbName, tempDBClone)
+    }
 }
 
 export default new CheckInAPI();

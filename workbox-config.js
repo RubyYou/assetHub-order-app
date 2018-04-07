@@ -1,7 +1,8 @@
 module.exports = {
     globDirectory: './www/',
     globPatterns: [
-      '**/*.{html,js,css,png}'
+      '**/*.{html,js,css,png}',
+      'fonts/*'
     ],
     swDest: './www/sw.js',
     clientsClaim: true,

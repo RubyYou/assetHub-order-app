@@ -197,8 +197,8 @@ class SocketAPI {
             roomName: this.state.roomName,
             profile: remoteConfig.database.profile,
             date: payload.today,
-            key: payload.key,
-            type: payload.type
+            type: payload.type,
+            _id: payload._id
         }
         console.log('deleteProfile', this.deleteData)
         this.socket.emit('deleteProfile', this.deleteData)
@@ -224,7 +224,7 @@ class SocketAPI {
             cardProfileMapping: remoteConfig.database.cardProfileMapping,
             date: payload.today,
             type: payload.type,
-            key: payload.key
+            _id: payload._id
         }
         console.log('deleteMapping', this.deleteData)
         this.socket.emit('deleteMapping', this.deleteData)

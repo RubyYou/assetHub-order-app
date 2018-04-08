@@ -1,6 +1,7 @@
 CACHE MANIFEST
-# 2010-02-10:v01
+# 2010-02-10:v01 update this version for updates
 
+# not cachine icons
 CACHE:
 index.html
 js/build.js
@@ -10,14 +11,19 @@ img/user.png
 css/app.css
 css/build.css
 css/framework7-icons.css
-css/framework7.ios.colors.min.css
 css/framework7.ios.min.css
-
+fonts/Framework7Icons-Regular.woff2
+fonts/Framework7Icons-Regular.woff
+fonts/Framework7Icons-Regular.ttf
+fonts/Framework7Icons-Regular.eot
+img/icons/startup-screen-768x1004.png
+img/icons/startup-screen-640x920.png
+img/icons/startup-screen-1242x2208.png
 
 # Require the user to be online.
 NETWORK:
 *
 
-# offline.html will be served in place of all other .html files
+# offline.html will be served in place of all other .html files (example)
 FALLBACK:
 # /index.html /offline.html

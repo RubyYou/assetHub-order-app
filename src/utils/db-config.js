@@ -47,18 +47,14 @@ export const remoteConfig = {
         photos: "photoA",
         pdf: "pdfA"
     },
-    indexDB: {
-        name: "runtime-store",
-        tableName: "data"
-    },
     types: {
         RFID: "rfid",
         STAFF: "staff",
         VEHICLE: "vehicle",
     },
     api: {
-        url: "http://localhost:3000/api/v1",
-        socket: "ws://localhost:3001",
+        url: "https://2c998993.ngrok.io/api/v1",
+        socket: "https://a16c0118.ngrok.io",
         actions: {
             signin: "/signin",
             forms: "/forms"

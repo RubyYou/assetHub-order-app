@@ -22,13 +22,12 @@ class MessageAPI {
     }
 
     init () {
-        // this._messagesDB = firebase.database ().ref (db.messages);
-        Utils.isOnline ? this._connectRemoteDB() : this._getContentFromIndexDB()
+        Utils.isOnline () ? this._connectRemoteDB() : this._getContentFromIndexDB()
         this._registerService()
     }
 
     _connectRemoteDB () {
-        this._getDayMessage(today) // listen to the  today's change
+        this._getDayMessage(today) // listen to the today's change
     }
 
     _getContentFromIndexDB () {
@@ -51,7 +50,7 @@ class MessageAPI {
 
     async _online () {
         this._connectRemoteDB()
-
+        //alert ('use remote service, delete offline stuff')
         const tempMessages = await IndexDB.get('tempMessages')
         const isTempExist = tempMessages && tempMessages.length > 0
 
@@ -66,6 +65,7 @@ class MessageAPI {
     }
 
     _offline () {
+        //alert ('start offline storage')
         const allMessages = JSON.parse(JSON.stringify(store.getters.messages))
         IndexDB.set('allMessages', allMessages)
     }
@@ -80,8 +80,9 @@ class MessageAPI {
         const data = Object.assign({}, payload, {
             username: store.state.userInfo.username,
             time: new Date().getTime().toString(),
-            messageDate: today
+            createDate: today
         })
+        // this has to change to message Date
         if (Utils.isOnline()) {
             SocketAPI.sendMessage(data)
         } else {

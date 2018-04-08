@@ -1,8 +1,12 @@
 module.exports = {
     globDirectory: './www/',
     globPatterns: [
-      '**/*.{html,js,css,png}',
-      'fonts/*'
+      '**/*.{html,js,png}',
+      'fonts/*.*',
+      'css/app.css',
+      'css/build.css',
+      'css/framework7-icons.css',
+      'css/framework7.ios.min.css'
     ],
     swDest: './www/sw.js',
     clientsClaim: true,

@@ -32,6 +32,7 @@ export default new Vuex.Store({
 
     setMessagesByDate (state, { date, messages }) {
       // formate
+      console.log ('setMessagesByDate', date, messages)
       const existItem = state.allMessages.find((day) => { return day.date === date })
 
       if (existItem) {

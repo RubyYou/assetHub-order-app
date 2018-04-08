@@ -35,6 +35,7 @@ class FormAPI {
 
     async _online () {
         this._connectRemoteDB()
+        //alert ('use remote service, delete offline stuff')
         const tempForms = await IndexDB.get('tempForms')
         const isTempExist = tempForms && tempForms.length > 0
 
@@ -55,6 +56,7 @@ class FormAPI {
     }
 
     _offline () {
+        //alert ('start offline storage')
         // shallow clone
         const forms = JSON.parse(JSON.stringify(store.getters.todayForms))
         IndexDB.set('forms', forms)

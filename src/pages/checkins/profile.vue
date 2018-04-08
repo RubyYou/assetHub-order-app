@@ -55,7 +55,6 @@ export default {
   },
   computed: {
     profiles() {
-      console.log("profiles-", this.dataType);
       return this.$store.state.checkin[this.dataType];
     }
   },

@@ -1,5 +1,9 @@
 <template>
   <f7-page data-page="posts">
+    <f7-navbar>
+      <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
+      <f7-nav-center> 公告事項 </f7-nav-center>
+    </f7-navbar>
     <br/><br/><br/>
     <f7-card v-html class="facebook-card" v-for="item in posts"
       :title="renderHeader (item.title, item.type)"

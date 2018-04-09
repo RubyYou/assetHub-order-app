@@ -153,15 +153,12 @@ export default {
                     locationInfo = state.RFID.find(location => location.serialNO === item.serialNO)
                     cardInfo = Object.assign({}, staffCard, { location: locationInfo.machineName }, { time: item.checkinTime })
                     delete cardInfo.createDate
-                    console.log ('staffCard', cardInfo)
                     staffHistory.push(cardInfo)
-                    console.log("staffHistory", staffHistory)
 
                 } else if (vehicleCard) {
                     locationInfo = state.RFID.find(location => location.serialNO === item.serialNO)
                     cardInfo = Object.assign({}, vehicleCard, { location: locationInfo.machineName }, { time: item.checkinTime })
                     delete cardInfo.createDate
-                    console.log ('vehicleCard', cardInfo)
                     vehicleHistory.push(cardInfo)
                 }
             })

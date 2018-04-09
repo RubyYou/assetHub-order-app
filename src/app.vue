@@ -15,7 +15,7 @@
             <!-- login area -->
             <f7-block>
               <div class="text-center logo"></div>
-              <h3 class="title">勞工安全管理APP</h3>
+              <h3 class="title">勞工安全管理</h3>
               <div v-if="errorMessage.length > 0" class="error">
                 {{ errorMessage }}
               </div>

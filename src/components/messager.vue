@@ -1,5 +1,9 @@
 <template>
   <f7-page data-page="messager"  class="messager-wrap">
+    <f7-navbar>
+      <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
+      <f7-nav-center> 現場溝通 </f7-nav-center>
+    </f7-navbar>
     <f7-messages v-for="day in allMessages">
       <div class="messages-date">
           {{renderDate (day.date)}}

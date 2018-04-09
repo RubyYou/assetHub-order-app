@@ -5,9 +5,9 @@ class CacheController {
 
     constructor () {
         if ('serviceWorker' in navigator) {
-            this._registerServiceWorker ()
+            //this._registerServiceWorker ()
         } else {
-            this._registerApplicationCache ()
+            //this._registerApplicationCache ()
         }
     }
 
@@ -24,7 +24,6 @@ class CacheController {
     _registerApplicationCache () {
         window.applicationCache.addEventListener('updateready', () => {
             if (window.applicationCache.status === window.applicationCache.UPDATEREADY) {
-                console.log ('new version, swap cache')
                 window.applicationCache.swapCache();
             }
         });

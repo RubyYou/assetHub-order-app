@@ -1,6 +1,10 @@
 <template>
-    <div data-page="charts" class="charts-page">
-        <br/><br/>
+    <f7-page data-page="charts" class="charts-page">
+        <f7-navbar>
+            <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
+            <f7-nav-center>IOT數據</f7-nav-center>
+        </f7-navbar>
+        <br/> <br/>
         <f7-block-title>重量觀測</f7-block-title>
         <f7-list>
             <f7-list-item
@@ -27,7 +31,7 @@
                 :title="chart.title">
             </f7-list-item>
         </f7-list>
-    </div>
+    </f7-page>
 </template>
 
 <script>

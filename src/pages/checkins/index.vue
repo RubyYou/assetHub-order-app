@@ -1,5 +1,9 @@
 <template>
     <f7-page data-page="checkIns">
+    <f7-navbar >
+        <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
+        <f7-nav-center>工人打卡</f7-nav-center>
+    </f7-navbar>
     <!-- Need a coustom one as icon formate not support f7-icons -->
     <f7-toolbar tabbar bottom labels>
         <f7-link tab-link="#tab1" active>
@@ -46,9 +50,6 @@ import CardMapping from './card-mapping.vue'
 import CheckInTimeline from './checkin-timeline.vue'
 
 export default {
-    props: {
-        dataType: String // it has to be staff or vehicle
-    },
     name: "checkIns",
     components: {
         Profile,
@@ -57,6 +58,10 @@ export default {
     },
     data: function (){
         return {
+            title: {
+                staff: "工人打卡",
+                vehicle: "車輛打卡"
+            },
             profile: {
                 staff: {
                     title: "人員履歷",
@@ -100,6 +105,12 @@ export default {
             }
         }
     },
+    computed: {
+        dataType () {
+            console.log (this.$route.params.type);
+            return this.$route.params.type
+        }
+    },
     methods: {
         getProfile(){
             return this.profile[this.dataType]
@@ -110,6 +121,10 @@ export default {
         getCheckinHistory () {
             return this.checkinHistroy[this.dataType]
         }
+    },
+    beforeCreate () {
+        console.assert (this.$route.params.type)
+        //dataType = this.$route.params.type
     }
 }
 </script>

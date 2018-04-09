@@ -1,10 +1,11 @@
-import MessageAPI from './message-mongo'
-import FormAPI from './form-mongo'
-import LoginAPI from './login-mongo'
-// import MessageAPI from './message'
-// import FormAPI from './form'
-// import LoginAPI from './login'
-import CheckInAPI from './checkin-mongo'
-import SocketAPI from './socket'
+// import MessageAPI from './firebase/message'
+// import FormAPI from './firebase/form'
+// import LoginAPI from './firebase/login'
+
+import MessageAPI from './mongo/message'
+import FormAPI from './mongo/form'
+import LoginAPI from './mongo/login'
+import CheckInAPI from './mongo/checkin'
+import SocketAPI from './mongo/socket'
 
 export { MessageAPI, FormAPI, LoginAPI, CheckInAPI, SocketAPI }

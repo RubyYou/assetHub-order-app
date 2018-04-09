@@ -1,7 +1,8 @@
 import SockeyIoClient from 'socket.io-client'
-import store from '../store/index'
-import { remoteConfig } from "../utils/db-config";
-import { FormAPI } from './index'
+import store from '../../store/index'
+import { remoteConfig } from "../../utils/db-config";
+import { FormAPI } from '../index'
+
 class SocketAPI {
 
     constructor() {

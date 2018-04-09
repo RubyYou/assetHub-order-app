@@ -1,11 +1,10 @@
-import store from '../store/index'
-import { remoteConfig } from '../utils/db-config'
-import Utils from '../utils/utils'
+import store from '../../store/index'
+import { remoteConfig } from '../../utils/db-config'
+import Utils from '../../utils/utils'
 import request from 'superagent'
-import Socket from './socket'
-import TimeUtils from '../utils/time-utils'
-import { SocketAPI } from './index'
-import IndexDB from '../offline/indexDB' // change to controller
+import TimeUtils from '../../utils/time-utils'
+import { SocketAPI } from '../index'
+import IndexDB from '../../offline/indexDB' // change to controller
 
 const today = TimeUtils.substractDayToDBFormate(0)
 
@@ -68,7 +67,7 @@ class FormAPI {
         if (!Utils.isOnline()) {
             await this._saveToIndexDB(null, payload)
         } else {
-            Socket.createNewForm(payload)
+            SocketAPI.createNewForm(payload)
         }
         setTimeout(() => {
             callback()
@@ -76,7 +75,7 @@ class FormAPI {
     }
 
     async updateForm (key, payload, callback) {
-        Socket.updateOldForm(key, payload)
+        SocketAPI.updateOldForm(key, payload)
         setTimeout(() => {
             callback()
         }, 2000);

@@ -1,9 +1,9 @@
-import store from '../store/index'
-import { remoteConfig } from '../utils/db-config'
-import Utils from '../utils/utils'
-import TimeUtils from '../utils/time-utils'
-import IndexDB from '../offline/indexDB'
-import SocketAPI from './socket'
+import store from '../../store/index'
+import { remoteConfig } from '../../utils/db-config'
+import Utils from '../../utils/utils'
+import TimeUtils from '../../utils/time-utils'
+import IndexDB from '../../offline/indexDB'
+import { SocketAPI } from '../index'
 
 const today = TimeUtils.substractDayToDBFormate(0)
 const db = remoteConfig.database

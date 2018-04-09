@@ -9,6 +9,8 @@ import IndexDB from '../offline/indexDB'
 const today = TimeUtils.substractDayToDBFormate (0)
 const db = remoteConfig.database
 
+//TODO: currently broken, need to fix after whole app finish
+
 class FormAPI {
 
     constructor () {}

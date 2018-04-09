@@ -13,6 +13,8 @@ import Utils from '../utils/utils'
     messagingSenderId: "971449811253"
 }
 
+//TODO: currently broken, need to fix after whole app finish
+
 class LoginAPI {
 
     constructor () {

@@ -2,7 +2,7 @@
     <f7-page data-page="checkIns">
     <f7-navbar >
         <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
-        <f7-nav-center>工人打卡</f7-nav-center>
+        <f7-nav-center>{{title[dataType]}}</f7-nav-center>
     </f7-navbar>
     <!-- Need a coustom one as icon formate not support f7-icons -->
     <f7-toolbar tabbar bottom labels>

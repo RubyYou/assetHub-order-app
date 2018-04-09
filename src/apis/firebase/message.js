@@ -18,6 +18,8 @@ const today = TimeUtils.substractDayToDBFormate (0)
 //    { date: 2018-03-15, messages: [{}, {}]}
 // ]
 
+//TODO: currently broken, need to fix after whole app finish
+
 class MessageAPI {
 
     constructor () {

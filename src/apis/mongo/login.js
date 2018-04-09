@@ -1,6 +1,6 @@
-import store from '../store/index'
-import { accountInfo, remoteConfig } from '../utils/db-config'
-import Utils from '../utils/utils'
+import store from '../../store/index'
+import { accountInfo, remoteConfig } from '../../utils/db-config'
+import Utils from '../../utils/utils'
 import request from 'superagent'
 
 class LoginAPI {

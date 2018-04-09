@@ -174,7 +174,7 @@ export default {
         setAllCheckInInfo (state, payload) {
             for (let key in payload) {
                 state [key] = payload[key]
-                console.log ('setAllCheckInInfo', key, state[key])
+                //console.log ('setAllCheckInInfo', key, state[key])
             }
         }
     }

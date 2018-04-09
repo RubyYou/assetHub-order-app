@@ -93,7 +93,7 @@
     ]
 
 */
-import CheckInAPI from '../apis/checkin-mongo' // --> there are some weird error, can not use index
+import { CheckInAPI } from '../apis/index'
 
 export default {
     state: {

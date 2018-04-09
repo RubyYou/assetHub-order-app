@@ -23,40 +23,52 @@ workbox.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "img/icons/icon-128.png",
-    "revision": "c53bae65078938a678267efb21454811"
+    "url": "img/icons/icon_114x114.png",
+    "revision": "79f019f90cd614d5948dbab9aa37f643"
   },
   {
-    "url": "img/icons/icon-256.png",
-    "revision": "6f042e521e4b4b9c5e0d610113298649"
+    "url": "img/icons/icon_144x144.png",
+    "revision": "317df7a91bd5dffe62e1718c4063a669"
   },
   {
-    "url": "img/icons/icon-48.png",
-    "revision": "967b80ffef2a99d090229cf0fbd9f6ea"
+    "url": "img/icons/icon_57x57.png",
+    "revision": "56546e9fdc2b66a947932dfbf63d909e"
   },
   {
-    "url": "img/icons/icon-512.png",
-    "revision": "0aef130ed2cf6bd2384fb3d919cf8755"
-  },
-  {
-    "url": "img/icons/icon-72.png",
-    "revision": "6f06a2accc69151d7cc9e39138c8a29c"
-  },
-  {
-    "url": "img/icons/startup-screen-1242x2208.png",
-    "revision": "02ed7dee6fcb4245c3ab30f747b5aa64"
-  },
-  {
-    "url": "img/icons/startup-screen-640x920.png",
-    "revision": "848cd7c0c63f4ca31dcf4825c491864f"
-  },
-  {
-    "url": "img/icons/startup-screen-768x1004.png",
-    "revision": "211b69a71c36f0a19371afac0eaf4fb3"
+    "url": "img/icons/icon_72x72.png",
+    "revision": "0237b98e5883247e25c109fd6a6d1dd4"
   },
   {
     "url": "img/map.png",
     "revision": "b2f8b3146988a4818fe2744de5022d17"
+  },
+  {
+    "url": "img/startup/320x460.png",
+    "revision": "02c954591dd6fc22c1bec3e4ebb7e93b"
+  },
+  {
+    "url": "img/startup/320x460@2x.png",
+    "revision": "12369d36abbed093ca4bba94e3f5f093"
+  },
+  {
+    "url": "img/startup/384x502@2x.png",
+    "revision": "b72519fa63f1c3898eec6594af118ee0"
+  },
+  {
+    "url": "img/startup/384x502@4x.png",
+    "revision": "2e606466f5489d7982fd65fe984fdfab"
+  },
+  {
+    "url": "img/startup/512x374@2x.png",
+    "revision": "82080a160ed8abc3daa9b72e617b4bf7"
+  },
+  {
+    "url": "img/startup/512x374@4x.png",
+    "revision": "85e175a8caecea9c81258dcc84d98a2b"
+  },
+  {
+    "url": "img/startup/640x1096.png",
+    "revision": "2cc7a790d948a81e004b95271f892d5d"
   },
   {
     "url": "img/user.png",
@@ -64,11 +76,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "0ac89ebccf23297a1b3a8068fd3fdfc3"
+    "revision": "7b6d9d6e26bf18fed2d6d4f9976fad69"
   },
   {
     "url": "js/build.js",
-    "revision": "d540c68fb4d3e098fe8529be47ac02d7"
+    "revision": "b03374f89a5b9987088aa4d008cebf60"
   },
   {
     "url": "js/echarts-all.js",

@@ -16,7 +16,7 @@ export const accountInfo = [
     }
 ]
 
-// locally should have info in sellphone
+// locally should have info in cellphone
 export const localConfig = {
     accounts: accountInfo,
     sensorIP: {
@@ -53,8 +53,8 @@ export const remoteConfig = {
         VEHICLE: "vehicle",
     },
     api: {
-        url: "https://2c998993.ngrok.io/api/v1",
-        socket: "https://a16c0118.ngrok.io",
+        url: "http://localhost:3000/api/v1",
+        socket: "ws://localhost:3001",
         actions: {
             signin: "/signin",
             forms: "/forms"

@@ -18,17 +18,33 @@
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="msapplication-starturl" content="/">
-        <link rel="icon" type="image/png" sizes="128x128" href="img/icons/icon-128.png">
-        <link rel="icon" type="image/png" sizes="256x256" href="img/icons/icon-256.png">
-        <link rel="apple-touch-icon" type="image/png" sizes="128x128" href="img/icons/icon-128.png">
-        <link rel="apple-touch-icon" type="image/png" sizes="256x245" href="img/icons/icon-256.png">
-        <link rel="apple-touch-startup-image" href="img/icons/startup-screen-640x920.png" media="(device-width: 320px) and (-webkit-device-pixel-ratio: 2)" >
-        <link rel="apple-touch-startup-image" href="img/icons/startup-screen-768x1004.png" media="(device-width: 768px) and (orientation: portrait)">
-        <link rel="apple-touch-startup-image" href="img/icons/startup-screen-1242x2208.png" media="(device-width: 414px) and (-webkit-device-pixel-ratio: 3)"  />
+
+        <!-- For third-generation iPad with high-resolution Retina display: -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/icons/icon_144x144.png">
+        <!-- For iPhone with high-resolution Retina display: -->
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/icons/icon_114x114.png">
+        <!-- For first- and second-generation iPad: -->
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/icons/icon_72x72.png">
+        <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+        <link rel="apple-touch-icon-precomposed" href="img/icons/icon_57x57.png">
+
+        <!-- iPhone SPLASHSCREEN-->
+        <link href="img/startup/320x460.png" media="(device-width: 320px)" rel="apple-touch-startup-image">
+        <!-- iPhone (Retina) SPLASHSCREEN-->
+        <link href="img/startup/320x460@2x.png" media="(device-width: 320px) and (device-height: 460px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <!-- iPhone 5 (Retina) SPLASHSCREEN-->
+        <link href="img/startup/640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+        <!-- iPad (non-Retina) (Portrait) -->
+        <link href="img/startup/384x502@2x.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" rel="apple-touch-startup-image" />
+        <!-- iPad (non-Retina) (Landscape) -->
+        <link href="img/startup/512x374@2x.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" rel="apple-touch-startup-image" />
+        <!-- iPad (Retina) (Portrait) -->
+        <link href="img/startup/384x502@4x.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+        <!-- iPad (Retina) (Landscape) -->
+        <link href="img/startup/512x374@4x.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) and (-webkit-min-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
 
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="manifest" href="js/manifest.json">
-
         <link rel="stylesheet" href="css/framework7.ios.min.css">
         <link rel="stylesheet" href="css/framework7-icons.css">
         <link rel="stylesheet" href="css/app.css">
@@ -37,8 +53,6 @@
     <body>
         <div id="app"></div>
         <script type="text/javascript" src="js/echarts-all.js"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.7/es5-shim.min.js"></script> -->
         <script type="text/javascript" src="js/build.js"></script>
-        <!-- please update build.js ? outside number to prevent cache in homescreen -->
     </body>
 </html>

@@ -16,9 +16,6 @@ fonts/Framework7Icons-Regular.woff2
 fonts/Framework7Icons-Regular.woff
 fonts/Framework7Icons-Regular.ttf
 fonts/Framework7Icons-Regular.eot
-img/icons/startup-screen-768x1004.png
-img/icons/startup-screen-640x920.png
-img/icons/startup-screen-1242x2208.png
 
 # Require the user to be online.
 NETWORK:

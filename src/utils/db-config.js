@@ -53,7 +53,7 @@ export const remoteConfig = {
         VEHICLE: "vehicle",
     },
     api: {
-        url: "http://dev.iot.airhub.io/api/v1",
+        url: "https://dev.iot.airhub.io/api/v1",
         socket: "ws://dev.iot.airhub.io",
         actions: {
             signin: "/signin",

@@ -5,9 +5,9 @@ class CacheController {
 
     constructor () {
         if ('serviceWorker' in navigator) {
-            //this._registerServiceWorker ()
+            this._registerServiceWorker ()
         } else {
-            //this._registerApplicationCache ()
+            this._registerApplicationCache ()
         }
     }
 

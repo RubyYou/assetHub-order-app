@@ -19,7 +19,7 @@
             <f7-list-item>
                 <f7-label>{{content.mapInfo.cardLabel}}</f7-label>
                 <select name="cardID" >
-                    <option v-for="cardID in cardIDs" :value="cardID._id">{{cardID._id}}</option>
+                    <option v-for="card in cards" :value="card.cardID">{{card.cardName}}</option>
                 </select>
             </f7-list-item>
             <f7-list-item>
@@ -29,7 +29,7 @@
 
         <f7-list class="mapping-list" form>
             <f7-list-item v-for="mapping in mappings">
-                <p><b>{{content.mapInfo.cardLabel}}</b><br/> {{mapping.cardID}}</p>
+                <p><b>{{content.mapInfo.cardLabel}}</b><br/> {{mapping.cardName}}</p>
                 <p><b>{{content.mapInfo.profileLabel}}</b><br/>{{mapping.profileName}}</p>
                 <i class="f7-icons" @click="deleteMapping(mapping._id)">delete_round_fill</i>
             </f7-list-item>
@@ -59,7 +59,7 @@ export default {
     profiles() {
       return this.$store.state.checkin[this.dataType];
     },
-    cardIDs() {
+    cards() {
       const cardFrom =
         this.dataType === "staff" ? "staffCardIds" : "vehicleCardIds";
       return this.$store.state.checkin[cardFrom];
@@ -74,9 +74,12 @@ export default {
     createMapping() {
       // TODO: add form validation
       const type = this.dataType;
-      let info = this.$f7.formToData("#create-mapping");
+      const formData = this.$f7.formToData("#create-mapping");
       const f7 =  this.$f7;
+      const cardName = this.cards.find (item => { return item.cardID === formData.cardID}).cardName
+      const info = Object.assign({}, formData, {"cardName": cardName})
       this.$store.dispatch("createMapping", { type, info, f7 });
+      this.togglePanel ()
     },
     deleteMapping(_id) {
       const type = this.dataType;

@@ -32,7 +32,7 @@ class CheckInAPI {
 
     async _online () {
         this._setRemoteDB()
-        alert ('use remote service, delete offline stuff')
+        //alert ('use remote service, delete offline stuff')
         const sendDBInfo = async (tempDBName, realDB) => {
             const tempDB = await IndexDB.get (tempDBName)
             const isTempDBExist = tempDB && tempDB.length > 0
@@ -54,7 +54,7 @@ class CheckInAPI {
     }
 
     _offline () {
-        alert ('start offline storage')
+        //alert ('start offline storage')
         // shallow clone
         const allCheckInInfo = JSON.parse (JSON.stringify (store.getters.allCheckInInfo))
         IndexDB.set ('checkin', allCheckInInfo)

@@ -18,8 +18,8 @@
         {
             // RFID
             "_id" : ObjectId("5ac253550c81af5499d25a84"),
-            "serialNO" : "y8327ryufewfkew",
-            "machineName" : "card1",
+            "serialNO" : "y8327ryufewfkew", // machie number 0000000012345660
+            "machineName" : "machine 1",
             "location" : {
                 "longitude" : 0.0001,
                 "latitude" : 11.0001
@@ -29,7 +29,7 @@
         {
             // staff
             "_id" : ObjectId("5ac253550c81af5499d25a85"),
-            "cardID" : "y8327ryufewfkew1",
+            "cardID" : "y8327ryufewfkew1", cardSerialNo: 50313a313331343033383132383130323033303738323535323535
             "cardName" : "card1",
             "type":"STAFF"
         },
@@ -142,6 +142,7 @@ export default {
         createHistoryData ({ state, commit }, items) {
             let staffHistory = []
             let vehicleHistory = []
+            console.log (items)
 
             items.map(item => {
                 const staffCard = state.staffCardMapping.find(card => parseInt(card.cardID) == parseInt(item.cardID))
@@ -151,13 +152,13 @@ export default {
 
                 if (staffCard) {
                     locationInfo = state.RFID.find(location => location.serialNO === item.serialNO)
-                    cardInfo = Object.assign({}, staffCard, { location: locationInfo.machineName }, { time: item.checkinTime })
+                    cardInfo = Object.assign({}, staffCard, { location: locationInfo.machineName }, { time: item.createTime })
                     delete cardInfo.createDate
                     staffHistory.push(cardInfo)
 
                 } else if (vehicleCard) {
                     locationInfo = state.RFID.find(location => location.serialNO === item.serialNO)
-                    cardInfo = Object.assign({}, vehicleCard, { location: locationInfo.machineName }, { time: item.checkinTime })
+                    cardInfo = Object.assign({}, vehicleCard, { location: locationInfo.machineName }, { time: item.createTime })
                     delete cardInfo.createDate
                     vehicleHistory.push(cardInfo)
                 }

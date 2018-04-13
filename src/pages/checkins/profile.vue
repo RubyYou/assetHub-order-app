@@ -65,6 +65,7 @@ export default {
       let info = this.$f7.formToData("#create-profile");
       const f7 =  this.$f7
       this.$store.dispatch("createProfile", { type, info, f7});
+      this.togglePanel();
     },
     deleteProfile(_id) {
       const type = this.dataType;

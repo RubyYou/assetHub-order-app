@@ -33,9 +33,6 @@ import TimeUtils from "../utils/time-utils";
 import moment from "moment";
 
 export default {
-  props: {
-    onSwitchMode: Function
-  },
   data: function() {
     return {
       avatar: "img/user.png"
@@ -77,7 +74,7 @@ export default {
     triggerAction(message) {
       const isToday = TimeUtils.isSameAsToday(parseInt(message.time));
       if (message.type === "form" && isToday) {
-        this.onSwitchMode("forms");
+        console.log('form', message.url)
         this.$f7Router.changeRoute(message.url, 0, {});
       }
     },

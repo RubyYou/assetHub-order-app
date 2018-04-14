@@ -5,7 +5,8 @@ import TimeUtils from '../../utils/time-utils'
 import { SocketAPI } from '../index'
 import IndexDB from '../../offline/indexDB' // change to controller
 
-
+const daybefore = TimeUtils.substractDayToDBFormate(2)
+const yesterday = TimeUtils.substractDayToDBFormate(1)
 const today = TimeUtils.substractDayToDBFormate(0)
 
 // message get into store's formate
@@ -27,7 +28,9 @@ class MessageAPI {
     }
 
     _connectRemoteDB () {
-        this._getDayMessage(today) // listen to the today's change
+        this._getDayMessage(daybefore)
+        this._getDayMessage(yesterday)
+        this._getDayMessage(today)
     }
 
     _getContentFromIndexDB () {

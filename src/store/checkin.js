@@ -142,7 +142,6 @@ export default {
         createHistoryData ({ state, commit }, items) {
             let staffHistory = []
             let vehicleHistory = []
-            console.log (items)
 
             items.map(item => {
                 const staffCard = state.staffCardMapping.find(card => parseInt(card.cardID) == parseInt(item.cardID))

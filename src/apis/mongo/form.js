@@ -82,14 +82,14 @@ class FormAPI {
     }
 
     // not working
-    async _saveToIndexDB (key, payload) {
+    async _saveToIndexDB (_id, payload) {
         const tempForms = await IndexDB.get('tempForms') // array
         let tempFormClone = []
         if (tempForms && tempForms.length > 0) {
             tempFormClone = tempForms.slice(0)
         }
 
-        let repeatedItem = tempFormClone.find(item => { return item.key === key })
+        let repeatedItem = tempFormClone.find(item => { return item._id === _id })
         if (repeatedItem) {
             repeatedItem = payload;
         } else {

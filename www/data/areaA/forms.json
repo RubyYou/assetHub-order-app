@@ -529,6 +529,161 @@
                 ]
               }
             ]
+        },
+        "FacilityCheckFormI" : {
+            "formTitle": "人員搭乘設備每日定期檢查紀錄表",
+            "url": "/forms/standard/FacilityCheckFormI",
+            "content": [
+                { "input": "機具編號", "data_input":"machine-number"},
+                { "title": "鋼索狀況及其末端緊結處之固定是否良好", "data":"check1"},
+                { "title": "救命用纖維索、安全帶及金屬配件固定是否良好，有無損傷", "data":"check2"},
+                { "title": "檢視吊臂、支架、工作台等固定是否良好，有無損傷", "data":"check3"},
+                { "title": "漏電自動斷電裝置是否良好", "data":"check4"},
+                { "title": "過捲預防裝置及停止開關是否良好", "data":"check5"},
+                { "title": "制動器作動是否良好", "data":"check6"},
+                { "title": "控制裝置、傾斜矯正裝置是否良好", "data":"check7"},
+                { "title": "升降裝置有無異狀", "data":"check8"},
+                { "title": "記事", "data":"check9"}
+            ]
+        },
+        "FacilityCheckFormJ" : {
+            "formTitle": "門型起重機每日檢查表",
+            "url": "/forms/standard/FacilityCheckFormJ",
+            "content": [
+                { "title": "1.控制部份", "data":"check1"},
+                { "title": "1-a.軌道前進限制", "data":"check2"},
+                { "title": "1-b.軌道後退限制", "data":"check3"},
+                { "title": "1-c.主捲揚上升極限", "data":"check4"},
+                { "title": "1-d.主捲揚左右限制", "data":"check5"},
+                { "title": "1-e.操作盒之按鈕", "data":"check6"},
+                { "title": "2.剎車", "data":"check7"},
+                { "title": "2-a.主捲揚馬達剎車", "data":"check8"},
+                { "title": "2-b.軌道馬達剎車", "data":"check9"},
+                { "title": "3.鋼索", "data":"check10"},
+                { "title": "3-a.有無斷絲、斷股、扭曲變型", "data":"check11"},
+                { "title": "3-b.捲胴、鋼索有否捲繞良好", "data":"check12"},
+                { "title": "4.桁架.軌道是否不變形", "data":"check13"}
+            ]
+        },
+        "SafetyCheckFormA" : {
+            "formTitle": "露天開挖作業安全",
+            "url": "/forms/standard/SafetyCheckFormA",
+            "content": [
+                { "title": "依地質鑽探調查結果擬定開挖計畫，內容應包括開挖方法、順序、進度、使用機械種類及土壓觀測系統", "data":"check1", "note": "改善措施內容", "data_note": "check1Note"},
+                { "title": "開挖前應先調查地下管線，並留下位置記號", "data":"check2", "note": "改善措施內容", "data_note": "check2Note"},
+                { "title": "開挖作業中應指派專人指揮監督", "data":"check3", "note": "改善措施內容", "data_note": "check3Note"},
+                { "title": "應管制作業勞工與作業無關人員進入作業現場", "data":"check4", "note": "改善措施內容", "data_note": "check4Note"},
+                { "title": "對地面水之排洩應隨時加以注意", "data":"check5", "note": "改善措施內容", "data_note": "check5Note"},
+                { "title": "開挖週邊設置安全護欄，出土作業時護欄可部分拆卸由專人管制", "data":"check6", "note": "改善措施內容", "data_note": "check6Note"},
+                { "title": "開挖四周應設置警告標示", "data":"check7", "note": "改善措施內容", "data_note": "check7Note"},
+                { "title": "開挖邊緣每次在暴雨過後，應加以檢查並加強防止滑動及崩塌之措施", "data":"check8", "note": "改善措施內容", "data_note": "check8Note"},
+                { "title": "挖出之土方應堆在開挖邊緣至少一公尺之外，施工機械設備不得置放於開挖邊緣", "data":"check9", "note": "改善措施內容", "data_note": "check9Note"},
+                { "title": "開挖底部應設置排水措施，隨時排除地面水、地下水", "data":"check10", "note": "改善措施內容", "data_note": "check10Note"},
+                { "title": "準備砂袋，以緊急應變，並嚴禁超挖", "data":"check11", "note": "改善措施內容", "data_note": "check11Note"},
+                { "title": "開挖深度≧1.5m以上應設置擋土支撐，擋土支撐作業主管需在場監督", "data":"check12", "note": "改善措施內容", "data_note": "check12Note"},
+                { "title": "開挖作業之機械設備及工具應於每日開工前檢查", "data":"check13", "note": "改善措施內容", "data_note": "check13Note"},
+                { "title": "挖土機迴轉半徑內，禁止人員進入並派專人從事開挖作業之指揮工作", "data":"check14", "note": "改善措施內容", "data_note": "check14Note"},
+                { "title": "機械、車輛之運行路線及進出土石裝卸場所之方法應事前決定並告知勞工", "data":"check15", "note": "改善措施內容", "data_note": "check15Note"}
+            ]
+        },
+        "SafetyCheckFormB" : {
+            "formTitle": "混凝土澆置作業安全",
+            "url": "/forms/standard/SafetyCheckFormB",
+            "content": [
+                { "title": "澆置期間指派領班巡視", "data":"check1", "note": "改善措施內容", "data_note": "check1Note"},
+                { "title": "禁止勞工乘坐於混凝土澆置桶上", "data":"check2", "note": "改善措施內容", "data_note": "check2Note"},
+                { "title": "以起重機具或索道吊運之混凝土桶下方，禁止人員進入", "data":"check3", "note": "改善措施內容", "data_note": "check3Note"},
+                { "title": "應指定安全出入口", "data":"check4", "note": "改善措施內容", "data_note": "check4Note"},
+                { "title": "拌器及輸送管接頭銜接狀況應良好", "data":"check5", "note": "改善措施內容", "data_note": "check5Note"},
+                { "title": "作業時攪拌器攪刀之護蓋不得開啟", "data":"check6", "note": "改善措施內容", "data_note": "check6Note"},
+                { "title": "容積一立方公尺以上之漏斗之混凝土拌合機，應有清掃裝置與護欄", "data":"check7", "note": "改善措施內容", "data_note": "check7Note"},
+                { "title": "未能設置護欄之作業面應架設安全母索，並使勞工佩掛安全帶", "data":"check8", "note": "改善措施內容", "data_note": "check8Note"},
+                { "title": "各分電盤應裝設5-30mA、0.1sec即跳脫之電流動作高速型漏電斷路器", "data":"check9", "note": "改善措施內容", "data_note": "check9Note"},
+                { "title": "橫越通道或勞工作業之電線應架高或保護", "data":"check10", "note": "改善措施內容", "data_note": "check10Note"},
+                { "title": "混凝土壓送車輸送管等有觸及高壓線路之虞時，是否設置絕緣套管並派專人指揮以保持安全距離", "data":"check11", "note": "改善措施內容", "data_note": "check11Note"}
+            ]
+        },
+        "SafetyCheckFormC" : {
+            "formTitle": "通風作業安全自動檢查表",
+            "url": "/forms/standardSections/SafetyCheckFormC",
+            "sections": [
+              { "title": "一般規定",
+                "content": [
+                    { "title": "勞工進入集水井從事作業前，是否先行通風30分鐘", "data":"check1", "note": "改善措施內容", "data_note": "check1Note"},
+                    { "title": "是否依規定施作現場，有足夠自然通風或機械通風", "data":"check2", "note": "改善措施內容", "data_note": "check2Note"},
+                    { "title": "作業前測試氧氣濃度未達到18％時是否禁止勞工作業", "data":"check3", "note": "改善措施內容", "data_note": "check3Note"},
+                    { "title": "作業前測試有害氣體濃度達危害值時是否禁止勞工作業", "data":"check4", "note": "改善措施內容", "data_note": "check4Note"}
+                ]
+              },
+              { "title": "機具設備",
+                "content": [
+                    { "title": "機械馬達是否設置避免人員、廢物吸入之防護罩", "data":"check5", "note": "改善處理情形", "data_note": "check5Note"},
+                    { "title": "機械四周是否設置護欄及警示標誌", "data":"check6", "note": "改善處理情形", "data_note": "check6Note"},
+                    { "title": "通風管是否依據集水井開挖深度延伸，而依序通風管口位置(進、出)設置", "data":"check7", "note": "改善處理情形", "data_note": "check7Note"}
+                ]
+              },
+              { "title": "安全管理",
+                "content": [
+                    { "title": "缺氧作業主管是否在現場，監督勞工作業", "data":"check8", "note": "改善處理情形", "data_note": "check8Note"},
+                    { "title": "是否指派專人每日檢查並負責通風設備開、關及管制", "data":"check9", "note": "改善處理情形", "data_note": "check9Note"},
+                    { "title": "作業期間於井口設置1位監視人員全程監視開挖人員作業情形", "data":"check10", "note": "改善處理情形", "data_note": "check10Note"}
+                ]
+              },
+              { "title": "災害防止",
+                "content": [
+                    { "title": "收工後是否指派專人巡視，確認無人員施工在關閉通風設備", "data":"check11", "note": "改善處理情形", "data_note": "check11Note"},
+                    { "title": "機械通風設備，電線是否架高，有無破皮現象", "data":"check12", "note": "改善處理情形", "data_note": "check12Note"},
+                    { "title": "通風設備故障時，有安全之虞，是否立即停止作業，並疏散到通風良好處", "data":"check13", "note": "改善處理情形", "data_note": "check13Note"},
+                    { "title": "於集水井工程，支撐架每層設置1條救生母索，供監測人員使用", "data":"check14", "note": "改善處理情形", "data_note": "check14Note"}
+                ]
+              }
+            ]
+        },
+        "SafetyCheckFormD" : {
+            "formTitle": "缺氧作業安全自動檢查表",
+            "url": "/forms/standard/SafetyCheckFormD",
+            "content": [
+                { "title": "缺氧作業主管是否選派經教育訓練合格並具備證照擔任之", "data":"check1", "note": "改善措施內容", "data_note": "check1Note"},
+                { "title": "缺氧作業主管是否在場監督及指揮勞工作業", "data":"check2", "note": "改善措施內容", "data_note": "check2Note"},
+                { "title": "有關作業程序、施工步驟及安衛配合措施作業前是否告知勞工", "data":"check3", "note": "改善措施內容", "data_note": "check3Note"},
+                { "title": "作業現場危害狀況作業前是否告知勞工", "data":"check4", "note": "改善措施內容", "data_note": "check4Note"},
+                { "title": "是否實施自動檢查並留存紀錄", "data":"check5", "note": "改善措施內容", "data_note": "check5Note"},
+                { "title": "新進人員是否實施3-4小時缺氧作業勞工安全衛生教育訓練", "data":"check6", "note": "改善措施內容", "data_note": "check6Note"},
+                { "title": "作業前測試氧氣濃度未達到18％時是否禁止勞工作業", "data":"check7", "note": "改善措施內容", "data_note": "check7Note"},
+                { "title": "作業前測試有害氣體濃度未達下列法定值之內時禁止勞工作業",
+                "data":"check8",
+                "customOptions": [
+                  "A.可燃性氣體之濃度低於爆炸下限的30%", "B.硫化氫濃度在10ppm以下", "C.一氧化碳濃度在35ppm以下", "D.其他有害物在容許濃度以下"
+                ], "note": "改善措施內容", "data_note": "check8Note"},
+                { "title": "勞工從事缺氧作業時設置監控設備，指派監視人員", "data":"check9", "note": "改善措施內容", "data_note": "check9Note"},
+                { "title": "是否發現從事該作業勞工有立即發生缺氧危險時是否立即停止作業", "data":"check10", "note": "改善措施內容", "data_note": "check10Note"},
+                { "title": "勞工是否佩戴工作證", "data":"check11", "note": "改善措施內容", "data_note": "check11Note"},
+                { "title": "勞工是否佩戴安全帽", "data":"check12", "note": "改善措施內容", "data_note": "check12Note"},
+                { "title": "作業期間於井口設置1位監視人員全程監視開挖人員作業情形", "data":"check13", "note": "改善措施內容", "data_note": "check13Note"},
+                { "title": "機具設備進場作業前是否經本所相關人員檢查合格才能使用", "data":"check14", "note": "改善措施內容", "data_note": "check14Note"},
+                { "title": "機具設備是否定期保養", "data":"check15", "note": "改善措施內容", "data_note": "check15Note"},
+                { "title": "通風設備是否足夠", "data":"check16", "note": "改善措施內容", "data_note": "check16Note"},
+                { "title": "作業前是否指派專人檢查", "data":"check17", "note": "改善措施內容", "data_note": "check17Note"},
+                { "title": "通風設備是否設置警告標誌", "data":"check18", "note": "改善措施內容", "data_note": "check18Note"},
+                { "title": "通風設備是否設置防雜物吸入之防護罩", "data":"check19", "note": "改善措施內容", "data_note": "check19Note"},
+                { "title": "通風管是否依深度延伸而依序架設", "data":"check20", "note": "改善措施內容", "data_note": "check20Note"},
+                { "title": "勞工從事缺氧危險作業時對進口各該場所勞工是否確認或點名登記", "data":"check21", "note": "改善措施內容", "data_note": "check21Note"},
+                { "title": "缺氧作業場所入口處是否設置注意事項並公告之", "data":"check22", "note": "改善措施內容", "data_note": "check22Note"},
+                { "title": "是否禁止與作業無關人員進入", "data":"check23", "note": "改善措施內容", "data_note": "check23Note"},
+                { "title": "電線是否架高、橫越地面浸泡水中", "data":"check24", "note": "改善措施內容", "data_note": "check24Note"},
+                { "title": "各分電路是否設置漏電斷路器", "data":"check25", "note": "改善措施內容", "data_note": "check25Note"},
+                { "title": "電氣設備是否接地", "data":"check26", "note": "改善措施內容", "data_note": "check26Note"},
+                { "title": "電線劣化絕緣不良是否更換新品", "data":"check27", "note": "改善措施內容", "data_note": "check27Note"},
+                { "title": "禁止使用無插頭電線直接插入使用", "data":"check28", "note": "改善措施內容", "data_note": "check28Note"},
+                { "title": "工區內照明燈嚴禁轉為他用", "data":"check29", "note": "改善措施內容", "data_note": "check29Note"},
+                { "title": "所有用電一律由電箱引接使用", "data":"check30", "note": "改善措施內容", "data_note": "check30Note"},
+                { "title": "禁止活線作業", "data":"check31", "note": "改善措施內容", "data_note": "check31Note"},
+                { "title": "停電時是否指派專人管制或設置「禁止送電」等標示", "data":"check32", "note": "改善措施內容", "data_note": "check32Note"},
+                { "title": "非電氣人員禁止接線使用", "data":"check33", "note": "改善措施內容", "data_note": "check33Note"},
+                { "title": "是否設置急救人員。", "data":"check34", "note": "改善措施內容", "data_note": "check34Note"},
+                { "title": "作業現場是否置備空氣呼吸器、呼吸防護具", "data":"check35", "note": "改善措施內容", "data_note": "check35Note"},
+                { "title": "於集水井之支撐架每層設置1條救生母索，供監測人員使用", "data":"check36", "note": "改善措施內容", "data_note": "check36Note"}
+            ]
         }
     }
 }

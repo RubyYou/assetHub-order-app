@@ -1,3 +1,226 @@
 {
-    "forms": "no data yet"
+    "formList": [
+        {
+            "title": "",
+            "list": [
+                {"title": "施工架作業安全檢查表", "href": "/forms/standard/SafeCheckFormA"},
+                {"title": "模板施工安全檢查表", "href": "/forms/standard/SafeCheckFormB"},
+                {"title": "開挖施工安全檢查表", "href": "/forms/standard/SafeCheckFormC"},
+                {"title": "混凝土澆置作業安全檢查表", "href": "/forms/standard/SafeCheckFormD"},
+                {"title": "鋼筋作業安全檢查表", "href": "/forms/standard/SafeCheckFormE"},
+                {"title": "移動式起重機作業安全檢查表", "href": "/forms/standard/SafeCheckFormF"},
+                {"title": "露天開挖作業安全檢查表", "href": "/forms/standard/SafeCheckFormG"},
+                {"title": "一般安全衛生自主檢查表", "href": "/forms/standard/SafeCheckFormH"},
+                {"title": "施工作業安全衛生檢查表", "href": "/forms/standardSections/SafeCheckFormI"}
+
+            ]
+        }
+    ],
+    "formData": {
+        "SafeCheckFormA": {
+            "formTitle": "施工架作業安全檢查表",
+            "url": "/forms/standard/SafeCheckFormA",
+            "content": [
+                { "title": "1.是否分配勞工工作並在現場監督勞工從事施工架組配、拆卸作業", "data":"check1", "note": "說明及改善情形", "data_note": "check1Note"},
+                { "title": "2.勞工作業時，施工架組配作業主管應在現場指揮監督", "data":"check2", "note": "說明及改善情形", "data_note": "check2Note"},
+                { "title": "3.是否將作業時間、範圍及順序等相關訊息告知作業勞工", "data":"check3", "note": "說明及改善情形", "data_note": "check3Note"},
+                { "title": "4.施工人員是否確實佩帶安全帽與使用安全帶", "data":"check4", "note": "說明及改善情形", "data_note": "check4Note"},
+                { "title": "5.施工架吊送應指派具合格證照之吊掛手負責作業及指揮", "data":"check5", "note": "說明及改善情形", "data_note": "check5Note"},
+                { "title": "6.工作台、走道、階梯等不可有堆積物料阻礙通行之作業", "data":"check6", "note": "說明及改善情形", "data_note": "check6Note"},
+                { "title": "7.架材、立柱、橫檔及踏腳板之固定部份、接合部份是否確實施作", "data":"check7","note": "說明及改善情形", "data_note": "check7Note"},
+                { "title": "8.施工架與結構體間之開口是否舖設狹長型安全網以防人員墜落", "data":"check8", "note": "說明及改善情形", "data_note": "check8Note"},
+                { "title": "9.總高度≧1.5M是否設置供勞工安全上下之階梯", "data":"check9", "note": "說明及改善情形", "data_note": "check9Note"},
+                { "title": "10.是否於施工架上使用梯子、合梯或踏凳等從事作業", "data":"check10", "note": "說明及改善情形", "data_note": "check10Note"},
+                { "title": "11.施工架組配是否架設高1.1M之6 mm鋼索安全母索，並使組裝、拆卸人員一律使用安全帶", "data":"check11", "note": "說明及改善情形", "data_note": "check11Note"},
+                { "title": "12.工作台是否低於施工架立柱頂點1M以上", "data":"check12", "note": "說明及改善情形", "data_note": "check12Note"},
+                { "title": "13.有鄰近或跨越工作走道部份是否設置斜籬或安全網", "data":"check13", "note": "說明及改善情形", "data_note": "check13Note"},
+                { "title": "14.是否置放鋼筋等重物超過施工架荷重限制", "data":"check14", "note": "說明及改善情形", "data_note": "check14Note"},
+                { "title": "15.基腳之下沈、滑動之狀況", "data":"check15", "note": "說明及改善情形", "data_note": "check15Note"},
+                { "title": "16.三角托架螺栓是否固定確實", "data":"check16", "note": "說明及改善情形", "data_note": "check16Note"},
+                { "title": "17.組立時是否在垂直向以≦5.5M、水平向以≦7.5M與結構物妥實連接", "data":"check17", "note": "說明及改善情形", "data_note": "check17Note"},
+                { "title": "18.吊運作業半徑內應實施人員管制，並嚴禁人員進入", "data":"check18", "note": "說明及改善情形", "data_note": "check18Note"}
+            ]
+        },
+        "SafeCheckFormB": {
+            "formTitle": "模板施工安全檢查表",
+            "url": "/forms/standard/SafeCheckFormB",
+            "content": [
+                { "title": "1.是否分配勞工工作及指派模板組配作業主管在現場督導、指揮", "data":"check1", "note": "說明及改善情形", "data_note": "check1Note"},
+                { "title": "2.是否確實監督勞工使用安全帽、安全帶", "data":"check2", "note": "說明及改善情形", "data_note": "check2Note"},
+                { "title": "3.混凝土澆築期間是否請模板支撐作業主管是否檢查模板支撐各部份之連接及斜撐裝置固定情形", "data":"check3", "note": "說明及改善情形", "data_note": "check3Note"},
+                { "title": "4.模板上突出之鐵釘是否拔出或釘入", "data":"check4", "note": "說明及改善情形", "data_note": "check4Note"},
+                { "title": "5.模板拆卸後應整理並不得堆置於勞工作業動線上", "data":"check5", "note": "說明及改善情形", "data_note": "check5Note"},
+                { "title": "6.是否設置禁止與作業無關之人員進入作業區域之告示牌", "data":"check6", "note": "說明及改善情形", "data_note": "check6Note"},
+                { "title": "7.未能設置護欄等防護措施之作業面是否架設高1.1m之鋼索安全母索¸並使每位勞工隨身配掛安全帶", "data":"check7","note": "說明及改善情形", "data_note": "check7Note"},
+                { "title": "8.支柱間距是否恰當", "data":"check8", "note": "說明及改善情形", "data_note": "check8Note"},
+                { "title": "9.支柱與水平墊條架設及支柱墊底之墊木是否穩固", "data":"check9", "note": "說明及改善情形", "data_note": "check9Note"},
+                { "title": "10.支柱之材質是否良好(無變形、腐蝕)", "data":"check10", "note": "說明及改善情形", "data_note": "check10Note"},
+                { "title": "11.模板斜撐材是否足夠", "data":"check11", "note": "說明及改善情形", "data_note": "check11Note"},
+                { "title": "12.從事吊運模板之起重機是否檢查合格", "data":"check12", "note": "說明及改善情形", "data_note": "check12Note"},
+                { "title": "13.起重機操作手、吊掛手是否已有合格證照", "data":"check13", "note": "說明及改善情形", "data_note": "check13Note"},
+                { "title": "14.吊舉物下方是否嚴禁人員進入", "data":"check14", "note": "說明及改善情形", "data_note": "check14Note"}
+            ]
+        },
+        "SafeCheckFormC": {
+            "formTitle": "開挖施工安全檢查表",
+            "url": "/forms/standard/SafeCheckFormC",
+            "content": [
+                { "title": "1.開挖前應先調查地下管線，並留下位置記號", "data":"check1", "note": "說明及改善情形", "data_note": "check1Note"},
+                { "title": "2.挖出之土方應運離施工區域", "data":"check2", "note": "說明及改善情形", "data_note": "check2Note"},
+                { "title": "3.開挖底部應設置排水設施隨時排除地面水地下水", "data":"check3", "note": "說明及改善情形", "data_note": "check3Note"},
+                { "title": "4.開挖四周應設置警告標示", "data":"check4", "note": "說明及改善情形", "data_note": "check4Note"},
+                { "title": "5.應指派有經驗指揮人員從事搬運機械之指揮工作", "data":"check5", "note": "說明及改善情形", "data_note": "check5Note"},
+                { "title": "6.嚴禁與作業無關人員進入作業現場", "data":"check6", "note": "說明及改善情形", "data_note": "check6Note"},
+                { "title": "7.開挖作業之機械器具及工具應於每日開工前檢查", "data":"check7","note": "說明及改善情形", "data_note": "check7Note"},
+                { "title": "8.開挖作業主管時應在現場指揮勞工從事開挖作業", "data":"check8", "note": "說明及改善情形", "data_note": "check8Note"},
+                { "title": "9.應確實監督勞工使用安全帽或安全帶", "data":"check9", "note": "說明及改善情形", "data_note": "check9Note"},
+                { "title": "10.應確實監督起重機械運轉時防止觸及高壓線", "data":"check10", "note": "說明及改善情形", "data_note": "check10Note"},
+                { "title": "11.應無妨害交通之顧慮", "data":"check11", "note": "說明及改善情形", "data_note": "check11Note"},
+                { "title": "12.應確實注意含水量無過高", "data":"check12", "note": "說明及改善情形", "data_note": "check12Note"},
+                { "title": "13.應確實注意開挖四周土質無鬆動", "data":"check13", "note": "說明及改善情形", "data_note": "check13Note"}
+            ]
+        },
+        "SafeCheckFormD": {
+            "formTitle": "混凝土澆置作業安全檢查表",
+            "url": "/forms/standard/SafeCheckFormD",
+            "content": [
+                { "title": "1.泵浦車配設輸送管是否與架空電線保持安全距離", "data":"check1", "note": "說明及改善情形", "data_note": "check1Note"},
+                { "title": "2.懸臂式輸送管是否碰撞鋼筋、模板或工作人員", "data":"check2", "note": "說明及改善情形", "data_note": "check2Note"},
+                { "title": "3.電動工具有無絕緣並設置電斷路器", "data":"check3", "note": "說明及改善情形", "data_note": "check3Note"},
+                { "title": "4.施工人員是否穿著安全鞋、戴安全帽、繫安全帶", "data":"check4", "note": "說明及改善情形", "data_note": "check4Note"},
+                { "title": "5.模板支撐是否牢靠，有無指派專人巡視", "data":"check5", "note": "說明及改善情形", "data_note": "check5Note"},
+                { "title": "6.混凝土澆置順序是否妥善規劃", "data":"check6", "note": "說明及改善情形", "data_note": "check6Note"},
+                { "title": "7.澆置場所開口邊緣是否加設安全欄杆", "data":"check7","note": "說明及改善情形", "data_note": "check7Note"},
+                { "title": "8.混凝土拌合車進出路線是否妨害交通及行人", "data":"check8", "note": "說明及改善情形", "data_note": "check8Note"},
+                { "title": "9.施工人員有否戴安全帽", "data":"check9", "note": "說明及改善情形", "data_note": "check9Note"}
+            ]
+        },
+        "SafeCheckFormE": {
+            "formTitle": "鋼筋作業安全檢查表",
+            "url": "/forms/standard/SafeCheckFormE",
+            "content": [
+                { "title": "1.鋼筋是否分類儲存排放整齊", "data":"check1", "note": "說明及改善情形", "data_note": "check1Note"},
+                { "title": "2.人員暴露於鋼材吊運旋轉範圍時，是否穩定索附於鋼材尾端，便於穩定", "data":"check2", "note": "說明及改善情形", "data_note": "check2Note"},
+                { "title": "3.有無利用鋼筋作為拉索支撐物、工作架或吊重支撐架之情形", "data":"check3", "note": "說明及改善情形", "data_note": "check3Note"},
+                { "title": "4.有無將鋼筋散置於搬運道上之情形", "data":"check4", "note": "說明及改善情形", "data_note": "check4Note"},
+                { "title": "5.勞工作業時有無佩帶手套", "data":"check5", "note": "說明及改善情形", "data_note": "check5Note"},
+                { "title": "6.是否在無安全措施下暴露鋼筋正上方作業", "data":"check6", "note": "說明及改善情形", "data_note": "check6Note"},
+                { "title": "7.鋼筋放置有無妨礙出入口", "data":"check7","note": "說明及改善情形", "data_note": "check7Note"},
+                { "title": "8.鋼筋有無堆置於道路上妨礙交通順暢", "data":"check8", "note": "說明及改善情形", "data_note": "check8Note"},
+                { "title": "9.施工人員有否戴安全帽", "data":"check9", "note": "說明及改善情形", "data_note": "check9Note"}
+            ]
+        },
+        "SafeCheckFormF": {
+            "formTitle": "移動式起重機作業安全檢查表",
+            "url": "/forms/standard/SafeCheckFormF",
+            "content": [
+                { "title": "1.強風、大雨等惡劣氣候下應禁止工作", "data":"check1", "note": "說明及改善情形", "data_note": "check1Note"},
+                { "title": "2.操作式玻璃窗應潔淨而有良好視線", "data":"check2", "note": "說明及改善情形", "data_note": "check2Note"},
+                { "title": "3.底盤伸縮腳架應確實伸展，支撐於堅實地盤", "data":"check3", "note": "說明及改善情形", "data_note": "check3Note"},
+                { "title": "4.桁架及桁架聯結裝置應良好", "data":"check4", "note": "說明及改善情形", "data_note": "check4Note"},
+                { "title": "5.操作人員或駕駛人員於起重機吊有荷重時，不得擅離操作位置或駕駛室", "data":"check5", "note": "說明及改善情形", "data_note": "check5Note"},
+                { "title": "6.合格證照（機具、人員）是否齊全", "data":"check6", "note": "說明及改善情形", "data_note": "check6Note"},
+                { "title": "7.起重機具應經檢查合格方得使用", "data":"check7","note": "說明及改善情形", "data_note": "check7Note"},
+                { "title": "8.過捲預防設備功能應正常", "data":"check8", "note": "說明及改善情形", "data_note": "check8Note"},
+                { "title": "9.過負荷警報裝置功能應正常", "data":"check9", "note": "說明及改善情形", "data_note": "check9Note"},
+                { "title": "10.負載鋼索應良好", "data":"check10", "note": "說明及改善情形", "data_note": "check10Note"},
+                { "title": "11.起重機具之作業應規定一定之運轉指揮信號，並指派專人負責辦理", "data":"check11", "note": "說明及改善情形", "data_note": "check11Note"},
+                { "title": "12.吊鉤應正常", "data":"check12", "note": "說明及改善情形", "data_note": "check12Note"},
+                { "title": "13.吊鉤防滑舌片功能應正常", "data":"check13", "note": "說明及改善情形", "data_note": "check13Note"},
+                { "title": "14.起重機之使用，不得超過額定荷重", "data":"check14", "note": "說明及改善情形", "data_note": "check14Note"},
+                { "title": "15.作業時應禁止人員進入吊舉物下方", "data":"check15", "note": "說明及改善情形", "data_note": "check15Note"},
+                { "title": "16.以吊物為限，不得吊升勞工從事作業", "data":"check16", "note": "說明及改善情形", "data_note": "check16Note"},
+                { "title": "17.接近高架線路應保持安全距離，並由專人監督指揮", "data":"check17", "note": "說明及改善情形", "data_note": "check17Note"}
+            ]
+        },
+        "SafeCheckFormG": {
+            "formTitle": "露天開挖作業安全檢查表",
+            "url": "/forms/standard/SafeCheckFormG",
+            "content": [
+                { "title": "1.開挖前應先調查地下管線，並留下位置記號", "data":"check1", "note": "說明及改善情形", "data_note": "check1Note"},
+                { "title": "2.開挖作業中應指派專人指揮監督", "data":"check2", "note": "說明及改善情形", "data_note": "check2Note"},
+                { "title": "3.應管制作業勞工與作業無關人員進入作業現場", "data":"check3", "note": "說明及改善情形", "data_note": "check3Note"},
+                { "title": "4.對地面水及地下水之排洩應隨時加以注意", "data":"check4", "note": "說明及改善情形", "data_note": "check4Note"},
+                { "title": "5.開挖週邊應設置安全防護，出土作業時護欄可部分拆卸由專人管制，人員靠近開口邊緣，作業完成後應將護欄復原", "data":"check5", "note": "說明及改善情形", "data_note": "check5Note"},
+                { "title": "6.開挖四周應設置警告標示", "data":"check6", "note": "說明及改善情形", "data_note": "check6Note"},
+                { "title": "7.開挖邊緣每次在暴雨過後，應加以檢查並加強防止滑動及崩塌之措施", "data":"check7","note": "說明及改善情形", "data_note": "check7Note"},
+                { "title": "8.開挖底部應設置排水措施，隨時排除地面水、地下水", "data":"check8", "note": "說明及改善情形", "data_note": "check8Note"},
+                { "title": "9.準備砂袋，以緊急應變，並嚴禁超挖", "data":"check9", "note": "說明及改善情形", "data_note": "check9Note"},
+                { "title": "10.開挖深度≧1.5m以上應設置擋土支撐，擋土支撐作業主管需在場監督", "data":"check10", "note": "說明及改善情形", "data_note": "check10Note"},
+                { "title": "11.各分電盤應裝設高速型漏電斷路器(額定感度電流30mA，跳脫時間0.1秒以內)，使用之電動工具應接於負載側，不得跳接", "data":"check11", "note": "說明及改善情形", "data_note": "check11Note"},
+                { "title": "12.橫越通道或勞工作業之電線應架高或保護", "data":"check12", "note": "說明及改善情形", "data_note": "check12Note"},
+                { "title": "13.開挖作業之機械設備及工具應於每日開工前檢查", "data":"check13", "note": "說明及改善情形", "data_note": "check13Note"},
+                { "title": "14.挖土機迴轉半徑內，禁止人員進入並派專人從事開挖作業之指揮工作", "data":"check14", "note": "說明及改善情形", "data_note": "check14Note"},
+                { "title": "15.機械、車輛之運行路線及進出土石裝卸場所之方法應事前決定並告知勞工", "data":"check15", "note": "說明及改善情形", "data_note": "check15Note"}
+            ]
+        },
+        "SafeCheckFormH": {
+            "formTitle": "一般安全衛生自主檢查表",
+            "url": "/forms/standard/SafeCheckFormH",
+            "content": [
+                { "title": "1.構造物及邊坡開挖是否妥當？（安全坡度、擋土設施及水土保持）", "data":"check1", "note": "說明及改善情形", "data_note": "check1Note"},
+                { "title": "2.開挖土方堆置及雜物處理妥當？", "data":"check2", "note": "說明及改善情形", "data_note": "check2Note"},
+                { "title": "3.開挖區周邊有妥切之警示標示及安全措施？(安全欄杆或警示措施等）", "data":"check3", "note": "說明及改善情形", "data_note": "check3Note"},
+                { "title": "4.吊車及重機具作業前檢查？(外觀一般檢驗、運轉試驗及滅火設備）", "data":"check4", "note": "說明及改善情形", "data_note": "check4Note"},
+                { "title": "5.吊車及重機具作業時之作業場所及工作人員管制？", "data":"check5", "note": "說明及改善情形", "data_note": "check5Note"},
+                { "title": "6.作業人員之工作服裝、工作鞋合宜？戴安全帽？（扣緊頤帶）", "data":"check6", "note": "說明及改善情形", "data_note": "check6Note"},
+                { "title": "7.設置臨時活動廁所及飲水設備？", "data":"check7","note": "說明及改善情形", "data_note": "check7Note"},
+                { "title": "8.電器設備、發電機裝設漏電斷路器及接地線？", "data":"check8", "note": "說明及改善情形", "data_note": "check8Note"},
+                { "title": "9.使用電線防止絕緣破壞及老化更新？", "data":"check9", "note": "說明及改善情形", "data_note": "check9Note"},
+                { "title": "10.作業場所配置必要之滅火設備？", "data":"check10", "note": "說明及改善情形", "data_note": "check10Note"},
+                { "title": "11.工作場所光線不良處裝設照明設備？", "data":"check11", "note": "說明及改善情形", "data_note": "check11Note"},
+                { "title": "12.閒雜人員車輛出入之管制？", "data":"check12", "note": "說明及改善情形", "data_note": "check12Note"}
+            ]
+        },
+        "SafeCheckFormI" : {
+            "formTitle": "施工作業安全衛生檢查表",
+            "url": "/forms/standardSections/SafeCheckFormI",
+            "sections": [
+                {  "title": "準備作業",
+                    "content": [
+                        { "title": "設施位置與設計是否符合", "data":"check1", "note": "說明及改善情形", "data_note": "check1Note"},
+                        { "title": "基地高程是否與設計符合", "data":"check2", "note": "說明及改善情形", "data_note": "check2Note"},
+                        { "title": "周邊道路高程及周邊排水坡度是否符合", "data":"check3", "note": "說明及改善情形", "data_note": "check3Note"},
+                        { "title": "基地排水狀況如何", "data":"check4", "note": "說明及改善情形", "data_note": "check4Note"},
+                        { "title": "道路安全及照明設備是否齊全", "data":"check5", "note": "說明及改善情形", "data_note": "check5Note"}
+                    ]
+                },
+                {  "title": "開挖作業",
+                    "content": [
+                        { "title": "開挖四周應設置警告標示", "data":"check6", "note": "說明及改善情形", "data_note": "check6Note"},
+                        { "title": "挖土機迴轉半徑內，禁止人員進入", "data":"check7", "note": "說明及改善情形", "data_note": "check7Note"},
+                        { "title": "開挖面之傾斜度應儘量保持在自由安息角內", "data":"check8", "note": "說明及改善情形", "data_note": "check8Note"},
+                        { "title": "挖土機設置警示燈及蜂鳴器", "data":"check9", "note": "說明及改善情形", "data_note": "check9Note"},
+                        { "title": "開挖四周路面雜草是否清理、路面是否整平", "data":"check10", "note": "說明及改善情形", "data_note": "check10Note"},
+                        { "title": "設施基礎地質狀況是否良好", "data":"check11", "note": "說明及改善情形", "data_note": "check11Note"},
+                        { "title": "基礎開挖堆棄區是否影響交通或鄰近地棄土位置是否洽當", "data":"check12", "note": "說明及改善情形", "data_note": "check12Note"},
+                        { "title": "回填是否確實", "data":"check13", "note": "說明及改善情形", "data_note": "check13Note"},
+                        { "title": "工區雜物是否清理乾淨", "data":"check14", "note": "說明及改善情形", "data_note": "check14Note"}
+                    ]
+                },
+                {  "title": "模板支撐作業",
+                    "content": [
+                        { "title": "模板上突出之鐵釘是否拔出或釘入", "data":"check15", "note": "說明及改善情形", "data_note": "check15Note"},
+                        { "title": "支柱間距是否恰當", "data":"check16", "note": "說明及改善情形", "data_note": "check16Note"},
+                        { "title": "板模高度、頂寬是否符合", "data":"check17", "note": "說明及改善情形", "data_note": "check17Note"},
+                        { "title": "模板斜撐材是否足夠、模板支撐搭接部份是否依規定組合", "data":"check18", "note": "說明及改善情形", "data_note": "check18Note"},
+                        { "title": "板模斜率是否符合設計", "data":"check19", "note": "說明及改善情形", "data_note": "check19Note"},
+                        { "title": "拆模後是否堆置整齊、拆模後的雜物是否清理乾淨", "data":"check20", "note": "說明及改善情形", "data_note": "check20Note"}
+                    ]
+                },
+                {  "title": "鋼筋混凝土作業",
+                    "content": [
+                        { "title": "鋼筋間距是否符合設計", "data":"check21", "note": "說明及改善情形", "data_note": "check21Note"},
+                        { "title": "吊具、鋼索不可有截斷、磨損、變形、扭結", "data":"check22", "note": "說明及改善情形", "data_note": "check22Note"},
+                        { "title": "鋼筋規格、位置是否符合設計", "data":"check23", "note": "說明及改善情形", "data_note": "check23Note"},
+                        { "title": "使用吊車或索道運送鋼筋時，應予紮牢以防滑落", "data":"check24", "note": "說明及改善情形", "data_note": "check24Note"},
+                        { "title": "鋼筋材料推置、預拌車或重車停放地點是否穩固", "data":"check25", "note": "說明及改善情形", "data_note": "check25Note"},
+                        { "title": "混凝土強度及尺寸是否符合設計", "data":"check26", "note": "說明及改善情形", "data_note": "check26Note"},
+                        { "title": "灌漿方法是否正確", "data":"check27", "note": "說明及改善情形", "data_note": "check27Note"},
+                        { "title": "洩水坡度是否足夠", "data":"check28", "note": "說明及改善情形", "data_note": "check28Note"}
+                    ]
+                }
+            ]
+        }
+    }
 }

@@ -31,7 +31,7 @@
             "type": "normal",
             "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9959.74124781881!2d121.09535193053557!3d24.72023238531989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346847cf047d0725%3A0x9f329a36bb0ba15b!2z5ZyL56uL6Ie654Gj5aSn5a246Yar5a246Zmi6ZmE6Kit6Yar6Zmi56u55p2x5YiG6Zmi!5e0!3m2!1szh-TW!2stw!4v1521367627747",
             "images": [
-                "./img/map.png"
+                "./data/areaA/map.png"
             ]
         },
         {

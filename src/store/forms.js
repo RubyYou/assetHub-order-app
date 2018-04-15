@@ -26,14 +26,14 @@ export default {
             console.log(type, data)
             commit('updateSignData', { type, data })
         },
-        saveForm ({ state, commit }, f7) {
+        saveForm ({ state, commit, getters }, f7) {
 
             // change key to mongodb _id
             const key = state.selectedForm._id
 
             f7.showPreloader('儲存中');
             const formData = Object.assign({}, state.selectedForm, { signData: state.signData })
-            const formInfo = Forms[formData.formName]
+            const formInfo = getters.formData[formData.formName]
 
             console.assert(typeof formInfo === "object")
 

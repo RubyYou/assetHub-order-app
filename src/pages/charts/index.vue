@@ -68,7 +68,7 @@ export default {
             ],
             // insert this to the form db
             'slide' : [
-                { title: '傾斜觀測管', href: '/forms/standard/SlideChartFormA' },
+                { title: '傾斜觀測管', href: '/forms/standard/SlideChartFormA' }, // this not working yet
                 { title: '傾度儀', href: '/forms/standardSections/SlideChartFormB' },
             ]
         }

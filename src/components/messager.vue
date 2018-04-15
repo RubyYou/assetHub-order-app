@@ -5,8 +5,8 @@
       <f7-nav-center> 現場溝通 </f7-nav-center>
     </f7-navbar>
     <f7-messages v-for="day in allMessages">
-      <div class="messages-date">
-          {{renderDate (day.date)}}
+      <div v-if='day.messages.length > 0' class="messages-date">
+        {{ renderDate (day.date)}}
       </div>
       <div v-for="message in day.messages"
           :class="renderClass (message.username)"
@@ -64,7 +64,7 @@ export default {
       clear();
     },
     renderDate(date) {
-      return TimeUtils.getDate(date);
+      return TimeUtils.getDate(date)
     },
     renderTime(epochTime) {
       const date = new Date(parseInt(epochTime));

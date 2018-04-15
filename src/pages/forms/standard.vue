@@ -23,6 +23,8 @@
           v-model="form[item.data]"
           @change = "(e) => { updateForm ({name: item.data, data:e.target.value})}">
           <!-- standard option -->
+          <!-- this is due to ios force to select first one, so we need to assign first one as empty value -->
+          <option v-if="!item.customOptions" value=""></option>
           <option v-if="!item.customOptions" value="符合">符合</option>
           <option v-if="!item.customOptions" value="不符合">不符合</option>
           <!-- custom options -->

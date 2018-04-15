@@ -36,7 +36,7 @@ export default {
   methods: {
     getDate(epochTime) {
       const day = new Date(parseInt(epochTime));
-      console.log("day", day);
+      //console.log("day", day);
       const date = moment(day).format("l");
       return date;
     },

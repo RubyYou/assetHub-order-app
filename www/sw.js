@@ -76,11 +76,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "43f0fd051f57521bf2e811cfa0509207"
+    "revision": "7fcfdb4f7f77d9018e2774fb87f1a2ba"
   },
   {
     "url": "js/build.js",
-    "revision": "c4ba02d3362e7d919a5ef1df012a908f"
+    "revision": "48a1126ed36b970b8aef9a96d4334748"
   },
   {
     "url": "js/echarts-all.js",

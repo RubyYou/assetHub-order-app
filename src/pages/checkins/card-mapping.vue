@@ -121,6 +121,7 @@ export default {
         }
         i.f7-icons {
             color: #929292;
+            margin-right: -2px;
         }
     }
 }

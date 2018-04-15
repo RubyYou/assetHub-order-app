@@ -107,7 +107,6 @@ export default {
     },
     computed: {
         dataType () {
-            console.log (this.$route.params.type);
             return this.$route.params.type
         }
     },

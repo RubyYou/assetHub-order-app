@@ -30,7 +30,7 @@
                 <p v-for="input in content.inputs">
                     <b>{{input}} :</b><br/>{{profile[input]}}</p>
                 <p v-for="radio in content.radios">
-                    <b>{{Object.keys(radio)[0]}} :</b> {{profile[Object.keys(radio)[0]]}}</p>
+                    <b>{{Object.keys(radio)[0]}} :</b><br/> {{profile[Object.keys(radio)[0]]}}</p>
                 <i class="f7-icons" @click="deleteProfile(profile._id)">delete_round_fill</i>
             </f7-list-item>
         </f7-list>
@@ -104,6 +104,7 @@ export default {
         }
         i.f7-icons {
             color: #929292;
+            margin-right: -2px;
         }
     }
 }

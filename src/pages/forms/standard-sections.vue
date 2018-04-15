@@ -20,6 +20,8 @@
                     :name="item.title"
                     v-model="form[item.data]"
                     @change = "(e) => { updateForm ({name: item.data, data: e.target.value})}">
+                    <!-- this is due to ios force to select first one, so we need to assign first one as empty value -->
+                    <option value=""></option>
                     <option value="符合">符合</option>
                     <option value="不符合">不符合</option>
                 </select>

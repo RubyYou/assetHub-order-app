@@ -1,0 +1,40 @@
+{
+    "name": "北坑溪-台中分局",
+    "accounts": [
+        {
+            "account": "總指揮",
+            "password": 1234,
+            "accountType": "ADMIN"
+        }, {
+            "account": "副總指揮",
+            "password": 1234,
+            "accountType": "WRITE"
+        }, {
+            "account": "一般人員",
+            "password": 1234,
+            "accountType": "NORMAL"
+        }
+    ],
+    "defaultStaff": ["徐明貿", "吳潭浪", "徐資涵", "蕭永盛"],
+    "database": {
+        "accounts": "accountsB",
+        "messages": "messagesB",
+        "forms": "formsB",
+        "profile": "profilesB",
+        "cards": "cardsB",
+        "cardProfileMapping": "cardProfileMappingB",
+        "checkinHistory": "checkinHistoryB"
+    },
+    "storage": {
+        "photos": "photoB",
+        "pdf": "pdfB"
+    },
+    "api": {
+        "url": "https://dev.iot.airhub.io/api/v1",
+        "socket": "ws://dev.iot.airhub.io",
+        "actions": {
+            "signin": "/signin",
+            "forms": "/forms"
+        }
+    }
+}

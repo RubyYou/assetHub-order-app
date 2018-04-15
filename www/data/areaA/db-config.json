@@ -1,0 +1,43 @@
+{
+    "name": "梅花地滑區-台北分局",
+    "accounts": [
+        {
+            "account": "總指揮",
+            "password": 1234,
+            "accountType": "ADMIN"
+        }, {
+            "account": "副總指揮",
+            "password": 1234,
+            "accountType": "WRITE"
+        }, {
+            "account": "一般人員",
+            "password": 1234,
+            "accountType": "NORMAL"
+        }
+    ],
+    "defaultStaff": [
+        "林瑞隆", "胡寧康", "陳凱廷", "潘柏辰",
+        "劉芳如", "陳彥廷", "黃保山", "林鑫彥"
+    ],
+    "database": {
+        "accounts": "accountsA",
+        "messages": "messagesA",
+        "forms": "formsA",
+        "profile": "profilesA",
+        "cards": "cardsA",
+        "cardProfileMapping": "cardProfileMappingA",
+        "checkinHistory": "checkinHistoryA"
+    },
+    "storage": {
+        "photos": "photoA",
+        "pdf": "pdfA"
+    },
+    "api": {
+        "url": "https://dev.iot.airhub.io/api/v1",
+        "socket": "ws://dev.iot.airhub.io",
+        "actions": {
+            "signin": "/signin",
+            "forms": "/forms"
+        }
+    }
+}

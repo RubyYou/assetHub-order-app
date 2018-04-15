@@ -1,21 +1,21 @@
 import store from '../../store/index'
-import { accountInfo, remoteConfig } from '../../utils/db-config'
+// import { accountInfo, remoteConfig } from '../../utils/db-config'
 import Utils from '../../utils/utils'
 import request from 'superagent'
 
 class LoginAPI {
 
     constructor() {
-        this._accounts = accountInfo // default setup locally
+        this._accounts = [] // default setup locally
         this._isRemote = false
         this._remoteLoginUser = null
-        this.roomName = remoteConfig.database.messages
-        this.formName = remoteConfig.database.forms
     }
 
-    start (account, password, username, successHandler, failHandler) {
 
+    start (account, password, username, successHandler, failHandler) {
+        this._accounts = store.getters.accounts
         this._isRemote = Utils.isOnline()
+
         console.assert(typeof successHandler === 'function')
         console.assert(typeof failHandler === 'function')
 
@@ -26,8 +26,7 @@ class LoginAPI {
         this.failHandler = failHandler
 
         if (this._isRemote === true) {
-            // this._initFirebase()
-            this._signin()
+            this._signin() // need to update remote DB
         } else {
             // local authentication
             this._authenticate(this._accounts)
@@ -43,7 +42,11 @@ class LoginAPI {
     }
 
     _signin () {
-        request.post(remoteConfig.api.url + remoteConfig.api.actions.signin)
+
+        const api = store.getters.api
+        console.assert (api.url && api.actions)
+
+        request.post(api.url + api.actions.signin)
             .send({
                 account: this.account,
                 password: this.password
@@ -63,9 +66,7 @@ class LoginAPI {
     succcess () {
         const payload = {
             account: this.account,
-            username: this.username,
-            roomName: this.roomName,
-            formName: this.formName
+            username: this.username
         }
         store.commit('setUserInfo', payload)
         this.successHandler()

@@ -1,23 +1,32 @@
 import SockeyIoClient from 'socket.io-client'
 import store from '../../store/index'
-import { remoteConfig } from "../../utils/db-config";
 import { FormAPI } from '../index'
 
 class SocketAPI {
 
     constructor() {
         this.socket = null
-        this.account = null
         this.userName = null
         this.roomName = null
         this.formName = null
+        this.database = null
     }
 
     init () {
-        this.socket = SockeyIoClient.connect(remoteConfig.api.socket)
-        this._registerData()
 
-        this.socket.emit('join', this.userData)
+        const socketURL = store.getters.api.socket
+        this.database = store.getters.database
+        console.assert ( typeof socketURL === 'string' && Object.keys(this.database).length > 0 )
+
+        const userInfo = store.getters.getUserInfo
+        this.userName = userInfo.username
+        this.roomName = this.database.messages // for messageDB
+        this.formName = this.database.forms // formDB
+
+        console.assert (this.userName !== null && this.roomName !== null && this.formName !== null)
+
+        this.socket = SockeyIoClient.connect(socketURL)
+        this.socket.emit('join', {userName: this.userName, roomName: this.roomName})
 
         this.socket.on('getDayMessage', data => {
             store.commit('setMessagesByDate', { date: data.date, messages: data.result })
@@ -77,101 +86,92 @@ class SocketAPI {
     }
 
     getForms (date) {
-        this.state = store.getters.getUserInfo
         this.querytData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            formName: this.state.formName,
+            userName: this.userName,
+            roomName: this.roomName,
+            formName: this.formName,
             date: date
         }
         this.socket.emit('getDayForms', this.querytData)
     }
 
     getRFIDCard () {
-        this.state = store.getters.getUserInfo
         this.querytData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            cards: remoteConfig.database.cards,
-            type: remoteConfig.types.RFID
+            userName: this.userName,
+            roomName: this.roomName,
+            cards: this.database.cards,
+            type: store.getters.checkinTypes.RFID
         }
         this.socket.emit('getRFIDCard', this.querytData)
     }
 
     getStaffCard () {
-        this.state = store.getters.getUserInfo
         this.querytData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            cards: remoteConfig.database.cards,
-            type: remoteConfig.types.STAFF
+            userName: this.userName,
+            roomName: this.roomName,
+            cards: this.database.cards,
+            type: store.getters.checkinTypes.STAFF
         }
         this.socket.emit('getStaffCard', this.querytData)
     }
 
     getVehicleCard () {
-        this.state = store.getters.getUserInfo
         this.querytData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            cards: remoteConfig.database.cards,
-            type: remoteConfig.types.VEHICLE
+            userName: this.userName,
+            roomName: this.roomName,
+            cards: this.database.cards,
+            type: store.getters.checkinTypes.VEHICLE
         }
         this.socket.emit('getVehicleCard', this.querytData)
     }
 
     getStaffProfile () {
-        this.state = store.getters.getUserInfo
         this.querytData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            profile: remoteConfig.database.profile,
-            type: remoteConfig.types.STAFF
+            userName: this.userName,
+            roomName: this.roomName,
+            profile: this.database.profile,
+            type: store.getters.checkinTypes.STAFF
         }
         this.socket.emit('getStaffProfile', this.querytData)
     }
 
     getVehicleProfile () {
-        this.state = store.getters.getUserInfo
         this.querytData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            profile: remoteConfig.database.profile,
-            type: remoteConfig.types.VEHICLE
+            userName: this.userName,
+            roomName: this.roomName,
+            profile: this.database.profile,
+            type: store.getters.checkinTypes.VEHICLE
         }
         this.socket.emit('getVehicleProfile', this.querytData)
     }
 
     getTodayStaffCardMapping (today) {
-        this.state = store.getters.getUserInfo
         this.querytData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            cardProfileMapping: remoteConfig.database.cardProfileMapping,
-            type: remoteConfig.types.STAFF,
+            userName: this.userName,
+            roomName: this.roomName,
+            cardProfileMapping: this.database.cardProfileMapping,
+            type: store.getters.checkinTypes.STAFF,
             date: today
         }
         this.socket.emit('getTodayStaffCardMapping', this.querytData)
     }
 
     getTodayVehicleCardMapping (today) {
-        this.state = store.getters.getUserInfo
         this.querytData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            cardProfileMapping: remoteConfig.database.cardProfileMapping,
-            type: remoteConfig.types.VEHICLE,
+            userName: this.userName,
+            roomName: this.roomName,
+            cardProfileMapping: this.database.cardProfileMapping,
+            type: store.getters.checkinTypes.VEHICLE,
             date: today
         }
         this.socket.emit('getTodayVehicleCardMapping', this.querytData)
     }
 
     getTodyCheckInHistory (today) {
-        this.state = store.getters.getUserInfo
         this.querytData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            checkinHistory: remoteConfig.database.checkinHistory,
+            userName: this.userName,
+            roomName: this.roomName,
+            checkinHistory: this.database.checkinHistory,
             date: today
         }
         console.log("querytData", this.querytData)
@@ -180,11 +180,10 @@ class SocketAPI {
     }
 
     createProfile (payload) {
-        this.state = store.getters.getUserInfo
         this.insertData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            profile: remoteConfig.database.profile,
+            userName: this.userName,
+            roomName: this.roomName,
+            profile: this.database.profile,
             payload: payload
         }
         console.log('createProfile', this.insertData)
@@ -192,11 +191,10 @@ class SocketAPI {
     }
 
     deleteProfile (payload) {
-        this.state = store.getters.getUserInfo
         this.deleteData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            profile: remoteConfig.database.profile,
+            userName: this.userName,
+            roomName: this.roomName,
+            profile: this.database.profile,
             date: payload.today,
             type: payload.type,
             _id: payload._id
@@ -206,11 +204,10 @@ class SocketAPI {
     }
 
     createMapping (payload) {
-        this.state = store.getters.getUserInfo
         this.insertData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            cardProfileMapping: remoteConfig.database.cardProfileMapping,
+            userName: this.userName,
+            roomName: this.roomName,
+            cardProfileMapping: this.database.cardProfileMapping,
             payload: payload
         }
         console.log('createMapping', this.insertData)
@@ -218,11 +215,10 @@ class SocketAPI {
     }
 
     deleteMapping (payload) {
-        this.state = store.getters.getUserInfo
         this.deleteData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            cardProfileMapping: remoteConfig.database.cardProfileMapping,
+            userName: this.userName,
+            roomName: this.roomName,
+            cardProfileMapping: this.database.cardProfileMapping,
             date: payload.today,
             type: payload.type,
             _id: payload._id
@@ -232,22 +228,20 @@ class SocketAPI {
     }
 
     createNewForm (formvalues) {
-        this.state = store.getters.getUserInfo
         this.insertData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            formName: this.state.formName,
+            userName: this.userName,
+            roomName: this.roomName,
+            formName: this.formName,
             formvalues: formvalues
         }
         this.socket.emit('createNewForm', this.insertData)
     }
 
     updateOldForm (key, formvalues) {
-        this.state = store.getters.getUserInfo
         this.updateData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            formName: this.state.formName,
+            userName: this.userName,
+            roomName: this.roomName,
+            formName: this.formName,
             formvalues: formvalues,
             key: key
         }
@@ -255,10 +249,9 @@ class SocketAPI {
     }
 
     sendMessage (message) {
-        this.state = store.getters.getUserInfo
         this.messageData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
+            userName: this.userName,
+            roomName: this.roomName,
             message: message
         }
         this.socket.emit('sendMessage', this.messageData)
@@ -266,23 +259,12 @@ class SocketAPI {
 
     getMessages (date) {
         console.log(date)
-        this.state = store.getters.getUserInfo
         this.querytData = {
-            userName: this.state.username,
-            roomName: this.state.roomName,
+            userName: this.userName,
+            roomName: this.roomName,
             date: date
         }
         this.socket.emit('getMessages', this.querytData)
-    }
-
-    _registerData () {
-        this.state = store.getters.getUserInfo
-        this.userData = {
-            account: this.state.account,
-            userName: this.state.username,
-            roomName: this.state.roomName,
-            formName: this.state.formName
-        }
     }
 }
 

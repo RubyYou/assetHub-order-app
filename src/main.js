@@ -9,6 +9,7 @@ import CacheController from './offline/cacheController'
 
 Vue.use (Framework7Vue)
 
+
 // Init App
 new Vue({
   el: '#app',

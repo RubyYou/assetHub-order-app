@@ -17,7 +17,7 @@
 <script>
 import moment from 'moment';
 import Utils from '../../utils/utils'
-import { posts } from './posts-data.js'
+import { mapState } from "vuex"
 import 'moment/locale/zh-tw';
 
 export default {
@@ -28,10 +28,12 @@ export default {
         normal : 'info_fill',
         important : 'bookmark_fill'
       },
-      albumCount : 0,
-      posts: posts
+      albumCount : 0
     }
   },
+  computed: mapState({
+    posts: state => state.config.postData
+  }),
   methods: {
     renderHeader (title, type) {
       const icon = '<i class="f7-icons ' + this.typeMap [type] + '\">' + this.typeMap [type] + '</i>';
@@ -108,5 +110,20 @@ export default {
 .f7-icons {
   margin-right: 10px;
   vertical-align: sub;
+}
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+  width: 100%;
+  th, td {
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    font-weight:normal;
+    padding:10px 5px;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    word-break:normal;
+  }
 }
 </style>

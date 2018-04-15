@@ -71,7 +71,6 @@
 import SignPopup from '../../components/signPopup.vue'
 import RepeatInput from './components/repeat-input.vue'
 import { mapState, mapActions } from 'vuex'
-import * as FormData from './form-data'
 
 // IMPORTANT : Here sets which form to update
 let formName = "";
@@ -82,11 +81,16 @@ export default {
     SignPopup,
     RepeatInput
   },
-  data: function() {
-    return FormData[formName];
-  },
   computed: mapState({
-    form: state => state.forms.selectedForm
+    form: state => state.forms.selectedForm,
+    content: state => {
+      console.log (state.config.formData[formName].content)
+      return state.config.formData[formName].content
+    },
+    formTitle: state => {
+      console.log (state.config.formData[formName].formTitle)
+      return state.config.formData[formName].formTitle
+    }
   }),
   methods: mapActions(["updateForm", "updateSign", "saveForm"]),
   beforeCreate() {

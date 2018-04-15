@@ -20,10 +20,6 @@
             "_id" : ObjectId("5ac253550c81af5499d25a84"),
             "serialNO" : "y8327ryufewfkew", // machie number 0000000012345660
             "machineName" : "machine 1",
-            "location" : {
-                "longitude" : 0.0001,
-                "latitude" : 11.0001
-            },
             "type":"RFID"
         },
         {
@@ -88,11 +84,11 @@
             cardID: "y8327ryufewfkew1",
             serialNO: "y8327ryufewfkew",
             createDate: "" ,
-            checkinTime:""
+            createTime:""
         },
     ]
-
 */
+
 import { CheckInAPI } from '../apis/index'
 
 export default {
@@ -107,7 +103,14 @@ export default {
         vehicleCardMapping: [], // only today's record
         vehicleCheckInHistory: [], // only today's record
 
-        RFID: [] // this include location info and id
+        RFID: [], // this include location info and id
+
+        // static data
+        types: {
+            "RFID": "rfid",
+            "STAFF": "staff",
+            "VEHICLE": "vehicle"
+        }
     },
     getters : {
         allCheckInInfo: state => {
@@ -121,7 +124,8 @@ export default {
         },
         getvehicleCardMapping: state => {
             return state.vehicleCardMapping
-        }
+        },
+        checkinTypes: state => state.types
     },
     actions: {
         createProfile ({ state, commit }, { type, info, f7 }) {

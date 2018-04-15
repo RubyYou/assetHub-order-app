@@ -53,7 +53,6 @@
 <script>
 import SignPopup from '../../components/signPopup.vue'
 import { mapState, mapActions } from 'vuex'
-import * as FormData from './form-data'
 
 // IMPORTANT : Here sets which form to update
 let formName = ""
@@ -63,11 +62,13 @@ export default {
   components: {
     SignPopup
   },
-  data: function () {
-    return FormData[formName]
-  },
   computed: mapState ({
-    form: state => state.forms.selectedForm
+    form: state => state.forms.selectedForm,
+    sections: state => { return state.config.formData[formName].sections },
+    formTitle: state => {
+      console.log (state.config.formData[formName].formTitle)
+      return state.config.formData[formName].formTitle
+    }
   }),
   methods: mapActions (['updateForm', 'updateSign', 'saveForm']),
   beforeCreate () {

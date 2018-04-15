@@ -4,6 +4,7 @@ import { accountInfo, localConfig, remoteConfig } from '../utils/db-config'
 import Utils from '../utils/utils'
 import forms from './forms'
 import checkin from './checkin'
+import config from './config'
 
 Vue.use(Vuex)
 
@@ -11,25 +12,21 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   modules: {
     forms: forms,
-    checkin: checkin
+    checkin: checkin,
+    config: config
   },
   state: {
     userInfo: {
       account: '',
-      username: '',
-      roomName: '',
-      formName: ''
+      username: ''
     },
     allMessages: []
   },
   mutations: {
-    setUserInfo (state, payload) {
-      state.userInfo.account = payload.account
-      state.userInfo.username = payload.username
-      state.userInfo.roomName = payload.roomName
-      state.userInfo.formName = payload.formName
+    setUserInfo (state, {account, username} ) {
+      state.userInfo.account = account
+      state.userInfo.username = username
     },
-
     setMessagesByDate (state, { date, messages }) {
       // formate
       // console.log ('setMessagesByDate', date, messages)

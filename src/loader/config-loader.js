@@ -36,6 +36,7 @@ class ConfigLoader {
         this._getJSON (workConfigRef, 'db-config.json', this._setDBConfig.bind (this), this._setError.bind(this))
         this._getJSON (workConfigRef, 'posts.json', this._setPostData.bind (this), this._setError.bind (this))
         this._getJSON (workConfigRef, 'forms.json', this._setFormData.bind (this), this._setError.bind (this))
+        this._getJSON (workConfigRef, 'charts.json', this._setChartData.bind (this), this._setError.bind (this))
     }
 
     _setDBConfig (data, status, xhr) {
@@ -66,6 +67,15 @@ class ConfigLoader {
         if (status == 200) {
             console.assert (data)
             store.commit('setFormData', JSON.parse(data))
+        } else {
+            this._setError(status)
+        }
+    }
+
+    _setChartData (data, status, xhr) {
+        if (status == 200) {
+            console.assert (data)
+            store.commit('setChartData', JSON.parse(data))
         } else {
             this._setError(status)
         }

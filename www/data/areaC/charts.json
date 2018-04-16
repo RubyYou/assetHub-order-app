@@ -1,0 +1,23 @@
+{
+    "chartList": [
+        {
+            "title": "水位計",
+            "list": [
+                { "title": "水位計A", "href": "/charts/templateName/DataEndPoint" },
+                { "title": "水位計B", "href": "/charts/templateName/DataEndPoint" }
+            ]
+        },
+        {
+            "title": "雨量計",
+            "list": [
+                { "title": "雨量計", "href": "/charts/templateName/DataEndPoint" }
+            ]
+        },
+        {
+            "title": "傾斜計",
+            "list": [
+                { "title": "傾斜計", "href": "/charts/templateName/DataEndPoint" }
+            ]
+        }
+    ]
+}

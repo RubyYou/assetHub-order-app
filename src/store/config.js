@@ -1,4 +1,12 @@
 // this is for static data
+const testApi = {
+    url: "http://localhost:3000/api/v1",
+    socket: "ws://localhost:3001",
+    actions: {
+        signin: "/signin",
+        forms: "/forms"
+    }
+}
 
 export default {
     state: {
@@ -10,7 +18,9 @@ export default {
         accounts: [],
         postData: null,
         formData: null,
-        formList: null
+        formList: null,
+        chartList: null,
+        chartInfo: null // not implement yet
     },
     getters: {
         isSet : state => state.isSet,
@@ -27,7 +37,8 @@ export default {
 
             state.name = name
             state.accounts = accounts
-            state.api = api
+            // state.api = api
+            state.api = testApi
             state.database = database
             state.defaultStaff = [''].concat (defaultStaff) // should add an empty value for not select
             state.isSet = true
@@ -40,6 +51,14 @@ export default {
             console.assert (payload.formList && payload.formData)
             state.formData = payload.formData
             state.formList = payload.formList
+        },
+        setChartData (state, payload) {
+            console.assert (payload.chartList)
+            state.chartList = payload.chartList
+
+            if (payload.chartFormData) {
+                state.formData = { ...state.formData, ...payload.chartFormData}
+            }
         }
     }
 }

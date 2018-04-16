@@ -23,6 +23,14 @@ workbox.clientsClaim();
  */
 self.__precacheManifest = [
   {
+    "url": "data/areaA/map.png",
+    "revision": "b2f8b3146988a4818fe2744de5022d17"
+  },
+  {
+    "url": "data/areaB/process.png",
+    "revision": "929f8d6cb501b1d62ad5478cabe39664"
+  },
+  {
     "url": "img/icons/icon_114x114.png",
     "revision": "79f019f90cd614d5948dbab9aa37f643"
   },
@@ -37,10 +45,6 @@ self.__precacheManifest = [
   {
     "url": "img/icons/icon_72x72.png",
     "revision": "0237b98e5883247e25c109fd6a6d1dd4"
-  },
-  {
-    "url": "img/map.png",
-    "revision": "b2f8b3146988a4818fe2744de5022d17"
   },
   {
     "url": "img/startup/320x460.png",
@@ -80,7 +84,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/build.js",
-    "revision": "43b7145cbf046f9093035decfb26508d"
+    "revision": "e683498ef7c6ede7dad4850ef58ca268"
   },
   {
     "url": "js/echarts-all.js",

@@ -66,15 +66,16 @@ export default {
     form: state => state.forms.selectedForm,
     sections: state => { return state.config.formData[formName].sections },
     formTitle: state => {
-      console.log (state.config.formData[formName].formTitle)
       return state.config.formData[formName].formTitle
+    },
+    sign: state => {
+      return state.config.formData[formName].sign
     }
   }),
   methods: mapActions (['updateForm', 'updateSign', 'saveForm']),
   beforeCreate () {
     console.assert (this.$route.params.formDataName)
     formName = this.$route.params.formDataName
-    //console.log ('formDataName', formName)
     this.$store.commit ('setSelectedForm', formName);
   }
 }

@@ -5,75 +5,32 @@
             <f7-nav-center>IOT數據</f7-nav-center>
         </f7-navbar>
         <br/> <br/>
-        <f7-block-title>重量觀測</f7-block-title>
-        <f7-list>
-            <f7-list-item
-                v-for="chart in chartList.weight"
-                :link="chart.href"
-                :title="chart.title">
-            </f7-list-item>
-        </f7-list>
-
-        <f7-block-title>氣體觀測</f7-block-title>
-        <f7-list>
-            <f7-list-item
-                v-for="chart in chartList.gas"
-                :link="chart.href"
-                :title="chart.title">
-            </f7-list-item>
-        </f7-list>
-
-        <f7-block-title>傾斜觀測 (手動輸入)</f7-block-title>
-        <f7-list>
-            <f7-list-item
-                v-for="chart in chartList.slide"
-                :link="chart.href"
-                :title="chart.title">
-            </f7-list-item>
-        </f7-list>
+        <div v-for="charts in chartList">
+            <f7-block-title >
+                {{charts.title}}
+            </f7-block-title>
+            <f7-list>
+                <f7-list-item
+                    v-for="chart in charts.list"
+                    :link="chart.href"
+                    :title="chart.title">
+                </f7-list-item>
+            </f7-list>
+        </div>
     </f7-page>
 </template>
 
 <script>
-//<Chart :chartData="chartData" ></Chart>
-import Chart from '../../components/chart.vue';
+// <Chart :chartData="chartData" ></Chart>
+// import Chart from '../../components/chart.vue';
 // import { waterPressure, crackMeasure, rainAmount,
 //         sliperMeasure, tiltMeter, waterLevel, bodyTempature } from '../../utils/data';
+import { mapState } from "vuex"
 
 export default {
-//   components: {
-//     Chart
-//   },
-  data: function () {
-    return {
-        // chartData: waterPressure,
-        // dataMap : {
-        //     'waterPressure' : waterPressure,
-        //     'crackMeasure' : crackMeasure,
-        //     'rainAmount' : rainAmount,
-        //     'sliperMeasure' : sliperMeasure,
-        //     'tiltMater' : tiltMeter,
-        //     'waterLevel' : waterLevel,
-        //     'bodyTempature' : bodyTempature
-        // },
-        chartList : {
-            'weight' : [
-                { title: '拉力計', href: '/charts/weight' }, // all not implemented
-            ],
-            'gas': [
-                { title: '可燃氣體', href: '/charts/combustible' },
-                { title: '一氧化碳', href: '/charts/co' },
-                { title: '硫化氫', href: '/charts/h2s' },
-                { title: '氧氣', href: '/charts/o2' }
-            ],
-            // insert this to the form db
-            'slide' : [
-                { title: '傾斜觀測管', href: '/forms/standard/SlideChartFormA' }, // this not working yet
-                { title: '傾度儀', href: '/forms/standardSections/SlideChartFormB' },
-            ]
-        }
-    }
-  },
+  computed: mapState({
+    chartList: state => state.config.chartList
+  }),
   methods: {
     updateChart (name) {
         this.chartData = this.dataMap [name];

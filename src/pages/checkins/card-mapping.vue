@@ -1,37 +1,55 @@
 <template>
+
+    <!-- DB: whiteCard: can mapped, need to fill out all info and insert, get it out each day -->
     <f7-page data-page="card-mapping" class="card-mapping">
         <f7-block-title>{{content.title}} <br/> {{date}}</f7-block-title>
         <div class="add" @click="togglePanel">
             <i v-if="mode==='normal'" class="f7-icons">add_round_fill</i>
             <i v-if="mode==='create'" class="f7-icons">delete_round_fill</i>
         </div>
+
         <!-- create Mapping -->
         <f7-list id="create-mapping" v-if="mode==='create'" form>
             <f7-list-item>
-                <f7-label>{{content.mapInfo.profileLabel}}</f7-label>
-                <select name="profileName" >
-                    <option v-for="profile in profiles"
-                            :value="profile[content.mapInfo.profileLabel]">
-                            {{profile[content.mapInfo.profileLabel]}}
-                    </option>
-                </select>
+                <f7-label>姓名</f7-label>
+                <f7-input name="name" type="text" />
             </f7-list-item>
             <f7-list-item>
-                <f7-label>{{content.mapInfo.cardLabel}}</f7-label>
+                <f7-label>卡片ID</f7-label>
                 <select name="cardID" >
                     <option v-for="card in cards" :value="card.cardID">{{card.cardName}}</option>
                 </select>
             </f7-list-item>
             <f7-list-item>
-                <f7-button @click="createMapping" fill>{{content.createBtn}}</f7-button>
+                <f7-label>血型</f7-label>
+                <f7-input name="bloodType" ref="bloodType" type="select">
+                    <option value="O">O</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="AB">AB</option>
+                </f7-input>
+            </f7-list-item>
+            <f7-list-item>
+                <f7-label>職務</f7-label>
+                <f7-input name="role" ref="role" type="text" />
+            </f7-list-item>
+             <f7-list-item>
+                <f7-label>公司</f7-label>
+                <f7-input name="company" ref="company" type="text" />
+            </f7-list-item>
+            <f7-list-item>
+                <f7-button @click="createMapping" fill>新建配對記錄</f7-button>
             </f7-list-item>
         </f7-list>
 
         <f7-list class="mapping-list" form>
             <f7-list-item v-for="mapping in mappings">
-                <p><b>{{content.mapInfo.cardLabel}}</b><br/> {{mapping.cardName}}</p>
-                <p><b>{{content.mapInfo.profileLabel}}</b><br/>{{mapping.profileName}}</p>
-                <i class="f7-icons" @click="deleteMapping(mapping._id)">delete_round_fill</i>
+                <p><b>姓名</b><br/> {{mapping.name}} </p>
+                <p><b>卡片ID</b><br/> {{mapping.cardName}} </p>
+                <p><b>血型</b><br/> {{mapping.bloodType}} </p>
+                <p><b>職務</b><br/> {{mapping.role}} </p>
+                <p><b>公司</b><br/> {{mapping.company}} </p>
+                <i class="f7-icons" @click="deleteMapping (mapping._id)">delete_round_fill</i>
             </f7-list-item>
         </f7-list>
     </f7-page>
@@ -39,8 +57,9 @@
 
 <script>
 import { mapState } from "vuex";
-import TimeUtils from "../../utils/time-utils";
+import TimeUtils from "../../utils/time-utils"
 
+// currently only used in staff mapping
 const today = TimeUtils.substractDayToDBFormate(0);
 
 export default {
@@ -57,17 +76,13 @@ export default {
   },
   computed: {
     profiles() {
-      return this.$store.state.checkin[this.dataType];
+      return this.$store.state.checkin.staff;
     },
     cards() {
-      const cardFrom =
-        this.dataType === "staff" ? "staffCardIds" : "vehicleCardIds";
-      return this.$store.state.checkin[cardFrom];
+      return this.$store.state.checkin.staffCardIds;
     },
     mappings() {
-      const mappingFrom =
-        this.dataType === "staff" ? "staffCardMapping" : "vehicleCardMapping";
-      return this.$store.state.checkin[mappingFrom];
+      return this.$store.state.checkin.staffCardMapping;
     }
   },
   methods: {

@@ -1,19 +1,4 @@
-/*
-    template for result
-    staff: {
-        name: "",
-        companyName: "aaaa",
-        workType: "", // 水泥工 、模板工、打石工 (select)
-        bloodType: "" // Ｏ Ａ B AB (select)
-    }
-
-    vehicle: {
-        number: "aaaa",
-        companyName: "aaaa",
-        vehicleType: "", // 起重機  挖土機 吊機 (select)
-    }
-
-    mongodb model schema
+/* // no card and no mapping for the cardsA
     cardsA :[
         {
             // RFID
@@ -28,13 +13,6 @@
             "cardID" : "y8327ryufewfkew1", cardSerialNo: 50313a313331343033383132383130323033303738323535323535
             "cardName" : "card1",
             "type":"STAFF"
-        },
-        {
-            // vehicle
-            "_id" : ObjectId("5ac253550c81af5499d25a86"),
-            "cardID" : "y8327ryufewfkew2",
-            "cardName" : "card1",
-            "type":"VEHICLE"
         }
     ]
 
@@ -66,14 +44,6 @@
             profileName: "aaaa",
             createDate: "" ,
             "type":"STAFF"
-        },
-        {
-            // vehicle
-            "_id" : ObjectId("5ac253550c81af5499d25a86"),
-            cardID: "y8327ryufewfkew1",
-            profileName: "aaaa",
-            createDate: "" ,
-            "type":"VEHICLE"
         }
     ]
 
@@ -94,13 +64,11 @@ import { CheckInAPI } from '../apis/index'
 export default {
     state: {
         staff: [], // profile data
-        staffCardIds: [], // ID data
-        staffCardMapping: [], // only today's record
+        staffCardIds: [], // not signed card Id
+        staffCardMapping: [], // current day mapping
         staffCheckInHistory: [], // only today's record
 
-        vehicle: [], // profile data,
-        vehicleCardIds: [], // ID data,
-        vehicleCardMapping: [], // only today's record
+        vehicle: [], // profile data, no empty vehicle cards
         vehicleCheckInHistory: [], // only today's record
 
         RFID: [], // this include location info and id
@@ -110,7 +78,9 @@ export default {
             "RFID": "rfid",
             "STAFF": "staff",
             "VEHICLE": "vehicle"
-        }
+        },
+
+        selected: {}
     },
     getters : {
         allCheckInInfo: state => {
@@ -122,12 +92,13 @@ export default {
         getstaffCardMapping: state => {
             return state.staffCardMapping
         },
-        getvehicleCardMapping: state => {
-            return state.vehicleCardMapping
-        },
         checkinTypes: state => state.types
     },
     actions: {
+        // update default staff or vehicle profile
+        updateProfile ({state, commit}, {_id, info, type, f7}) {
+            CheckInAPI.updateProfile(type, _id, info, f7)
+        },
         createProfile ({ state, commit }, { type, info, f7 }) {
             console.assert(type === "staff" || type === "vehicle")
             CheckInAPI.createProfile(type, info, f7)
@@ -178,8 +149,13 @@ export default {
         setAllCheckInInfo (state, payload) {
             for (let key in payload) {
                 state [key] = payload[key]
-                //console.log ('setAllCheckInInfo', key, state[key])
             }
+        },
+        setProfileSelected (state, {id, type}) {
+            console.assert (type === 'staff' || type === 'vehicle') // see use which data
+            const profileType = (type === 'staff') ? 'staff': 'vehicle'
+            const selectedData = state[type].find(profile => profile._id == id)
+            state.selected = selectedData
         }
     }
 }

@@ -10,14 +10,13 @@ class LoginAPI {
         this._remoteLoginUser = null
     }
 
-
     start (account, password, username, successHandler, failHandler) {
         this._accounts = store.getters.accounts
         this._isRemote = Utils.isOnline()
-
         console.assert(typeof successHandler === 'function')
         console.assert(typeof failHandler === 'function')
 
+        this.accountDB = store.getters.database.accounts
         this.account = account
         this.password = password
         this.username = username
@@ -48,7 +47,8 @@ class LoginAPI {
         request.post(api.url + api.actions.signin)
             .send({
                 account: this.account,
-                password: this.password
+                password: this.password,
+                accountDB: this.accountDB
             }).end((err, res) => {
                 let user = res.body.results
                 if (err || user.length === 0) {

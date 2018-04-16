@@ -48,6 +48,7 @@ class SocketAPI {
             store.commit('setStateInfo', payload)
         })
 
+        // not used
         this.socket.on('getVehicleCard', data => {
             const payload = { name: 'vehicleCardIds', data: data.result }
             console.log('getVehicleCard', payload)
@@ -72,6 +73,7 @@ class SocketAPI {
             store.commit('setStateInfo', payload)
         })
 
+        // not used
         this.socket.on('getTodayVehicleCardMapping', data => {
             const payload = { name: 'vehicleCardMapping', data: data.result }
             console.log('getTodayVehicleCardMapping', payload)
@@ -115,14 +117,27 @@ class SocketAPI {
         this.socket.emit('getStaffCard', this.querytData)
     }
 
-    getVehicleCard () {
-        this.querytData = {
+    // getVehicleCard () {
+    //     this.querytData = {
+    //         userName: this.userName,
+    //         roomName: this.roomName,
+    //         cards: this.database.cards,
+    //         type: store.getters.checkinTypes.VEHICLE
+    //     }
+    //     this.socket.emit('getVehicleCard', this.querytData)
+    // }
+
+    updateProfile (payload) {
+        this.updateData = {
             userName: this.userName,
             roomName: this.roomName,
-            cards: this.database.cards,
-            type: store.getters.checkinTypes.VEHICLE
+            profile: this.database.profile,
+            payload: payload.info,
+            type: payload.type,
+            _id: payload._id
         }
-        this.socket.emit('getVehicleCard', this.querytData)
+        console.log('updateProfile', this.updateData)
+        this.socket.emit('updateProfile', this.updateData)
     }
 
     getStaffProfile () {

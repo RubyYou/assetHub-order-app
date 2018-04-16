@@ -46,7 +46,6 @@ export default {
             }
 
             if (key && key.length > 0) {
-                console.log('updateForm')
                 FormAPI.updateForm(key, formData, callback)
             } else {
                 FormAPI.createNewForm(formData, callback)

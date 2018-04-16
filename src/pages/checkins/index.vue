@@ -10,9 +10,9 @@
             <i class="f7-icons">add_round_fill</i>
             <span class="tabbar-label">{{profile[dataType].title}}</span>
         </f7-link>
-        <f7-link tab-link="#tab2" >
+        <f7-link v-if="dataType === 'staff'" tab-link="#tab2" >
             <i class="f7-icons">document_text_fill</i>
-            <span class="tabbar-label">建立卡片記錄</span>
+            <span class="tabbar-label">建立記錄</span>
         </f7-link>
         <f7-link tab-link="#tab3">
             <i class="f7-icons">check_round</i>
@@ -27,7 +27,7 @@
                     :dataType="dataType"
                 />
             </f7-tab>
-            <f7-tab id="tab2">
+            <f7-tab id="tab2" v-if="dataType === 'staff'">
                 <CardMapping
                     :content="getMapping ()"
                     :dataType="dataType"
@@ -64,35 +64,28 @@ export default {
             },
             profile: {
                 staff: {
-                    title: "人員履歷",
-                    inputs: ["姓名", "公司名稱"],
-                    radios: [{"工作項目": ["水泥工", "模板工", "打石工"]},
-                            {"血型": ["O", "A", "B", "AB"]}],
-                    createBtn : "新建人員"
+                    title: "人員卡片履歷",
+                    details: [
+                        { key: "name", ref: '姓名', show: true},
+                        { key: "cardName", ref:'卡號', show: false},
+                        { key: "bloodType", ref: '血型', show: true},
+                        { key: "company", ref: '公司', show: false},
+                        { key: "role", ref: '職務', show: true}
+                    ]
                 },
                 vehicle: {
-                    title: "車輛履歷",
-                    inputs: ["車輛編號", "公司名稱"],
-                    radios: [{"車種": ["起重機", "挖土機", "吊機"]}],
-                    createBtn: "新建車輛"
-                }
+                    title: "車輛卡片履歷",
+                    details: [
+                        { key: "carNumber", ref: '車號', show: false},
+                        { key: "cardName", ref:'卡號', show: true},
+                        { key: "company", ref: '公司', show: false},
+                        { key: "info", ref: '資訊', show: true}
+                    ]
+                } // carNumber is number of Plate --> // cardId is only for mapping
             },
             mapping: {
                 staff: {
-                    title: "今日人員卡片配對",
-                    mapInfo: {
-                        profileLabel: "姓名",
-                        cardLabel: "卡片ID"
-                    },
-                    createBtn : "新建人員卡片配對"
-                },
-                vehicle: {
-                    title: "今日車輛卡片配對",
-                    mapInfo: {
-                        profileLabel: "車輛編號",
-                        cardLabel: "卡片ID"
-                    },
-                    createBtn: "新建車輛卡片配對"
+                    title: "今日人員卡片配對"
                 }
             },
             checkinHistroy: {

@@ -61,25 +61,24 @@ class CheckInAPI {
     }
 
     _setRemoteDB () {
-        SocketAPI.getRFIDCard()
+        SocketAPI.getRFIDCard() // checkin machine
         SocketAPI.getStaffCard()
-        SocketAPI.getVehicleCard()
+        // SocketAPI.getVehicleCard()
         SocketAPI.getStaffProfile()
         SocketAPI.getVehicleProfile()
         SocketAPI.getTodayStaffCardMapping(today)
-        SocketAPI.getTodayVehicleCardMapping(today)
         SocketAPI.getTodyCheckInHistory(today)
     }
 
-    createProfile (type, payload) {
-        payload.type = type
-        payload.createDate = today
+    // update default staff or vehicle profile
+    updateProfile (type, _id, info, f7) {
+        let payload = { _id: _id, info: info, type: type }
 
         if (!Utils.isOnline()) {
-            this._saveToIndexDB ('tempProfile', 'create', null, payload)
+            this._saveToIndexDB ('tempProfile', 'create', null, payload) // this is not correct yet
             this._showHidePreloader (f7, '本記錄暫存中, 連線後會再寄出本紀錄')
         } else {
-            SocketAPI.createProfile(payload)
+            SocketAPI.updateProfile (payload)
             this._showHidePreloader (f7, '儲存中')
         }
     }
@@ -100,8 +99,8 @@ class CheckInAPI {
         }
     }
 
+    // this is create Mapping and also profile information
     createMapping (type, payload, f7) {
-        console.log(type, payload)
         payload.createDate = today
         payload.type = type
         if (!Utils.isOnline()) {

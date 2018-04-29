@@ -50,7 +50,7 @@ import store from '../../store/index'
 export default {
   name: "Profile",
   props: {
-    content: Object, // details
+    content: Object,
     dataType: String
   },
   data: function() {

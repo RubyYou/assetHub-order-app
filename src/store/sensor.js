@@ -6,12 +6,16 @@ export default {
         water: {}, // could have two
         rain: {},
 
-        trackers: {} // get all devices
+        trackers: {}, // get all devices
+        locations: {},
     },
     actions: {},
-    mutations : {
-        setSensorData (state, {type, data}) {
-            state [type] = data
+    mutations: {
+        setSensorData(state, {type, data}) {
+            state[type] = data
+        },
+        setLocationData(state, data) {
+            state.locations = data
         }
-    }
+    },
 }

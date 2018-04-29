@@ -51,10 +51,10 @@ class SensorAPI {
         })
     }
     // get all Traker info first before getting all tracker data
-    _getTrackerDeviceInfo () { // this will also goes to vehicle mapping stuff
+    // this will also goes to vehicle mapping stuff
+    _getTrackerDeviceInfo () {
         const type = 'tracker'
         const url = this._api.url + this._api.actions.device + '/' + this._database.deviceMapping + '/' + type
-        console.log(url)
 
         request.get(url).end((err, res) => {
             let results = res.body.results
@@ -62,11 +62,29 @@ class SensorAPI {
                 console.log(type, results)
                 // two type is different
                 let payload = {type: 'trackers', data: results}
+                this._getLocationData ()
                 store.commit('setSensorData', payload)
             } else {
                 this.fail()
             }
         })
+    }
+
+    _getLocationData () {
+        const type = 'tracker'
+        // formate : /sensors/:tableName/:date/:type
+        const baseUrl = this._api.url + this._api.actions.sensor + '/' + this._database.sensor + '/' + today + '/'
+        const url = baseUrl + type
+        request
+            .get(url)
+            .end((err, res) => {
+                let results = res.body.results
+                if (results) {
+                    store.commit('setLocationData', results)
+                } else {
+                    this.fail()
+                }
+            })
     }
 
     fail () {

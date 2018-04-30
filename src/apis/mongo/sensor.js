@@ -7,9 +7,7 @@ const today = TimeUtils.substractDayToDBFormate(0)
 
 class SensorAPI {
 
-    constructor() {
-        this._data = {}
-    }
+    constructor() {}
 
     init() {
         const chartInfo = store.getters.chartInfo
@@ -17,12 +15,12 @@ class SensorAPI {
         for (let key in chartInfo) {
             if (chartInfo[key].type)
             {
-                this._getChartData (chartInfo[key].type)
+                this._getChartData(chartInfo[key].type, chartInfo[key].params || {})
             }
         }
     }
 
-    _getChartData (type) {
+    _getChartData (type, params) {
         const api = store.getters.api
         const database = store.getters.database
         console.assert (api.url && api.actions && database.sensor)
@@ -33,24 +31,19 @@ class SensorAPI {
 
         console.log (url)
 
-        request.get (url).end ((err, res) => {
+        request.get (url).query (params).end ((err, res) => {
             let results = res.body.results
             if (results) {
-                console.log ('results', results)
+                console.log (type, params, results)
                 let payload = {
                     type: type,
                     data: results
                 }
-                //this._data[type] = results
                 store.commit ('setSensorData', payload)
             } else {
                 this.fail ()
             }
         })
-    }
-
-    getSensor (type) {
-        return this._data[type] ? this._data[type] : []
     }
 
     fail () {

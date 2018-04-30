@@ -3,8 +3,8 @@
         {
             "title": "雨量及水位",
             "list": [
-                { "title": "水位計", "href": "/charts/waterTemplate/water" },
-                { "title": "雨量計", "href": "/charts/rainTemplate/rain" }
+                { "title": "水位計", "href": "/charts/water/water" },
+                { "title": "雨量計", "href": "/charts/rain/rain" }
             ]
         },
         {
@@ -18,17 +18,17 @@
         "water": {
             "title": "水位計",
             "type": "water",
-            "format": {}
+            "params": { "baseDistance": 395 }
         },
         "rain": {
             "title": "雨量計",
             "type": "rain",
-            "format": {}
+            "params": {"baseMM": 55}
         },
         "location": {
             "title": "追蹤定位",
             "type": "tracker",
-            "format": {}
+            "params": {}
         }
     }
 }

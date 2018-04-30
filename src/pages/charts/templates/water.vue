@@ -4,7 +4,7 @@
             <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
             <f7-nav-center>水位計</f7-nav-center>
         </f7-navbar>
-        <br/><br/> <br/>
+        <br/><br/>
         <f7-block-title>{{date}}</f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
     </f7-page>

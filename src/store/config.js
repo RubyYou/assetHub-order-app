@@ -1,11 +1,12 @@
 // this is for static data
 const testApi = {
-    url: "http://localhost:3000/api/v1",
-    socket: "ws://localhost:3001",
+    url: 'http://localhost:3000/api/v1',
+    socket: 'ws://localhost:3001',
     actions: {
-        signin: "/signin",
-        forms: "/forms",
-        sensor: "/sensors"
+        signin: '/signin',
+        forms: '/forms',
+        sensor: '/sensors',
+        device: '/devices'
     }
 }
 

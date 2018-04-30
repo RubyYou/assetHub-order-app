@@ -5,7 +5,8 @@ export default {
     state: {
         water: {}, // could have two
         rain: {},
-        location: {}
+
+        trackers: {} // get all devices
     },
     actions: {},
     mutations : {

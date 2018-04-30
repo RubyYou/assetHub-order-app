@@ -35,6 +35,10 @@
         <span class="icon video-stream"></span>
         <p>監視系統</p>
       </f7-button>-->
+      <f7-button href="/tracking">
+        <span class="icon video-stream"></span>
+        <p>追蹤定位</p>
+      </f7-button>
 
     </f7-block>
   </f7-page>

@@ -4,7 +4,7 @@
 
         <!-- modify profile -->
         <f7-list id="modify-profile" v-if="mode==='open'" form>
-            <f7-list-item  v-for="item in content.details">
+            <f7-list-item v-for="item in content.details">
                 <f7-label> {{item.ref}} </f7-label>
                 <f7-input
                     v-if="item.key === 'cardName'" readonly :name="item.key"
@@ -14,6 +14,14 @@
                     v-else :name="item.key"
                     type="text" v-model="selected [item.key]"
                 />
+            </f7-list-item>
+            <f7-list-item v-if="dataType === 'vehicle'">
+                <f7-label> 追蹤裝置 </f7-label>
+                <select name="tracker" v-model="selected.tracker">
+                    <option v-for="device in trackers" :value="device.deviceAddress">
+                        {{device.deviceAddress}}
+                    </option>
+                </select>
             </f7-list-item>
             <f7-list-item>
                 <f7-button @click="editProfile(selected._id)" fill> 修改 </f7-button>
@@ -54,6 +62,9 @@ export default {
   computed: {
     profiles() {
       return this.$store.state.checkin[this.dataType];
+    },
+    trackers() {
+        return this.$store.state.sensor.trackers
     },
     selected () {
         return this.$store.state.checkin.selected

@@ -28,7 +28,8 @@
         "cards": "cardsC",
         "cardProfileMapping": "cardProfileMappingC",
         "checkinHistory": "checkinHistoryC",
-        "sensor": "sensorC"
+        "sensor": "sensorC",
+        "deviceMapping": "deviceMappingC"
     },
     "storage": {
         "photos": "photoC",
@@ -40,7 +41,8 @@
         "actions": {
             "signin": "/signin",
             "forms": "/forms",
-            "sensor": "/sensors"
+            "sensor": "/sensors",
+            "device": "/devices"
         }
     }
 }

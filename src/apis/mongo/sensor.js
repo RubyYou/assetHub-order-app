@@ -7,26 +7,31 @@ const today = TimeUtils.substractDayToDBFormate(0)
 
 class SensorAPI {
 
-    constructor() {}
+    constructor() {
+        this._api = {}
+        this._database = {}
+    }
 
     init() {
-        const chartInfo = store.getters.chartInfo
+        this._api = store.getters.api
+        this._database = store.getters.database
+        console.assert(this._api.url && this._api.actions && this._database.sensor)
 
+        const chartInfo = store.getters.chartInfo
         for (let key in chartInfo) {
             if (chartInfo[key].type)
             {
                 this._getChartData(chartInfo[key].type, chartInfo[key].params || {})
             }
         }
+
+        this._getTrackerDeviceInfo ()
     }
 
-    _getChartData (type, params) {
-        const api = store.getters.api
-        const database = store.getters.database
-        console.assert (api.url && api.actions && database.sensor)
 
+    _getChartData (type, params) {
         // formate : /sensors/:tableName/:date/:type
-        const baseUrl = api.url + api.actions.sensor + "/" + database.sensor + '/' + today + "/"
+        const baseUrl = this._api.url + this._api.actions.sensor + "/" + this._database.sensor + '/' + today + "/"
         const url = baseUrl + type
 
         console.log (url)
@@ -34,7 +39,7 @@ class SensorAPI {
         request.get (url).query (params).end ((err, res) => {
             let results = res.body.results
             if (results) {
-                console.log (type, params, results)
+                //console.log (type, params, results)
                 let payload = {
                     type: type,
                     data: results
@@ -42,6 +47,24 @@ class SensorAPI {
                 store.commit ('setSensorData', payload)
             } else {
                 this.fail ()
+            }
+        })
+    }
+    // get all Traker info first before getting all tracker data
+    _getTrackerDeviceInfo () { // this will also goes to vehicle mapping stuff
+        const type = 'tracker'
+        const url = this._api.url + this._api.actions.device + '/' + this._database.deviceMapping + '/' + type
+        console.log(url)
+
+        request.get(url).end((err, res) => {
+            let results = res.body.results
+            if (results) {
+                console.log(type, results)
+                // two type is different
+                let payload = {type: 'trackers', data: results}
+                store.commit('setSensorData', payload)
+            } else {
+                this.fail()
             }
         })
     }

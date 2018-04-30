@@ -6,12 +6,6 @@
                 { "title": "水位計", "href": "/charts/water/water" },
                 { "title": "雨量計", "href": "/charts/rain/rain" }
             ]
-        },
-        {
-            "title": "追蹤定位",
-            "list": [
-                { "title": "追蹤", "href": "/charts/mapTemplate/tracker" }
-            ]
         }
     ],
     "chartInfo": {
@@ -24,11 +18,6 @@
             "title": "雨量計",
             "type": "rain",
             "params": {"baseMM": 55}
-        },
-        "location": {
-            "title": "追蹤定位",
-            "type": "tracker",
-            "params": {}
         }
     }
 }

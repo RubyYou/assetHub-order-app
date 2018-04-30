@@ -4,9 +4,10 @@
             <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
             <f7-nav-center>雨量筒</f7-nav-center>
         </f7-navbar>
-        <br/><br/> <br/>
-        <f7-block-title>{{date}}</f7-block-title>
-        <p>今日總雨量累計 {{totalAmount}} mm </p>
+        <br/><br/>
+        <f7-block-title>{{date}}
+            <span class="amount"> 雨量累計 {{totalAmount}} mm </span>
+        </f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
     </f7-page>
 </template>
@@ -78,3 +79,8 @@ export default {
     }
 }
 </script>
+<<style lang="scss">
+.amount {
+    float: right;
+}
+</style>>

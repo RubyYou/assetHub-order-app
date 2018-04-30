@@ -25,7 +25,7 @@ export default [
     },
     {
         path: '/charts/rain/:dataType',
-        component: require('./pages/charts/templates/rain.vue')
+        component: require('./pages/charts/templates/rain.vue'),
     },
     {
         path: '/forms',
@@ -42,5 +42,9 @@ export default [
     {
         path: '/ipcam',
         component: require('./pages/ipcam/index.vue'),
+    },
+    {
+        path: '/tracking',
+        component: require('./pages/tracking/index.vue'),
     },
 ]

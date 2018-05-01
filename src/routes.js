@@ -20,6 +20,10 @@ export default [
     component: require ('./pages/charts/index.vue')
   },
   {
+    path: '/charts/waterTemplate/:dataType',
+    component: require ('./pages/charts/water/waterTemplate.vue')
+  },
+  {
     path: '/forms',
     component: require ('./pages/forms/index.vue')
   },
@@ -30,5 +34,9 @@ export default [
   {
     path: '/checkins/:type',
     component: require ('./pages/checkins/index.vue')
+  },
+  {
+    path: '/ipcam',
+    component: require ('./pages/ipcam/index.vue')
   }
 ]

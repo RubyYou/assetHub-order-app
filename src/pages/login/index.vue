@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { MessageAPI, FormAPI, LoginAPI, CheckInAPI, SocketAPI } from "../../apis/index";
+import { MessageAPI, FormAPI, LoginAPI, CheckInAPI, SocketAPI, SensorAPI } from "../../apis/index";
 import { mapState } from "vuex"
 
 export default {
@@ -96,6 +96,7 @@ export default {
       FormAPI.init();
       MessageAPI.init();
       CheckInAPI.init();
+      SensorAPI.init();
       this.goToMain();
     },
     loginFailHandler() {

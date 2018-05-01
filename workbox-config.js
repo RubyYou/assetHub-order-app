@@ -3,6 +3,7 @@ module.exports = {
     globPatterns: [
       '**/*.{html,js,png}',
       'fonts/*.*',
+      'data/**/*.*',
       'css/app.css',
       'css/build.css',
       'css/framework7-icons.css',

@@ -4,7 +4,8 @@ const testApi = {
     socket: "ws://localhost:3001",
     actions: {
         signin: "/signin",
-        forms: "/forms"
+        forms: "/forms",
+        sensor: "/sensors"
     }
 }
 
@@ -20,7 +21,7 @@ export default {
         formData: null,
         formList: null,
         chartList: null,
-        chartInfo: null // not implement yet
+        chartInfo: null // all setting related to how to render a chart
     },
     getters: {
         isSet : state => state.isSet,
@@ -28,7 +29,8 @@ export default {
         database: state => state.database,
         api: state => state.api,
         postData: state => state.postData,
-        formData: state => state.formData
+        formData: state => state.formData,
+        chartInfo: state => state.chartInfo
     },
     actions: {},
     mutations : {
@@ -37,7 +39,7 @@ export default {
 
             state.name = name
             state.accounts = accounts
-            // state.api = api
+            //state.api = api
             state.api = testApi
             state.database = database
             state.defaultStaff = [''].concat (defaultStaff) // should add an empty value for not select
@@ -58,6 +60,10 @@ export default {
 
             if (payload.chartFormData) {
                 state.formData = { ...state.formData, ...payload.chartFormData}
+            }
+
+            if (payload.chartInfo) {
+                state.chartInfo = payload.chartInfo
             }
         }
     }

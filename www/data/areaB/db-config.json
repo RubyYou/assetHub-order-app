@@ -15,7 +15,11 @@
             "accountType": "NORMAL"
         }
     ],
-    "defaultStaff": ["徐明貿", "吳潭浪", "徐資涵", "蕭永盛"],
+    "defaultStaff": [
+        "徐明貿", "吳潭浪", "徐資涵", "蕭永盛",
+        "林強中", "蕭名淳", "蕭文凱", "徐國偉",
+        "陳如盛", "陳建宇", "黃正翰", "楊竣丞", "劉育安"
+    ],
     "database": {
         "accounts": "accountsB",
         "messages": "messagesB",

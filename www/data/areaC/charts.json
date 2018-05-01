@@ -1,23 +1,34 @@
 {
     "chartList": [
         {
-            "title": "水位計",
+            "title": "雨量及水位",
             "list": [
-                { "title": "水位計A", "href": "/charts/templateName/DataEndPoint" },
-                { "title": "水位計B", "href": "/charts/templateName/DataEndPoint" }
+                { "title": "水位計", "href": "/charts/waterTemplate/water" },
+                { "title": "雨量計", "href": "/charts/rainTemplate/rain" }
             ]
         },
         {
-            "title": "雨量計",
+            "title": "追蹤定位",
             "list": [
-                { "title": "雨量計", "href": "/charts/templateName/DataEndPoint" }
-            ]
-        },
-        {
-            "title": "傾斜計",
-            "list": [
-                { "title": "傾斜計", "href": "/charts/templateName/DataEndPoint" }
+                { "title": "追蹤", "href": "/charts/mapTemplate/tracker" }
             ]
         }
-    ]
+    ],
+    "chartInfo": {
+        "water": {
+            "title": "水位計",
+            "type": "water",
+            "format": {}
+        },
+        "rain": {
+            "title": "雨量計",
+            "type": "rain",
+            "format": {}
+        },
+        "location": {
+            "title": "追蹤定位",
+            "type": "tracker",
+            "format": {}
+        }
+    }
 }

@@ -21,10 +21,6 @@
 </template>
 
 <script>
-// <Chart :chartData="chartData" ></Chart>
-// import Chart from '../../components/chart.vue';
-// import { waterPressure, crackMeasure, rainAmount,
-//         sliperMeasure, tiltMeter, waterLevel, bodyTempature } from '../../utils/data';
 import { mapState } from "vuex"
 
 export default {

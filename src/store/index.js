@@ -5,6 +5,7 @@ import Utils from '../utils/utils'
 import forms from './forms'
 import checkin from './checkin'
 import config from './config'
+import sensor from './sensor'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,8 @@ export default new Vuex.Store({
   modules: {
     forms: forms,
     checkin: checkin,
-    config: config
+    config: config,
+    sensor: sensor
   },
   state: {
     userInfo: {

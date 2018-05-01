@@ -1,7 +1,7 @@
 import Utils from '../utils/utils'
 import store from '../store/index'
 
-const applicationAreaRef = 'areaB'
+const applicationAreaRef = 'areaA'
 const parentFolder = './data'
 const maximumLoadingTime = 10000
 

@@ -3,8 +3,6 @@ import { SensorAPI } from '../apis/index'
 
 export default {
     state: {
-        water: {}, // could have two
-        rain: {},
 
         trackers: {}, // get all devices
         locations: {},

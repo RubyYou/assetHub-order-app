@@ -128,8 +128,8 @@ export default {
 .button.button-fill {
     width: 100%;
 }
-.card-mapping{
-    .item-inner{
+.card-mapping {
+    .item-inner {
         p {
             font-size: 12px;
             color: #929292;

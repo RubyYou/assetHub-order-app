@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     profiles() {
-      return this.$store.state.checkin[this.dataType];
+        return this.$store.state.checkin[this.dataType];
     },
     trackers() {
         return this.$store.state.sensor.trackers

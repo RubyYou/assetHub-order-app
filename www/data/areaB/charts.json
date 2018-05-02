@@ -3,14 +3,14 @@
         {
             "title": "水位計",
             "list": [
-                { "title": "水位計A", "href": "/charts/templateName/DataEndPoint" },
-                { "title": "水位計B", "href": "/charts/templateName/DataEndPoint" }
+                { "title": "水位計A", "href": "/charts/water/waterA" },
+                { "title": "水位計B", "href": "/charts/water/waterB" }
             ]
         },
         {
             "title": "雨量計",
             "list": [
-                { "title": "雨量計", "href": "/charts/templateName/DataEndPoint" }
+                { "title": "雨量計", "href": "/charts/rain/rain" }
             ]
         },
         {
@@ -19,5 +19,22 @@
                 { "title": "傾斜計", "href": "/charts/templateName/DataEndPoint" }
             ]
         }
-    ]
+    ],
+    "chartInfo": {
+        "waterA": {
+            "title": "水位計",
+            "type": "waterA",
+            "params": { "baseDistance": 570 }
+        },
+        "waterB": {
+            "title": "水位計",
+            "type": "waterB",
+            "params": { "baseDistance": 99 }
+        },
+        "rain": {
+            "title": "雨量計",
+            "type": "rain",
+            "params": {"baseMM": 55 }
+        }
+    }
 }

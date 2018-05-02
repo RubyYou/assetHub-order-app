@@ -9,6 +9,7 @@
             <span class="amount"> 雨量累計 {{totalAmount}} mm </span>
         </f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
+        <div v-else class="no-data"> <p>今日還沒有雨量數據</p> </div>
     </f7-page>
 </template>
 <script>
@@ -40,14 +41,12 @@ export default {
                 grid: { y2: 120 },
                 xAxis : [ { type: 'category', data: []}],
                 yAxis : [ { type: 'value', data: [-5, 0, 5, 10]}],
-                series : [
-                    { name: 'rain', type: 'line', showAllSymbol: true, data: []}
-                ]
+                series : [ { name: 'rain', type: 'line', showAllSymbol: true, data: []}]
             }
         }
     },
     computed: mapState({
-        rainData: state => state.sensor.rain
+        rainData: state => state.sensor[dataType]
     }),
     methods: {
         getClock (epochDate) {
@@ -75,12 +74,24 @@ export default {
         dataType = this.$route.params.dataType
     },
     mounted () {
-        this.formateData ()
+        if (this.rainData.length > 0) {
+            this.formateData ()
+        }
     }
 }
 </script>
 <<style lang="scss">
 .amount {
     float: right;
+}
+.no-data {
+    text-align: center;
+    display: block;
+    width: 95%;
+    background: gainsboro;
+    margin-left: 2.5%;
+    margin-top: 5%;
+    height: 50px;
+    padding-top: 6px;
 }
 </style>>

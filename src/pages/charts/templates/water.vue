@@ -7,6 +7,7 @@
         <br/><br/>
         <f7-block-title>{{date}}</f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
+        <div v-else class="no-data"> <p>今日還沒有水位數據</p> </div>
     </f7-page>
 </template>
 <script>
@@ -44,7 +45,7 @@ export default {
         }
     },
     computed: mapState({
-        waterData: state => state.sensor.water
+        waterData: state => state.sensor[dataType]
     }),
     methods: {
         getClock (epochDate) {
@@ -71,7 +72,9 @@ export default {
         dataType = this.$route.params.dataType
     },
     mounted () {
-        this.formateData ()
+        if (this.waterData.length > 0) {
+            this.formateData () // there is 2, waterA and waterB, check how to do
+        }
     }
 }
 </script>

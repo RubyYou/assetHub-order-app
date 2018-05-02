@@ -27,7 +27,9 @@
         "profile": "profilesA",
         "cards": "cardsA",
         "cardProfileMapping": "cardProfileMappingA",
-        "checkinHistory": "checkinHistoryA"
+        "checkinHistory": "checkinHistoryA",
+        "sensor": "sensorA",
+        "deviceMapping": "deviceMappingA"
     },
     "storage": {
         "photos": "photoA",
@@ -38,7 +40,9 @@
         "socket": "ws://dev.iot.airhub.io",
         "actions": {
             "signin": "/signin",
-            "forms": "/forms"
+            "forms": "/forms",
+            "sensor": "/sensors",
+            "device": "/devices"
         }
     }
 }

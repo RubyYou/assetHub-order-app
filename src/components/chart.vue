@@ -10,11 +10,6 @@ export default {
     props: [
         'chartData'
     ],
-    data : function () {
-        return {
-            message: 'hello'
-        }
-    },
     methods: {
         setChartSize (element) {
             const width = window.innerWidth * 1.15;
@@ -46,8 +41,7 @@ export default {
 
 <style >
 .chart {
-    margin-left: -40px;
-    margin-bottom: 30px;
+    margin-left: -20px;
 }
 
 </style>

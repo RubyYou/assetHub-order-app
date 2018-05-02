@@ -80,11 +80,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "43f0fd051f57521bf2e811cfa0509207"
+    "revision": "c9461b2cc80bcf01ed4a9e39b735412c"
   },
   {
     "url": "js/build.js",
-    "revision": "6bf3f070c5b951671a8b9e1464538170"
+    "revision": "e95f4a041abde56307565b3d6a6445aa"
   },
   {
     "url": "js/echarts-all.js",
@@ -132,7 +132,7 @@ self.__precacheManifest = [
   },
   {
     "url": "data/areaB/db-config.json",
-    "revision": "9484b0fae82c5fdf06c52ed3ffac7e19"
+    "revision": "532dd98c6eb5a2ca7110059d635582ec"
   },
   {
     "url": "data/areaB/forms.json",
@@ -144,11 +144,11 @@ self.__precacheManifest = [
   },
   {
     "url": "data/areaC/charts.json",
-    "revision": "6eb4cdd45ee53a8e9c6835d224908f80"
+    "revision": "df11ff5075fa3b06cca42f413342fb2e"
   },
   {
     "url": "data/areaC/db-config.json",
-    "revision": "fb99ba2f9389d35242d05a7c676b954e"
+    "revision": "8364a84b01f03f0372c4f19135c43f54"
   },
   {
     "url": "data/areaC/forms.json",

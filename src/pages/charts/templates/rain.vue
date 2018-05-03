@@ -5,8 +5,10 @@
             <f7-nav-center>雨量筒</f7-nav-center>
         </f7-navbar>
         <br/><br/>
-        <f7-block-title>{{date}}
-            <span class="amount"> 雨量累計 {{totalAmount}} mm </span>
+        <f7-block-title class="day-title">
+            <f7-button @click="getSubstrackDayData(1)"> < </f7-button>
+            <p>{{date}} / 雨量累計 {{totalAmount}} mm  </p>
+            <f7-button @click="getSubstrackDayData(-1)"> > </f7-button>
         </f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
         <div v-else class="no-data"> <p>今日還沒有雨量數據</p> </div>
@@ -35,14 +37,14 @@ export default {
             date: TimeUtils.getDate(today),
             totalAmount: 0,
             chartOptions: {
-                title : { text : '雨量筒', align: 'center', x: 55 },
                 dataZoom: { show: true, start : 20, end: 80 },
                 legend : { data : ['降雨量 - mm'] },
                 grid: { y2: 120 },
                 xAxis : [ { type: 'category', data: []}],
                 yAxis : [ { type: 'value', data: [-5, 0, 5, 10]}],
                 series : [ { name: 'rain', type: 'line', showAllSymbol: true, data: []}]
-            }
+            },
+            currentDayIndex : 0
         }
     },
     computed: mapState({
@@ -54,19 +56,36 @@ export default {
             return d.getHours () + ':' + d.getMinutes () + ':' + d.getSeconds ();
         },
         formateData () {
-            let mms = []
-            let time = []
+            console.log ('this.rainData', this.date, this.rainData)
+            if (this.rainData.length > 0) {
+                let mms = []
+                let time = []
+                this.rainData.map (item => {
+                    mms.push (item.mm)
+                    const clock = this.getClock (item.time)
+                    time.push(clock)
+                })
+                this.chartOptions.series[0].data = mms
+                this.chartOptions.xAxis[0].data = time
+                this.chartData = this.chartOptions
+                this.totalAmount = mms[mms.length-1]
+            } else {
+                this.chartData = null
+            }
+        },
+        getSubstrackDayData (substrackNumber) {
+            console.assert (typeof substrackNumber === "number")
+            const finalNumber = this.currentDayIndex + substrackNumber
+            const fetchDate = TimeUtils.substractDayToDBFormate (finalNumber);
+            this.currentDayIndex = finalNumber
 
-            this.rainData.map (item => {
-                mms.push (item.mm)
-                const clock = this.getClock (item.time)
-                time.push(clock)
-            })
-
-            this.chartOptions.series[0].data = mms
-            this.chartOptions.xAxis[0].data = time
-            this.chartData = this.chartOptions
-            this.totalAmount = mms[mms.length-1]
+            const payload = {
+                type: dataType,
+                date: fetchDate,
+                callBack : this.formateData
+            }
+            this.$store.dispatch ("getSensorData", payload);
+            this.date = TimeUtils.getDate(fetchDate)
         }
     },
     beforeCreate () {
@@ -74,16 +93,11 @@ export default {
         dataType = this.$route.params.dataType
     },
     mounted () {
-        if (this.rainData.length > 0) {
-            this.formateData ()
-        }
+        this.formateData ()
     }
 }
 </script>
 <<style lang="scss">
-.amount {
-    float: right;
-}
 .no-data {
     text-align: center;
     display: block;
@@ -93,5 +107,20 @@ export default {
     margin-top: 5%;
     height: 50px;
     padding-top: 6px;
+}
+.day-title {
+    display: flex;
+    flex-direction: row;
+    margin: 35px 20px 10px;
+    p {
+        margin: 8px 20px;
+        width: calc(100% - 40px);
+        text-align: center;
+    }
+    .button {
+        background: #007aff;
+        color: white;
+        border: none;
+    }
 }
 </style>>

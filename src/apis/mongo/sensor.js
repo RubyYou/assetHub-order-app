@@ -21,7 +21,7 @@ class SensorAPI {
         for (let key in chartInfo) {
             if (chartInfo[key].type)
             {
-                this._getChartData(chartInfo[key].type, chartInfo[key].params || {})
+                this.getChartData(chartInfo[key].type, today, chartInfo[key].params || {})
             }
         }
 
@@ -29,22 +29,22 @@ class SensorAPI {
     }
 
 
-    _getChartData (type, params) {
+    getChartData (type, date, params, callBack) {
         // formate : /sensors/:tableName/:date/:type
-        const baseUrl = this._api.url + this._api.actions.sensor + "/" + this._database.sensor + '/' + today + "/"
+        const baseUrl = this._api.url + this._api.actions.sensor + '/' + this._database.sensor + '/' + date + '/'
         const url = baseUrl + type
-
         console.log (url)
 
         request.get (url).query (params).end ((err, res) => {
             let results = res.body.results
             if (results) {
-                //console.log (type, params, results)
                 let payload = {
                     type: type,
-                    data: results
+                    data: results,
+                    callBack : callBack
                 }
                 store.commit ('setSensorData', payload)
+
             } else {
                 this.fail ()
             }
@@ -62,7 +62,7 @@ class SensorAPI {
                 console.log(type, results)
                 // two type is different
                 let payload = {type: 'trackers', data: results}
-                this._getLocationData ()
+                this._getLocationData (today)
                 store.commit('setSensorData', payload)
             } else {
                 this.fail()
@@ -70,10 +70,10 @@ class SensorAPI {
         })
     }
 
-    _getLocationData () {
+    _getLocationData (date) {
         const type = 'tracker'
         // formate : /sensors/:tableName/:date/:type
-        const baseUrl = this._api.url + this._api.actions.sensor + '/' + this._database.sensor + '/' + today + '/'
+        const baseUrl = this._api.url + this._api.actions.sensor + '/' + this._database.sensor + '/' + date + '/'
         const url = baseUrl + type
         request
             .get(url)

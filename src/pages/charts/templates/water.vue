@@ -5,7 +5,15 @@
             <f7-nav-center>水位計</f7-nav-center>
         </f7-navbar>
         <br/><br/>
-        <f7-block-title>{{date}}</f7-block-title>
+        <f7-block-title class="day-title">
+            <f7-button @click="getSubstrackDayData(1)">
+                <
+            </f7-button>
+            <p>{{date}}</p>
+            <f7-button @click="getSubstrackDayData(-1)">
+                >
+            </f7-button>
+        </f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
         <div v-else class="no-data"> <p>今日還沒有水位數據</p> </div>
     </f7-page>
@@ -20,7 +28,7 @@ import { SensorAPI } from '../../../apis/'
 
 // currently only used in staff mapping
 const today = TimeUtils.substractDayToDBFormate(0);
-
+// 0 is today
 let dataType = "";
 
 export default {
@@ -32,7 +40,6 @@ export default {
             chartData : null,
             date: TimeUtils.getDate(today),
             chartOptions: {
-                title : { text : '水位計', align: 'center', x: 55 },
                 dataZoom: { show: true, start : 50, end: 60 },
                 legend : { data : ['水位 - cm'] },
                 grid: { y2: 120 },
@@ -41,7 +48,8 @@ export default {
                 series : [
                     { name: 'water', type: 'line', showAllSymbol: true, data: []}
                 ]
-            }
+            },
+            currentDayIndex: 0
         }
     },
     computed: mapState({
@@ -53,18 +61,34 @@ export default {
             return d.getHours () + ':' + d.getMinutes () + ':' + d.getSeconds ();
         },
         formateData () {
-            let distance = []
-            let time = []
+            if (this.waterData.length > 0) {
+                let distance = []
+                let time = []
+                this.waterData.map (item => {
+                    distance.push (item.distance)
+                    const clock = this.getClock (item.time)
+                    time.push(clock)
+                })
+                this.chartOptions.series[0].data = distance
+                this.chartOptions.xAxis[0].data = time
+                this.chartData = this.chartOptions
+            } else {
+                this.chartData = null
+            }
+        },
+        getSubstrackDayData (substrackNumber) {
+            console.assert (typeof substrackNumber === "number")
+            const finalNumber = this.currentDayIndex + substrackNumber
+            const fetchDate = TimeUtils.substractDayToDBFormate (finalNumber);
+            this.currentDayIndex = finalNumber
 
-            this.waterData.map (item => {
-                distance.push (item.distance)
-                const clock = this.getClock (item.time)
-                time.push(clock)
-            })
-
-            this.chartOptions.series[0].data = distance
-            this.chartOptions.xAxis[0].data = time
-            this.chartData = this.chartOptions
+            const payload = {
+                type: dataType,
+                date: fetchDate,
+                callBack : this.formateData
+            }
+            this.$store.dispatch ("getSensorData", payload);
+            this.date = TimeUtils.getDate(fetchDate)
         }
     },
     beforeCreate () {
@@ -72,9 +96,12 @@ export default {
         dataType = this.$route.params.dataType
     },
     mounted () {
-        if (this.waterData.length > 0) {
-            this.formateData () // there is 2, waterA and waterB, check how to do
-        }
+        this.formateData ()
     }
 }
 </script>
+<style lang="sass" scoped>
+.button-group {
+    margin-left: 5px;
+}
+</style>

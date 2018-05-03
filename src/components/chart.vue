@@ -18,7 +18,6 @@ export default {
             element.style.height = height + 'px';
         },
         dataUpdate () {
-
             if (this.chartContent) {
                 this.chartContent.dispose ();
             }
@@ -28,8 +27,11 @@ export default {
         }
     },
     watch: {
-        chartData () {
-            this.dataUpdate ();
+        chartData: {
+            handler (after, before) {
+                this.dataUpdate () // force it to deep update
+            },
+            deep: true
         }
     },
     mounted () {

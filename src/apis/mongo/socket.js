@@ -82,7 +82,7 @@ class SocketAPI {
 
         this.socket.on('getTodyCheckInHistory', data => {
             console.log('getTodyCheckInHistory', data.result)
-            store.dispatch('createHistoryData', data.result)
+            //store.dispatch('createHistoryData', data.result)
         })
 
     }

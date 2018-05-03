@@ -17,14 +17,18 @@ export default {
             const params = rootState.config.chartInfo[type].params
             SensorAPI.getChartData(type, date, params, callBack)
         },
+        getLocationData({state, commit}, {date, callBack}) {
+            SensorAPI.getLocationData(date, callBack)
+        },
     },
     mutations: {
         setSensorData(state, {type, data, callBack}) {
             state[type] = data
             callBack && callBack()
         },
-        setLocationData(state, data) {
+        setLocationData(state, {data, callBack}) {
             state.locations = data
+            callBack && callBack()
         }
-    },
+    }
 }

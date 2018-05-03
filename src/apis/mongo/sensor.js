@@ -28,12 +28,11 @@ class SensorAPI {
         this._getTrackerDeviceInfo ()
     }
 
-
     getChartData (type, date, params, callBack) {
         // formate : /sensors/:tableName/:date/:type
         const baseUrl = this._api.url + this._api.actions.sensor + '/' + this._database.sensor + '/' + date + '/'
         const url = baseUrl + type
-        console.log (url)
+        //console.log (url)
 
         request.get (url).query (params).end ((err, res) => {
             let results = res.body.results
@@ -50,8 +49,7 @@ class SensorAPI {
             }
         })
     }
-    // get all Traker info first before getting all tracker data
-    // this will also goes to vehicle mapping stuff
+
     _getTrackerDeviceInfo () {
         const type = 'tracker'
         const url = this._api.url + this._api.actions.device + '/' + this._database.deviceMapping + '/' + type
@@ -59,10 +57,10 @@ class SensorAPI {
         request.get(url).end((err, res) => {
             let results = res.body.results
             if (results) {
-                console.log(type, results)
+                //console.log(type, results)
                 // two type is different
-                let payload = {type: 'trackers', data: results}
-                this._getLocationData (today)
+                let payload = { type: 'trackers', data: results}
+                this.getLocationData (today)
                 store.commit('setSensorData', payload)
             } else {
                 this.fail()
@@ -70,17 +68,21 @@ class SensorAPI {
         })
     }
 
-    _getLocationData (date) {
+    getLocationData (date, callBack) {
         const type = 'tracker'
         // formate : /sensors/:tableName/:date/:type
-        const baseUrl = this._api.url + this._api.actions.sensor + '/' + this._database.sensor + '/' + date + '/'
-        const url = baseUrl + type
+        const url = this._api.url + this._api.actions.sensor + '/' + this._database.sensor + '/' + date + '/' + type
+
         request
             .get(url)
             .end((err, res) => {
                 let results = res.body.results
                 if (results) {
-                    store.commit('setLocationData', results)
+                    let payload = {
+                        data: results,
+                        callBack: callBack
+                    }
+                    store.commit('setLocationData', payload)
                 } else {
                     this.fail()
                 }

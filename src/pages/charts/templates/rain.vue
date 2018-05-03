@@ -56,7 +56,6 @@ export default {
             return d.getHours () + ':' + d.getMinutes () + ':' + d.getSeconds ();
         },
         formateData () {
-            console.log ('this.rainData', this.date, this.rainData)
             if (this.rainData.length > 0) {
                 let mms = []
                 let time = []

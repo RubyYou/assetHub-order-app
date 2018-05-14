@@ -15,7 +15,7 @@
             <!-- login area -->
             <f7-block>
               <div class="text-center logo"></div>
-              <h3 class="title"> {{name}} <br/> 勞工安全管理</h3>
+              <h3 class="title"> {{name}} <br/> 職業安全管理</h3>
                 <template v-if="!isConfigSet && !isPostDataSet && !isFormDataSet">
                   <f7-preloader></f7-preloader>
                 </template>

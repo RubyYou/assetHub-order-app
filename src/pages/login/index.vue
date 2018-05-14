@@ -17,20 +17,20 @@
                   <f7-input ref="password" type="password" placeholder="password" v-model="password"/>
               </f7-list-item>
           </f7-list>
-          <h3 class="name-title">請填入您的登入姓名</h3>
+          <h3 class="name-title">請選您的登入姓名</h3>
           <f7-list form ref="name-item">
                 <f7-list-item>
-                  <f7-label >內建姓名</f7-label>
+                  <f7-label >姓名</f7-label>
                   <f7-input ref="username" type="select" v-model="defaultName">
                     <option v-for="staff in defaultStaff" :value="staff">
                       {{ staff }}
                     </option>
                   </f7-input>
                 </f7-list-item>
-                <f7-list-item>
+                <!--<f7-list-item>
                   <f7-label >新建姓名</f7-label>
                   <f7-input ref="name" type="text" placeholder="name" v-model="name"/>
-                </f7-list-item>
+                </f7-list-item>-->
             </f7-list>
       <f7-button fill @click="checkValidation"> 登入 </f7-button>
   </div>
@@ -70,7 +70,7 @@ export default {
 
       if (!isAccountValid || !isNameValid) {
         !isAccountValid && this.setErrorMessage("請填入正確帳號密碼");
-        !isNameValid && this.setErrorMessage("請使用內建姓名或填入姓名");
+        !isNameValid && this.setErrorMessage("請選姓名");
         this.removeErrorMessage ();
       } else {
         this.setErrorMessage ("");
@@ -118,13 +118,7 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      LoginAPI.start(
-        "總指揮",
-        1234,
-        "aaa",
-        this.loginSuccessHandler,
-        this.loginFailHandler
-      );
+      LoginAPI.start( "總指揮", 1234, "aaa", this.loginSuccessHandler, this.loginFailHandler);
     }, 500);
   }
 };

@@ -1,73 +1,13 @@
-/* // no card and no mapping for the cardsA
-    cardsA :[
-        {
-            // RFID
-            "_id" : ObjectId("5ac253550c81af5499d25a84"),
-            "serialNO" : "y8327ryufewfkew", // machie number 0000000012345660
-            "machineName" : "machine 1",
-            "type":"RFID"
-        },
-        {
-            // staff
-            "_id" : ObjectId("5ac253550c81af5499d25a85"),
-            "cardID" : "y8327ryufewfkew1", cardSerialNo: 50313a313331343033383132383130323033303738323535323535
-            "cardName" : "card1",
-            "type":"STAFF"
-        }
-    ]
-
-    profileA :[
-        {
-            // staff
-            "_id" : ObjectId("5ac253550c81af5499d25a85"),
-            name: "",
-            companyName: "aaaa",
-            workType: "", // 水泥工 、模板工、打石工 (select)
-            bloodType: "" ,// Ｏ Ａ B AB (select)
-            "type":"STAFF"
-        },
-        {
-            // vehicle
-            "_id" : ObjectId("5ac253550c81af5499d25a86"),
-            number: "aaaa",
-            companyName: "aaaa",
-            vehicleType: "", // 起重機  挖土機 吊機 (select)
-            "type":"VEHICLE"
-        }
-    ]
-
-    cardProfileMappingA:[
-        {
-            // staff
-            "_id" : ObjectId("5ac253550c81af5499d25a85"),
-            cardID: "y8327ryufewfkew1",
-            profileName: "aaaa",
-            createDate: "" ,
-            "type":"STAFF"
-        }
-    ]
-
-    checkinHistoryA:[
-        {
-            // staff
-            "_id" : ObjectId("5ac253550c81af5499d25a85"),
-            cardID: "y8327ryufewfkew1",
-            serialNO: "y8327ryufewfkew",
-            createDate: "" ,
-            createTime:""
-        },
-    ]
-*/
-
 import { CheckInAPI } from '../apis/index'
 
 export default {
     state: {
         staff: [], // profile data
-        staffCardIds: [], // not signed card Id
+        //staffCardIds: [], // All cards
         staffCardMapping: [], // current day mapping
         staffCheckInHistory: [], // only today's record
 
+        allCards: [], // All cards
         vehicle: [], // profile data, no empty vehicle cards
         vehicleCheckInHistory: [], // only today's record
 
@@ -117,29 +57,35 @@ export default {
         createHistoryData ({ state, commit }, items) {
             let staffHistory = []
             let vehicleHistory = []
+            let times = []
+            let filteredItem = []
+            let oneMin = 1 * 60 * 1000
 
-            items.map(item => {
-                const staffCard = state.staffCardMapping.find(card => parseInt(card.cardID) == parseInt(item.cardID))
-                const vehicleCard = state.vehicleCardMapping.find(card => parseInt(card.cardID) == parseInt(item.cardID))
-                let locationInfo = null
-                let cardInfo = null
+            // filter out all time
+            items.map ((data, index)=> {
 
-                if (staffCard) {
-                    locationInfo = state.RFID.find(location => location.serialNO === item.serialNO)
-                    cardInfo = Object.assign({}, staffCard, { location: locationInfo.machineName }, { time: item.createTime })
-                    delete cardInfo.createDate
-                    staffHistory.push(cardInfo)
+                let machineNum = data.serialNO;
+                data.serialNO = machineNum.substr (machineNum.length - 5, machineNum.length - 1)
+                let isNotValid = true
 
-                } else if (vehicleCard) {
-                    locationInfo = state.RFID.find(location => location.serialNO === item.serialNO)
-                    cardInfo = Object.assign({}, vehicleCard, { location: locationInfo.machineName }, { time: item.createTime })
-                    delete cardInfo.createDate
-                    vehicleHistory.push(cardInfo)
+                if (index > 0) {
+                    isNotValid = times.filter(time => Math.abs(time - data.createTime) < oneMin).length > 0
+                } else {
+                    times.push(data.createTime)
+                    filteredItem.push(data)
+                }
+
+                if (!isNotValid) {
+                    times.push(data.createTime)
+                    filteredItem.push (data)
                 }
             })
 
-            staffHistory.length > 0 && commit('setStateInfo', { name: 'staffCheckInHistory', data: staffHistory })
-            vehicleHistory.length > 0 && commit('setStateInfo', { name: 'vehicleCheckInHistory', data: vehicleHistory })
+            items.length > 0 && commit('setStateInfo', {
+                name: 'staffCheckInHistory',
+                data: filteredItem
+            })
+            // vehicleHistory.length > 0 && commit('setStateInfo', { name: 'vehicleCheckInHistory', data: vehicleHistory })
         }
     },
     mutations : {

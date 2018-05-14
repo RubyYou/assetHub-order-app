@@ -1,10 +1,11 @@
 <template>
     <f7-page data-page="checkin-timeline" class="timeline">
+        <h3 class="title"> 今日打卡記錄 <br/> <b>{{date}}</b> </h3>
         <f7-timeline sides>
             <f7-timeline-item
                 v-for="history in historys"
-                :day = "getTime (history.time)"
-                :month = "getDate (history.time)"
+                :day = "getTime (history.createTime)"
+                :month = "getDate (history.createTime)"
                 inner
                 title="Item Title"
                 :content = "getContent (history)">
@@ -16,6 +17,9 @@
 <script>
 import moment from "moment";
 import { mapState } from "vuex";
+import TimeUtils from "../../utils/time-utils"
+
+const today = TimeUtils.substractDayToDBFormate(0);
 
 export default {
   name: "checkin-timeline",
@@ -33,10 +37,14 @@ export default {
       return this.$store.state.checkin[cardFrom];
     }
   },
+  data: function () {
+        return {
+          date: TimeUtils.getDate(today)
+        }
+  },
   methods: {
     getDate(epochTime) {
       const day = new Date(parseInt(epochTime));
-      //console.log("day", day);
       const date = moment(day).format("l");
       return date;
     },
@@ -46,16 +54,8 @@ export default {
       return time;
     },
     getContent(info) {
-      const name = this.content.profileName;
-
       return (
-        "<p><b> " +
-        name +
-        " </b> " +
-        info.profileName +
-        "</p><p><b> 地點</b> " +
-        info.location +
-        "</p>"
+        "<p><b> 卡片ID </b>" + info.cardID + "</p> <p><b> 刷卡機號 </b> " + info.serialNO + "</p>"
       );
     }
   }
@@ -64,7 +64,15 @@ export default {
 
 <style lang="scss" scoped>
 .timeline {
-  margin-top: 30px;
+  margin-top: 40px;
+  margin-bottom: 50px;
+  .title{
+    margin-top:20px;
+    text-align:center;
+    b{
+      color: #007aff;
+    }
+  }
 }
 </style>
 <style lang="scss" global>

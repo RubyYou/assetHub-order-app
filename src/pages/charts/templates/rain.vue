@@ -7,11 +7,21 @@
         <br/><br/>
         <f7-block-title class="day-title">
             <f7-button @click="getSubstrackDayData(1)"> < </f7-button>
-            <p>{{date}} / 雨量累計 {{totalAmount}} mm  </p>
+            <p>{{date}} </p>
             <f7-button @click="getSubstrackDayData(-1)"> > </f7-button>
         </f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
-        <div v-else class="no-data"> <p>今日還沒有雨量數據</p> </div>
+        <div v-else class="no-data">
+            <p> 今日還沒有雨量數據 雨量 0 mm </p>
+        </div>
+        <div class="rain-info">
+            <h5 v-if="chartData !== null" class="total" > 今日雨量累計 {{totalAmount}} mm </h5>
+            <h5 v-if="addInfo !== null"> {{addInfo}} </h5>
+            <h5>1.大雨 : 指24小時累積雨量達80毫米以上，或時雨量達40毫米以上之降雨現象。</h5>
+            <h5>2.豪雨 : 指24小時累積雨量達200毫米以上，或3小時累積雨量達100毫米以上之降雨現象。</h5>
+            <h5>3.大豪雨 : 24小時累積雨量達350毫米以上之降雨現象。</h5>
+            <h5>4.超大豪雨 : 24小時累積雨量達500毫米以上之降雨現象。</h5>
+        </div>
     </f7-page>
 </template>
 <script>
@@ -48,7 +58,8 @@ export default {
         }
     },
     computed: mapState({
-        rainData: state => state.sensor[dataType]
+        rainData: state => state.sensor[dataType],
+        addInfo: state => state.config.chartInfo[dataType].addInfo || null
     }),
     methods: {
         getClock (epochDate) {
@@ -97,6 +108,12 @@ export default {
 }
 </script>
 <<style lang="scss">
+.total{
+    color: #0079ff;
+    font-size: 18px;
+    text-align: center;
+    padding: 0 5px 10px;
+}
 .no-data {
     text-align: center;
     display: block;
@@ -112,7 +129,7 @@ export default {
     flex-direction: row;
     margin: 35px 20px 10px;
     p {
-        margin: 8px 20px;
+        margin: 8px 10px;
         width: calc(100% - 40px);
         text-align: center;
     }
@@ -120,6 +137,14 @@ export default {
         background: #007aff;
         color: white;
         border: none;
+    }
+}
+.rain-info {
+    padding: 0;
+    width: 90%;
+    margin: 20px auto;
+    h5{
+        margin: 0 10px;
     }
 }
 </style>>

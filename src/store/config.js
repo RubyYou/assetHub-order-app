@@ -40,8 +40,8 @@ export default {
 
             state.name = name
             state.accounts = accounts
-            state.api = api
-            //state.api = testApi
+            //state.api = api
+            state.api = testApi
             state.database = database
             state.defaultStaff = [''].concat (defaultStaff) // should add an empty value for not select
             state.isSet = true

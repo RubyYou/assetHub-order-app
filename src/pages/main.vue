@@ -2,7 +2,7 @@
 <template>
   <f7-page data-page="main" >
     <f7-navbar>
-      <f7-nav-center> 勞工安全管理 </f7-nav-center>
+      <f7-nav-center> 職業安全管理 </f7-nav-center>
     </f7-navbar>
     <br/>
     <f7-block class="main-wrap">
@@ -22,23 +22,22 @@
         <span class="icon staff-checkins"></span>
         <p>工人打卡</p>
       </f7-button>
-      <f7-button href="/checkins/vehicle">
+      <!--<f7-button href="/checkins/vehicle">
         <span class="icon vehicle-checkins"></span>
         <p>車輛打卡</p>
-      </f7-button>
+      </f7-button>-->
       <f7-button href="/posts">
         <span class="icon post"></span>
         <p>公告事項</p>
       </f7-button>
-
-      <!--<f7-button href="/ipcam">
+      <f7-button href="/ipcam">
         <span class="icon video-stream"></span>
         <p>監視系統</p>
-      </f7-button>-->
-      <f7-button href="/tracking">
+      </f7-button>
+      <!--<f7-button href="/tracking">
         <span class="icon positions"></span>
         <p>追蹤定位</p>
-      </f7-button>
+      </f7-button>-->
 
     </f7-block>
   </f7-page>

@@ -42,6 +42,12 @@ class SocketAPI {
             store.commit('setStateInfo', payload)
         })
 
+        this.socket.on('getAllCards', data => {
+            const payload = { name: 'allCards', data: data.result }
+            console.log('all Cards', payload)
+            store.commit('setStateInfo', payload)
+        })
+
         this.socket.on('getStaffCard', data => {
             const payload = { name: 'staffCardIds', data: data.result }
             console.log('getStaffCard', payload)
@@ -82,7 +88,7 @@ class SocketAPI {
 
         this.socket.on('getTodyCheckInHistory', data => {
             console.log('getTodyCheckInHistory', data.result)
-            //store.dispatch('createHistoryData', data.result)
+            store.dispatch('createHistoryData', data.result)
         })
 
     }
@@ -107,15 +113,25 @@ class SocketAPI {
         this.socket.emit('getRFIDCard', this.querytData)
     }
 
-    getStaffCard () {
+    getAllCards () {
         this.querytData = {
             userName: this.userName,
             roomName: this.roomName,
-            cards: this.database.cards,
-            type: store.getters.checkinTypes.STAFF
+            cards: this.database.cards
         }
-        this.socket.emit('getStaffCard', this.querytData)
+
+        this.socket.emit('getAllCards', this.querytData)
     }
+
+    // getStaffCard () {
+    //     this.querytData = {
+    //         userName: this.userName,
+    //         roomName: this.roomName,
+    //         cards: this.database.cards,
+    //         type: store.getters.checkinTypes.STAFF
+    //     }
+    //     this.socket.emit('getStaffCard', this.querytData)
+    // }
 
     // getVehicleCard () {
     //     this.querytData = {

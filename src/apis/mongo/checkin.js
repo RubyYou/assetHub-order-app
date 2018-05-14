@@ -54,7 +54,7 @@ class CheckInAPI {
     }
 
     _offline () {
-        //alert ('start offline storage')
+        // alert ('start offline storage')
         // shallow clone
         const allCheckInInfo = JSON.parse (JSON.stringify (store.getters.allCheckInInfo))
         IndexDB.set ('checkin', allCheckInInfo)
@@ -62,7 +62,7 @@ class CheckInAPI {
 
     _setRemoteDB () {
         SocketAPI.getRFIDCard() // checkin machine
-        SocketAPI.getStaffCard()
+        SocketAPI.getAllCards()
         // SocketAPI.getVehicleCard()
         SocketAPI.getStaffProfile()
         SocketAPI.getVehicleProfile()

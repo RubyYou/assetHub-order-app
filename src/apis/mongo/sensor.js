@@ -32,7 +32,6 @@ class SensorAPI {
         // formate : /sensors/:tableName/:date/:type
         const baseUrl = this._api.url + this._api.actions.sensor + '/' + this._database.sensor + '/' + date + '/'
         const url = baseUrl + type
-        //console.log (url)
 
         request.get (url).query (params).end ((err, res) => {
             let results = res.body.results

@@ -5,7 +5,7 @@
             "info": "<table><tbody><tr><td></td><td>緊急應變小組召集人</td><td>電話</td></tr><tr><td >姓名</td><td>徐明貿</td><td><a href='tel:0910428875'>0910428875</a></td></tr></tbody></table>",
             "type": "urgent",
             "images": [
-                "./data/areaB/process.png"
+                "./data/areaA/process.png"
             ]
         },
         {

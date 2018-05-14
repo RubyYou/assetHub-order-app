@@ -84,7 +84,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/build.js",
-    "revision": "2aaa4ce705d7cb959daf8c1f3f89b0c9"
+    "revision": "a54294343145d46b70c2ff72049bef01"
   },
   {
     "url": "js/echarts-all.js",
@@ -107,10 +107,6 @@ self.__precacheManifest = [
     "revision": "ae8767ca8ecf4b090af58eff5dd6d3a7"
   },
   {
-    "url": "data/account-config.json",
-    "revision": "d41d8cd98f00b204e9800998ecf8427e"
-  },
-  {
     "url": "data/areaA/charts.json",
     "revision": "1db6fa73b589c8a36d55125d78f0bad8"
   },
@@ -128,7 +124,7 @@ self.__precacheManifest = [
   },
   {
     "url": "data/areaB/charts.json",
-    "revision": "3584480f62cfe27bad91c49c15c8b862"
+    "revision": "8d22c7dae03c29869e131b9313d58202"
   },
   {
     "url": "data/areaB/db-config.json",
@@ -140,11 +136,11 @@ self.__precacheManifest = [
   },
   {
     "url": "data/areaB/posts.json",
-    "revision": "1bfdd73ef602deb8250dcc0141569a46"
+    "revision": "e4c04c698738a8663cdbdef68ce761de"
   },
   {
     "url": "data/areaC/charts.json",
-    "revision": "df11ff5075fa3b06cca42f413342fb2e"
+    "revision": "3d0f689b6ef760a9ef66d42a57acbfc2"
   },
   {
     "url": "data/areaC/db-config.json",
@@ -152,7 +148,7 @@ self.__precacheManifest = [
   },
   {
     "url": "data/areaC/forms.json",
-    "revision": "ae181e7bc737b5a1b5b0d7f08e2d88eb"
+    "revision": "00f29aac006aa28a3b958604102f2d04"
   },
   {
     "url": "data/areaC/posts.json",
@@ -164,7 +160,7 @@ self.__precacheManifest = [
   },
   {
     "url": "css/build.css",
-    "revision": "446898d1fbc012d20a73794e17b6eb89"
+    "revision": "b9e63525a49bd36a70e2b055e5e9d1be"
   },
   {
     "url": "css/framework7-icons.css",

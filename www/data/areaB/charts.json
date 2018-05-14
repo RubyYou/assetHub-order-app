@@ -3,8 +3,12 @@
         {
             "title": "水位計",
             "list": [
-                { "title": "水位計A", "href": "/charts/water/waterA" },
-                { "title": "水位計B", "href": "/charts/water/waterB" }
+                {
+                    "title": "石棟橋水位計", "href": "/charts/water/waterA"
+                },
+                {
+                    "title": "安全橋水位計", "href": "/charts/water/waterB"
+                }
             ]
         },
         {
@@ -14,22 +18,24 @@
             ]
         },
         {
-            "title": "傾斜計",
+            "title": "鋼便橋傾斜儀",
             "list": [
-                { "title": "傾斜計", "href": "/charts/templateName/DataEndPoint" }
+                {  "title": "鋼便橋傾斜儀", "href": "/charts/templateName/DataEndPoint" }
             ]
         }
     ],
     "chartInfo": {
         "waterA": {
-            "title": "水位計",
+            "title": "石棟橋水位計",
             "type": "waterA",
-            "params": { "baseDistance": 570 }
+            "params": { "baseDistance": 570 },
+            "addInfo": "「施工期間若達大雨條件，即刻撤離並封橋待命。」"
         },
         "waterB": {
-            "title": "水位計",
+            "title": "安全橋水位計",
             "type": "waterB",
-            "params": { "baseDistance": 99 }
+            "params": { "baseDistance": 565 },
+            "addInfo": "「施工期間若達大雨條件，即刻撤離並封橋待命。」"
         },
         "rain": {
             "title": "雨量計",

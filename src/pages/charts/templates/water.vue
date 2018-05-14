@@ -5,6 +5,9 @@
             <f7-nav-center>水位計</f7-nav-center>
         </f7-navbar>
         <br/><br/>
+        <div v-if="warning === true && chartData !== null" class="warning">
+            <i class="f7-icons">bolt_round_fill</i> 水位已超過30公分, 請現場人員警戒
+        </div>
         <f7-block-title class="day-title">
             <f7-button @click="getSubstrackDayData(1)">
                 <
@@ -45,11 +48,10 @@ export default {
                 grid: { y2: 120 },
                 xAxis : [ { type: 'category', data: []}],
                 yAxis : [ { type: 'value', data: [-5, 0, 5, 10]}],
-                series : [
-                    { name: 'water', type: 'line', showAllSymbol: true, data: []}
-                ]
+                series : [ { name: 'water', type: 'line', showAllSymbol: true, data: []}]
             },
-            currentDayIndex: 0
+            currentDayIndex: 0,
+            warning : false
         }
     },
     computed: mapState({
@@ -64,11 +66,16 @@ export default {
             if (this.waterData.length > 0) {
                 let distance = []
                 let time = []
+                let warning = false; // set this is incase of looping overlay the value
                 this.waterData.map (item => {
+                    if (item.distance >= 30) {
+                        warning = true
+                    }
                     distance.push (item.distance)
                     const clock = this.getClock (item.time)
                     time.push(clock)
                 })
+                this.warning = warning
                 this.chartOptions.series[0].data = distance
                 this.chartOptions.xAxis[0].data = time
                 this.chartData = this.chartOptions
@@ -103,5 +110,13 @@ export default {
 <style lang="sass" scoped>
 .button-group {
     margin-left: 5px;
+}
+.warning {
+    background: red;
+    width: 100%;
+    text-align: center;
+    color: white;
+    padding: 10px 0;
+    margin-top: 5px;
 }
 </style>

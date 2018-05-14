@@ -6,16 +6,19 @@
         <f7-list id="modify-profile" v-if="mode==='open'" form>
             <f7-list-item v-for="item in content.details">
                 <f7-label> {{item.ref}} </f7-label>
-                <f7-input
-                    v-if="item.key === 'cardName'" readonly :name="item.key"
-                    type="text" v-model="selected [item.key]"
-                />
-                <f7-input
-                    v-else :name="item.key"
+                <f7-input :name="item.key"
                     type="text" v-model="selected [item.key]"
                 />
             </f7-list-item>
-            <f7-list-item v-if="dataType === 'vehicle'">
+            <f7-list-item>
+                <f7-label> 卡號 </f7-label>
+                <select name="cardId" v-model="selected.cardId">
+                    <option v-for="card in allCards" :value="card.cardId">
+                        {{card.cardName}}
+                    </option>
+                </select>
+            </f7-list-item>
+            <f7-list-item>
                 <f7-label> 追蹤裝置 </f7-label>
                 <select name="tracker" v-model="selected.tracker">
                     <option v-for="device in trackers" :value="device.deviceAddress">
@@ -39,7 +42,6 @@
                 </f7-button>
             </f7-list-item>
         </f7-list>
-
     </f7-page>
 </template>
 
@@ -61,7 +63,10 @@ export default {
   },
   computed: {
     profiles() {
-        return this.$store.state.checkin[this.dataType];
+        return this.$store.state.checkin[this.dataType]
+    },
+    allCards () {
+        return this.$store.state.checkin.allCards
     },
     trackers() {
         return this.$store.state.sensor.trackers

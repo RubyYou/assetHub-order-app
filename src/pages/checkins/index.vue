@@ -4,7 +4,6 @@
         <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
         <f7-nav-center>{{title[dataType]}}</f7-nav-center>
     </f7-navbar>
-    <!-- Need a coustom one as icon formate not support f7-icons -->
     <f7-toolbar tabbar bottom labels>
         <f7-link tab-link="#tab1" active>
             <i class="f7-icons">add_round_fill</i>
@@ -67,7 +66,6 @@ export default {
                     title: "人員卡片履歷",
                     details: [
                         { key: "name", ref: '姓名', show: true},
-                        { key: "cardName", ref:'卡號', show: false},
                         { key: "bloodType", ref: '血型', show: true},
                         { key: "company", ref: '公司', show: false},
                         { key: "role", ref: '職務', show: true}
@@ -77,7 +75,6 @@ export default {
                     title: "車輛卡片履歷",
                     details: [
                         { key: "carNumber", ref: '車號', show: false},
-                        { key: "cardName", ref:'卡號', show: true},
                         { key: "company", ref: '公司', show: false},
                         { key: "info", ref: '資訊', show: true}
                     ]

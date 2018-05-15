@@ -4,7 +4,7 @@
             "title": "雨量及水位",
             "list": [
                 { "title": "工區水位計", "href": "/charts/water/water" },
-                { "title": "雨量龍興宮雨量筒計", "href": "/charts/rain/rain" }
+                { "title": "龍興宮雨量筒計", "href": "/charts/rain/rain" }
             ]
         }
     ],

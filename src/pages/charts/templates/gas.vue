@@ -2,7 +2,7 @@
     <f7-page data-page="charts-water" class="charts-page">
         <f7-navbar>
             <f7-nav-left back-link="上一頁" sliding></f7-nav-left>
-            <f7-nav-center>氣體監測</f7-nav-center>
+            <f7-nav-center>{{dataType}} 氣體監測</f7-nav-center>
         </f7-navbar>
         <br/><br/>
         <f7-block-title class="day-title">
@@ -11,7 +11,7 @@
             <f7-button @click="getSubstrackDayData(-1)"> > </f7-button>
         </f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
-        <div v-else class="no-data"> <p>今日還沒有水位數據</p> </div>
+        <div v-else class="no-data"> <p>今日沒有 {{dataType}} 氣體數據</p> </div>
     </f7-page>
 </template>
 
@@ -23,9 +23,11 @@ import store from '../../../store/index'
 import { SensorAPI } from '../../../apis/'
 
 // currently only used in staff mapping
-const today = TimeUtils.substractDayToDBFormate(0);
+// const today = TimeUtils.substractDayToDBFormate(0);
+
 // 0 is today
 let dataType = "";
+let unit = ""
 
 export default {
     components: {
@@ -33,11 +35,12 @@ export default {
     },
     data: function () {
         return {
+            dataType: null,
             chartData : null,
-            date: TimeUtils.getDate(today),
+            date: TimeUtils.getDate(this.gasCurrentDate),
             chartOptions: {
                 dataZoom: { show: true, start : 50, end: 60 },
-                legend : { data : ['gas - '] },
+                legend : { data : [ dataType + ' - ' + unit ] },
                 grid: { y2: 120 },
                 xAxis : [{type: 'category', data: []}],
                 yAxis : [{type: 'value', data: [-5, 0, 5, 10]}],
@@ -49,7 +52,8 @@ export default {
     },
     computed: mapState({
         gasData: state => state.sensor[dataType],
-        unit: state => state.config.chartInfo[dataType]
+        unit: state => state.config.chartInfo.gasB.unit[dataType],
+        gasCurrentDate: state => state.sensor.gasCurrentDate
     }),
     methods: {
         getClock (epochDate) {
@@ -57,6 +61,7 @@ export default {
             return d.getHours () + ':' + d.getMinutes () + ':' + d.getSeconds ();
         },
         formateData () {
+            unit = this.unit
             if (this.gasData.length > 0) {
                 let values = []
                 let time = []
@@ -65,14 +70,12 @@ export default {
                 this.gasData.map (item => {
                     values.push (item.value)
                     const clock = this.getClock (item.createTime)
-                    console.log(item.value, item.createTime)
                     time.push (clock)
                 })
 
                 this.warning = warning
                 this.chartOptions.series[0].data = values
                 this.chartOptions.xAxis[0].data = time
-
                 this.chartData = this.chartOptions
 
             } else {
@@ -99,6 +102,9 @@ export default {
         dataType = this.$route.params.dataType
     },
     mounted () {
+        this.dataType = dataType
+        unit = this.unit
+        console.log (this.gasCurrentDate, unit)
         this.formateData ()
     }
 }

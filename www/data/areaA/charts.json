@@ -1,18 +1,12 @@
 {
     "chartList": [
         {
-            "title": "重量觀測",
-            "list": [
-                { "title": "拉力計", "href": "/charts/weight" }
-            ]
-        },
-        {
             "title": "氣體觀測",
             "list": [
-                { "title": "可燃氣體", "href": "/charts/combustible" },
-                { "title": "一氧化碳", "href": "/charts/co" },
-                { "title": "硫化氫", "href": "/charts/h2s" },
-                { "title": "氧氣", "href": "/charts/o2" }
+                { "title": "可燃氣體", "href": "/charts/gas/LEL" },
+                { "title": "一氧化碳", "href": "/charts/gas/CO" },
+                { "title": "硫化氫", "href": "/charts/gas/H2S" },
+                { "title": "氧氣", "href": "/charts/gas/O2" }
             ]
         },
         {
@@ -23,6 +17,18 @@
             ]
         }
     ],
+    "chartInfo": {
+        "gasB": {
+            "title": "氣體監測",
+            "type": "gasB",
+            "unit": {
+                "LEL": "%",
+                "O2": "%",
+                "CO": "PPM",
+                "H2S": "PPM"
+            }
+        }
+    },
     "chartFormData": {
         "SlideChartFormA" : {
             "formTitle": "傾斜觀測管檢查表",

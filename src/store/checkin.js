@@ -57,33 +57,10 @@ export default {
         createHistoryData ({ state, commit }, items) {
             let staffHistory = []
             let vehicleHistory = []
-            let times = []
-            let filteredItem = []
-            let oneMin = 1 * 60 * 1000
-
-            // filter out all time
-            items.map ((data, index)=> {
-
-                let machineNum = data.serialNO;
-                data.serialNO = machineNum.substr (machineNum.length - 5, machineNum.length - 1)
-                let isNotValid = true
-
-                if (index > 0) {
-                    isNotValid = times.filter(time => Math.abs(time - data.createTime) < oneMin).length > 0
-                } else {
-                    times.push(data.createTime)
-                    filteredItem.push(data)
-                }
-
-                if (!isNotValid) {
-                    times.push(data.createTime)
-                    filteredItem.push (data)
-                }
-            })
 
             items.length > 0 && commit('setStateInfo', {
                 name: 'staffCheckInHistory',
-                data: filteredItem
+                data: items
             })
             // vehicleHistory.length > 0 && commit('setStateInfo', { name: 'vehicleCheckInHistory', data: vehicleHistory })
         }

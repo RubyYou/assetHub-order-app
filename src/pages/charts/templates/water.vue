@@ -21,8 +21,8 @@
         <div v-else class="no-data"> <p>今日還沒有水位數據</p> </div>
     </f7-page>
 </template>
-<script>
 
+<script>
 import Chart from '../../../components/chart.vue'
 import { mapState } from 'vuex'
 import TimeUtils from "../../../utils/time-utils"

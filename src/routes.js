@@ -28,6 +28,10 @@ export default [
         component: require('./pages/charts/templates/rain.vue'),
     },
     {
+        path: '/charts/gas/:dataType',
+        component: require('./pages/charts/templates/gas.vue')
+    },
+    {
         path: '/forms',
         component: require('./pages/forms/index.vue'),
     },

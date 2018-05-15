@@ -27,10 +27,6 @@
                     </option>
                   </f7-input>
                 </f7-list-item>
-                <!--<f7-list-item>
-                  <f7-label >新建姓名</f7-label>
-                  <f7-input ref="name" type="text" placeholder="name" v-model="name"/>
-                </f7-list-item>-->
             </f7-list>
       <f7-button fill @click="checkValidation"> 登入 </f7-button>
   </div>

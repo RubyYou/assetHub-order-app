@@ -20,7 +20,7 @@
         {
             "title": "鋼便橋傾斜儀",
             "list": [
-                {  "title": "鋼便橋傾斜儀", "href": "/charts/templateName/DataEndPoint" }
+                {  "title": "鋼便橋傾斜儀", "href": "/charts/tilt/tilt" }
             ]
         }
     ],
@@ -41,6 +41,11 @@
             "title": "雨量計",
             "type": "rain",
             "params": {"baseMM": 55 }
+        },
+        "tilt": {
+            "title": "鋼便橋傾斜儀",
+            "type": "tilt",
+            "params": { }
         }
     }
 }

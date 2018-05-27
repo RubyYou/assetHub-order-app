@@ -32,6 +32,10 @@ export default [
         component: require('./pages/charts/templates/gas.vue')
     },
     {
+        path: '/charts/tilt/:dataType',
+        component: require('./pages/charts/templates/tilt.vue')
+    },
+    {
         path: '/forms',
         component: require('./pages/forms/index.vue'),
     },

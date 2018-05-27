@@ -9,6 +9,7 @@ export default {
         waterA: [],
         waterB: [],
         rain: [],
+        tilt: [],
 
         gas: [],
         LEL: [],

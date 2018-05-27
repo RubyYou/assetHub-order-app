@@ -88,7 +88,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/build.js",
-    "revision": "6508e29aa86a541d63ca9c8b9e39aefc"
+    "revision": "286f0e586187bd8a37be34d4fced1707"
   },
   {
     "url": "js/echarts-all.js",
@@ -112,7 +112,7 @@ self.__precacheManifest = [
   },
   {
     "url": "data/areaA/charts.json",
-    "revision": "1db6fa73b589c8a36d55125d78f0bad8"
+    "revision": "9e9297551ebf72403679ad4204fd4b10"
   },
   {
     "url": "data/areaA/db-config.json",
@@ -144,7 +144,7 @@ self.__precacheManifest = [
   },
   {
     "url": "data/areaC/charts.json",
-    "revision": "3d0f689b6ef760a9ef66d42a57acbfc2"
+    "revision": "9a56ee176ae996970013d73017b3d92f"
   },
   {
     "url": "data/areaC/db-config.json",

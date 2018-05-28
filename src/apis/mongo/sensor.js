@@ -25,7 +25,8 @@ class SensorAPI {
             }
         }
 
-        this._getTrackerDeviceInfo ()
+        this._getDeviceInfo ('tracker')
+        this._getDeviceInfo ('helmet')
     }
 
     getChartData (type, date, params, callBack) {
@@ -49,17 +50,20 @@ class SensorAPI {
         })
     }
 
-    _getTrackerDeviceInfo () {
-        const type = 'tracker'
+    _getDeviceInfo (type) {
         const url = this._api.url + this._api.actions.device + '/' + this._database.deviceMapping + '/' + type
+        let payload = {}
 
         request.get(url).end((err, res) => {
             let results = res.body.results
             if (results) {
-                //console.log(type, results)
-                // two type is different
-                let payload = { type: 'trackers', data: results}
-                this.getLocationData (today)
+                if (type === 'tracker') {
+                    payload = { type: 'trackers', data: results }
+                    this.getLocationData (today)
+                } else {
+                    payload = { type: type, data: results }
+                }
+
                 store.commit('setSensorData', payload)
             } else {
                 this.fail()

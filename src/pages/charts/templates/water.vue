@@ -13,7 +13,7 @@
                 <
             </f7-button>
             <p>{{date}}</p>
-            <f7-button @click="getSubstrackDayData(-1)">
+            <f7-button v-if="currentDayIndex > 0" @click="getSubstrackDayData(-1)">
                 >
             </f7-button>
         </f7-block-title>

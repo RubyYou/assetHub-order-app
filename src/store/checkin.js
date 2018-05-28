@@ -56,13 +56,24 @@ export default {
         // create history data based on RFID and card Mapping information information
         createHistoryData ({ state, commit }, items) {
             let staffHistory = []
-            let vehicleHistory = []
 
-            items.length > 0 && commit('setStateInfo', {
-                name: 'staffCheckInHistory',
-                data: items
-            })
-            // vehicleHistory.length > 0 && commit('setStateInfo', { name: 'vehicleCheckInHistory', data: vehicleHistory })
+            // this is only staff checkin history
+            if (items.length > 0 ) {
+                items.map (info => {
+                    let cardInfo = state.allCards.filter(card => { return card.cardId == info.cardID })
+                    let staffInfo = state.staff.filter(staff => { return staff.cardId == info.cardID })
+                    let checkinInfo = {
+                        name: staffInfo.length > 0 ? staffInfo[0].name : '未配置',
+                        cardName: cardInfo.length > 0 ? cardInfo[0].cardName : '未記錄',
+                        cardID: info.cardID,
+                        createTime: info.createTime,
+                        serialNO: info.serialNO
+                    }
+                    staffHistory.push (checkinInfo)
+                })
+
+                commit('setStateInfo', { name: 'staffCheckInHistory', data: staffHistory })
+            }
         }
     },
     mutations : {

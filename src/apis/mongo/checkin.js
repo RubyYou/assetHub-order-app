@@ -61,13 +61,13 @@ class CheckInAPI {
     }
 
     _setRemoteDB () {
-        SocketAPI.getRFIDCard() // checkin machine
+        //SocketAPI.getRFIDCard() // checkin machine
         SocketAPI.getAllCards()
         // SocketAPI.getVehicleCard()
         SocketAPI.getStaffProfile()
         SocketAPI.getVehicleProfile()
         SocketAPI.getTodayStaffCardMapping(today)
-        SocketAPI.getTodyCheckInHistory(today)
+        setTimeout( () => { SocketAPI.getTodyCheckInHistory(today)}, 3000) // wait for other info
     }
 
     // update default staff or vehicle profile

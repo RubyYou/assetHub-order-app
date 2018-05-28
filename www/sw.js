@@ -88,7 +88,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/build.js",
-    "revision": "286f0e586187bd8a37be34d4fced1707"
+    "revision": "37cc21f346cfa24dc3c2f340a8539467"
   },
   {
     "url": "js/echarts-all.js",
@@ -128,7 +128,7 @@ self.__precacheManifest = [
   },
   {
     "url": "data/areaB/charts.json",
-    "revision": "f0286680318ef421302a6fe8b3dbcbf1"
+    "revision": "9391dfbc7d54d9f4c606ea436b629cd6"
   },
   {
     "url": "data/areaB/db-config.json",

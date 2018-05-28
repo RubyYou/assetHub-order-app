@@ -54,8 +54,9 @@ export default {
       return time;
     },
     getContent(info) {
+      let machineNO = (info.serialNO).substr(info.serialNO.length - 2)
       return (
-        "<p><b> 卡片ID </b>" + info.cardID + "</p> <p><b> 刷卡機號 </b> " + info.serialNO + "</p>"
+        "<p><b> 姓名 </b>" + info.name + "</p><p><b>卡片編號 </b>" + info.cardName +  "</p><p>(" + info.cardID + ")</p><p><b> 刷卡機號 </b> " + machineNO + "</p>"
       );
     }
   }
@@ -66,6 +67,7 @@ export default {
 .timeline {
   margin-top: 40px;
   margin-bottom: 50px;
+  padding: 0;
   .title{
     margin-top:20px;
     text-align:center;
@@ -77,6 +79,10 @@ export default {
 </style>
 <style lang="scss" global>
 .timeline .timeline-item-inner {
+  padding: 8px;
+  p{
+    margin: 5px 0;
+  }
   b {
     color: #168888;
   }

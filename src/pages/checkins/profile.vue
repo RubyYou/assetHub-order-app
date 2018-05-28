@@ -27,6 +27,14 @@
                 </select>
             </f7-list-item>
             <f7-list-item>
+                <f7-label> 安全帽裝置 </f7-label>
+                <select name="helmet" v-model="selected.helmet">
+                    <option v-for="helmet in helmets" :value="helmet.deviceAddress">
+                        {{helmet.deviceAddress}}
+                    </option>
+                </select>
+            </f7-list-item>
+            <f7-list-item>
                 <f7-button @click="editProfile(selected._id)" fill> 修改 </f7-button>
                 <f7-button @click="togglepanel(false)" fill color="red"> 取消 </f7-button>
             </f7-list-item>
@@ -71,6 +79,9 @@ export default {
     trackers() {
         return this.$store.state.sensor.trackers
     },
+    helmets() {
+        return this.$store.state.sensor.helmet
+    },
     selected () {
         return this.$store.state.checkin.selected
     }
@@ -85,6 +96,7 @@ export default {
         const type = this.dataType;
         const info = this.$f7.formToData ("#modify-profile");
         const f7 =  this.$f7;
+        console.log(info)
         this.$store.dispatch ("updateProfile", {_id, info, type, f7});
         this.togglepanel();
     },

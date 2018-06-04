@@ -13,6 +13,7 @@
         "HightRiskCheckForm": {
             "formTitle": "高風險安衛項目檢查表",
             "url": "/forms/standardSections/HightRiskCheckForm",
+            "sign": false,
             "sections": [
                 {
                     "title": "有立即發生『墜落』危險之虞",
@@ -67,6 +68,7 @@
         "SlopeSafeCheckForm": {
             "formTitle": "「邊坡施工」之安全作業程序檢查表",
             "url": "/forms/standardSections/SlopeSafeCheckForm",
+            "sign": false,
             "sections": [
                 {   "title": "",
                     "content": [
@@ -151,6 +153,7 @@
         "RiverBedSafeCheckForm": {
             "formTitle": "「河床施工」之安全作業程序檢查表",
             "url": "/forms/standardSections/RiverBedSafeCheckForm",
+            "sign": false,
             "sections": [
                 {   "title": "",
                     "content": [

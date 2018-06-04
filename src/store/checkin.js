@@ -71,9 +71,9 @@ export default {
                     }
                     staffHistory.push (checkinInfo)
                 })
-
-                commit('setStateInfo', { name: 'staffCheckInHistory', data: staffHistory })
             }
+
+            commit('setStateInfo', { name: 'staffCheckInHistory', data: staffHistory })
         }
     },
     mutations : {

@@ -2,7 +2,7 @@
     "posts": [
         {
             "title": "緊急應變",
-            "info": "<table><tr><th></th><th></th><th>,緊急應變小組召集人</th><th>電話</th></tr><tr><td>總指揮</td><td>姓名</td><td>鄭春光</td><td>0972936319</td></tr><tr><td>副總指揮</td><td>姓名</td><td>陳威誠</td><td>0983056026</td></tr></table>",
+            "info": "<table><tr><th></th><th></th><th>緊急應變小組召集人</th><th>電話</th></tr><tr><td>總指揮</td><td>姓名</td><td>鄭春光</td><td>0972936319</td></tr><tr><td>副總指揮</td><td>姓名</td><td>陳威誠</td><td>0983056026</td></tr></table>",
             "type": "urgent",
             "images": [
                 "./data/areaA/process.png"

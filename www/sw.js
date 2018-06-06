@@ -88,7 +88,7 @@ self.__precacheManifest = [
   },
   {
     "url": "js/build.js",
-    "revision": "cf6e2a99a2ae0df1e57a718865aab9ae"
+    "revision": "636837f560e61b84b0c3e2103877a1da"
   },
   {
     "url": "js/echarts-all.js",
@@ -156,7 +156,7 @@ self.__precacheManifest = [
   },
   {
     "url": "data/areaC/posts.json",
-    "revision": "90666b0b4dd60eeb9d23ad58f5ee1d33"
+    "revision": "790759fb481658346a4f90aaa6ae2db1"
   },
   {
     "url": "css/app.css",

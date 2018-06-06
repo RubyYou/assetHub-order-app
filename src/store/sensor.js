@@ -36,6 +36,9 @@ export default {
     },
     mutations: {
         setSensorData (state, {type, data, callBack}) {
+
+            // sort sensor Data
+            type.indexOf('water') >= 0 && data.sort ((a, b) => { return a.time - b.time })
             state[type] = data
 
             let LEL = []

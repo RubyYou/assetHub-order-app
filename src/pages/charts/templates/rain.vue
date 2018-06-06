@@ -12,7 +12,7 @@
         </f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
         <div v-else class="no-data">
-            <p> 今日還沒有雨量數據 雨量 0 mm </p>
+            <p> 今日沒有雨量數據 雨量 0 mm </p>
         </div>
         <div class="rain-info">
             <h5 v-if="chartData !== null" class="total" > 今日雨量累計 {{totalAmount}} mm </h5>

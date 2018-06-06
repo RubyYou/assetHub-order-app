@@ -41,13 +41,13 @@ export default {
             date: TimeUtils.getDate(today),
             chartOptions: {
                 dataZoom: { show: true, start: 30, end: 70},
-                legend : { data : [ '傾斜角 - x',  '傾斜角 - y'] },
+                legend : { data : [ '傾斜角 - x°',  '傾斜角 - y°'] },
                  grid: { y2: 120 },
                 xAxis : [ { type: 'category', data: []}],
                 yAxis : [ { type: 'value', max: 20, min: -20}],
                 series : [
-                    { name: '傾斜角 - x', type: 'line', showAllSymbol: true, data: []},
-                    { name: '傾斜角 - y', type: 'line', showAllSymbol: true, data: []},
+                    { name: '傾斜角 - x°', type: 'line', showAllSymbol: true, data: []},
+                    { name: '傾斜角 - y°', type: 'line', showAllSymbol: true, data: []},
                 ]
             },
             currentDayIndex: 0,

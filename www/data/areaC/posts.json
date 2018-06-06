@@ -25,8 +25,14 @@
             "type": "urgent"
         }, {
             "title": "醫院位置",
-            "info": "財團法人佛教慈濟綜合醫院大林分院 <br/> 地址 : 嘉義縣大林鎮民生路2號 <br/> 電話 : <a href='tel:(05)2648000'>(05)2648000</a><br/>竹崎鄉衛生所 <br/> 電話 : <a href='tel:0424819900'>(04)24819900</a><br/> 地址 : 嘉義縣竹崎鄉文化路19-1號",
-            "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.2334397208865!2d120.4550609841945!3d23.59595952583408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346ebeb8cac6d799%3A0x826064b9a51623ba!2sBuddhist+Dalin+Tzu+Chi+General+Hospital!5e0!3m2!1sen!2stw!4v1526336145930",
+            "info": "長安醫院 <br/> 地址:臺中市太坪區永平路一段9號 <br/> 電話 : <a href='tel:0436113611'>(04)36113611</a><br/>竹崎鄉衛生所 <br/> 電話 : <a href='tel:0424819900'>(04)24819900</a><br/> 地址 : 嘉義縣竹崎鄉文化路19-1號",
+            "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3641.1544873473795!2d120.7174899149886!3d24.131212184403058!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346922c9bb3288d3%3A0xdf9bdbed92a8657a!2sNo.+9%2C+Section+1%2C+Yongping+Road%2C+Taiping+District%2C+Taichung+City%2C+406!5e0!3m2!1sen!2stw!4v1528259730944",
+            "type": "normal"
+        },
+        {
+            "title": "消防分隊",
+            "info": "臺中市政府消防局第三救災救護大隊車籠埔消防分隊 <br/> 地址: 臺中市太平區光興路1463巷33弄67號 <br/> 電話 : <a href='tel:0422792947'>(04)22792947</a>",
+            "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29129.23613079382!2d120.70211531891331!3d24.131211165682874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346922c1ec9a830b%3A0x39559d623cb2bafd!2z6Ie65Lit5biC5pS_5bqc5raI6Ziy5bGA56ys5LiJ5pWR54G95pWR6K235aSn6ZqK6LuK57Gg5Z-U5raI6Ziy5YiG6ZqK!5e0!3m2!1sen!2stw!4v1528259276796",
             "type": "normal"
         }, {
             "title": "相關單位",

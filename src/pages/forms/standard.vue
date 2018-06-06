@@ -84,11 +84,9 @@ export default {
   computed: mapState({
     form: state => state.forms.selectedForm,
     content: state => {
-      //console.log ('content', state.config.formData[formName].content)
       return state.config.formData[formName].content
     },
     formTitle: state => {
-      //console.log (state.config.formData[formName].formTitle)
       return state.config.formData[formName].formTitle
     },
     sign: state => {

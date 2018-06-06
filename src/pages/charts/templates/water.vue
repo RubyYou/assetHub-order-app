@@ -18,7 +18,11 @@
             </f7-button>
         </f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
-        <div v-else class="no-data"> <p>今日還沒有水位數據</p> </div>
+        <div v-else class="no-data"> <p>今日沒有水位數據</p> </div>
+        <div class="water-info">
+            <h5>警戒值為水位高度達100 mm (10cm) </h5>
+            <h5>行動值為水位高度達200 mm (20cm) </h5>
+        </div>
     </f7-page>
 </template>
 
@@ -119,4 +123,12 @@ export default {
     padding: 10px 0;
     margin-top: 5px;
 }
+.water-info {
+    text-align:center;
+    margin-top:20px;
+    h5 {
+        margin: 0;
+    }
+}
+
 </style>

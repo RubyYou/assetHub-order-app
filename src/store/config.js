@@ -29,6 +29,7 @@ export default {
         accounts: state => state.accounts,
         database: state => state.database,
         api: state => state.api,
+        //api: state => testApi,
         postData: state => state.postData,
         formData: state => state.formData,
         chartInfo: state => state.chartInfo

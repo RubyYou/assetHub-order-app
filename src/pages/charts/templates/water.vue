@@ -19,9 +19,7 @@
         </f7-block-title>
         <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
         <div v-else class="no-data"> <p>今日沒有水位數據</p> </div>
-        <div class="water-info">
-            <h5>警戒值為水位高度達100 mm (10cm) </h5>
-            <h5>行動值為水位高度達200 mm (20cm) </h5>
+        <div v-if="addInfo !== null" class="water-info" v-html="addInfo">
         </div>
     </f7-page>
 </template>
@@ -48,18 +46,19 @@ export default {
             date: TimeUtils.getDate(today),
             chartOptions: {
                 dataZoom: { show: true, start : 50, end: 60 },
-                legend : { data : ['水位 - cm'] },
+                legend : { data : ['水位 - cm'], textStyle: { fontSize:16 }},
                 grid: { y2: 120 },
                 xAxis : [ { type: 'category', data: []}],
                 yAxis : [ { type: 'value', data: [-5, 0, 5, 10]}],
-                series : [ { name: 'water', type: 'line', showAllSymbol: true, data: []}]
+                series : [ { name: '水位 - cm', type: 'line', showAllSymbol: true, data: []}]
             },
             currentDayIndex: 0,
             warning : false
         }
     },
     computed: mapState({
-        waterData: state => state.sensor[dataType]
+        waterData: state => state.sensor[dataType],
+        addInfo: state => state.config.chartInfo[dataType].addInfo || null
     }),
     methods: {
         getClock (epochDate) {
@@ -74,6 +73,9 @@ export default {
                 this.waterData.map (item => {
                     if (item.distance >= 30) {
                         warning = true
+                    }
+                    if (item.time >= new Date().getTime()) {
+                        return
                     }
                     distance.push (item.distance)
                     const clock = this.getClock (item.time)
@@ -125,7 +127,9 @@ export default {
 }
 .water-info {
     text-align:center;
-    margin-top:20px;
+    margin: 0 auto;
+    width: 90%;
+    line-height: 25px;
     h5 {
         margin: 0;
     }

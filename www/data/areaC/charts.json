@@ -12,12 +12,14 @@
         "water": {
             "title": "工區水位計",
             "type": "water",
-            "params": { "baseDistance": 395 }
+            "params": { "baseDistance": 395 },
+            "addInfo": "<p>工區內水位計達警戒值 20 CM時，應立即用無線電通知作業人員並持續觀測；<br/>工區內水位計達行動值 30 CM時， 應立即發布蜂鳴器並回報工地負責人。</p>"
         },
         "rain": {
             "title": "龍興宮雨量筒",
             "type": "rain",
-            "params": {"baseMM": 55}
+            "params": {"baseMM": 55},
+            "addInfo": "<p>工區內雨量計達警戒值 15 mm時，應立即用無線電通知作業人員並持續觀測；<br/>工區內雨量計達行動值 35 mm時， 應立即發布蜂鳴器並回報工地負責人。</p>"
         }
     }
 }

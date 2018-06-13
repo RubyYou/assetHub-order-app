@@ -60,12 +60,13 @@ export default {
             // this is only staff checkin history
             if (items.length > 0 ) {
                 items.map (info => {
-                    let cardInfo = state.allCards.filter(card => { return card.cardId == info.cardID })
-                    let staffInfo = state.staff.filter(staff => { return staff.cardId == info.cardID })
+                    let cardInfo = state.allCards.filter(card => { return card.cardId === info.cardID })
+                    let staffInfo = state.staff.filter(staff => { return staff.cardId === info.cardID })
+
                     let checkinInfo = {
                         name: staffInfo.length > 0 ? staffInfo[0].name : '未配置',
                         cardName: cardInfo.length > 0 ? cardInfo[0].cardName : '未記錄',
-                        cardID: info.cardID,
+                        cardID: (info.cardID).substring(0, 15),
                         createTime: info.createTime,
                         serialNO: info.serialNO
                     }

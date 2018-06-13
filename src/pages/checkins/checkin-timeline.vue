@@ -37,9 +37,7 @@ export default {
   computed: {
     historys() {
       const cardFrom =
-        this.dataType === "staff"
-          ? "staffCheckInHistory"
-          : "vehicleCheckInHistory";
+        this.dataType === "staff" ? "staffCheckInHistory" : "vehicleCheckInHistory";
       console.log ( this.$store.state.checkin[cardFrom])
       return this.$store.state.checkin[cardFrom];
     }
@@ -64,7 +62,7 @@ export default {
     getContent(info) {
       let machineNO = (info.serialNO).substr(info.serialNO.length - 2)
       return (
-        "<p><b> 姓名 </b>" + info.name + "</p><p><b>卡片編號 </b>" + info.cardName +  "</p><p>(" + info.cardID + ")</p><p><b> 刷卡機號 </b> " + machineNO + "</p>"
+        "<p><b> 姓名 </b>" + info.name + "</p><p><b>卡片編號 </b>" + info.cardName + "</p><p>(" + info.cardID + ")</p><p><b> 刷卡機號 </b> " + machineNO + "</p>"
       );
     },
     getSubstrackDayData (substrackNumber) {

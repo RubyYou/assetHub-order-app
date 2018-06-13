@@ -16,11 +16,13 @@
         </div>
         <div class="rain-info">
             <h5 v-if="chartData !== null" class="total" > 今日雨量累計 {{totalAmount}} mm </h5>
-            <h5 v-if="addInfo !== null"> {{addInfo}} </h5>
-            <h5>1.大雨 : 指24小時累積雨量達80毫米以上，或時雨量達40毫米以上之降雨現象。</h5>
-            <h5>2.豪雨 : 指24小時累積雨量達200毫米以上，或3小時累積雨量達100毫米以上之降雨現象。</h5>
-            <h5>3.大豪雨 : 24小時累積雨量達350毫米以上之降雨現象。</h5>
-            <h5>4.超大豪雨 : 24小時累積雨量達500毫米以上之降雨現象。</h5>
+            <h5 v-if="addInfo !== null" v-html="addInfo" class="text-center"></h5>
+            <h5>
+                1.大雨 : 指24小時累積雨量達80毫米以上，或時雨量達40毫米以上之降雨現象。<br/>
+                2.豪雨 : 指24小時累積雨量達200毫米以上，或3小時累積雨量達100毫米以上之降雨現象。<br/>
+                3.大豪雨 : 24小時累積雨量達350毫米以上之降雨現象。<br/>
+                4.超大豪雨 : 24小時累積雨量達500毫米以上之降雨現象。
+            </h5>
         </div>
     </f7-page>
 </template>
@@ -48,11 +50,11 @@ export default {
             totalAmount: 0,
             chartOptions: {
                 dataZoom: { show: true, start : 20, end: 80 },
-                legend : { data : ['降雨量 - mm'] },
+                legend : { data : ['降雨量 - mm'], textStyle: { fontSize:16 } },
                 grid: { y2: 120 },
                 xAxis : [ { type: 'category', data: []}],
                 yAxis : [ { type: 'value', data: [-5, 0, 5, 10]}],
-                series : [ { name: 'rain', type: 'line', showAllSymbol: true, data: []}]
+                series : [ { name: '降雨量 - mm', type: 'line', showAllSymbol: true, data: []}]
             },
             currentDayIndex : 0
         }
@@ -143,8 +145,7 @@ export default {
     padding: 0;
     width: 90%;
     margin: 20px auto;
-    h5{
-        margin: 0 10px;
-    }
+    .text-center { text-align: center; }
+    p { text-align:center; }
 }
 </style>>

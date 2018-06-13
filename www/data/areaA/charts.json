@@ -1,12 +1,21 @@
 {
     "chartList": [
         {
-            "title": "氣體觀測",
+            "title": "氣體觀測(A)",
             "list": [
-                { "title": "可燃氣體", "href": "/charts/gas/LEL" },
-                { "title": "一氧化碳", "href": "/charts/gas/CO" },
-                { "title": "硫化氫", "href": "/charts/gas/H2S" },
-                { "title": "氧氣", "href": "/charts/gas/O2" }
+                { "title": "可燃氣體", "href": "/charts/gas/gasA?data=LEL" },
+                { "title": "一氧化碳", "href": "/charts/gas/gasA?data=CO" },
+                { "title": "硫化氫", "href": "/charts/gas/gasA?data=H2S" },
+                { "title": "氧氣", "href": "/charts/gas/gasA?data=O2" }
+            ]
+        },
+        {
+            "title": "氣體觀測(B)",
+            "list": [
+                { "title": "可燃氣體", "href": "/charts/gas/gasB?data=LEL" },
+                { "title": "一氧化碳", "href": "/charts/gas/gasB?data=CO" },
+                { "title": "硫化氫", "href": "/charts/gas/gasB?data=H2S" },
+                { "title": "氧氣", "href": "/charts/gas/gasB?data=O2" }
             ]
         },
         {
@@ -18,8 +27,18 @@
         }
     ],
     "chartInfo": {
+        "gasA": {
+            "title": "氣體觀測(A)",
+            "type": "gasA",
+            "unit": {
+                "LEL": "%",
+                "O2": "%",
+                "CO": "PPM",
+                "H2S": "PPM"
+            }
+        },
         "gasB": {
-            "title": "氣體監測",
+            "title": "氣體觀測(B)",
             "type": "gasB",
             "unit": {
                 "LEL": "%",

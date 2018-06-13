@@ -5,34 +5,34 @@
         <f7-nav-center>{{title[dataType]}}</f7-nav-center>
     </f7-navbar>
     <f7-toolbar tabbar bottom labels>
-        <f7-link tab-link="#tab1" active>
+        <f7-link tab-link="#tab1">
             <i class="f7-icons">add_round_fill</i>
             <span class="tabbar-label">{{profile[dataType].title}}</span>
         </f7-link>
-        <f7-link v-if="dataType === 'staff'" tab-link="#tab2" >
+        <!--<f7-link v-if="dataType === 'staff'" tab-link="#tab2" >
             <i class="f7-icons">document_text_fill</i>
             <span class="tabbar-label">建立記錄</span>
-        </f7-link>
-        <f7-link tab-link="#tab3">
+        </f7-link>-->
+        <f7-link tab-link="#tab3" active>
             <i class="f7-icons">check_round</i>
             <span class="tabbar-label">打卡記錄</span>
         </f7-link>
     </f7-toolbar>
     <div class="checkIn-wrap">
         <f7-tabs>
-            <f7-tab id="tab1" active>
+            <f7-tab id="tab1">
                 <Profile
                     :content="getProfile ()"
                     :dataType="dataType"
                 />
             </f7-tab>
-            <f7-tab id="tab2" v-if="dataType === 'staff'">
+            <!--<f7-tab id="tab2" v-if="dataType === 'staff'">
                 <CardMapping
                     :content="getMapping ()"
                     :dataType="dataType"
                 />
-            </f7-tab>
-            <f7-tab id="tab3">
+            </f7-tab>-->
+            <f7-tab id="tab3" active>
                 <CheckInTimeline
                     :content="getCheckinHistory ()"
                     :dataType="dataType"/>
@@ -113,7 +113,6 @@ export default {
     },
     beforeCreate () {
         console.assert (this.$route.params.type)
-        //dataType = this.$route.params.type
     }
 }
 </script>

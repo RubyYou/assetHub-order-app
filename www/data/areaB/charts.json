@@ -29,13 +29,16 @@
             "title": "石棟橋水位計",
             "type": "waterA",
             "params": { "baseDistance": 570 },
-            "addInfo": "「施工期間若達大雨條件，即刻撤離並封橋待命。」"
+            "addInfo": "<p>行動值為水位高度達300mm (30cm)</p>"
         },
         "waterB": {
             "title": "安全橋水位計",
             "type": "waterB",
             "params": { "baseDistance": 565 },
-            "addInfo": "「施工期間若達大雨條件，即刻撤離並封橋待命。」"
+            "addInfo": "<p>行動值為水位高度達300mm (30cm)</p>",
+            "rules": [
+                { "time": "2018-06-11T00:01:01", "params": { "baseDistance": 626 }}
+            ]
         },
         "rain": {
             "title": "雨量計",

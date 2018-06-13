@@ -28,7 +28,7 @@ export default [
         component: require('./pages/charts/templates/rain.vue'),
     },
     {
-        path: '/charts/gas/:dataType',
+        path: '/charts/gas/:collection',
         component: require('./pages/charts/templates/gas.vue')
     },
     {

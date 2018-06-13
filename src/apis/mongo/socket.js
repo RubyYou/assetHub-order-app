@@ -38,13 +38,13 @@ class SocketAPI {
 
         this.socket.on('getRFIDCard', data => {
             const payload = { name: 'RFID', data: data.result }
-            console.log('getRFIDCard', payload)
+            //console.log('getRFIDCard', payload)
             store.commit('setStateInfo', payload)
         })
 
         this.socket.on('getAllCards', data => {
             const payload = { name: 'allCards', data: data.result }
-            console.log('all Cards', payload)
+            //console.log('all Cards', payload)
             store.commit('setStateInfo', payload)
         })
 
@@ -57,37 +57,37 @@ class SocketAPI {
         // not used
         this.socket.on('getVehicleCard', data => {
             const payload = { name: 'vehicleCardIds', data: data.result }
-            console.log('getVehicleCard', payload)
+            //console.log('getVehicleCard', payload)
             store.commit('setStateInfo', payload)
         })
 
         this.socket.on('getStaffProfile', data => {
             const payload = { name: 'staff', data: data.result }
-            console.log('getStaffProfile', payload)
+            //console.log('getStaffProfile', payload)
             store.commit('setStateInfo', payload)
         })
 
         this.socket.on('getVehicleProfile', data => {
             const payload = { name: 'vehicle', data: data.result }
-            console.log('getVehicleProfile', payload)
+            //console.log('getVehicleProfile', payload)
             store.commit('setStateInfo', payload)
         })
 
         this.socket.on('getTodayStaffCardMapping', data => {
             const payload = { name: 'staffCardMapping', data: data.result }
-            console.log('getTodayStaffCardMapping', payload)
+            //console.log('getTodayStaffCardMapping', payload)
             store.commit('setStateInfo', payload)
         })
 
         // not used
         this.socket.on('getTodayVehicleCardMapping', data => {
             const payload = { name: 'vehicleCardMapping', data: data.result }
-            console.log('getTodayVehicleCardMapping', payload)
+            //console.log('getTodayVehicleCardMapping', payload)
             store.commit('setStateInfo', payload)
         })
 
         this.socket.on('getTodyCheckInHistory', data => {
-            console.log('getTodyCheckInHistory', data.result)
+            //console.log('getTodyCheckInHistory', data.result)
             store.dispatch('createHistoryData', data.result)
         })
 

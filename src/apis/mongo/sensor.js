@@ -34,6 +34,16 @@ class SensorAPI {
         const baseUrl = this._api.url + this._api.actions.sensor + '/' + this._database.sensor + '/' + date + '/'
         const url = baseUrl + type
 
+        // apply special rule if has one
+        let rulesInfo = store.getters.chartInfo[type].rules || null
+
+        if (rulesInfo) {
+            let rules = rulesInfo && rulesInfo.filter((rule) => {
+                return new Date(date).getTime() >= new Date(rule.time).getTime()
+            })
+            rules.length > 0 && (params = rules[0].params)
+        }
+
         request.get (url).query (params).end ((err, res) => {
             let results = res.body.results
             if (results) {

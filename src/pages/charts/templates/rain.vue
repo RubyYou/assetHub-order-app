@@ -75,6 +75,7 @@ export default {
                 this.rainData.map (item => {
                     mms.push (item.mm)
                     const clock = this.getClock (item.time)
+                    //console.log (item.time, clock)
                     time.push(clock)
                 })
                 this.chartOptions.series[0].data = mms
@@ -98,7 +99,7 @@ export default {
             }
             this.$store.dispatch ("getSensorData", payload);
             this.date = TimeUtils.getDate(fetchDate)
-        }
+        },
     },
     beforeCreate () {
         console.assert (this.$route.params.dataType)

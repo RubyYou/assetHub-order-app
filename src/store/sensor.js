@@ -45,6 +45,13 @@ export default {
         setSensorData (state, {type, data, callBack}) {
 
             // sort sensor Data
+            if (data.length> 0 && typeof data[0].time === 'string') {
+                data.map (item => {
+                    let epoch = TimeUtils.formateDateFromString(item.time)
+                    item.time = epoch
+                })
+            }
+
             const sortable = type.indexOf('water') >= 0 || type.indexOf('tilt') >= 0
             sortable && data.sort ((a, b) => { return a.time - b.time })
             state[type] = data

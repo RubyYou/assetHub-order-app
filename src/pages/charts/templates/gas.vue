@@ -110,7 +110,6 @@ export default {
             }
             this.warning = false
             this.$store.dispatch ("getSensorData", payload);
-            console.log ('this.gasCurrentDate', this.gasCurrentDate)
             this.date = TimeUtils.getDate(fetchDate)
         }
     },

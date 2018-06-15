@@ -33,4 +33,11 @@ export default class TimeUtils {
 
         return formate
     }
+
+    static formateDateFromString (dateString) {
+        var a = dateString.split(/[^0-9]/);
+        var d = new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
+        //console.log(dateString + " " + d, new Date(d).getTime());
+        return new Date(d).getTime()
+    }
 }

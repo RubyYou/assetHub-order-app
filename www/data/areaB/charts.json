@@ -37,7 +37,7 @@
             "params": { "baseDistance": 565 },
             "addInfo": "<p>行動值為水位高度達300mm (30cm)</p>",
             "rules": [
-                { "time": "2018-06-11T00:01:01", "params": { "baseDistance": 626 }}
+                { "time": "2018-06-11T00:01:01", "params": { "baseDistance": 614 }}
             ]
         },
         "rain": {

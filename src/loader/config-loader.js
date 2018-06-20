@@ -44,9 +44,9 @@ class ConfigLoader {
         if (status == 200) {
             this._dbConfig = JSON.parse(data)
 
-            const { name, accounts, api, database, defaultStaff } = this._dbConfig // for all testing data
+            const { name, accounts, api, database, defaultStaff, routeConfig } = this._dbConfig // for all testing data
             console.assert (name && accounts && api && database && defaultStaff)
-            store.commit('setDatabaseInfo', { name, accounts, api, database, defaultStaff})
+            store.commit('setDatabaseInfo', { name, accounts, api, database, defaultStaff, routeConfig})
         } else {
             this._setError(status)
         }

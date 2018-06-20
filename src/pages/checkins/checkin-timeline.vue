@@ -38,7 +38,6 @@ export default {
     historys() {
       const cardFrom =
         this.dataType === "staff" ? "staffCheckInHistory" : "vehicleCheckInHistory";
-      console.log ( this.$store.state.checkin[cardFrom])
       return this.$store.state.checkin[cardFrom];
     }
   },

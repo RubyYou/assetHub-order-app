@@ -16,7 +16,8 @@ export default class TimeUtils {
     /**
      * formate date in Local language
     */
-    static getDate (date) {
+    static getDate (date)
+    {
         const time = moment (date).format ('LL');
         const day = moment (date).format ('dddd');
         return time + " " + day ;
@@ -25,7 +26,8 @@ export default class TimeUtils {
     /**
      * get consistent formate date compare from Today
     */
-    static substractDayToDBFormate (substract) {
+    static substractDayToDBFormate (substract)
+    {
         console.assert (typeof substract === 'number')
 
         const day = moment ().subtract (substract, 'days').format('YYYY-MM-DD');
@@ -34,10 +36,18 @@ export default class TimeUtils {
         return formate
     }
 
-    static formateDateFromString (dateString) {
+    static formateDateFromString (dateString)
+    {
         var a = dateString.split(/[^0-9]/);
         var d = new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
         //console.log(dateString + " " + d, new Date(d).getTime());
         return new Date(d).getTime()
+    }
+
+    static getClock(epochDate) {
+        var d = new Date (epochDate);
+        let min = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes()
+        let sec = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds()
+        return d.getHours() + ':' + min + ':' + sec;
     }
 }

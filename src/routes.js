@@ -55,4 +55,8 @@ export default [
         path: '/tracking',
         component: require('./pages/tracking/index.vue'),
     },
+    {
+        path: '/helmet',
+        component: require('./pages/helmet/index.vue'),
+    }
 ]

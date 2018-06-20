@@ -17,6 +17,7 @@ export default {
         isSet : false,
         api: {},
         database: {},
+        routeConfig: {ignore: []},
         accounts: [],
         postData: null,
         formData: null,
@@ -28,6 +29,7 @@ export default {
         isSet : state => state.isSet,
         accounts: state => state.accounts,
         database: state => state.database,
+        routeConfig: state => state.routeConfig,
         api: state => state.api,
         //api: state => testApi,
         postData: state => state.postData,
@@ -36,13 +38,14 @@ export default {
     },
     actions: {},
     mutations : {
-        setDatabaseInfo (state, { name, accounts, api, database, defaultStaff }) {
+        setDatabaseInfo (state, { name, accounts, api, database, defaultStaff, routeConfig }) {
             console.log('setDBInfo', { name, accounts, api, database, defaultStaff })
 
             state.name = name
             state.accounts = accounts
             state.api = api
             state.database = database
+            state.routeConfig = routeConfig
             state.defaultStaff = [''].concat (defaultStaff) // should add an empty value for not select
             state.isSet = true
         },

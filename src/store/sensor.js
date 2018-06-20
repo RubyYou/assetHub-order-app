@@ -26,10 +26,13 @@ export default {
 
         gasCurrentDate: TimeUtils.substractDayToDBFormate(0),
         trackers: {}, // get all devices
-        locations: {}
+        locations: {},
+
+        helmets: [],
+        helmetData: {}
     },
     actions: {
-        getSensorData({state, commit, rootState}, {type, date, callBack}) {
+        getSensorData ({state, commit, rootState}, {type, date, callBack}) {
 
             let gasType = ['LEL', 'CO', 'H2S', 'O2']
             let sensorInfo = rootState.config.chartInfo[type]
@@ -37,18 +40,25 @@ export default {
             gasType.indexOf(type) >= 0 && commit('setGasDate', { date })
             SensorAPI.getChartData(type, date, params, callBack)
         },
-        getLocationData({state, commit}, {date, callBack}) {
-            SensorAPI.getLocationData(date, callBack)
+        getTrackingData ({state, commit}, {date, type, callBack}) {
+            SensorAPI.getTrackingData(date, type, callBack)
         }
     },
     mutations: {
         setSensorData (state, {type, data, callBack}) {
 
             // sort sensor Data
-            if (data.length> 0 && typeof data[0].time === 'string') {
+            if (data.length > 0 && typeof data[0].time === 'string') {
                 data.map (item => {
                     let epoch = TimeUtils.formateDateFromString(item.time)
                     item.time = epoch
+                })
+            }
+
+            // waterB has to cut off half of the value
+            if (type === 'waterB') {
+                data.map (item => {
+                    item.distance = parseInt(item.distance/2)
                 })
             }
 
@@ -80,8 +90,9 @@ export default {
             }
             callBack && callBack()
         },
-        setLocationData(state, {data, callBack}) {
-            state.locations = data
+        setTrackingData(state, {data, type, callBack}) {
+            type === 'tracker' && (state.locations = data)
+            type === 'helmet' && (state.helmetData = data)
             callBack && callBack()
         },
         setGasDate(state, {date}) {

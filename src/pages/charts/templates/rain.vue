@@ -51,7 +51,7 @@ export default {
             chartOptions: {
                 dataZoom: { show: true, start : 20, end: 80 },
                 legend : { data : ['降雨量 - mm'], textStyle: { fontSize:16 } },
-                grid: { y2: 120 },
+                grid: { y2: 80 },
                 xAxis : [ { type: 'category', data: []}],
                 yAxis : [ { type: 'value', data: [-5, 0, 5, 10]}],
                 series : [ { name: '降雨量 - mm', type: 'line', showAllSymbol: true, data: []}]
@@ -75,7 +75,6 @@ export default {
                 this.rainData.map (item => {
                     mms.push (item.mm)
                     const clock = this.getClock (item.time)
-                    //console.log (item.time, clock)
                     time.push(clock)
                 })
                 this.chartOptions.series[0].data = mms

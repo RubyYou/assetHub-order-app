@@ -32,9 +32,8 @@
         "sensor": "sensorB",
         "deviceMapping": "deviceMappingB"
     },
-    "storage": {
-        "photos": "photoB",
-        "pdf": "pdfB"
+    "routeConfig": {
+        "ignore": []
     },
     "api": {
         "url": "https://dev.iot.airhub.io/api/v1",

@@ -113,9 +113,9 @@ export default {
     }
   },
   mounted() {
-    // setTimeout(() => {
-    //   LoginAPI.start( "總指揮", 1234, "aaa", this.loginSuccessHandler, this.loginFailHandler);
-    // }, 500);
+    setTimeout(() => {
+      LoginAPI.start( "總指揮", 1234, "aaa", this.loginSuccessHandler, this.loginFailHandler);
+    }, 500);
   }
 };
 

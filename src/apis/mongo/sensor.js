@@ -26,7 +26,7 @@ class SensorAPI {
         }
 
         this._getDeviceInfo ('tracker')
-        this._getDeviceInfo ('helmet')
+        //this._getDeviceInfo ('helmet') // not load (temp)
     }
 
     getChartData (type, date, params, callBack) {
@@ -67,9 +67,10 @@ class SensorAPI {
         request.get(url).end((err, res) => {
             let results = res.body.results
             if (results) {
-                if (type === 'tracker') {
-                    payload = { type: 'trackers', data: results }
-                    this.getLocationData (today)
+                if (type === 'tracker' || type === 'helmet') {
+                    type === 'tracker' && (payload = { type: 'trackers', data: results })
+                    type === 'helmet' && (payload = { type: 'helmets', data: results })
+                    this.getTrackingData(today, type)
                 } else {
                     payload = { type: type, data: results }
                 }
@@ -81,10 +82,12 @@ class SensorAPI {
         })
     }
 
-    getLocationData (date, callBack) {
-        const type = 'tracker'
+    // two type of tracking, vehicle tracking and helmet tracking
+    getTrackingData (date, type, callBack) {
+        // this is testing only
+        const sensorDB = type == 'helmet' ? 'sensorD' : this._database.sensor
         // formate : /sensors/:tableName/:date/:type
-        const url = this._api.url + this._api.actions.sensor + '/' + this._database.sensor + '/' + date + '/' + type
+        const url = this._api.url + this._api.actions.sensor + '/' + sensorDB + '/' + date + '/' + type
 
         request
             .get(url)
@@ -93,9 +96,10 @@ class SensorAPI {
                 if (results) {
                     let payload = {
                         data: results,
+                        type: type,
                         callBack: callBack
                     }
-                    store.commit('setLocationData', payload)
+                    store.commit('setTrackingData', payload)
                 } else {
                     this.fail()
                 }

@@ -32,9 +32,8 @@
         "sensor": "sensorC",
         "deviceMapping": "deviceMappingC"
     },
-    "storage": {
-        "photos": "photoC",
-        "pdf": "pdfC"
+    "routeConfig": {
+        "ignore": ["/ipcam"]
     },
     "api": {
         "url": "https://dev.iot.airhub.io/api/v1",

@@ -42,7 +42,7 @@ export default {
             chartOptions: {
                 dataZoom: { show: true, start: 30, end: 70},
                 legend : { data : [ '傾斜角 - x°', '傾斜角 - y°'], textStyle: { fontSize:16 }},
-                grid: { y2: 120 },
+                grid: { y2: 80 },
                 xAxis : [ { type: 'category', data: []}],
                 yAxis : [ { type: 'value', max: 20, min: -20}],
                 series : [

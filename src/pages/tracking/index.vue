@@ -145,9 +145,10 @@ export default {
             this.currentDayIndex = finalNumber
             const payload = {
                 date: fetchDate,
+                type: 'tracker',
                 callBack : this.initMap
             }
-            this.$store.dispatch ("getLocationData", payload);
+            this.$store.dispatch ("getTrackingData", payload);
             this.date = TimeUtils.getDate(fetchDate)
         }
     },

@@ -59,6 +59,8 @@ export default {
 
             // this is only staff checkin history
             if (items.length > 0 ) {
+                items.sort ((a, b) => b.createTime - a.createTime)
+
                 items.map (info => {
                     let cardInfo = state.allCards.filter(card => { return card.cardId === info.cardID })
                     let staffInfo = state.staff.filter(staff => { return staff.cardId === info.cardID })

@@ -47,7 +47,7 @@ export default {
             chartOptions: {
                 dataZoom: { show: true, start : 50, end: 60 },
                 legend : { data : ['水位 - cm'], textStyle: { fontSize:16 }},
-                grid: { y2: 120 },
+                grid: { y2: 80 },
                 xAxis : [ { type: 'category', data: []}],
                 yAxis : [ { type: 'value', data: [-5, 0, 5, 10]}],
                 series : [ { name: '水位 - cm', type: 'line', showAllSymbol: true, data: []}]

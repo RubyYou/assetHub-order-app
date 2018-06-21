@@ -58,7 +58,26 @@ export default {
             // waterB has to cut off half of the value
             if (type === 'waterB') {
                 data.map (item => {
-                    item.distance = parseInt(item.distance/2)
+                    item.distance = parseInt(item.distance / 2)
+                })
+            }
+
+            // modify water for C
+            if (type === 'water') {
+                data.map(item => {
+                    let shorterDistance = item.distance - 7
+                    if (shorterDistance < 0) {
+                        item.distance = 0
+                    } else {
+                        item.distance = parseInt(item.distance - 7)
+                    }
+                })
+            }
+
+            // reset tilt Y to 0
+            if (type === 'tilt') {
+                data.map (item => {
+                    item.y = parseFloat(item.y - 4)
                 })
             }
 

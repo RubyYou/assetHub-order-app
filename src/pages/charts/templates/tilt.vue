@@ -14,7 +14,14 @@
                 >
             </f7-button>
         </f7-block-title>
-        <Chart v-if="chartData !== null" :chartData="chartData" ></Chart>
+        <div class="chart-wrapper" v-if="chartDataX !== null && chartDataY !== null">
+            <Chart :chartData="chartDataX" ></Chart>
+            <br/><br/>
+            <Chart :chartData="chartDataY" ></Chart>
+            <br/>
+            <p class="yellow">傾斜達0.5度時為行動值，工區需進行撤離。</p>
+            <p class="red">傾斜達1度時為警戒值，進行封橋動作。</p>
+        </div>
         <div v-else class="no-data"> <p>今日沒有傾斜儀數據</p> </div>
     </f7-page>
 </template>
@@ -37,22 +44,33 @@ export default {
     },
     data: function () {
         return {
-            chartData : null,
             date: TimeUtils.getDate(today),
-            chartOptions: {
+            chartDataX : null,
+            chartDataY : null,
+            chartOptionsX: {
                 dataZoom: { show: true, start: 30, end: 70},
-                legend : { data : [ '傾斜角 - x°', '傾斜角 - y°'], textStyle: { fontSize:16 }},
+                legend : { data : [ '傾斜角 - x°'], textStyle: { fontSize:16 }},
                 grid: { y2: 80 },
                 xAxis : [ { type: 'category', data: []}],
-                yAxis : [ { type: 'value', max: 20, min: -20}],
+                yAxis : [ { type: 'value', max: 2, min: -2}],
                 series : [
-                    { name: '傾斜角 - x°', type: 'line', showAllSymbol: true, data: []},
+                    { name: '傾斜角 - x°', type: 'line', showAllSymbol: true, data: []}
+                ]
+            },
+            chartOptionsY: {
+                dataZoom: { show: true, start: 30, end: 70},
+                legend : { data : [ '傾斜角 - y°'], textStyle: { fontSize:16 }},
+                grid: { y2: 80 },
+                xAxis : [ { type: 'category', data: []}],
+                yAxis : [ { type: 'value', max: 2, min: -2}],
+                series : [
                     { name: '傾斜角 - y°', type: 'line', showAllSymbol: true, data: []},
                 ]
             },
             currentDayIndex: 0,
             warning : false
         }
+
     },
     computed: mapState({
         tiltData: state => state.sensor[dataType]
@@ -82,12 +100,15 @@ export default {
                     time.push(clock)
                 })
                 this.warning = warning
-                this.chartOptions.series[0].data = x
-                this.chartOptions.series[1].data = y
-                this.chartOptions.xAxis[0].data = time
-                this.chartData = this.chartOptions
+                this.chartOptionsX.series[0].data = x
+                this.chartOptionsY.series[0].data = y
+                this.chartOptionsX.xAxis[0].data = time
+                this.chartOptionsY.xAxis[0].data = time
+                this.chartDataX = this.chartOptionsX
+                this.chartDataY = this.chartOptionsY
             } else {
-                this.chartData = null
+                this.chartDataX = null
+                this.chartDataY = null
             }
         },
         getAverage (dataSet, childName) {
@@ -139,5 +160,18 @@ export default {
     color: white;
     padding: 10px 0;
     margin-top: 5px;
+}
+.chart-wrapper {
+    min-height: 900px;
+    //margin-bottom: 200px;
+}
+.yellow {
+    text-align:center;
+    color:#ffa900;
+    //margin-top: -300px;
+}
+.red {
+    text-align:center;
+    color:red;
 }
 </style>

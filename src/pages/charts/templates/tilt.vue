@@ -91,8 +91,8 @@ export default {
                 let averageX = this.getAverage(this.tiltData, 'x')
                 let averageY = this.getAverage(this.tiltData, 'y')
                 this.tiltData.map (item => {
-                    item.x && (item.x >= 5) && (warning = true)
-                    item.y && (item.y >= 5) && (warning = true)
+                    item.x && (item.x >= 1.2) && (warning = true)
+                    item.y && (item.y >= 1.2) && (warning = true)
                     item.x && x.push (item.x) && y.push (averageY)
                     item.y && y.push (item.y) && x.push (averageX)
 

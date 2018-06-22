@@ -289,7 +289,6 @@ class SocketAPI {
     }
 
     getMessages (date) {
-        console.log(date)
         this.querytData = {
             userName: this.userName,
             roomName: this.roomName,

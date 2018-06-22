@@ -5,7 +5,7 @@
             <f7-nav-center>水位計</f7-nav-center>
         </f7-navbar>
         <br/><br/>
-        <div v-if="warning === true && chartData !== null" class="warning">
+        <div :class="[{active: warning}, 'warning']">
             <i class="f7-icons">bolt_round_fill</i> 水位已超過30公分, 請現場人員警戒
         </div>
         <f7-block-title class="day-title">
@@ -42,6 +42,8 @@ export default {
     },
     data: function () {
         return {
+            onehour: 1 * 60 * 60 * 1000,
+            limit: 30,
             chartData : null,
             date: TimeUtils.getDate(today),
             chartOptions: {
@@ -69,25 +71,38 @@ export default {
             if (this.waterData.length > 0) {
                 let distance = []
                 let time = []
-                let warning = false; // set this is incase of looping overlay the value
+                let warningData = []
+                let now = new Date().getTime()
                 this.waterData.map (item => {
-                    if (item.distance >= 30) {
-                        warning = true
-                    }
-                    if (item.time >= new Date().getTime()) {
-                        return
+                    if (item.time >= now) { return }
+                    if (item.distance >= this.limit) {
+                        warningData.push (item)
                     }
                     distance.push (item.distance)
                     const clock = this.getClock (item.time)
                     time.push(clock)
                 })
-                this.warning = warning
+
+                let alertInfo = warningData.filter(item => {
+                    return (now - item.time) < this.onehour
+                })
+
+                if (alertInfo.length > 0) { this.startAlert () }
                 this.chartOptions.series[0].data = distance
                 this.chartOptions.xAxis[0].data = time
                 this.chartData = this.chartOptions
             } else {
                 this.chartData = null
             }
+        },
+        startAlert () {
+            const twoMins = 1000 * 12
+            this.warning = true
+
+            // cancel after 2 min
+            setTimeout(() => {
+                if (this.warning) this.warning = false
+            }, twoMins)
         },
         getSubstrackDayData (substrackNumber) {
             console.assert (typeof substrackNumber === "number")
@@ -118,12 +133,21 @@ export default {
     margin-left: 5px;
 }
 .warning {
-    background: red;
     width: 100%;
     text-align: center;
     color: white;
-    padding: 10px 0;
-    margin-top: 5px;
+    height: 0;
+    opacity: 0;
+    -webkit-transition: all .5s; /* Safari */
+    transition: all .5s;
+
+    &.active {
+        opacity: 1;
+        background: red;
+        padding: 10px 0;
+        margin-top: 5px;
+        height: 28px
+    }
 }
 .water-info {
     text-align:center;

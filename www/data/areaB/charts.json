@@ -48,7 +48,7 @@
         "tilt": {
             "title": "鋼便橋傾斜儀",
             "type": "tilt",
-            "params": { }
+            "params": { "baseX": -0.05, "baseY": 4.2, "baseRX": -0.8, "baseRY": 3.56 }
         }
     }
 }

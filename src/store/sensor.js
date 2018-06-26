@@ -74,13 +74,6 @@ export default {
                 })
             }
 
-            // reset tilt Y to 0
-            if (type === 'tilt') {
-                data.map (item => {
-                    item.y = parseFloat(item.y - 4)
-                })
-            }
-
             const sortable = type.indexOf('water') >= 0 || type.indexOf('tilt') >= 0
             sortable && data.sort ((a, b) => { return a.time - b.time })
             state[type] = data

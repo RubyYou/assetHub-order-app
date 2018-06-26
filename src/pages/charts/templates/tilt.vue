@@ -15,9 +15,9 @@
             </f7-button>
         </f7-block-title>
         <div class="chart-wrapper" v-if="chartDataX !== null && chartDataY !== null">
-            <Chart :chartData="chartDataX" ></Chart>
+            <Chart :chartData="chartDataX"></Chart>
             <br/><br/>
-            <Chart :chartData="chartDataY" ></Chart>
+            <Chart :chartData="chartDataY"></Chart>
             <br/>
             <p class="yellow">傾斜達0.5度時為行動值，工區需進行撤離。</p>
             <p class="red">傾斜達1度時為警戒值，進行封橋動作。</p>
@@ -52,7 +52,7 @@ export default {
                 legend : { data : [ '傾斜角 - x°'], textStyle: { fontSize:16 }},
                 grid: { y2: 80 },
                 xAxis : [ { type: 'category', data: []}],
-                yAxis : [ { type: 'value', max: 2, min: -2}],
+                yAxis : [ { type: 'value', max: 1.5, min: -1.5, splitNumber: 6}],
                 series : [
                     { name: '傾斜角 - x°', type: 'line', showAllSymbol: true, data: []}
                 ]
@@ -62,7 +62,7 @@ export default {
                 legend : { data : [ '傾斜角 - y°'], textStyle: { fontSize:16 }},
                 grid: { y2: 80 },
                 xAxis : [ { type: 'category', data: []}],
-                yAxis : [ { type: 'value', max: 2, min: -2}],
+                yAxis : [ { type: 'value', max: 1.5, min: -1.5, splitNumber: 6}],
                 series : [
                     { name: '傾斜角 - y°', type: 'line', showAllSymbol: true, data: []},
                 ]
